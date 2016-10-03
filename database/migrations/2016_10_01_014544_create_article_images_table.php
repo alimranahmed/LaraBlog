@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateImagePostsTable extends Migration
+class CreateArticleImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,16 @@ class CreateImagePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('image_post', function (Blueprint $table) {
+        Schema::create('article_image', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('image_id')->unsigned();
+            $table->foreign('image_id')
+                ->reference('id')
+                ->on('images');
+            $table->integer('article_id')->unsigned();
+            $table->foreign('article_id')
+                ->reference('id')
+                ->on('articles');
             $table->timestamps();
         });
     }
