@@ -15,6 +15,17 @@ class CreateResourcesTable extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('name')->nullable();
+            $table->text('content')->nullable();
+            $table->integer('image_id')->unsigned()->nullable();
+            $table->foreign('image_id')
+                ->reference('id')
+                ->on('images');
+            $table->integer('page_id')->unsigned()->nullable();
+            $table->foreign('page_id')
+                ->reference('id')
+                ->on('pages')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
