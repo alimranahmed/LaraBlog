@@ -15,6 +15,14 @@ class CreateAddressesTable extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('ip', 200)->nullable();
+            $table->string('country_code', 10)->nullable();
+            $table->string('country_name');
+            $table->string('zip_code')->nullable();
+            $table->string('timezone')->nullable();
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
+            $table->string('metro_code')->nullable();
             $table->timestamps();
         });
     }
