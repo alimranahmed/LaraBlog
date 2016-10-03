@@ -18,7 +18,10 @@ class CreateAddressesTable extends Migration
             $table->string('ip', 200)->nullable();
             $table->string('country_code', 10)->nullable();
             $table->string('country_name');
+            $table->string('region_name')->nullable();
+            $table->string('city')->nullable();
             $table->string('zip_code')->nullable();
+            $table->string('extra')->nullable();
             $table->string('timezone')->nullable();
             $table->double('latitude')->nullable();
             $table->double('longitude')->nullable();
