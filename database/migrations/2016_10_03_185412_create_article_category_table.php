@@ -34,8 +34,6 @@ class CreateArticleCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::table('article_category', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('article_category');
     }
 }
