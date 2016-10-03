@@ -15,6 +15,19 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('heading')->index();
+            $table->text('content')->index();
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')
+                ->reference('id')
+                ->on('users');
+            $table->dateTime('published_at');
+            $table->integer('hit_count')->unsigned();
+            $table->integer('vote')->unsigned();
+            $table->integer('address_id')->unsigned()->nullable();
+            $table->foreign('address_id')
+                ->references('id')
+                ->on('addresses');
             $table->timestamps();
         });
     }

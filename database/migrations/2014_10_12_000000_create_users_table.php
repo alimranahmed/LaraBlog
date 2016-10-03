@@ -31,8 +31,7 @@ class CreateUsersTable extends Migration
             $table->integer('address_id')->unsigned()->nullable();
             $table->foreign('address_id')
                 ->references('id')
-                ->on('addresses')
-                ->onDelete('cascade');
+                ->on('addresses');
             $table->string('token')->nullable();
             $table->rememberToken();
             $table->timestamps();
