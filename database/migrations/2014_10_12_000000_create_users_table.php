@@ -32,6 +32,10 @@ class CreateUsersTable extends Migration
             $table->foreign('address_id')
                 ->references('id')
                 ->on('addresses');
+            $table->integer('role_id')->unsigned();
+            $table->foreign('role_id')
+                ->reference('id')
+                ->on('roles');
             $table->string('token')->nullable();
             $table->rememberToken();
             $table->timestamps();
