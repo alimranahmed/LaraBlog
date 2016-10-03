@@ -17,7 +17,7 @@ class CreateEmailLogsTable extends Migration
             $table->increments('id');
             $table->text('sender')->nullable();
             $table->text('receiver');
-            $table->text('content')->default('');
+            $table->text('content');
             $table->dateTime('sent_at');
             $table->timestamps();
         });

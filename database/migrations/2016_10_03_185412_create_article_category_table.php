@@ -13,7 +13,7 @@ class CreateArticleCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::table('article_category', function (Blueprint $table) {
+        Schema::create('article_category', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('article_id')->unsigned();
             $table->foreign('article_id')
