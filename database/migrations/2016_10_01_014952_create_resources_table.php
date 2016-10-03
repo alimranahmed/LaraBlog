@@ -19,11 +19,11 @@ class CreateResourcesTable extends Migration
             $table->text('content')->nullable();
             $table->integer('image_id')->unsigned()->nullable();
             $table->foreign('image_id')
-                ->reference('id')
+                ->references('id')
                 ->on('images');
             $table->integer('page_id')->unsigned()->nullable();
             $table->foreign('page_id')
-                ->reference('id')
+                ->references('id')
                 ->on('pages')
                 ->onDelete('cascade');
             $table->timestamps();

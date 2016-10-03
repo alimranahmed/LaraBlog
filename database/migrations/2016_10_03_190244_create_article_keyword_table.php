@@ -17,11 +17,11 @@ class CreateArticleKeywordTable extends Migration
             $table->increments('id');
             $table->integer('article_id')->unsigned();
             $table->foreign('article_id')
-                ->reference('id')
+                ->references('id')
                 ->on('articles');
             $table->integer('keyword_id')->unsigned();
             $table->foreign('keyword_id')
-                ->reference('id')
+                ->references('id')
                 ->on('keywords');
             $table->timestamps();
         });

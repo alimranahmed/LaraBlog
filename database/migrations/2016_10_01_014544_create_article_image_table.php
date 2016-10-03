@@ -17,11 +17,11 @@ class CreateArticleImageTable extends Migration
             $table->increments('id');
             $table->integer('image_id')->unsigned();
             $table->foreign('image_id')
-                ->reference('id')
+                ->references('id')
                 ->on('images');
             $table->integer('article_id')->unsigned();
             $table->foreign('article_id')
-                ->reference('id')
+                ->references('id')
                 ->on('articles');
             $table->timestamps();
         });

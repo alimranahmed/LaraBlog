@@ -19,7 +19,7 @@ class CreateArticlesTable extends Migration
             $table->text('content')->index();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
-                ->reference('id')
+                ->references('id')
                 ->on('users');
             $table->dateTime('published_at');
             $table->integer('hit_count')->unsigned();

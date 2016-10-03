@@ -17,11 +17,11 @@ class CreateArticleCategoryTable extends Migration
             $table->increments('id');
             $table->integer('article_id')->unsigned();
             $table->foreign('article_id')
-                ->reference('id')
+                ->references('id')
                 ->on('articles');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')
-                ->reference('id')
+                ->references('id')
                 ->on('categories');
             $table->timestamps();
         });
