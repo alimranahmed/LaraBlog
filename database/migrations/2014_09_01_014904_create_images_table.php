@@ -15,6 +15,9 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('src');
+            $table->text('caption')->nullable();
+            $table->enum('src_type', ['internal', 'external'])->default('internal');
             $table->timestamps();
         });
     }
