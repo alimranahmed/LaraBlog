@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->index();
             $table->string('email')->unique();
             $table->string('password');
+            $table->text('website');
             $table->integer('image_id')->unsigned()->nullable();
             $table->foreign('image_id')
                 ->references('id')
