@@ -17,13 +17,13 @@ class CreateArticlesTable extends Migration
             $table->increments('id');
             $table->text('heading');
             $table->text('content');
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
             $table->dateTime('published_at');
-            $table->integer('hit_count')->unsigned();
-            $table->integer('vote')->unsigned();
+            $table->integer('hit_count')->unsigned()->default(0);
+            $table->integer('vote')->unsigned()->default(0);
             $table->integer('address_id')->unsigned()->nullable();
             $table->foreign('address_id')
                 ->references('id')
