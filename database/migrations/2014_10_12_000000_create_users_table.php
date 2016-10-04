@@ -37,6 +37,7 @@ class CreateUsersTable extends Migration
                 ->references('id')
                 ->on('roles');
             $table->string('token')->nullable();
+            $table->string('remember_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
