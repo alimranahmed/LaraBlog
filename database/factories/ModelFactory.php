@@ -11,14 +11,12 @@
 |
 */
 
-$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
-    static $password;
+$factory->define(App\Models\Article::class, function (Faker\Generator $faker) {
 
     return [
-        'title' => $faker->title,
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'heading' => $faker->title,
+        'content' => $faker->name,
+        'published_at' => new \DateTime(),
+        'user_id' => 1,
     ];
 });
