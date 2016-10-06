@@ -14,8 +14,8 @@
 $factory->define(App\Models\Article::class, function (Faker\Generator $faker) {
 
     return [
-        'heading' => $faker->title,
-        'content' => $faker->name,
+        'heading' => $faker->sentence,
+        'content' => $faker->paragraph,
         'published_at' => new \DateTime(),
         'user_id' => 1,
     ];
