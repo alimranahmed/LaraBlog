@@ -22,6 +22,7 @@ class CreateArticlesTable extends Migration
                 ->references('id')
                 ->on('users');
             $table->dateTime('published_at');
+            $table->integer('is_published')->unsigned()->default(1);
             $table->integer('hit_count')->unsigned()->default(0);
             $table->integer('vote')->unsigned()->default(0);
             $table->integer('address_id')->unsigned()->nullable();
