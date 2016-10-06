@@ -17,7 +17,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::get('/article', 'ArticleController@index');
-Route::get('/article/{articleId}', 'ArticleController@show');
-Route::put('/article/{articleId}', 'ArticleController@update');
-Route::post('/article', 'ArticleController@store');
+//Article
+Route::get('article', 'ArticleController@index');
+Route::get('article/{articleId}', 'ArticleController@show');
+Route::put('article/{articleId}', 'ArticleController@update');
+Route::post('article', 'ArticleController@store');
+//Comment
+Route::post('comment/{articleId}', 'CommentController@store');
