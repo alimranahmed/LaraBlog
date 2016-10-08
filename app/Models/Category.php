@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
 
-    public function article(){
-        return $this->hasMany(Article::class);
+    public function articles(){
+        return $this->belongsToMany(Article::class, 'article_category');
     }
 
     public function parent(){

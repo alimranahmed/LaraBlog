@@ -16,7 +16,7 @@ class Article extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function category(){
-        return $this->belongsTo(Category::class);
+    public function categories(){
+        return $this->belongsToMany(Category::class, 'article_category');
     }
 }
