@@ -24,3 +24,7 @@ Route::put('article/{articleId}', 'ArticleController@update');
 Route::post('article', 'ArticleController@store');
 //Comment
 Route::post('comment/{articleId}', 'CommentController@store');
+
+//Category
+Route::get('category', 'CategoryController@index');
+Route::get('category/{categoryId}', 'CategoryController@show');
