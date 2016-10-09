@@ -23,4 +23,8 @@ class Article extends Model
     public function address(){
         return $this->belongsTo(Address::class);
     }
+
+    public function addresses(){
+        return $this->belongsToMany(Image::class, 'article_image');
+    }
 }
