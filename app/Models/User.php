@@ -14,4 +14,8 @@ class User extends Authenticatable
     public function articles(){
         return $this->hasMany(Article::class);
     }
+
+    public function image(){
+        return $this->belongsTo(Image::class);
+    }
 }
