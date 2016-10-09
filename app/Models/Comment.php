@@ -9,4 +9,8 @@ class Comment extends Model
     public function article(){
         return $this->belongsTo(Article::class);
     }
+
+    public function address(){
+        return $this->belongsTo(Address::class);
+    }
 }
