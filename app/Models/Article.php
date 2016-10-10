@@ -20,11 +20,16 @@ class Article extends Model
         return $this->belongsToMany(Category::class, 'article_category');
     }
 
+    //Written from the address
     public function address(){
         return $this->belongsTo(Address::class);
     }
 
-    public function addresses(){
+    public function images(){
         return $this->belongsToMany(Image::class, 'article_image');
+    }
+
+    public function keywords(){
+        return $this->belongsToMany(Keyword::class, 'article_keyword');
     }
 }
