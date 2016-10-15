@@ -22,6 +22,7 @@ Route::get('article', 'ArticleController@index');
 Route::get('article/{articleId}', 'ArticleController@show');
 Route::put('article/{articleId}', 'ArticleController@update');
 Route::post('article', 'ArticleController@store');
+Route::put('article/toggle-publish/{articleId}', 'ArticleController@togglePublish');
 //Comment
 Route::post('comment/{articleId}', 'CommentController@store');
 
