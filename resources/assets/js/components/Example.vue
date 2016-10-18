@@ -35,7 +35,7 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <div style="min-height:560px; padding-top:50px">
+    <div class="main-container">
         Here is my blog
     </div>
     <footer class="container-fluid">
