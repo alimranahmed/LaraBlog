@@ -1,40 +1,45 @@
 <template>
-    <div class="navbar-fixed">
-        <nav>
-            <div class="nav-wrapper green lighten-5 purple-text text-darken-4">
-                <a href="#" class="brand-logo purple-text text-darken-4">Al- Imran Ahmed</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li class="active">
-                        <a href="#" class="purple-text text-darken-4">Sass</a>
-                    </li>
-                    <li class="purple-text">
-                        <a href="#" class="purple-text text-darken-4">Components</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-button purple-text text-darken-4" data-activates="dropdown1">User
-                            <i class="fa fa-caret-down right"></i>
-                        </a>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Al- Imran Ahmed</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#">Link </a></li>
+                    <li><a href="#">Link</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Logout</a></li>
+                        </ul>
                     </li>
                 </ul>
-            </div>
-            <ul id="dropdown1" class="dropdown-content">
-                <li><a href="#!">Profile</a></li>
-                <li><a href="#!">Settings</a></li>
-                <li class="divider"></li>
-                <li><a href="#!">Logout</a></li>
-            </ul>
-        </nav>
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                </form>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div style="min-height:560px; padding-top:50px">
+        Here is my blog
     </div>
-    <div style="min-height:480px">
-
-    </div>
-    <footer class="page-footer" style="padding:0px;">
-        <div class="footer-copyright green lighten-5">
-            <div class="container">
-                <span class="purple-text text-darken-4">© 2016 Al- Imran Ahmed</span>
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-        </div>
+    <footer class="container-fluid">
+        <span class="purple-text text-darken-4">© 2016 Al- Imran Ahmed</span>
     </footer>
 </template>
 
