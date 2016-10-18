@@ -1,4 +1,4 @@
-# Personal Blog Using Laravel 5.3
+s# Personal Blog Using Laravel 5.3
 A blogging system for personal use. 
 
 ### Features
@@ -10,8 +10,8 @@ A blogging system for personal use.
 
 ### Technology Used: 
 1. Laravel 5.3
-2. VueJs 2.0
-3. Materialize-css 0.97.7
+2. VueJS 2
+3. Bootstrap 3
 
 ### Library
 1. Entrust for permission management
