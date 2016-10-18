@@ -1,4 +1,4 @@
-s# Personal Blog Using Laravel 5.3
+# Personal Blog Using Laravel 5.3
 A blogging system for personal use. 
 
 ### Features
