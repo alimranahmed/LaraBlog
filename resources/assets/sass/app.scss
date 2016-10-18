@@ -1,11 +1,15 @@
 
-// Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-@import url(http://fonts.googleapis.com/icon?family=Material+Icons);
+//Google fonts
+//@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+//@import url(http://fonts.googleapis.com/icon?family=Material+Icons);
+
+//Font-Awesome fonts
+@import "node_modules/font-awesome/scss/font-awesome";
 
 // Variables
 @import "variables";
 
 // Bootstrap
 //@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+//Materialize
 @import "node_modules/materialize-css/sass/materialize";

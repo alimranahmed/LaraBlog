@@ -11,8 +11,8 @@
                         <a href="#" class="purple-text text-darken-4">Components</a>
                     </li>
                     <li>
-                        <a class="dropdown-button purple-text text-darken-4" data-activates="dropdown1">Dropdown
-                            <i class="material-icons right">arrow_drop_down</i>
+                        <a class="dropdown-button purple-text text-darken-4" data-activates="dropdown1">User
+                            <i class="fa fa-caret-down right"></i>
                         </a>
                     </li>
                 </ul>
