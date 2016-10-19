@@ -36,10 +36,31 @@
         </div><!-- /.container-fluid -->
     </nav>
     <div class="main-container container-fluid">
-        <h1>Welcome to my blog</h1>
+        <h1 v-for="article in articles">{{$index+1}}. {{article.heading }}</h1>
     </div>
     <footer class="container-fluid">
         <span class="purple-text text-darken-4">© 2016 Al- Imran Ahmed</span>
     </footer>
 </template>
 
+<script>
+    export default {
+        data: function() {
+            return {
+                "articles": {},
+            }
+        },
+        ready: function(){
+            this.getArticles();
+        },
+
+        methods: {
+            getArticles: function(){
+                this.$http.get('index.php/api/article').then(function (response) {
+                    console.debug(response.data);
+                    this.articles = response.data;
+                });
+            }
+        }
+    };
+</script>

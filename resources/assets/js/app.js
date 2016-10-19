@@ -1,10 +1,4 @@
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * include Vue and Vue Resource. This gives a great starting point for
- * building robust, powerful web applications using Vue and Laravel.
- */
-
+//load bootstrap.js file of current directory
 require('./bootstrap');
 
 /**
@@ -16,5 +10,8 @@ require('./bootstrap');
 Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
-    el: 'body'
+    el: 'body',
+    data: {
+        
+    }
 });
