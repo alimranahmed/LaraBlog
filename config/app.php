@@ -177,11 +177,6 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        //Newly added
-        Barryvdh\Debugbar\ServiceProvider::class,
-        Arcanedev\LogViewer\LogViewerServiceProvider::class,
-
     ],
 
     /*
@@ -229,9 +224,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        //Newly added
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
-
     ],
 
 ];
