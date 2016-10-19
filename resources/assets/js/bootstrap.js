@@ -15,6 +15,8 @@ require('vue-resource');
  * the outgoing requests issued by this application.
  */
 
+window.Laravel = { csrfToken: '{{ csrf_token() }}' };
+
 Vue.http.interceptors.push(function(request, next){
     request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
 
