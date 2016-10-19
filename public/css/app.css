@@ -7952,11 +7952,20 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
+body, li {
+  color: #4a148c; }
+
 .navbar-brand {
   color: #4a148c !important; }
 
 .main-container {
   min-height: 560px;
   padding-top: 50px; }
+
+footer {
+  height: 55px;
+  background: #e8f5e9;
+  padding-top: 20px;
+  font-size: 15px; }
 
 /*# sourceMappingURL=app.css.map */

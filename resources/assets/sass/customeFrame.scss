@@ -1,3 +1,7 @@
+body, li{
+  color: $purple-dark4;
+}
+
 .navbar-brand {
   color: $purple-dark4 !important;
 }
@@ -5,4 +9,11 @@
 .main-container {
   min-height: 560px;
   padding-top: 50px;
+}
+
+footer{
+  height: 55px;
+  background: $green-light4;
+  padding-top: 20px;
+  font-size: 15px;
 }

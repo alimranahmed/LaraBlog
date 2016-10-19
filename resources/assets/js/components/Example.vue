@@ -35,8 +35,8 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <div class="main-container">
-        Here is my blog
+    <div class="main-container container-fluid">
+        <h1>Welcome to my blog</h1>
     </div>
     <footer class="container-fluid">
         <span class="purple-text text-darken-4">© 2016 Al- Imran Ahmed</span>
