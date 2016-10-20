@@ -10,11 +10,7 @@ require('bootstrap-sass');
 window.Vue = require('vue');
 require('vue-resource');
 
-/**
- * register a HTTP interceptor to attach the "CSRF" header to each of
- * the outgoing requests issued by this application.
- */
-
+//Generate csrf token
 window.Laravel = { csrfToken: '{{ csrf_token() }}' };
 
 Vue.http.interceptors.push(function(request, next){

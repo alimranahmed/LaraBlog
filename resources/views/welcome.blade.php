@@ -7,11 +7,17 @@
 
         <title>L5 Blog</title>
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <link href="{{asset("css/app.css")}}" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <example></example>
+        <div id="app">
+            <h1>Hello App!</h1>
+            <p>
+                <router-link to="/foo">Go to Foo</router-link>
+                <router-link to="/bar">Go to Bar</router-link>
+            </p>
+            <router-view></router-view>
+        </div>
         <script src="{{asset("js/app.js")}}"></script>
     </body>
 </html>
