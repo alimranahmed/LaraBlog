@@ -6,18 +6,18 @@ window.$ = window.jQuery = require('jquery');
 require('bootstrap-sass');
 // require('materialize-css');
 
-//Load vue and vue resource
-window.Vue = require('vue');
-require('vue-resource');
-
-//Generate csrf token
-window.Laravel = { csrfToken: '{{ csrf_token() }}' };
-
-Vue.http.interceptors.push(function(request, next){
-    request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
-
-    next();
-});
+// //Load vue and vue resource
+// window.Vue = require('vue');
+// require('vue-resource');
+//
+// //Generate csrf token
+// window.Laravel = { csrfToken: '{{ csrf_token() }}' };
+//
+// Vue.http.interceptors.push(function(request, next){
+//     request.headers['X-CSRF-TOKEN'] = Laravel.csrfToken;
+//
+//     next();
+// });
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

@@ -1,5 +1,5 @@
 //load bootstrap.js file of current directory
-// require('./libraries');
+require('./libraries');
 require('./routes.js');
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -7,8 +7,8 @@ require('./routes.js');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-// Vue.component('example', require('./components/Example.vue'));
-//
+// Vue.component('example', require('./components/articles.vue'));
+
 // const app = new Vue({
 //     el: 'body',
 //     data: {
