@@ -48,7 +48,9 @@
                 </div><!-- /.container-fluid -->
             </nav>
             <div class="main-container container-fluid">
-                <router-view></router-view>
+                @foreach($articles as $article)
+                    <h1>{{$article->heading}}</h1>
+                @endforeach
             </div>
             <footer class="container-fluid">
                 <span class="purple-text text-darken-4">© 2016 Al- Imran Ahmed</span>

@@ -12,5 +12,6 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $articles = \App\Models\Article::all();
+    return view('welcome', compact('articles'));
 });
