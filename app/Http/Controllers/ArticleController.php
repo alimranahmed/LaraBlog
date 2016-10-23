@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 class ArticleController extends Controller
 {
     public function index(Request $request){
-        return Article::all();
+        $articles =  Article::all();
+        return view('welcome', compact('articles'));
     }
 
     public function show(Request $request, $articleId){
