@@ -1,17 +1,16 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of the routes that are handled
-| by your application. Just tell Laravel the URIs it should respond
-| to using a Closure or controller method. Build something great!
-|
-*/
+//Article
+Route::get('article', 'ArticleController@index');
+Route::get('article/{articleId}', 'ArticleController@show');
+Route::put('article/{articleId}', 'ArticleController@update');
+Route::post('article', 'ArticleController@store');
+Route::put('article/toggle-publish/{articleId}', 'ArticleController@togglePublish');
+//Comment
+Route::post('comment/{articleId}', 'CommentController@store');
 
-Route::get('/', function () {
-    $articles = \App\Models\Article::all();
-    return view('welcome', compact('articles'));
-});
+//Category
+Route::get('category', 'CategoryController@index');
+Route::get('category/{categoryId}', 'CategoryController@show');
+Route::put('category/{categoryId}', 'CategoryController@update');
+Route::post('category/{categoryId}', 'CategoryController@store');
