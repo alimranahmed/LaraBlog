@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
     @foreach($articles as $article)
-        <h1>{{$article->heading}}</h1>
+        <a href="{{route('get-article', $article->id)}}"><h1>{{$article->heading}}</h1></a>
     @endforeach
 @endsection
