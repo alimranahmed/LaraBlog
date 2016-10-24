@@ -7968,4 +7968,11 @@ footer {
   padding-top: 20px;
   font-size: 15px; }
 
+.sidebar {
+  width: 17%; }
+  .sidebar ul {
+    margin: 0px -15px; }
+  .sidebar li {
+    width: 100%; }
+
 /*# sourceMappingURL=app.css.map */
