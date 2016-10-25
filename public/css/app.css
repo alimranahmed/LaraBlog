@@ -7955,6 +7955,9 @@ button.close {
 body, li {
   color: #4a148c; }
 
+a:hover {
+  text-decoration: none; }
+
 .navbar-brand {
   color: #4a148c !important; }
 
@@ -7977,13 +7980,15 @@ footer {
 
 .article-list {
   margin: 0px;
-  padding: 5px; }
+  padding: 5px;
+  border-bottom: 1px dotted #777; }
   .article-list .heading {
     display: inline; }
   .article-list .time {
     color: #777; }
 
 .article-list:hover {
-  background: #ffcdd2; }
+  background: #ffcdd2;
+  font-weight: bold; }
 
 /*# sourceMappingURL=app.css.map */

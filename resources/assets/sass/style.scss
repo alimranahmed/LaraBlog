@@ -1,6 +1,7 @@
 .article-list{
   margin:0px;
   padding:5px;
+  border-bottom: 1px dotted $grey;
   .heading{
     display: inline;
   }
@@ -10,5 +11,6 @@
   }
 }
 .article-list:hover{
-   background: $red-lighten4;
+  background: $red-lighten4;
+  font-weight:bold;
  }
