@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
@@ -31,5 +32,10 @@ class Article extends Model
 
     public function keywords(){
         return $this->belongsToMany(Keyword::class, 'article_keyword');
+    }
+
+    public function getPublishedAtAttribute($value){
+        $carbonDate = new Carbon($value);
+        return $carbonDate->diffForHumans();
     }
 }
