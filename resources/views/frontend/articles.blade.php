@@ -2,8 +2,10 @@
 @section('content')
     @foreach($articles as $article)
         <a href="{{route('get-article', $article->id)}}">
-            <h3>{{$article->heading}}</h3>
-            <span>published on {{$article->published_at}}</span>
+            <div class="row article-list">
+                <h3 class="heading">{{$article->heading}}</h3>
+                <span class="time">publised {{$article->published_at}}</span>
+            </div>
         </a>
     @endforeach
 @endsection

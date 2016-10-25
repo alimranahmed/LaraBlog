@@ -7975,4 +7975,15 @@ footer {
   .sidebar li {
     width: 100%; }
 
+.article-list {
+  margin: 0px;
+  padding: 5px; }
+  .article-list .heading {
+    display: inline; }
+  .article-list .time {
+    color: #777; }
+
+.article-list:hover {
+  background: #ffcdd2; }
+
 /*# sourceMappingURL=app.css.map */
