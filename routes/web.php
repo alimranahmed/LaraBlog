@@ -1,9 +1,7 @@
 <?php
 
-Route::get('/', function(){
-    return view('home');
-});
 //Article
+Route::get('/', 'ArticleController@index')->name('articles');
 Route::get('article', 'ArticleController@index')->name('articles');
 Route::get('article/{articleId}', 'ArticleController@show')->name('get-article');
 Route::put('article/{articleId}', 'ArticleController@update');
