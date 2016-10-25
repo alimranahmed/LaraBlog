@@ -1,0 +1,14 @@
+.article-list{
+  margin:0px;
+  padding:5px;
+  .heading{
+    display: inline;
+  }
+  
+  .time{
+    color: $grey;
+  }
+}
+.article-list:hover{
+   background: $red-lighten4;
+ }
