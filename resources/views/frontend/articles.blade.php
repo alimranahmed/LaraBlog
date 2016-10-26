@@ -4,7 +4,7 @@
         <a href="{{route('get-article', $article->id)}}">
             <div class="row article-list">
                 <h3 class="heading">{{$article->heading}}</h3>
-                <span class="time">publised {{$article->published_at}}</span>
+                <span class="time">published {{$article->published_at}}</span>
             </div>
         </a>
     @endforeach
