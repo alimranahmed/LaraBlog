@@ -15,7 +15,7 @@ class ArticleController extends Controller
 
     public function show(Request $request, $articleId){
         $article = Article::where('id', $articleId)->with('comments')->first();
-        return $article;
+        return view('frontend.article', compact('article'));
     }
 
     public function update(Request $request, $articleId){
