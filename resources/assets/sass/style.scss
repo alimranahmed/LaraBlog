@@ -5,10 +5,14 @@
   .heading{
     display: inline;
   }
-  
-  .time{
-    color: $grey;
-  }
+}
+
+.time{
+  color: $grey;
+}
+
+.article-heading{
+  font-weight:bold;
 }
 .article-list:hover{
   background: $red-lighten4;

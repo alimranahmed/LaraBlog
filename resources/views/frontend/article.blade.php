@@ -2,8 +2,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-12">
-            <h3 class="heading">{{$article->heading}}</h3>
-            <span class="time">published {{$article->published_at}}</span>
+            <h3 class="article-heading text-center">{{$article->heading}}</h3>
         </div>
     </div>
     <div class="row">

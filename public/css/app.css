@@ -7984,8 +7984,12 @@ footer {
   border-bottom: 1px dotted #777; }
   .article-list .heading {
     display: inline; }
-  .article-list .time {
-    color: #777; }
+
+.time {
+  color: #777; }
+
+.article-heading {
+  font-weight: bold; }
 
 .article-list:hover {
   background: #ffcdd2;
