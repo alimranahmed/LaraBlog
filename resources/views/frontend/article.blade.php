@@ -13,13 +13,15 @@
             <h4>Comments</h4>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            @forelse($article->comments as $comment)
-                {{$comment->content}}
-            @empty
-                <span class="text-grey">No comment yet<span>
-            @endforelse
+    @forelse($article->comments as $comment)
+        <div class="row">
+            <div class="col-sm-12">{{$comment->content}}</div>
         </div>
-    </div>
+    @empty
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="text-grey">No comment yet</span>
+            </div>
+        </div>
+    @endforelse
 @endsection
