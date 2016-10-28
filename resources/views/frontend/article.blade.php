@@ -16,6 +16,7 @@
     @forelse($article->comments as $comment)
         <div class="row">
             <div class="col-sm-12">{{$comment->content}}</div>
+            <div class="col-sm-12">published at {{$comment->created_at}}</div>
         </div>
     @empty
         <div class="row">
