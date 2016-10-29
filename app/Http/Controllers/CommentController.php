@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
+use App\Models\Comment;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 
 class CommentController extends Controller
 {
@@ -19,10 +19,11 @@ class CommentController extends Controller
             //Create new article
             $newComment['address_id'] = $newAddress->id;
             $newComment['article_id'] = $articleId;
-            $newComment = Article::create($newComment);
+            $newComment = Comment::create($newComment);
         }catch(\PDOException $e){
             return response()->json(['message' => $e->getMessage()]);
         }
-        return response()->json(['message' => 'Article created successfully!', 'entity' => $newComment]);
+        //return response()->json(['message' => 'Article created successfully!', 'entity' => $newComment]);
+        return redirect()->route('get-article', $articleId);
     }
 }
