@@ -25,4 +25,17 @@
             </div>
         </div>
     @endforelse
+    <div class="row">
+        <div class="col-sm-12">
+            <form>
+                <div class="form-group">
+                    <textarea type="text" name="content" class="form-control" id="comment" placeholder="Comment"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="name" class="form-control" id="name" placeholder="Name">
+                </div>
+                <button type="submit" class="btn btn-primary">Commit</button>
+            </form>
+        </div>
+    </div>
 @endsection
