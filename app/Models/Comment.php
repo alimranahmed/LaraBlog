@@ -15,4 +15,8 @@ class Comment extends Model
     public function address(){
         return $this->belongsTo(Address::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
