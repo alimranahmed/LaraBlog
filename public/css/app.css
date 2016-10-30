@@ -7955,6 +7955,9 @@ button.close {
 body, li {
   color: #4a148c; }
 
+textarea {
+  resize: vertical; }
+
 .text-grey {
   color: #777; }
 

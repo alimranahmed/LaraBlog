@@ -2,6 +2,10 @@ body, li{
   color: $purple-dark4;
 }
 
+textarea{
+  resize: vertical;
+}
+
 .text-grey{
   color: $grey;
 }
