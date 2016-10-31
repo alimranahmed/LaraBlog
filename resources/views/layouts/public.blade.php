@@ -1,6 +1,5 @@
 @include('layouts._header')
 @include('layouts._navbar')
-{{--@include('layouts._sidebar')--}}
 <div class="main-container container" id="app">
     <div class="col-sm-offset-1 col-sm-10">
         @yield('content')
