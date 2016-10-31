@@ -7984,6 +7984,45 @@ footer {
   .sidebar li {
     width: 100%; }
 
+.border-bottom {
+  border-bottom: 1px solid #a5d6a7; }
+
+.border-top {
+  border-top: 1px solid #a5d6a7; }
+
+.border-left {
+  border-left: 1px solid #a5d6a7; }
+
+.border-right {
+  border-right: 1px solid #a5d6a7; }
+
+.border-all {
+  border: 1px solid #a5d6a7; }
+
+hr {
+  margin-top: 0;
+  margin-bottom: 0;
+  border: 0;
+  border-top: 1px solid #a5d6a7; }
+
+.margin-top-15 {
+  margin-top: 15px; }
+
+.margin-bottom-15 {
+  margin-bottom: 15px; }
+
+.margin-top-10 {
+  margin-top: 10px; }
+
+.margin-bottom-10 {
+  margin-bottom: 10px; }
+
+.margin-top-5 {
+  margin-top: 5px; }
+
+.margin-bottom-5 {
+  margin-bottom: 5px; }
+
 .article-list {
   margin: 0;
   padding: 5px;
