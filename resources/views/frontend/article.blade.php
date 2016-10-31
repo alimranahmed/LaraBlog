@@ -6,14 +6,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12">{{$article->content}}</div>
+        <div class="col-sm-12 text-justify">{{$article->content}}</div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <h4>Comments</h4>
-        </div>
-    </div>
-    <div class="row">
+    <div class="row margin-top-15">
         <div class="col-sm-12">
             <form action="{{route('add-comment', $article->id)}}" method="post" name="add_comment_form">
                 {{csrf_field()}}
@@ -29,16 +24,22 @@
                     <input type="email" name="email" value="{{old('email')}}" class="form-control" id="email"
                            placeholder="Email">
                 </div>
-                <button type="submit" class="btn btn-primary">Comment</button>
+                <button type="submit" class="btn btn-primary pull-right">Comment</button>
             </form>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h4>Comments</h4>
+        </div>
+    </div>
+    <hr class="margin-bottom-15">
     @forelse($article->comments as $comment)
-        <div class="row">
+        <div class="row margin-bottom-5">
             <div class="col-sm-2">
                 <b>{{is_null($comment->user) ? 'Someone' : $comment->user->name }}</b>&nbsp;said:
             </div>
-            <div class="col-sm-12">{{$comment->content}}
+            <div class="col-sm-12 text-justify">{{$comment->content}}
                 <span class="text-grey">&nbsp;{{$comment->created_at}}</span>
             </div>
         </div>
