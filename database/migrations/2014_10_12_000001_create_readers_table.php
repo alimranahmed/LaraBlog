@@ -31,8 +31,8 @@ class CreateReadersTable extends Migration
             $table->foreign('address_id')
                 ->references('id')
                 ->on('addresses');
-            $table->integer('is_verified')->nullable(0);
-            $table->integer('notify')->nullable(0);
+            $table->integer('is_verified')->default(0);
+            $table->integer('notify')->default(0);
             $table->string('token')->nullable();
             $table->timestamps();
         });

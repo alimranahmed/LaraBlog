@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommentRequest;
 use App\Models\Address;
 use App\Models\Comment;
+use App\Models\Reader;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -23,16 +24,17 @@ class CommentController extends Controller
                 $newComment['address_id'] = $newAddress->id;
                 $newComment['article_id'] = $articleId;
 
+                //If email exist create new user
                 if($request->has('email')){
-                    $newUser = $request->only('email');
-                    $newUser = User::firstOrCreate($newUser);
+                    $newReader = $request->only('email');
+                    $newReader = Reader::firstOrCreate($newReader);
+                    //If name provided then add name to the created user
                     if($request->has('name') && !empty($request->get('name'))){
-                        $newUser->name = $request->get('name');
-                        $newUser->save();
+                        $newReader->name = $request->get('name');
+                        $newReader->save();
                     }
-                    $newComment['user_id'] = $newUser->id;
+                    $newComment['reader_id'] = $newReader->id;
                 }
-
                 Comment::create($newComment);
             });
         }catch(\PDOException $e){
