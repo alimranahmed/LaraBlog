@@ -4,7 +4,7 @@
     </div>
 </div>
 <hr class="margin-bottom-15">
-@forelse($article->comments as $comment)
+@forelse($comments as $comment)
     <div class="row margin-bottom-5">
         <div class="col-sm-2">
             <b>{{is_null($comment->user) ? 'Someone' : $comment->user->name }}</b>&nbsp;said:

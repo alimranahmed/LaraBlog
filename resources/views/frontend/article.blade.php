@@ -9,7 +9,7 @@
         <div class="col-sm-12 text-justify">{{$article->content}}</div>
     </div>
     <div class="row margin-top-15">
-        @include('frontend._form_comment');
+        @include('frontend._form_comment')
     </div>
-    @include('frontend.comments')
+    @include('frontend.comments', ['comments' => $article->comments])
 @endsection
