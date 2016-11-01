@@ -13,7 +13,6 @@ class CommentController extends Controller
 {
     public function store(CommentRequest $request, $articleId){
         $clientIP = $_SERVER['REMOTE_ADDR'];
-
         $newComment = $request->only('content');
         $newAddress = ['ip' => $clientIP];
         try{
@@ -29,10 +28,11 @@ class CommentController extends Controller
                     $newReader = $request->only('email');
                     $newReader = Reader::firstOrCreate($newReader);
                     //If name provided then add name to the created user
-                    if($request->has('name') && !empty($request->get('name'))){
+                    if($request->has('name')){
                         $newReader->name = $request->get('name');
-                        $newReader->save();
                     }
+                    $newReader['notify'] = $request->has('notify');
+                    $newReader->save();
                     $newComment['reader_id'] = $newReader->id;
                 }
                 Comment::create($newComment);
