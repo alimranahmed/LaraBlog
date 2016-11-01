@@ -14,7 +14,7 @@
         </div>
         <div class="form-group col-sm-6 col-sm-offset-6 no-padding-right checkbox">
             <label>
-                <input type="checkbox"> Notify me about new article
+                <input type="checkbox" name="notify"> Notify me about new article
             </label>
             <button type="submit" class="btn btn-primary pull-right">Comment</button>
         </div>
