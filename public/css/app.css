@@ -8059,6 +8059,9 @@ hr {
 .no-padding-left {
   padding-left: 0; }
 
+.hide {
+  display: none; }
+
 .article-list {
   margin: 0;
   padding: 5px;

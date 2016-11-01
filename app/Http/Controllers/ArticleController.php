@@ -15,6 +15,12 @@ class ArticleController extends Controller
 
     public function show(Request $request, $articleId){
         $article = Article::where('id', $articleId)->with('comments')->first();
+        //TODO keep log of which ip has hit the article
+        try{
+            $article->update(['hit_count' => ++$article->hit_count]);
+        }catch(\PDOException $e){
+            //TODO add log
+        }
         return view('frontend.article', compact('article'));
     }
 
