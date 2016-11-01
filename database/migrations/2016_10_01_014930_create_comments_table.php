@@ -29,6 +29,7 @@ class CreateCommentsTable extends Migration
             $table->foreign('address_id')
                 ->references('id')
                 ->on('addresses');
+            $table->integer('is_published')->unsigned()->default(0);
             $table->timestamps();
         });
     }
