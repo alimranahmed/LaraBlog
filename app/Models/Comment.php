@@ -21,6 +21,10 @@ class Comment extends Model
         return $this->belongsTo(Reader::class);
     }
 
+    public function replies(){
+        return $this->hasMany(Comment::class, 'parent_comment_id');
+    }
+
     public function getCreatedAtAttribute($value){
         $carbonDate = new Carbon($value);
         return $carbonDate->diffForHumans();

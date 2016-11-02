@@ -29,6 +29,10 @@ class CreateCommentsTable extends Migration
             $table->foreign('address_id')
                 ->references('id')
                 ->on('addresses');
+            $table->integer('parent_comment_id')->unsigned()->nullable();
+            $table->foreign('parent_comment_id')
+                ->references('id')
+                ->on('comments');
             $table->integer('is_published')->unsigned()->default(0);
             $table->timestamps();
         });
