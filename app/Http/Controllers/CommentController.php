@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
+use App\Mail\CommentConfirmation;
+use App\Mail\OrderShipped;
 use App\Models\Address;
 use App\Models\Comment;
 use App\Models\Reader;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -37,7 +40,9 @@ class CommentController extends Controller
                 }
                 Comment::create($newComment);
             });
-        }catch(\PDOException $e){
+            //TODO as reader doesn't need to login, their comment need to be confirmed
+            //Mail::to("name@gmail.com")->send(new CommentConfirmation());
+        }catch(\Exception $e){
             return response()->json(['message' => $e->getMessage()]);
         }
         //return response()->json(['message' => 'Article created successfully!', 'entity' => $newComment]);
