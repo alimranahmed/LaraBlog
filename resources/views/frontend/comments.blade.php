@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-12">
-        <h4>Comments</h4>
+        <h4>Comments({{count($comments)}})</h4>
     </div>
 </div>
 <hr class="margin-bottom-15">
