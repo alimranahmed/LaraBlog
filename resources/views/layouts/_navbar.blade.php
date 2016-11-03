@@ -26,9 +26,9 @@
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-right">
+            <form class="navbar-form navbar-right" id="#searchBox">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Search" @keyup="search()">
                 </div>
             </form>
         </div><!-- /.navbar-collapse -->
