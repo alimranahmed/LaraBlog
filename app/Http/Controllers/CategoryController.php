@@ -34,4 +34,10 @@ class CategoryController extends Controller
         }
         return response()->json(['message' => 'Category Created successfully!', 'entity' => $category]);
     }
+
+    public function getArticles(Request $request, $categoryAlias){
+        $category = Category::where('alias', $categoryAlias)->with('articles')->first();
+        $articles = $category->articles;
+        return view('frontend.articles', compact('articles'));
+    }
 }
