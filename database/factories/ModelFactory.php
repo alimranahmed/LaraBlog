@@ -1,7 +1,7 @@
 <?php
 
 $factory->define(App\Models\Category::class, function(Faker\Generator $faker){
-    return [ 'name' => $faker->word ];
+    return [ 'name' => $name = $faker->word, 'alias' => $name ];
 });
 
 $factory->define(App\Models\Article::class, function (Faker\Generator $faker) {
