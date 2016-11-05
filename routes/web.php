@@ -7,6 +7,8 @@ Route::get('article/{articleId}', 'ArticleController@show')->name('get-article')
 Route::put('article/{articleId}', 'ArticleController@update');
 Route::post('article', 'ArticleController@store');
 Route::put('article/toggle-publish/{articleId}', 'ArticleController@togglePublish');
+
+Route::get('search/{queryString}', 'ArticleController@search');
 //Comment
 Route::post('comment/{articleId}', 'CommentController@store')->name('add-comment');
 
