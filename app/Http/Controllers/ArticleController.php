@@ -64,4 +64,10 @@ class ArticleController extends Controller
         }
         return response()->json(['message' => 'Publication status changed successfully!']);
     }
+
+    public function search(Request $request, $queryString){
+        //TODO search on article, category based on query string
+        $articles = [];
+        return $articles;
+    }
 }
