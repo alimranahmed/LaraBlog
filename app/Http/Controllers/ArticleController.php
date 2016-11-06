@@ -69,6 +69,6 @@ class ArticleController extends Controller
         $articles = Article::where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
             ->get();
-        return $articles;
+        return view('frontend.articles', compact('articles'));
     }
 }
