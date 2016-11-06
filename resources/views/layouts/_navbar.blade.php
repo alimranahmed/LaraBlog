@@ -36,9 +36,9 @@
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-right" id="#searchBox">
+            <form class="navbar-form navbar-right" id="#searchBox" action="{{route('search-article')}}" method="get">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search" @keyup="search()">
+                    <input type="text" class="form-control" placeholder="Search" name="query_string">
                 </div>
             </form>
         </div><!-- /.navbar-collapse -->
