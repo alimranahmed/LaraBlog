@@ -66,8 +66,9 @@ class ArticleController extends Controller
     }
 
     public function search(Request $request, $queryString){
-        //TODO search on article, category based on query string
-        $articles = [];
+        $articles = Article::where('heading', 'LIKE', "%$queryString%")
+            ->orWhere('content', 'LIKE', "%$queryString%")
+            ->get();
         return $articles;
     }
 }
