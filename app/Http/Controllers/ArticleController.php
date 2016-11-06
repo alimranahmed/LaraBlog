@@ -65,7 +65,8 @@ class ArticleController extends Controller
         return response()->json(['message' => 'Publication status changed successfully!']);
     }
 
-    public function search(Request $request, $queryString){
+    public function search(Request $request){
+        $queryString = $request->get('query_string');
         $articles = Article::where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
             ->get();
