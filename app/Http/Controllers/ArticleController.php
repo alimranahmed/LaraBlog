@@ -70,6 +70,9 @@ class ArticleController extends Controller
         $articles = Article::where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
             ->get();
-        return view('frontend.articles', compact('articles'));
+        $searched = new \stdClass();
+        $searched->query = $queryString;
+        $searched->articles = $articles;
+        return view('frontend.search_result', compact('searched'));
     }
 }
