@@ -11,5 +11,5 @@
     <div class="row margin-top-15">
         @include('frontend._form_comment')
     </div>
-    @include('frontend.comments', ['comments' => $article->comments])
+    @include('frontend._comments', ['comments' => $article->comments])
 @endsection

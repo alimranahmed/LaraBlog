@@ -5,5 +5,5 @@
             <span class="text-grey">({{$searched->articles->count()}})</span>
         </h2>
     </div>
-    @include('frontend.article_list', ['articles' => $searched->articles])
+    @include('frontend._article_list', ['articles' => $searched->articles])
 @endsection
