@@ -14,7 +14,7 @@ class Article extends Model
     }
 
     public function comments(){
-        return $this->hasMany(Comment::class)->with('reader')->orderBy('created_at', 'desc');
+        return $this->hasMany(Comment::class)->with('user')->orderBy('created_at', 'desc');
     }
 
     public function categories(){

@@ -18,4 +18,12 @@ class User extends Authenticatable
     public function image(){
         return $this->belongsTo(Image::class);
     }
+
+    public function reader(){
+        return $this->hasOne(Reader::class);
+    }
+
+    public function getIsReaderAttribute(){
+        return !is_null($this->reader);
+    }
 }
