@@ -21,10 +21,10 @@ class CreateCommentsTable extends Migration
                 ->references('id')
                 ->on('articles')
                 ->onDelete('cascade');
-            $table->integer('reader_id')->unsigned()->nullable();
-            $table->foreign('reader_id')
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('readers');
+                ->on('users');
             $table->integer('address_id')->unsigned()->nullable();
             $table->foreign('address_id')
                 ->references('id')
