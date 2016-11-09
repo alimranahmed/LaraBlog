@@ -28,7 +28,7 @@ class CommentController extends Controller
                 //If email exist create new user
                 if($request->has('email')){
                     $newUser = $request->only('email');
-                    $newUser = Reader::firstOrCreate($newUser);
+                    $newUser = User::firstOrCreate($newUser);
                     //If name provided then add name to the created user
                     if($request->has('name')){
                         $newUser->name = $request->get('name');
