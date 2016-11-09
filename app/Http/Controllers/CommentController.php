@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
 use App\Mail\CommentConfirmation;
-use App\Mail\OrderShipped;
 use App\Models\Address;
 use App\Models\Comment;
 use App\Models\Reader;
@@ -28,15 +27,16 @@ class CommentController extends Controller
 
                 //If email exist create new user
                 if($request->has('email')){
-                    $newReader = $request->only('email');
-                    $newReader = Reader::firstOrCreate($newReader);
+                    $newUser = $request->only('email');
+                    $newUser = Reader::firstOrCreate($newUser);
                     //If name provided then add name to the created user
                     if($request->has('name')){
-                        $newReader->name = $request->get('name');
+                        $newUser->name = $request->get('name');
                     }
-                    $newReader['notify'] = $request->has('notify');
-                    $newReader->save();
-                    $newComment['reader_id'] = $newReader->id;
+                    $newUser->reader()->create([
+                        'notify' => $request->has('notify'),
+                    ]);
+                    $newComment['user_id'] = $newUser->id;
                 }
                 Comment::create($newComment);
             });
