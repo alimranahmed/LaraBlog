@@ -5,18 +5,14 @@
             <textarea name="content" class="form-control" id="comment" rows="3"
                       placeholder="Comment*">{{old('content')}}</textarea>
         </div>
-        <div class="form-group col-sm-4 no-padding-left">
-            <input type="text" name="name" value="{{old('name')}}" class="form-control" id="name" placeholder="Name">
+        <div class="form-group col-sm-6 no-padding-left {{$errors->has('name') ? 'has-error has-feedback' : ''}}">
+            <input type="text" name="name" value="{{old('name')}}" class="form-control" id="name" placeholder="Name*">
         </div>
-        <div class="form-group col-sm-4 no-padding-right {{$errors->has('email') ? 'has-error has-feedback' : ''}}">
+        <div class="form-group col-sm-6 no-padding-right {{$errors->has('email') ? 'has-error has-feedback' : ''}}">
             <input type="email" name="email" value="{{old('email')}}" class="form-control" id="email"
-                   placeholder="Email">
+                   placeholder="Email*">
         </div>
-        <div class="form-group col-sm-4 no-padding-right {{$errors->has('password') ? 'has-error has-feedback' : ''}}">
-            <input type="password" name="password" value="{{old('password')}}" class="form-control" id="paassword"
-                   placeholder="Password">
-        </div>
-        <div class="form-group col-sm-8 col-sm-offset-4 no-padding-right checkbox">
+        <div class="form-group col-sm-6 col-sm-offset-6 no-padding-right checkbox">
             <label>
                 <input type="checkbox" name="notify"> Notify me about new article
             </label>
