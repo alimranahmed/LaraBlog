@@ -17,8 +17,8 @@ class Article extends Model
         return $this->hasMany(Comment::class)->with('user')->orderBy('created_at', 'desc');
     }
 
-    public function categories(){
-        return $this->belongsToMany(Category::class, 'article_category');
+    public function category(){
+        return $this->belongsTo(Category::class);
     }
 
     //Written from the address

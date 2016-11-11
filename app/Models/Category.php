@@ -8,7 +8,7 @@ class Category extends Model
 {
     protected $guarded = ['id'];
     public function articles(){
-        return $this->belongsToMany(Article::class, 'article_category');
+        return $this->hasMany(Article::class);
     }
 
     public function parent(){
