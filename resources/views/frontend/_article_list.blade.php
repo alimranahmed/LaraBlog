@@ -10,6 +10,6 @@
     </a>
 @empty
     <div class="row text-grey">
-        <h3>Nothing Found</h3>
+        <h3>No Article Found</h3>
     </div>
 @endforelse
