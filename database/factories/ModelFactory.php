@@ -11,6 +11,7 @@ $factory->define(App\Models\Article::class, function (Faker\Generator $faker) {
         'content' => $faker->paragraph,
         'published_at' => new \DateTime(),
         'user_id' => 1,
+        'category_id' => $faker->numberBetween(1, 5),
     ];
 });
 
