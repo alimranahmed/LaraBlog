@@ -68,7 +68,7 @@ class ArticleController extends Controller
 
     public function search(Request $request){
         $this->validate($request, ['query_string' => 'required']);
-        
+
         $queryString = $request->get('query_string');
         $articles = Article::where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
