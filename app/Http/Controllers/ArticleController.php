@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\Article;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -66,6 +67,8 @@ class ArticleController extends Controller
     }
 
     public function search(Request $request){
+        $this->validate($request, ['query_string' => 'required']);
+        
         $queryString = $request->get('query_string');
         $articles = Article::where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
