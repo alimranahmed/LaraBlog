@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
         User::create(
             [
                 'name' => 'Al- Imran Ahmed',
+                'username' => 'imran',
                 'password' => \Hash::make('chand'),
                 'email' => 'al.imran.cse@gmail.com',
                 'role_id' => Role::where('name', 'OWNER')->first()->id,
