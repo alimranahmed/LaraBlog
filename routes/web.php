@@ -18,3 +18,6 @@ Route::get('category/{categoryId}', 'CategoryController@show');
 Route::put('category/{categoryId}', 'CategoryController@update');
 Route::post('category/{categoryId}', 'CategoryController@store');
 Route::get('category/article/{categoryAlias}', 'CategoryController@getArticles')->name('articles-by-category');
+
+//Admin
+Route::get('admin/login', 'AuthController@showLoginForm');
