@@ -7978,7 +7978,7 @@ footer {
   font-size: 15px; }
 
 .sidebar {
-  width: 17%; }
+  width: 100%; }
   .sidebar ul {
     margin: 0px -15px; }
   .sidebar li {
