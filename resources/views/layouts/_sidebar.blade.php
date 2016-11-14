@@ -1,4 +1,4 @@
-<div style="padding-top:50px">
+<div>
     <nav class="navbar navbar-default sidebar">
         <div>
             <!-- Brand and toggle get grouped for better mobile display -->
