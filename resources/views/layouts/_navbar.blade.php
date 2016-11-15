@@ -33,7 +33,7 @@
                             <li><a href="#">Profile</a></li>
                             <li><a href="#">Settings</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="{{route('logout')}}">Logout</a></li>
                         </ul>
                     </li>
                 @endif
