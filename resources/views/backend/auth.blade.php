@@ -6,7 +6,8 @@
                 <strong>Welcome</strong>
             </div>
             <div class="panel-body">
-                <form>
+                <form method="post" action="{{route('login')}}">
+                    {{csrf_field()}}
                     <div class="input-group">
                         <div class="input-group-addon">@</div>
                         <input type="email" name="email" class="form-control" id="email" placeholder="Email">
