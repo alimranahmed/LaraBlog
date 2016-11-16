@@ -1,11 +1,11 @@
 @include('layouts._header')
 @include('layouts._navbar')
 <div class="main-container container-fluid no-padding-left">
-    <div class="col-sm-2 no-padding">
+    <aside class="col-sm-2 no-padding">
         @if(Auth::check())
             @include('layouts._sidebar')
         @endif
-    </div>
+    </aside>
     <div class="col-sm-10">
         @yield('content')
     </div>
