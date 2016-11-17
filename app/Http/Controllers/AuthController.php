@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function showLoginForm(Request $request){
+        if(Auth::check()){
+            return redirect()->route('admin-dashboard');
+        }
         return view('backend.auth');
     }
 
@@ -16,7 +19,7 @@ class AuthController extends Controller
         $this->validate($request, ['email' => 'required|email', 'password' => 'required|min:4']);
 
         if(Auth::attempt($request->only('email', 'password'), $request->has('remember_me'))){
-            return Auth::user();
+            return redirect()->route('admin-dashboard');
         }else{
             return back()->with('auth_error','Invalid credentials');
         }
