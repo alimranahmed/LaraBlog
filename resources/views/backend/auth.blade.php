@@ -13,10 +13,12 @@
                         <div class="input-group-addon">@</div>
                         <input type="email" name="email" class="form-control" id="email" value="{{old('email')}}" placeholder="Email">
                     </div>
+                    <div class="text-danger">{{$errors->first('email')}}</div>
                     <div class="input-group margin-top-15 {{$errors->has('password') ? 'has-error has-feedback' : ''}}">
                         <div class="input-group-addon"><i class="fa fa-lock"></i></div>
                         <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                     </div>
+                    <div class="text-danger">{{$errors->first('password')}}</div>
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" name="remember_me"> Remember Me
