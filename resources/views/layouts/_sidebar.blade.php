@@ -15,13 +15,13 @@
         <div class="collapse navbar-collapse" id="sidebar">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="{{route('articles')}}">
+                    <a href="#">
                         <i class="fa fa-dashboard"></i>
                         <span class="hidden-sm">Dashboard</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('articles')}}">
+                    <a href="#">
                         <i class="fa fa-file-text"></i>
                         <span class="hidden-sm">Articles</span>
                     </a>
