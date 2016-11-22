@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="sidebar">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href="#">
+                    <a href="{{route('admin-dashboard')}}">
                         <i class="fa fa-dashboard"></i>
                         <span class="hidden-sm">Dashboard</span>
                     </a>
