@@ -10,7 +10,7 @@
             <b>{{is_null($comment->user) ? 'Someone' : $comment->user ->name }}</b>&nbsp;said:
         </div>
         <div class="col-sm-12 text-justify">{{$comment->content}}
-            <span class="text-grey">&nbsp;{{$comment->created_at}}</span>
+            <span class="text-grey">&nbsp;{{$comment->createdAtHuman}}</span>
         </div>
     </div>
 @empty
