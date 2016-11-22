@@ -40,7 +40,7 @@ class Article extends Model
         return $carbonDate->diffForHumans();
     }
 
-    public function getCreateddAtHumanAttribute($value){
+    public function getCreatedAtHumanAttribute($value){
         $carbonDate = new Carbon($this->created_at);
         return $carbonDate->diffForHumans();
     }
