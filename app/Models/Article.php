@@ -9,7 +9,7 @@ class Article extends Model
 {
     protected $guarded = ['id'];
 
-    protected function user(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
 

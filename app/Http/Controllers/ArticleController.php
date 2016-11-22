@@ -78,4 +78,10 @@ class ArticleController extends Controller
         $searched->articles = $articles;
         return view('frontend.search_result', compact('searched'));
     }
+
+    public function adminArticle(Request $request){
+        $articles =  Article::with('category', 'keywords', 'user')->get();
+        //return $articles;
+        return view('backend.articleList', compact('articles'));
+    }
 }
