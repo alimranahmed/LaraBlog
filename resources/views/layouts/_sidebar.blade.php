@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{route('admin-articles')}}">
                         <i class="fa fa-file-text"></i>
                         <span class="hidden-sm">Articles</span>
                     </a>
