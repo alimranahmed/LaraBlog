@@ -7,22 +7,22 @@
             <th>Category</th>
             <th>Written</th>
             <th>Published</th>
-            <th>Written</th>
-            <th>Last Edited</th>
+            <th>Last</th>
             <th>Comments</th>
             <th>Hits</th>
+            <th>Operations</th>
         </tr>
         @foreach($articles as $article)
             <tr>
                 <td>{{$article->id}}</td>
                 <td>{{$article->heading}}</td>
                 <td>{{$article->category->name}}</td>
-                <td>{{$article->created_at}}</td>
-                <td>{{$article->published_at}}</td>
-                <td>{{$article->user->name}}</td>
-                <td>{{$article->updated_at}}</td>
+                <td>{{$article->createdAtHuman}}</td>
+                <td>{{$article->publishedAtHuman}}</td>
+                <td>{{$article->updatedAtHuman}}</td>
                 <td>{{$article->comment_count}}</td>
                 <td>{{$article->hit_count}}</td>
+                <td>Show | Edit | Delete</td>
             </tr>
         @endforeach
     </table>
