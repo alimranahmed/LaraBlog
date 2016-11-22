@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     protected $guarded = ['id'];
+    protected $appends = ['publishedAtHuman', 'createdAtHuman', 'updatedAtHuman'];
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -34,8 +35,17 @@ class Article extends Model
         return $this->belongsToMany(Keyword::class, 'article_keyword');
     }
 
-    public function getPublishedAtAttribute($value){
-        $carbonDate = new Carbon($value);
+    public function getPublishedAtHumanAttribute($value){
+        $carbonDate = new Carbon($this->published_at);
+        return $carbonDate->diffForHumans();
+    }
+
+    public function getCreateddAtHumanAttribute($value){
+        $carbonDate = new Carbon($this->created_at);
+        return $carbonDate->diffForHumans();
+    }
+    public function getUpdatedAtHumanAttribute($value){
+        $carbonDate = new Carbon($this->updated_at);
         return $carbonDate->diffForHumans();
     }
 }

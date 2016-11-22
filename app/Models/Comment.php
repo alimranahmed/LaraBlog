@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     protected $guarded = ['id'];
+    protected $appends = ['createdAtHuman'];
 
     public function article(){
         return $this->belongsTo(Article::class);
@@ -25,8 +26,8 @@ class Comment extends Model
         return $this->hasMany(Comment::class, 'parent_comment_id');
     }
 
-    public function getCreatedAtAttribute($value){
-        $carbonDate = new Carbon($value);
+    public function getCreatedAtHumanAttribute(){
+        $carbonDate = new Carbon($this->created_at);
         return $carbonDate->diffForHumans();
     }
 }
