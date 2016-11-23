@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{route('admin-categories')}}">
                         <span class="fa fa-database"></span>
                         <span class="hidden-sm">Categories</span>
                     </a>
