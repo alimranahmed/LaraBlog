@@ -14,7 +14,7 @@ Route::get('search', 'ArticleController@search')->name('search-article');
 Route::post('comment/{articleId}', 'CommentController@store')->name('add-comment');
 
 //Category
-Route::get('category', 'CategoryController@index')->name('categories');
+Route::get('admin/category', 'CategoryController@index')->name('admin-categories');
 Route::get('category/{categoryId}', 'CategoryController@show')->name('get-category');
 Route::put('category/{categoryId}', 'CategoryController@update')->name('update-category');
 Route::post('category/{categoryId}', 'CategoryController@store')->name('add-category');
