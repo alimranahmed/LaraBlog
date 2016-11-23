@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
     protected $guarded = ['id'];
+    protected $appends = ['createdAtHuman'];
+
     public function articles(){
         return $this->hasMany(Article::class);
     }
@@ -17,5 +20,10 @@ class Category extends Model
 
     public function children(){
         return $this->belongsTo(Category::class, 'parent_category_id');
+    }
+
+    public function getCreatedAtHumanAttribute(){
+        $carbonDate = new Carbon($this->updated_at);
+        return $carbonDate->diffForHumans();
     }
 }
