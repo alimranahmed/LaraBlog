@@ -10,23 +10,22 @@
             </button>
             {{--<a class="navbar-brand" href="#">Al- Imran Ahmed</a>--}}
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="sidebar">
             <ul class="nav navbar-nav">
-                <li class="active">
+                <li class="{{Request::is('admin/dashboard') ? "active":""}}">
                     <a href="{{route('admin-dashboard')}}">
                         <i class="fa fa-dashboard"></i>
                         <span class="hidden-sm">Dashboard</span>
                     </a>
                 </li>
-                <li>
+                <li class="{{Request::is('admin/article') ? "active":""}}">
                     <a href="{{route('admin-articles')}}">
                         <i class="fa fa-file-text"></i>
                         <span class="hidden-sm">Articles</span>
                     </a>
                 </li>
-                <li>
+                <li class="{{Request::is('admin/category') ? "active":""}}">
                     <a href="{{route('admin-categories')}}">
                         <span class="fa fa-database"></span>
                         <span class="hidden-sm">Categories</span>
