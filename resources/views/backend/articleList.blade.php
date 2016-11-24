@@ -22,7 +22,10 @@
                 <td class="text-center">{{$article->updatedAtHuman}}</td>
                 <td class="text-center">{{$article->comment_count}}</td>
                 <td class="text-center">{{$article->hit_count}}</td>
-                <td>Edit | Delete</td>
+                <td class="text-center">
+                    <span class="fa fa-edit text-primary"></span>&nbsp;
+                    <span class="fa fa-trash text-danger"></span>
+                </td>
             </tr>
         @endforeach
     </table>

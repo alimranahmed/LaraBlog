@@ -12,7 +12,10 @@
                 <td>{{$category->id}}</td>
                 <td>{{$category->name}}</td>
                 <td>{{$category->createdAtHuman}}</td>
-                <td>Edit | Delete</td>
+                <td class="text-center">
+                    <span class="fa fa-edit text-primary"></span>&nbsp;
+                    <span class="fa fa-trash text-danger"></span>
+                </td>
             </tr>
         @endforeach
     </table>
