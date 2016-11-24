@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
+    public function index(){
+        $comments = Comment::with('article', 'user')->get();
+        return view('backend.commentList', compact('comments'));
+    }
     public function store(CommentRequest $request, $articleId){
         $clientIP = $_SERVER['REMOTE_ADDR'];
         $newComment = $request->only('content');
