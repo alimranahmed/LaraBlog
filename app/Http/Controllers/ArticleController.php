@@ -80,7 +80,7 @@ class ArticleController extends Controller
     }
 
     public function adminArticle(Request $request){
-        $articles =  Article::with('category', 'keywords', 'user')->get();
+        $articles =  Article::with('category', 'keywords', 'user')->orderBy('id', 'desc')->get();
         //return $articles;
         return view('backend.articleList', compact('articles'));
     }

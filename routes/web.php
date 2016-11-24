@@ -26,5 +26,5 @@ Route::get('admin/logout', 'AuthController@logout')->name('logout');
 Route::get('admin/dashboard', 'DashboardController@index')->name('admin-dashboard');
 Route::get('admin/article', 'ArticleController@adminArticle')->name('admin-articles');
 
-//Admin category
+//Admin comment
 Route::get('admin/comment', 'CommentController@index')->name('comments');

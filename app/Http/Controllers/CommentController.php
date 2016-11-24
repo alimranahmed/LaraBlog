@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 class CommentController extends Controller
 {
     public function index(){
-        $comments = Comment::with('article', 'user')->get();
+        $comments = Comment::with('article', 'user')->orderBy('id', 'desc')->get();
         return view('backend.commentList', compact('comments'));
     }
     public function store(CommentRequest $request, $articleId){
