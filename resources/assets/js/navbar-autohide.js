@@ -7,17 +7,18 @@
         $(".top-navbar").fadeOut("slow");
 
         // fade in .navbar
-        $(function () {
-            /*$(window).scroll(function () {
+        /*$(function () {
+            $(window).scroll(function () {
                 // set distance user needs to scroll before we fadeIn navbar
                 if ($(this).scrollTop() > 50) {
                     $('.top-navbar').fadeIn();
                 } else {
                     $('.top-navbar').fadeOut();
                 }
-            });*/
-        });
+            });
+        });*/
 
+        //Show navabar when mouse is at the top of window
         $(function() {
             var mouseY = 0;
             document.addEventListener('mousemove', function(e) {
