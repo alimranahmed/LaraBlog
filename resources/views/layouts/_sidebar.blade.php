@@ -26,9 +26,15 @@
                     </a>
                 </li>
                 <li class="{{Request::is('admin/category*') ? "active":""}}">
-                    <a href="{{route('admin-categories')}}">
+                    <a href="{{route('categories')}}">
                         <span class="fa fa-database"></span>
                         <span class="hidden-sm">Categories</span>
+                    </a>
+                </li>
+                <li class="{{Request::is('admin/comment*') ? "active":""}}">
+                    <a href="{{route('comments')}}">
+                        <span class="fa fa-comment"></span>
+                        <span class="hidden-sm">Comment</span>
                     </a>
                 </li>
             </ul>
