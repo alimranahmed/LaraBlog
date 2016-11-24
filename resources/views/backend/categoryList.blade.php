@@ -5,7 +5,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Created</th>
-            <th>Operations</th>
+            <th class="text-center">Operations</th>
         </tr>
         @foreach($categories as $category)
             <tr>
