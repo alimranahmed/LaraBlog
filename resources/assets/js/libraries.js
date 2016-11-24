@@ -9,6 +9,7 @@ require('bootstrap-sass');
 //Load vue and vue resource
 window.Vue = require('vue');
 require('vue-resource');
+require('./navbar-autohide');
 
 //Generate csrf token
 window.Laravel = { csrfToken: '{{ csrf_token() }}' };
