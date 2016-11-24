@@ -15,8 +15,10 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="{{route('articles')}}">Articles </a></li>
-                <li class="dropdown">
+                <li class="{{Request::is('article*') ? "active":""}}">
+                    <a href="{{route('articles')}}">Articles </a>
+                </li>
+                <li class="dropdown {{Request::is('category/*') ? "active":""}}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Categories <span class="caret"></span></a>
                     <ul class="dropdown-menu">
