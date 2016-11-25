@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function index(Request $request){
-        $categories = Category::all();
+        $categories = Category::with('articles')->get();
         return view('backend.categoryList', compact('categories'));
     }
 
