@@ -1,6 +1,6 @@
 @include('layouts._header')
 @include('layouts._navbar')
-<div class="main-container container-fluid no-padding-left">
+<div class="main-container container-fluid no-padding">
     <h1 class="text-center border-bottom" id="site-heading">Al- Imran Ahmed</h1>
     <aside class="col-sm-2 no-padding">
         @if(Auth::check())
