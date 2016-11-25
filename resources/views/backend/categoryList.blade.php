@@ -4,6 +4,7 @@
         <tr class="text-center">
             <th>ID</th>
             <th>Name</th>
+            <th>Alias</th>
             <th>Created</th>
             <th>Articles</th>
             <th class="text-center">Operations</th>
@@ -12,6 +13,7 @@
             <tr>
                 <td>{{$category->id}}</td>
                 <td>{{$category->name}}</td>
+                <td>{{$category->alias}}</td>
                 <td>{{$category->createdAtHuman}}</td>
                 <td>
                     <a href="{{route('articles-by-category', $category->alias)}}">{{$category->articles->count()}}</a>

@@ -3,17 +3,18 @@
  */
 (function ($) {
     $(document).ready(function () {
+        var topNavBar = $("#top-navbar");
         // hide .navbar first
-        //$(".top-navbar").fadeOut("slow");
+        //topNavBar.fadeOut("slow");
 
         // fade in .navbar
         /*$(function () {
             $(window).scroll(function () {
                 // set distance user needs to scroll before we fadeIn navbar
                 if ($(this).scrollTop() > 50) {
-                    $('.top-navbar').fadeIn();
+                    topNavBar.fadeIn();
                 } else {
-                    $('.top-navbar').fadeOut();
+                    topNavBar.fadeOut();
                 }
             });
         });*/
@@ -22,12 +23,15 @@
         $(function() {
             var mouseY = 0;
             document.addEventListener('mousemove', function(e) {
-                console.log('MouseMoving: '+e.clientX+','+e.clientY);
+
                 mouseY = e.clientY || e.pageY;
-                if(mouseY < 100) {
-                    $('.top-navbar').fadeIn();
+
+                if(mouseY > 100 && !topNavBar.is(':hover')) {
+                    topNavBar.fadeOut();
+
                 }else{
-                    $('.top-navbar').fadeOut(1000 * 3);
+                    topNavBar.fadeIn();
+
                 }
             }, false);
         });
