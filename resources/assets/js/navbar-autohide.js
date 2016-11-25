@@ -4,7 +4,7 @@
 (function ($) {
     $(document).ready(function () {
         // hide .navbar first
-        $(".top-navbar").fadeOut("slow");
+        //$(".top-navbar").fadeOut("slow");
 
         // fade in .navbar
         /*$(function () {
