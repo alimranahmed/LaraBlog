@@ -7968,8 +7968,7 @@ a:hover {
   color: #4a148c !important; }
 
 .main-container {
-  min-height: 560px;
-  padding-top: 50px; }
+  min-height: 560px; }
 
 footer {
   height: 55px;
@@ -8078,5 +8077,8 @@ hr {
 .article-list:hover {
   background: #ffcdd2;
   font-weight: bold; }
+
+#site-heading {
+  margin-top: 10px; }
 
 /*# sourceMappingURL=app.css.map */
