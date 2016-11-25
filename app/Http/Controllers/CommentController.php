@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommentRequest;
 use App\Mail\CommentConfirmation;
 use App\Models\Address;
+use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Reader;
 use App\Models\User;
@@ -43,6 +44,7 @@ class CommentController extends Controller
                     $newComment['user_id'] = $newUser->id;
                 }
                 Comment::create($newComment);
+                Article::where('id', $articleId)->increment('comment_count');
             });
             //TODO as reader doesn't need to login, their comment need to be confirmed
             //Mail::to("name@gmail.com")->send(new CommentConfirmation());
