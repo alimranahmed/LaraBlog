@@ -1,7 +1,8 @@
 <?php
 
+//Home
+Route::get('/', 'HomeController@index')->name('home');
 //Article
-Route::get('/', 'ArticleController@index')->name('home');
 Route::get('article', 'ArticleController@index')->name('articles');
 Route::get('article/{articleId}', 'ArticleController@show')->name('get-article');
 Route::put('article/{articleId}', 'ArticleController@update');
