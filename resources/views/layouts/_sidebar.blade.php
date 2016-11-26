@@ -27,14 +27,26 @@
                 </li>
                 <li class="{{Request::is('admin/category*') ? "active":""}}">
                     <a href="{{route('categories')}}">
-                        <span class="fa fa-database"></span>
+                        <span class="fa fa-share-alt"></span>
                         <span class="hidden-sm">Categories</span>
                     </a>
                 </li>
                 <li class="{{Request::is('admin/comment*') ? "active":""}}">
                     <a href="{{route('comments')}}">
-                        <span class="fa fa-comment"></span>
-                        <span class="hidden-sm">Comment</span>
+                        <span class="fa fa-comment-o"></span>
+                        <span class="hidden-sm">Comments</span>
+                    </a>
+                </li>
+                <li class="{{Request::is('admin/keyword*') ? "active":""}}">
+                    <a href="{{route('comments')}}">
+                        <span class="fa fa-file"></span>
+                        <span class="hidden-sm">Keywords</span>
+                    </a>
+                </li>
+                <li class="{{Request::is('admin/user*') ? "active":""}}">
+                    <a href="{{route('comments')}}">
+                        <span class="fa fa-user"></span>
+                        <span class="hidden-sm">Users</span>
                     </a>
                 </li>
             </ul>
