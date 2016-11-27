@@ -13,11 +13,9 @@
             <tr>
                 <td>{{$user->id}}</td>
                 <td>{{$user->name}}</td>
+                <td>{{$user->username}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->createdAtHuman}}</td>
-                <td>
-                    <a href="{{route('articles-by-category', $user->alias)}}">{{$user->articles->count()}}</a>
-                </td>
                 <td class="text-center">
                     <span class="fa fa-edit text-primary"></span>&nbsp;
                     <span class="fa fa-trash text-danger"></span>
