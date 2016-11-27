@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="{{Request::is('admin/user*') ? "active":""}}">
-                    <a href="{{route('comments')}}">
+                    <a href="{{route('users')}}">
                         <span class="fa fa-user"></span>
                         <span class="hidden-sm">Users</span>
                     </a>
