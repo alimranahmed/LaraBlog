@@ -29,3 +29,6 @@ Route::get('admin/article', 'ArticleController@adminArticle')->name('admin-artic
 
 //Admin comment
 Route::get('admin/comment', 'CommentController@index')->name('comments');
+
+//Admin users
+Route::get('admin/user', 'UserController@index')->name('users');
