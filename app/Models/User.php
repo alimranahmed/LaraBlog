@@ -29,7 +29,7 @@ class User extends Authenticatable
         return !is_null($this->reader);
     }
 
-    public function getCreatedAtHuman(){
+    public function getCreatedAtHumanAttribute(){
         $carbonDate = new Carbon($this->created_at);
         return $carbonDate->diffForHumans();
     }
