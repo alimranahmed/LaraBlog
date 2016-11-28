@@ -32,3 +32,6 @@ Route::get('admin/comment', 'CommentController@index')->name('comments');
 
 //Admin users
 Route::get('admin/user', 'UserController@index')->name('users');
+
+//Admin keywords
+Route::get('admin/keywords', 'KeywordController@index')->name('keywords');
