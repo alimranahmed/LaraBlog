@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="{{Request::is('admin/keyword*') ? "active":""}}">
-                    <a href="{{route('comments')}}">
+                    <a href="{{route('keywords')}}">
                         <span class="fa fa-file"></span>
                         <span class="hidden-sm">Keywords</span>
                     </a>
