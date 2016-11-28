@@ -25,6 +25,10 @@ class User extends Authenticatable
         return $this->hasOne(Reader::class);
     }
 
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
+
     public function getIsReaderAttribute(){
         return !is_null($this->reader);
     }

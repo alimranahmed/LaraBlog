@@ -6,6 +6,7 @@
             <th>Name</th>
             <th>Username</th>
             <th>Email</th>
+            <th>Role</th>
             <th>Created</th>
             <th class="text-center">Operations</th>
         </tr>
@@ -15,6 +16,7 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->username}}</td>
                 <td>{{$user->email}}</td>
+                <td>{{$user->role->name}}</td>
                 <td>{{$user->createdAtHuman}}</td>
                 <td class="text-center">
                     <span class="fa fa-edit text-primary"></span>&nbsp;

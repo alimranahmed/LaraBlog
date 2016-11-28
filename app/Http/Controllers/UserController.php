@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(Request $request){
-        $users = User::all();
+        $users = User::with('role')->get();
         return view('backend.userList', compact('users'));
     }
 }
