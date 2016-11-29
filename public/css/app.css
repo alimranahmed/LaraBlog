@@ -8061,6 +8061,27 @@ hr {
 .hide {
   display: none; }
 
+.pointer {
+  cursor: pointer; }
+
+.text-sm {
+  font-size: 0.7em; }
+
+.text-normal {
+  font-size: 1em; }
+
+.text-md {
+  font-size: 1.3em; }
+
+.text-lg {
+  font-size: 2em; }
+
+.text-xlg {
+  font-size: 3.5em; }
+
+.text-xxlg {
+  font-size: 5em; }
+
 .article-list {
   margin: 0;
   padding: 5px;

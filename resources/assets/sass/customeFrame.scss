@@ -148,3 +148,27 @@ hr{
 .pointer{
   cursor: pointer;
 }
+
+//Font sizes
+.text-sm{
+  font-size: $font-sm;
+}
+
+.text-normal{
+  font-size: $font-normal;
+}
+.text-md{
+  font-size: $font-md;
+}
+
+.text-lg{
+  font-size: $font-lg;
+}
+
+.text-xlg{
+  font-size: $font-xlg;
+}
+
+.text-xxlg{
+  font-size: $font-xxlg;
+}
