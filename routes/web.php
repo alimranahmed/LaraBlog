@@ -25,9 +25,11 @@ Route::get('admin/login', 'AuthController@showLoginForm')->name('loginForm');
 Route::post('admin/login', 'AuthController@login')->name('login');
 Route::get('admin/logout', 'AuthController@logout')->name('logout');
 Route::get('admin/dashboard', 'DashboardController@index')->name('admin-dashboard');
+//admin articles
 Route::get('admin/article', 'ArticleController@adminArticle')->name('admin-articles');
+Route::get('admin/article/toggle-publish/{articleID}', 'ArticleController@togglePublish')->name('toggle-article-publish');
 
-//Admin comment
+//Admin comments
 Route::get('admin/comment', 'CommentController@index')->name('comments');
 
 //Admin users

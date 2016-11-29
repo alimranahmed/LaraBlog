@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\Article;
-use Dotenv\Validator;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -59,11 +58,14 @@ class ArticleController extends Controller
     public function togglePublish(Request $request, $articleId){
         $article = Article::find($articleId);
         try{
-            $article->update(['is_published' => !$article->is_published]);
+            $article->update([
+                'is_published' => !$article->is_published,
+                'published_at' => new \DateTime(),
+            ]);
         }catch(\PDOException $e){
             return response()->json(['message' => $e->getMessage()]);
         }
-        return response()->json(['message' => 'Publication status changed successfully!']);
+        return redirect()->route('admin-articles');
     }
 
     public function search(Request $request){
