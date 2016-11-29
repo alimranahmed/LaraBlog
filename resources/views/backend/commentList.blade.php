@@ -17,7 +17,7 @@
                 <td>{{$comment->user->email}}</td>
                 <td class="text-center">{{$comment->createdAtHuman}}</td>
                 <td class="text-center">
-                    <strong class="fa {{$comment->is_published ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></strong>
+                    <strong class="fa fa-lg {{$comment->is_published ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></strong>
                 </td>
                 <td>{{substr($comment->article->heading, 0, 20)}}...</td>
                 <td class="text-center">
