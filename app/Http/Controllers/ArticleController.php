@@ -9,12 +9,16 @@ use Illuminate\Http\Request;
 class ArticleController extends Controller
 {
     public function index(Request $request){
-        $articles =  Article::all();
+        $articles =  Article::orderBy('created_at ', 'desc')->get();
         return view('frontend.articles', compact('articles'));
     }
 
     public function show(Request $request, $articleId){
-        $article = Article::where('id', $articleId)->with('comments')->first();
+        $article = Article::where('id', $articleId)
+            ->where('is_published', 1)
+            ->with(['comments' => function($comments){
+                $comments->where('is_published', 1);
+            }])->first();
         //TODO keep log of which ip has hit the article
         try{
             $article->increment('hit_count');
