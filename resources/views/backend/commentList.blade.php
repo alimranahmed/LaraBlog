@@ -17,9 +17,13 @@
                 <td>{{$comment->user->email}}</td>
                 <td class="text-center">{{$comment->createdAtHuman}}</td>
                 <td class="text-center">
-                    <strong class="fa fa-lg {{$comment->is_published ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></strong>
+                    <a href="{{route('toggle-comment-publish', $comment->id)}}">
+                        <strong class="fa fa-lg {{$comment->is_published ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></strong>
+                    </a>
                 </td>
-                <td>{{substr($comment->article->heading, 0, 20)}}...</td>
+                <td>
+                    <a href="{{route('get-article', $comment->article->id)}}">{{substr($comment->article->heading, 0, 20)}}...</a>
+                </td>
                 <td class="text-center">
                     <span class="fa fa-edit text-primary"></span>&nbsp;
                     <span class="fa fa-trash text-danger"></span>
