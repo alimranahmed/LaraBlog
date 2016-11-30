@@ -18,6 +18,7 @@ class CommentController extends Controller
         $comments = Comment::with('article', 'user')->orderBy('id', 'desc')->get();
         return view('backend.commentList', compact('comments'));
     }
+
     public function store(CommentRequest $request, $articleId){
         $clientIP = $_SERVER['REMOTE_ADDR'];
         $newComment = $request->only('content');
@@ -53,5 +54,18 @@ class CommentController extends Controller
         }
         //return response()->json(['message' => 'Article created successfully!', 'entity' => $newComment]);
         return redirect()->route('get-article', $articleId);
+    }
+
+    public function togglePublish(Request $request, $commentId){
+        $comment = Comment::find($commentId);
+        try{
+            $comment->update([
+                'is_published' => !$comment->is_published,
+                'published_at' => new \DateTime(),
+            ]);
+        }catch(\PDOException $e){
+            return response()->json(['message' => $e->getMessage()]);
+        }
+        return redirect()->route('comments');
     }
 }
