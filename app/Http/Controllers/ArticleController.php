@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 class ArticleController extends Controller
 {
     public function index(Request $request){
-        $articles =  Article::orderBy('created_at ', 'desc')->get();
+        $articles =  Article::where('is_published', 1)
+            ->orderBy('created_at', 'desc')
+            ->get();
         return view('frontend.articles', compact('articles'));
     }
 
