@@ -41,4 +41,14 @@ class CategoryController extends Controller
         $articles = $category->articles;
         return view('frontend.articles', compact('articles'));
     }
+
+    public function toggleActive(Request $request, $categoryId){
+        $category = Category::find($categoryId);
+        try{
+            $category->update(['is_active' => !$category->is_active]);
+        }catch(\PDOException $e){
+            return response()->json(['message' => $e->getMessage()]);
+        }
+        return redirect()->route('categories');
+    }
 }
