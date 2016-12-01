@@ -20,7 +20,9 @@
                 </td>
                 <td class="text-center">
                     <span class="fa fa-edit text-primary"></span>&nbsp;
-                    <span class="fa fa-trash text-danger"></span>
+                    <a href="{{route('toggle-category-active', $category->id)}}">
+                        <span class="fa fa-lg {{$category->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></span>
+                    </a>
                 </td>
             </tr>
         @endforeach
