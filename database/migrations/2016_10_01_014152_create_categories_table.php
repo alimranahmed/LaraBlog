@@ -22,6 +22,7 @@ class CreateCategoriesTable extends Migration
                 ->references('id')
                 ->on('categories');*/
             $table->integer('position')->unsigned()->nullable();
+            $table->integer('is_active')->unsigned()->defualt(1);
             $table->timestamps();
         });
     }
