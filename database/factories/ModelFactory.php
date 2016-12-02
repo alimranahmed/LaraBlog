@@ -12,7 +12,7 @@ $factory->define(App\Models\Article::class, function (Faker\Generator $faker) {
 
     return [
         'heading' => $faker->sentence,
-        'content' => $faker->paragraph,
+        'content' => implode(' ',$faker->paragraphs(15)),
         'published_at' => new \DateTime(),
         'user_id' => 1,
         'category_id' => $faker->numberBetween(1, 5),
