@@ -38,6 +38,7 @@ class CommentController extends Controller
                     //If name provided then add name to the created user
                     if($request->has('name')){
                         $newUser->name = $request->get('name');
+                        $newUser->save();
                     }
                     $newUser->reader()->create([
                         'notify' => $request->has('notify'),
