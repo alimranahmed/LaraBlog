@@ -14,7 +14,7 @@
             <tr>
                 <td>{{$comment->id}}</td>
                 <td>{{$comment->content}}</td>
-                <td>{{$comment->user->email}}</td>
+                <td>{{$comment->user->name.' ('.$comment->user->email.')'}}</td>
                 <td class="text-center">{{$comment->createdAtHuman}}</td>
                 <td class="text-center">
                     <a href="{{route('toggle-comment-publish', $comment->id)}}">
