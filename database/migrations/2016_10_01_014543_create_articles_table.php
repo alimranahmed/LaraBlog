@@ -23,6 +23,7 @@ class CreateArticlesTable extends Migration
                 ->on('users');
             $table->dateTime('published_at');
             $table->integer('is_published')->unsigned()->default(1);
+            $table->integer('is_deleted')->unsigned()->default(0);
             $table->integer('hit_count')->unsigned()->default(0);
             $table->integer('comment_count')->unsigned()->default(0);
             $table->integer('vote')->unsigned()->default(0);
