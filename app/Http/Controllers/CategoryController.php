@@ -36,12 +36,6 @@ class CategoryController extends Controller
         return response()->json(['message' => 'Category Created successfully!', 'entity' => $category]);
     }
 
-    public function getArticles(Request $request, $categoryAlias){
-        $category = Category::where('alias', $categoryAlias)->with('articles')->first();
-        $articles = $category->articles;
-        return view('frontend.articles', compact('articles'));
-    }
-
     public function toggleActive(Request $request, $categoryId){
         $category = Category::find($categoryId);
         try{
@@ -50,5 +44,13 @@ class CategoryController extends Controller
             return response()->json(['message' => $e->getMessage()]);
         }
         return redirect()->route('categories');
+    }
+
+    public function getArticles(Request $request, $categoryAlias){
+        $category = Category::where('alias', $categoryAlias)->with(['articles'  => function($articles){
+            $articles->where('is_published', 1)->where('is_deleted', 0);
+        }])->first();
+        $articles = $category->articles;
+        return view('frontend.articles', compact('articles'));
     }
 }
