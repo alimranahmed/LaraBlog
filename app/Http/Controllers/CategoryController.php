@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function index(Request $request){
-        $categories = Category::with('articles')->get();
+        $categories = Category::with(['articles' => function($articles){
+            $articles->where('is_deleted', 0);
+        }])->get();
         return view('backend.categoryList', compact('categories'));
     }
 
