@@ -69,4 +69,13 @@ class CommentController extends Controller
         }
         return redirect()->route('comments');
     }
+
+    public function destroy(Request $request, $commentId){
+        try{
+            Comment::destroy($commentId);
+        }catch (\PDOException $exception){
+            return response()->json(['message' => $exception->getMessage()]);
+        }
+        return redirect()->route('comments');
+    }
 }

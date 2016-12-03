@@ -33,6 +33,7 @@ Route::get('admin/article/toggle-publish/{articleID}', 'ArticleController@toggle
 
 //Admin comments
 Route::get('admin/comment', 'CommentController@index')->name('comments');
+Route::get('admin/comment/{commentId}/delete', 'CommentController@destroy')->name('delete-comment');
 Route::get('admin/comment/toggle-publish/{commentId}', 'CommentController@togglePublish')->name('toggle-comment-publish');
 
 //Admin users
