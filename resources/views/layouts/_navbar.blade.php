@@ -22,7 +22,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Categories <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        @foreach($categories as $category)
+                        @foreach($navCategories as $category)
                             <li><a href="{{route('articles-by-category', $category->alias)}}">{{$category->name}}</a></li>
                         @endforeach
                     </ul>
