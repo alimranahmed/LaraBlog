@@ -81,12 +81,10 @@ class ArticleController extends Controller
         $queryString = $request->get('query_string');
         $articles = Article::where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
-            ->where('is_published', 1)
-            ->where('is_deleted', 0)
             ->get();
         $searched = new \stdClass();
         $searched->query = $queryString;
-        $searched->articles = $articles;
+        $searched->articles = $articles->where('is_published', 1)->where('is_deleted', 0);
         return view('frontend.search_result', compact('searched'));
     }
 
