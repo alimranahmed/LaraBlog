@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ArticleController extends Controller
 {
     public function index(Request $request){
-        $articles =  Article::where('is_published', 1)
+        $articles =  Article::where('is_published', 1)->where('is_deleted', 0)
             ->orderBy('created_at', 'desc')
             ->get();
         return view('frontend.articles', compact('articles'));
@@ -18,6 +18,7 @@ class ArticleController extends Controller
     public function show(Request $request, $articleId){
         $article = Article::where('id', $articleId)
             ->where('is_published', 1)
+            ->where('is_deleted', 0)
             ->with(['comments' => function($comments){
                 $comments->where('is_published', 1);
             }])->first();
