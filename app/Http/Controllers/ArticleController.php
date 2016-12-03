@@ -53,7 +53,7 @@ class ArticleController extends Controller
             //Create new article
             $newArticle['address_id'] = $newAddress->id;
             $newArticle['published_at'] = new \DateTime();
-            $newArticle['user_id'] = 1; //TODO remove the hard coded user id
+            $newArticle['user_id'] = Auth::user()->id;
             $newArticle = Article::create($newArticle);
         }catch(\PDOException $e){
             return response()->json(['message' => $e->getMessage()]);
@@ -81,6 +81,8 @@ class ArticleController extends Controller
         $queryString = $request->get('query_string');
         $articles = Article::where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
+            ->where('is_published', 1)
+            ->where('is_deleted', 0)
             ->get();
         $searched = new \stdClass();
         $searched->query = $queryString;
