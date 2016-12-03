@@ -30,6 +30,7 @@ Route::get('admin/dashboard', 'DashboardController@index')->name('admin-dashboar
 //admin articles
 Route::get('admin/article', 'ArticleController@adminArticle')->name('admin-articles');
 Route::get('admin/article/toggle-publish/{articleID}', 'ArticleController@togglePublish')->name('toggle-article-publish');
+Route::get('admin/article/{articleId}/delete', 'ArticleController@destroy')->name('delete-article');
 
 //Admin comments
 Route::get('admin/comment', 'CommentController@index')->name('comments');

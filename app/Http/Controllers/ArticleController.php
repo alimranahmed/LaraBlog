@@ -88,8 +88,20 @@ class ArticleController extends Controller
     }
 
     public function adminArticle(Request $request){
-        $articles =  Article::with('category', 'keywords', 'user')->orderBy('id', 'desc')->get();
+        $articles =  Article::where('is_deleted', 0)
+            ->with('category', 'keywords', 'user')
+            ->orderBy('id', 'desc')
+            ->get();
         //return $articles;
         return view('backend.articleList', compact('articles'));
+    }
+
+    public function destroy(Request $request, $articleId){
+        try{
+            Article::where('id', $articleId)->update(['is_deleted' => 1]);
+        }catch (\PDOException $e){
+            return response()->json(['message' => $e->getMessage()]);
+        }
+        return redirect()->route('admin-articles');
     }
 }
