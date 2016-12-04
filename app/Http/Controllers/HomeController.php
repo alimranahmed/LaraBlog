@@ -12,7 +12,10 @@ class HomeController extends Controller
         if(Auth::check()){
            return view('backend.dashboard');
         }else{
-            $articles =  Article::all();
+            $articles =  Article::where('is_published', 1)->where('is_deleted', 0)
+                ->orderBy('published_at', 'desc')
+                ->orderBy('created_at', 'desc')
+                ->get();
             return view('frontend.articles', compact('articles'));
         }
     }
