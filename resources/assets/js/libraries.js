@@ -4,7 +4,6 @@ window._ = require('lodash');
 //load Jquery & bootstrap
 window.$ = window.jQuery = require('jquery');
 require('bootstrap-sass');
-// require('materialize-css');
 
 //Load vue and vue resource
 window.Vue = require('vue');
