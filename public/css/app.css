@@ -8086,11 +8086,10 @@ hr {
   font-size: 5em; }
 
 .alert {
-  position: absolute;
+  position: fixed;
   width: 100%;
   bottom: 0;
   margin: 0;
-  opacity: 0.1;
   color: white; }
 
 .alert-success {
