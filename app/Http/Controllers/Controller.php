@@ -10,4 +10,12 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function getMessage($e, $msg = null){
+        if(env('APP_ENV') == 'local'){
+            return $e->getMessage();
+        }else{
+            return is_null($msg) ? 'Oops, operation failed please try again' : $msg;
+        }
+    }
 }
