@@ -16,5 +16,10 @@ class RolesTableSeeder extends Seeder
             'name' => 'OWNER',
             'level' => '1',
         ]);
+
+        Role::create([
+            'name' => 'VISITOR',
+            'level' => '2',
+        ]);
     }
 }
