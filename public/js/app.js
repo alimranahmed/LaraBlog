@@ -83,7 +83,7 @@ eval("'use strict';\n\nvar VueRouter = __webpack_require__(10);//# sourceMapping
 /***/ function(module, exports) {
 
 "use strict";
-eval("\"use strict\";\n\n$(\"#success-alert\").fadeTo(2000, 500).slideUp(500, function () {\n    $(\"#success-alert\").slideUp(500);\n});//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9yZXNvdXJjZXMvYXNzZXRzL2pzL2FsZXJ0LWF1dG9oaWRlLmpzPzk1ZmIiXSwic291cmNlc0NvbnRlbnQiOlsiXCJ1c2Ugc3RyaWN0XCI7XG5cbiQoXCIjc3VjY2Vzcy1hbGVydFwiKS5mYWRlVG8oMjAwMCwgNTAwKS5zbGlkZVVwKDUwMCwgZnVuY3Rpb24gKCkge1xuICAgICQoXCIjc3VjY2Vzcy1hbGVydFwiKS5zbGlkZVVwKDUwMCk7XG59KTtcblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gcmVzb3VyY2VzL2Fzc2V0cy9qcy9hbGVydC1hdXRvaGlkZS5qcyJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsInNvdXJjZVJvb3QiOiIifQ==");
+eval("\"use strict\";\n\n$(\"#success-alert\").fadeTo(5000, 500).slideUp(500, function () {\n    $(\"#success-alert\").slideUp(500);\n});//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9yZXNvdXJjZXMvYXNzZXRzL2pzL2FsZXJ0LWF1dG9oaWRlLmpzPzk1ZmIiXSwic291cmNlc0NvbnRlbnQiOlsiXCJ1c2Ugc3RyaWN0XCI7XG5cbiQoXCIjc3VjY2Vzcy1hbGVydFwiKS5mYWRlVG8oNTAwMCwgNTAwKS5zbGlkZVVwKDUwMCwgZnVuY3Rpb24gKCkge1xuICAgICQoXCIjc3VjY2Vzcy1hbGVydFwiKS5zbGlkZVVwKDUwMCk7XG59KTtcblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gcmVzb3VyY2VzL2Fzc2V0cy9qcy9hbGVydC1hdXRvaGlkZS5qcyJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsInNvdXJjZVJvb3QiOiIifQ==");
 
 /***/ },
 /* 3 */
