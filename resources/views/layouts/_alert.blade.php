@@ -13,4 +13,4 @@
         <button type="button" class="close" data-dismiss="alert">x</button>
         <strong>Warning, </strong>{{session('warningMsg')}}
     </div>
-@elseif
+@endif
