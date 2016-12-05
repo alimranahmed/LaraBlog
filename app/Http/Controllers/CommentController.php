@@ -8,6 +8,7 @@ use App\Models\Address;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Reader;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -33,8 +34,12 @@ class CommentController extends Controller
 
                 //If email exist create new user
                 if($request->has('email')){
-                    $newUser = $request->only('email');
-                    $newUser = User::firstOrCreate($newUser);
+                    $newUser = User::where('email', $request->get('email'))->first();
+                    if(is_null($newUser)){
+                        $newUser = $request->only('email');
+                        $newUser['role_id'] = Role::where('name', 'VISITOR')->first()->id;
+                        $newUser = User::create($newUser);
+                    }
                     //If name provided then add name to the created user
                     if($request->has('name')){
                         $newUser->name = $request->get('name');
