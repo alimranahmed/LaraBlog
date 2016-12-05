@@ -51,10 +51,10 @@ class CommentController extends Controller
             //TODO as reader doesn't need to login, their comment need to be confirmed
             //Mail::to("name@gmail.com")->send(new CommentConfirmation());
         }catch(\Exception $e){
-            return response()->json(['message' => $e->getMessage()]);
+            return redirect()->back()->with('errorMsg', $this->getMessage($e))->withInput();
         }
         //return response()->json(['message' => 'Article created successfully!', 'entity' => $newComment]);
-        return redirect()->route('get-article', $articleId);
+        return redirect()->route('get-article', $articleId)->with('successMsg', 'Comment posted');
     }
 
     public function togglePublish(Request $request, $commentId){
@@ -65,17 +65,17 @@ class CommentController extends Controller
                 'published_at' => new \DateTime(),
             ]);
         }catch(\PDOException $e){
-            return response()->json(['message' => $e->getMessage()]);
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
-        return redirect()->route('comments');
+        return redirect()->route('comments')->with('successMsg', 'Comment updated');
     }
 
     public function destroy(Request $request, $commentId){
         try{
             Comment::destroy($commentId);
-        }catch (\PDOException $exception){
-            return response()->json(['message' => $exception->getMessage()]);
+        }catch (\PDOException $e){
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
-        return redirect()->route('comments');
+        return redirect()->route('comments')->with('successMsg', 'Comment deleted');
     }
 }

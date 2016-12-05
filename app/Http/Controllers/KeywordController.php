@@ -17,8 +17,8 @@ class KeywordController extends Controller
         try{
             $keyword->update(['is_active' => !$keyword->is_active]);
         }catch(\PDOException $e){
-            return response()->json(['message' => $e->getMessage()]);
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
-        return redirect()->route('keywords');
+        return redirect()->route('keywords')->with('successMsg', 'Keyword updated');
     }
 }

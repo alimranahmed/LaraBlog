@@ -23,7 +23,7 @@ class CategoryController extends Controller
         try{
             Category::where('id', $categoryId)->update($updatedCategory);
         }catch (\PDOException $e){
-            return response()->json(['message' => $e->getMessage()]);
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return response()->json(['message' => 'Category updated successfully!']);
     }
@@ -33,7 +33,7 @@ class CategoryController extends Controller
         try{
             $category = Category::create($newCategory);
         }catch (\PDOException $e){
-            return response()->json(['message' => $e->getMessage()]);
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return response()->json(['message' => 'Category Created successfully!', 'entity' => $category]);
     }
@@ -43,9 +43,9 @@ class CategoryController extends Controller
         try{
             $category->update(['is_active' => !$category->is_active]);
         }catch(\PDOException $e){
-            return response()->json(['message' => $e->getMessage()]);
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
-        return redirect()->route('categories');
+        return redirect()->route('categories')->with('successMsg', 'Category updated');
     }
 
     public function getArticles(Request $request, $categoryAlias){
