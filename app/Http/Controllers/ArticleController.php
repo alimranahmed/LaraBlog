@@ -37,7 +37,7 @@ class ArticleController extends Controller
         try{
             Article::where('id', $articleId)->update($updatedArticle);
         }catch(\PDOException $e){
-            return response()->json(['message' => $e->getMessage()]);
+            return response()->json(['message' => $this->getMessage($e)]);
         }
         return response()->json(['message' => 'Updated successfully!']);
     }
@@ -57,7 +57,7 @@ class ArticleController extends Controller
             $newArticle['user_id'] = Auth::user()->id;
             $newArticle = Article::create($newArticle);
         }catch(\PDOException $e){
-            return response()->json(['message' => $e->getMessage()]);
+            return response()->json(['message' => $this->getMessage($e)]);
         }
 
         return response()->json(['message' => 'Article created successfully!', 'entity' => $newArticle]);
@@ -71,9 +71,9 @@ class ArticleController extends Controller
                 'published_at' => new \DateTime(),
             ]);
         }catch(\PDOException $e){
-            return response()->json(['message' => $e->getMessage()]);
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
-        return redirect()->route('admin-articles');
+        return redirect()->route('admin-articles')->with('successMsg', 'Article updated');
     }
 
     public function search(Request $request){
@@ -102,7 +102,7 @@ class ArticleController extends Controller
         try{
             Article::where('id', $articleId)->update(['is_deleted' => 1]);
         }catch (\PDOException $e){
-            return response()->json(['message' => $e->getMessage()]);
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('admin-articles');
     }
