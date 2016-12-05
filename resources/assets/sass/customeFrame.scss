@@ -176,3 +176,23 @@ hr{
 .text-xxlg{
   font-size: $font-xxlg;
 }
+
+//alert
+.alert{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  margin:0;
+  opacity: 0.1;
+  color: white;
+}
+.alert-success{
+  background: $green-dark1;
+}
+.alert-danger{
+  background: $red-dark1;
+}
+
+.alert-warning{
+  background: $yellow-dark3;
+}

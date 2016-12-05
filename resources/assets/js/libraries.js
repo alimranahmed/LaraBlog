@@ -9,6 +9,7 @@ require('bootstrap-sass');
 window.Vue = require('vue');
 require('vue-resource');
 require('./navbar-autohide');
+require('./alert-autohide');
 require('./script');
 
 //Generate csrf token

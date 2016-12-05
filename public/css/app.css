@@ -8085,6 +8085,23 @@ hr {
 .text-xxlg {
   font-size: 5em; }
 
+.alert {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  margin: 0;
+  opacity: 0.1;
+  color: white; }
+
+.alert-success {
+  background: #43a047; }
+
+.alert-danger {
+  background: #e53935; }
+
+.alert-warning {
+  background: #f9a825; }
+
 .article-list {
   margin: 0;
   padding: 5px;
