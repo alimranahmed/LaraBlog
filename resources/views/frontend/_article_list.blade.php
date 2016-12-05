@@ -4,7 +4,7 @@
             <h3 class="heading">{{$article->heading}}</h3>
             <span class="time">published {{$article->publishedAtHuman}}</span>
             <span class="text-grey {{!$article->hit_count ? 'hide':''}}">
-                (visited {{$article->hit_count}} time)
+                ({{$article->hit_count}} {{$article->hit_count > 1 ? 'reads' : 'read'}})
             </span>
         </div>
     </a>
