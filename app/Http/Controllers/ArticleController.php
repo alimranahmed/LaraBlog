@@ -104,6 +104,6 @@ class ArticleController extends Controller
         }catch (\PDOException $e){
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
-        return redirect()->route('admin-articles');
+        return redirect()->route('admin-articles')->with('successMsg', 'Article deleted');
     }
 }
