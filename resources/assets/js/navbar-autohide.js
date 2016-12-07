@@ -4,21 +4,6 @@
 (function ($) {
     $(document).ready(function () {
         var topNavBar = $("#top-navbar");
-        // hide .navbar first
-        //topNavBar.fadeOut("slow");
-
-        // fade in .navbar
-        /*$(function () {
-            $(window).scroll(function () {
-                // set distance user needs to scroll before we fadeIn navbar
-                if ($(this).scrollTop() > 50) {
-                    topNavBar.fadeIn();
-                } else {
-                    topNavBar.fadeOut();
-                }
-            });
-        });*/
-
         //Show navabar when mouse is at the top of window
         $(function() {
             var mouseY = 0;
