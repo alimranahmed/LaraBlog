@@ -29,13 +29,13 @@ class CategoryController extends Controller
     }
 
     public function store(Request $request){
-        $newCategory = $request->only(['name', 'position', 'parent_category_id']);
+        $newCategory = $request->only(['name', 'alias', 'position', 'parent_category_id']);
         try{
             $category = Category::create($newCategory);
         }catch (\PDOException $e){
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
-        return response()->json(['message' => 'Category Created successfully!', 'entity' => $category]);
+        return redirect()->back()->with('successMsg', 'Category created successfully!');
     }
 
     public function toggleActive(Request $request, $categoryId){
