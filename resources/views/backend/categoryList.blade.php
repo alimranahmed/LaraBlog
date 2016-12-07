@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <table class="table table-hover table-bordered">
+    <table class="table table-hover table-bordered" id="categoryList">
         <tr class="text-center">
             <th>ID</th>
             <th>Name</th>
@@ -19,7 +19,7 @@
                     <a href="{{route('articles-by-category', $category->alias)}}">{{$category->articles->count()}}</a>
                 </td>
                 <td class="text-center">
-                    <span class="fa fa-edit text-primary pointer" onclick="showCategoryForm({{$category}})"></span>&nbsp;
+                    <span class="fa fa-edit text-primary pointer" v-on:click="showCategoryForm({{$category}})"></span>&nbsp;
                     <a href="{{route('toggle-category-active', $category->id)}}">
                         <span class="fa fa-lg {{$category->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></span>
                     </a>
@@ -61,12 +61,17 @@
 
 @section('inPageJS')
     <script type="application/javascript">
-        function showCategoryForm(category) {
-            console.debug(category.name);
-            $("#name").val(category.name);
-            $("#alias").val(category.alias);
-            $("#category-form").attr("action", "category/" + category.id);
-            $("#category-modal").modal("show");
-        }
+        new Vue({
+            el: '#categoryList',
+            data: {},
+            methods: {
+                showCategoryForm: function(category){
+                    $("#name").val(category.name);
+                    $("#alias").val(category.alias);
+                    $("#category-form").attr("action", "category/" + category.id);
+                    $("#category-modal").modal("show");
+                }
+            }
+        });
     </script>
 @endsection

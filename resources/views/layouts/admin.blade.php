@@ -12,5 +12,4 @@
         @yield('content')
     </div>
 </div>
-@yield('inPageJS')
 @include('layouts._footer')

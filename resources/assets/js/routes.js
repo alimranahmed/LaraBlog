@@ -1,1 +1,0 @@
-var VueRouter = require('vue-router');
