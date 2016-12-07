@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <table class="table table-hover table-bordered">
+    <table class="table table-hover table-bordered" id="keywordList">
         <tr class="text-center">
             <th>ID</th>
             <th>Name</th>
@@ -15,7 +15,7 @@
                 <td>{{$keyword->createdAtHuman}}</td>
                 <td>{{$keyword->articles->count()}}</td>
                 <td class="text-center">
-                    <span class="fa fa-edit text-primary"></span>&nbsp;
+                    <span class="fa fa-edit text-primary pointer" v-on:click="showKeywordForm({{$keyword}})"></span>&nbsp;
                     <a href="{{route('toggle-keyword-active', $keyword->id)}}">
                         <span class="fa fa-lg {{$keyword->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></span>
                     </a>
@@ -23,4 +23,47 @@
             </tr>
         @endforeach
     </table>
+@endsection
+
+<!-- Modal -->
+<div class="modal fade" id="keyword-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <form class="form-inline" id="category-form" method="POST">
+                <div class="modal-body">
+                    {{csrf_field()}}
+                    <input type="hidden" name="_method" value="PUT">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input name="name" placeholder="Name" id="name" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section('inPageJS')
+    <script type="application/javascript">
+        new Vue({
+            el: '#keywordList',
+            data: {},
+            methods: {
+                showKeywordForm: function(keyword){
+                    $("#name").val(keyword.name);
+                    $("#category-form").attr("action", "keyword/" + keyword.id);
+                    $("#keyword-modal").modal("show");
+                }
+            }
+        });
+    </script>
 @endsection

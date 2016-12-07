@@ -21,4 +21,14 @@ class KeywordController extends Controller
         }
         return redirect()->route('keywords')->with('successMsg', 'Keyword updated');
     }
+
+    public function update(Request $request, $keywordId){
+        $updatedKeyword = $request->only('name');
+        try{
+            Keyword::where('id', $keywordId)->update($updatedKeyword);
+        }catch(\PDOException $e){
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
+        }
+        return redirect()->route('keywords')->with('successMsg', 'Keyword updated');
+    }
 }
