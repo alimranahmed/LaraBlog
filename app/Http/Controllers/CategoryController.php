@@ -19,13 +19,13 @@ class CategoryController extends Controller
     }
 
     public function update(Request $request, $categoryId){
-        $updatedCategory = $request->only(['name', 'position', 'parent_category_id']);
+        $updatedCategory = $request->only(['name', 'alias', 'position', 'parent_category_id']);
         try{
             Category::where('id', $categoryId)->update($updatedCategory);
         }catch (\PDOException $e){
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
-        return response()->json(['message' => 'Category updated successfully!']);
+        return redirect()->back()->with('successMsg', 'Category updated successfully!');
     }
 
     public function store(Request $request){
