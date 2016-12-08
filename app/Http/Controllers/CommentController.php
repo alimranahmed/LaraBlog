@@ -62,6 +62,20 @@ class CommentController extends Controller
         return redirect()->route('get-article', $articleId)->with('successMsg', 'Comment posted');
     }
 
+    public function update(Request $request, $commentId){
+        $comment = Comment::find($commentId);
+        try{
+            $comment->update([
+                'content' => $request->get('content'),
+                'originalContent' => $comment->countEdit == 0 ? $comment->content : $comment->originalContent,
+                'countEdit' => $comment->countEdit+1,
+            ]);
+        }catch(\PDOException $e){
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
+        }
+        return redirect()->route('comments')->with('successMsg', 'Comment updated');
+    }
+
     public function togglePublish(Request $request, $commentId){
         $comment = Comment::find($commentId);
         try{

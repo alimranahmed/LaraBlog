@@ -38,6 +38,7 @@ Route::get('admin/article/{articleId}/delete', 'ArticleController@destroy')->nam
 Route::get('admin/comment', 'CommentController@index')->name('comments');
 Route::get('admin/comment/{commentId}/delete', 'CommentController@destroy')->name('delete-comment');
 Route::get('admin/comment/toggle-publish/{commentId}', 'CommentController@togglePublish')->name('toggle-comment-publish');
+Route::put('admin/comment/{commentId}', 'CommentController@update')->name('update-comment');
 
 //Admin users
 Route::get('admin/user', 'UserController@index')->name('users');
