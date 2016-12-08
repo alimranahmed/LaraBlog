@@ -32,9 +32,9 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="myModalLabel">Edit Keyword</h4>
             </div>
-            <form class="form-inline" id="category-form" method="POST">
+            <form class="form-inline" id="keyword-form" method="POST">
                 <div class="modal-body">
                     {{csrf_field()}}
                     <input type="hidden" name="_method" value="PUT">
@@ -60,7 +60,7 @@
             methods: {
                 showKeywordForm: function(keyword){
                     $("#name").val(keyword.name);
-                    $("#category-form").attr("action", "keyword/" + keyword.id);
+                    $("#keyword-form").attr("action", "keyword/" + keyword.id);
                     $("#keyword-modal").modal("show");
                 }
             }
