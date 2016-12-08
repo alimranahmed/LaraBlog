@@ -35,6 +35,8 @@ class CreateCommentsTable extends Migration
                 ->on('comments');
             $table->integer('is_published')->unsigned()->default(1);
             $table->dateTime('published_at')->nullable();
+            $table->integer('countEdit')->unsigned()->default(0);
+            $table->text('originalContent')->nullable();
             $table->timestamps();
         });
     }
