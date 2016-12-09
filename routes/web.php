@@ -44,6 +44,7 @@ Route::put('admin/comment/{commentId}', 'CommentController@update')->name('updat
 Route::get('admin/user', 'UserController@index')->name('users');
 
 //Admin keywords
+Route::post('admin/keyword', 'KeywordController@store')->name('add-keyword');
 Route::get('admin/keyword', 'KeywordController@index')->name('keywords');
 Route::get('admin/keyword/toggle-active/{keywordId}', 'KeywordController@toggleActive')->name('toggle-keyword-active');
 Route::put('admin/keyword/{keywordId}', 'KeywordController@update')->name('update-keyword');

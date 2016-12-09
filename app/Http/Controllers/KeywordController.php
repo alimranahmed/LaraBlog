@@ -12,6 +12,16 @@ class KeywordController extends Controller
         return view('backend.keywordList', compact('keywords'));
     }
 
+    public function store(Request $request){
+        $newKeyword = $request->only('name');
+        try{
+            Keyword::create($newKeyword);
+        }catch(\PDOException $e){
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
+        }
+        return redirect()->route('keywords')->with('successMsg', 'Keyword added');
+    }
+
     public function toggleActive(Request $request, $keywordId){
         $keyword = Keyword::find($keywordId);
         try{
