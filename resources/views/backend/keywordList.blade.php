@@ -1,28 +1,41 @@
 @extends('layouts.admin')
 @section('content')
-    <table class="table table-hover table-bordered" id="keywordList">
-        <tr class="text-center">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Created</th>
-            <th>Articles</th>
-            <th class="text-center">Operations</th>
-        </tr>
-        @foreach($keywords as $keyword)
+    <form action="{{route('add-keyword')}}" method="post">
+        {{csrf_field()}}
+        <table class="table table-hover table-bordered" id="keywordList">
+            <tr class="text-center">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Created</th>
+                <th>Articles</th>
+                <th class="text-center">Operations</th>
+            </tr>
             <tr>
-                <td>{{$keyword->id}}</td>
-                <td>{{$keyword->name}}</td>
-                <td>{{$keyword->createdAtHuman}}</td>
-                <td>{{$keyword->articles->count()}}</td>
+                <td></td>
+                <td><input type="text" name="name" class="form-control" placeholder="Name"></td>
+                <td>Now</td>
+                <td>0</td>
                 <td class="text-center">
-                    <span class="fa fa-edit text-primary pointer" v-on:click="showKeywordForm({{$keyword}})"></span>&nbsp;
-                    <a href="{{route('toggle-keyword-active', $keyword->id)}}">
-                        <span class="fa fa-lg {{$keyword->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></span>
-                    </a>
+                    <button type="submit" class="btn btn-success">Add</button>
                 </td>
             </tr>
-        @endforeach
-    </table>
+            @forea
+            @foreach($keywords as $keyword)
+                <tr>
+                    <td>{{$keyword->id}}</td>
+                    <td>{{$keyword->name}}</td>
+                    <td>{{$keyword->createdAtHuman}}</td>
+                    <td>{{$keyword->articles->count()}}</td>
+                    <td class="text-center">
+                        <span class="fa fa-edit text-primary pointer" v-on:click="showKeywordForm({{$keyword}})"></span>&nbsp;
+                        <a href="{{route('toggle-keyword-active', $keyword->id)}}">
+                            <span class="fa fa-lg {{$keyword->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></span>
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    </form>
 @endsection
 
 <!-- Modal -->
@@ -58,7 +71,7 @@
             el: '#keywordList',
             data: {},
             methods: {
-                showKeywordForm: function(keyword){
+                showKeywordForm: function (keyword) {
                     $("#name").val(keyword.name);
                     $("#keyword-form").attr("action", "keyword/" + keyword.id);
                     $("#keyword-modal").modal("show");
