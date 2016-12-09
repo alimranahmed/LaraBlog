@@ -28,6 +28,7 @@ Route::get('admin/category', 'CategoryController@index')->name('categories');
 Route::get('admin/category/toggle-active/{categoryId}', 'CategoryController@toggleActive')->name('toggle-category-active');
 Route::put('admin/category/{categoryId}', 'CategoryController@update')->name('update-category');
 Route::post('admin/category', 'CategoryController@store')->name('add-category');
+Route::get('admin/category/{categoryId}/delete', 'CategoryController@destroy')->name('delete-category');
 
 //admin articles
 Route::get('admin/article', 'ArticleController@adminArticle')->name('admin-articles');

@@ -55,4 +55,13 @@ class CategoryController extends Controller
         $articles = $category->articles;
         return view('frontend.articles', compact('articles'));
     }
+
+    public function destroy(Request $request, $categoryId){
+        try{
+            Category::destroy($categoryId);
+        }catch (\PDOException $e){
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
+        }
+        return redirect()->back()->with('successMsg', 'Category deleted');
+    }
 }
