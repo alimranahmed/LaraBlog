@@ -36,6 +36,9 @@
                         <a href="{{route('toggle-category-active', $category->id)}}">
                             <span class="fa fa-lg {{$category->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></span>
                         </a>
+                        <a href="{{route('delete-category', $category->id)}}" onclick="return confirm('Are you sure to delete')">
+                            <span class="fa fa-trash text-danger"></span>
+                        </a>
                     </td>
                 </tr>
             @endforeach
