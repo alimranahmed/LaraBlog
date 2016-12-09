@@ -1,32 +1,46 @@
 @extends('layouts.admin')
 @section('content')
-    <table class="table table-hover table-bordered" id="categoryList">
-        <tr class="text-center">
-            <th>ID</th>
-            <th>Name</th>
-            <th>Alias</th>
-            <th>Created</th>
-            <th>Articles</th>
-            <th class="text-center">Operations</th>
-        </tr>
-        @foreach($categories as $category)
+    <form method="post" action="{{route('add-category')}}">
+        {{csrf_field()}}
+        <table class="table table-hover table-bordered" id="categoryList">
+            <tr class="text-center">
+                <th>ID</th>
+                <th>Name</th>
+                <th>Alias</th>
+                <th>Created</th>
+                <th>Articles</th>
+                <th class="text-center">Operations</th>
+            </tr>
             <tr>
-                <td>{{$category->id}}</td>
-                <td>{{$category->name}}</td>
-                <td>{{$category->alias}}</td>
-                <td>{{$category->createdAtHuman}}</td>
-                <td>
-                    <a href="{{route('articles-by-category', $category->alias)}}">{{$category->articles->count()}}</a>
-                </td>
+                <td></td>
+                <td><input type="text" name="name" class="form-control" placeholder="Name"></td>
+                <td><input type="text" name="alias" class="form-control" placeholder="Alias"></td>
+                <td>Now</td>
+                <td>0</td>
                 <td class="text-center">
-                    <span class="fa fa-edit text-primary pointer" v-on:click="showCategoryForm({{$category}})"></span>&nbsp;
-                    <a href="{{route('toggle-category-active', $category->id)}}">
-                        <span class="fa fa-lg {{$category->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></span>
-                    </a>
+                    <button type="submit" class="btn btn-success">Add</button>
                 </td>
             </tr>
-        @endforeach
-    </table>
+            @foreach($categories as $category)
+                <tr>
+                    <td>{{$category->id}}</td>
+                    <td>{{$category->name}}</td>
+                    <td>{{$category->alias}}</td>
+                    <td>{{$category->createdAtHuman}}</td>
+                    <td>
+                        <a href="{{route('articles-by-category', $category->alias)}}">{{$category->articles->count()}}</a>
+                    </td>
+                    <td class="text-center">
+                        <span class="fa fa-edit text-primary pointer"
+                              v-on:click="showCategoryForm({{$category}})"></span>&nbsp;
+                        <a href="{{route('toggle-category-active', $category->id)}}">
+                            <span class="fa fa-lg {{$category->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></span>
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    </form>
 @endsection
 <!-- Modal -->
 <div class="modal fade" id="category-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -65,7 +79,7 @@
             el: '#categoryList',
             data: {},
             methods: {
-                showCategoryForm: function(category){
+                showCategoryForm: function (category) {
                     $("#name").val(category.name);
                     $("#alias").val(category.alias);
                     $("#category-form").attr("action", "category/" + category.id);
