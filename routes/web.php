@@ -49,3 +49,4 @@ Route::post('admin/keyword', 'KeywordController@store')->name('add-keyword');
 Route::get('admin/keyword', 'KeywordController@index')->name('keywords');
 Route::get('admin/keyword/toggle-active/{keywordId}', 'KeywordController@toggleActive')->name('toggle-keyword-active');
 Route::put('admin/keyword/{keywordId}', 'KeywordController@update')->name('update-keyword');
+Route::get('admin/keyword/{keywordId}/delete', 'KeywordController@destroy')->name('delete-keyword');

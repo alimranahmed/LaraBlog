@@ -41,4 +41,13 @@ class KeywordController extends Controller
         }
         return redirect()->route('keywords')->with('successMsg', 'Keyword updated');
     }
+
+    public function destroy(Request $request, $keywordId){
+        try{
+            Keyword::destroy($keywordId);
+        }catch (\PDOException $e){
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
+        }
+        return redirect()->route('keywords')->with('successMsg', 'Keyword deleted');
+    }
 }
