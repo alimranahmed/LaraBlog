@@ -19,7 +19,6 @@
                     <button type="submit" class="btn btn-success">Add</button>
                 </td>
             </tr>
-            @forea
             @foreach($keywords as $keyword)
                 <tr>
                     <td>{{$keyword->id}}</td>
@@ -30,6 +29,9 @@
                         <span class="fa fa-edit text-primary pointer" v-on:click="showKeywordForm({{$keyword}})"></span>&nbsp;
                         <a href="{{route('toggle-keyword-active', $keyword->id)}}">
                             <span class="fa fa-lg {{$keyword->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></span>
+                        </a>
+                        <a href="{{route('delete-keyword', $keyword->id)}}" onclick="return confirm('Are you sure to delete');">
+                            <span class="fa fa-trash text-danger"></span>
                         </a>
                     </td>
                 </tr>
