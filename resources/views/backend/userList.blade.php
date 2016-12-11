@@ -20,7 +20,9 @@
                 <td>{{$user->createdAtHuman}}</td>
                 <td class="text-center">
                     <span class="fa fa-edit text-primary"></span>&nbsp;
-                    <span class="fa fa-trash text-danger"></span>
+                    <a href="{{route('delete-user', $user->id)}}" onclick="return confirm('Are you sure to delete');">
+                        <span class="fa fa-trash text-danger"></span>
+                    </a>
                 </td>
             </tr>
         @endforeach
