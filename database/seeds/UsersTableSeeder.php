@@ -16,9 +16,9 @@ class UsersTableSeeder extends Seeder
         User::create(
             [
                 'name' => 'Al- Imran Ahmed',
-                'username' => 'imran',
-                'password' => \Hash::make('chand'),
-                'email' => 'al.imran.cse@gmail.com',
+                'username' => 'admin',
+                'password' => \Hash::make('admin'),
+                'email' => 'admin@gmail.com',
                 'role_id' => Role::where('name', 'OWNER')->first()->id,
                 'last_ip' => '127.0.0.1',
             ]
