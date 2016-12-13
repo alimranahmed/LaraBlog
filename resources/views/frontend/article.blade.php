@@ -2,7 +2,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-12">
-            <h3 class="article-heading text-lg">{{$article->heading}}</h3>
+            <h1 class="article-heading text-xlg">{{$article->heading}}</h1>
         </div>
     </div>
     <div class="row">
