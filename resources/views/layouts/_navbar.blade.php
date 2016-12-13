@@ -33,7 +33,7 @@
                            aria-expanded="false">{{Auth::user()->name}} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Profile</a></li>
-                            <li><a href="#">Settings</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#changePassword">Change Password</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{route('logout')}}">Logout</a></li>
                         </ul>
@@ -48,3 +48,36 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+
+{{--Change password modal--}}
+<div class="modal fade" tabindex="-1" role="dialog" id="changePassword">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Change Password</h4>
+            </div>
+            <form action="{{route('change-password')}}" method="post">
+                {{csrf_field()}}
+                <input type="hidden" name="_method" value="PUT">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Old Password</label>
+                        <input type="password" class="form-control" name="old_password" id="#old-password">
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" class="form-control" name="new_password" id="#new-password">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm New Password</label>
+                        <input type="password" class="form-control" name="confirm_new_password" id="#confirm-new-password">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Change</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
