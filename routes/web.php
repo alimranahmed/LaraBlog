@@ -44,6 +44,7 @@ Route::put('admin/comment/{commentId}', 'CommentController@update')->name('updat
 //Admin users
 Route::get('admin/user', 'UserController@index')->name('users');
 Route::get('admin/user/{userId}/delete', 'UserController@destroy')->name('delete-user');
+Route::put('admin/user/change-password', 'UserController@changePassword')->name('change-password');
 
 //Admin keywords
 Route::post('admin/keyword', 'KeywordController@store')->name('add-keyword');
