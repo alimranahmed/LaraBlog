@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePasswordRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,7 @@ class UserController extends Controller
         return redirect()->back()->with('successMsg', 'User deleted');
     }
 
-    public function changePassword(Request $request){
+    public function changePassword(ChangePasswordRequest $request){
         $newPassword = $request->get('new_password');
         
         if(!Hash::check($request->get('old_password'), Auth::user()->password)) {
