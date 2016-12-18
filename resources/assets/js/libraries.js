@@ -3,6 +3,7 @@ window._ = require('lodash');
 
 //load Jquery & bootstrap
 window.$ = window.jQuery = require('jquery');
+require('vue-resource');
 //load bootstrap
 require('bootstrap-sass');
 //load custom js
