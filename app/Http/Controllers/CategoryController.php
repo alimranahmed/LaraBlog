@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class CategoryController extends Controller
         return Category::with('articles')->find($categoryId);
     }
 
-    public function update(Request $request, $categoryId){
+    public function update(CategoryRequest $request, $categoryId){
         $updatedCategory = $request->only(['name', 'alias', 'position', 'parent_category_id']);
         try{
             Category::where('id', $categoryId)->update($updatedCategory);
@@ -28,7 +29,7 @@ class CategoryController extends Controller
         return redirect()->back()->with('successMsg', 'Category updated successfully!');
     }
 
-    public function store(Request $request){
+    public function store(CategoryRequest $request){
         $newCategory = $request->only(['name', 'alias', 'position', 'parent_category_id']);
         try{
             $category = Category::create($newCategory);
