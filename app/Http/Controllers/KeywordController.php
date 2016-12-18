@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\KeywordRequest;
 use App\Models\Keyword;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class KeywordController extends Controller
         return view('backend.keywordList', compact('keywords'));
     }
 
-    public function store(Request $request){
+    public function store(KeywordRequest $request){
         $newKeyword = $request->only('name');
         try{
             Keyword::create($newKeyword);
@@ -32,7 +33,7 @@ class KeywordController extends Controller
         return redirect()->route('keywords')->with('successMsg', 'Keyword updated');
     }
 
-    public function update(Request $request, $keywordId){
+    public function update(KeywordRequest $request, $keywordId){
         $updatedKeyword = $request->only('name');
         try{
             Keyword::where('id', $keywordId)->update($updatedKeyword);
