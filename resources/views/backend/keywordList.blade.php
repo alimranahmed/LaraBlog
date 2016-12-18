@@ -12,7 +12,9 @@
             </tr>
             <tr>
                 <td></td>
-                <td><input type="text" name="name" class="form-control" placeholder="Name"></td>
+                <td class="{{$errors->has('name') ? 'has-error has-feedback' : ''}}">
+                    <input type="text" name="name" class="form-control" placeholder="Name" value="{{old('name')}}">
+                </td>
                 <td>Now</td>
                 <td>0</td>
                 <td class="text-center">
@@ -53,9 +55,9 @@
                 <div class="modal-body">
                     {{csrf_field()}}
                     <input type="hidden" name="_method" value="PUT">
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('name') ? 'has-error has-feedback' : ''}}">
                         <label>Name</label>
-                        <input name="name" placeholder="Name" id="name" class="form-control">
+                        <input name="name" placeholder="Name" id="name" class="form-control" value="{{old('name')}}">
                     </div>
                 </div>
                 <div class="modal-footer">
