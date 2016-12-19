@@ -1,22 +1,48 @@
 @extends('layouts.public')
 @section('content')
-    <div class="row">
-        <div class="col-sm-12">
-            <h1 class="article-heading text-xlg">{{$article->heading}}</h1>
+    <div id="article">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="article-heading text-xlg">{{$article->heading}}</h1>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12 text-justify text-md">{{$article->content}}</div>
-    </div>
-    <div class="row margin-top-15" style="display: none;" id="comment-form">
-        @include('frontend._form_comment')
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <strong class="text-lg">Comments({{count($article->comments)}})</strong>
-            <span class="fa fa-3x fa-commenting-o text-primary pointer" id="comment-btn" title="Post a comment"></span>
+        <div class="row">
+            <div class="col-sm-12 text-justify text-md">{{$article->content}}</div>
         </div>
+        <div class="row margin-top-15" style="display: none;" id="comment-form">
+            @include('frontend._form_comment')
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <strong class="text-lg">Comments({{count($article->comments)}})</strong>
+                <span class="fa fa-3x fa-commenting-o text-primary pointer" id="comment-btn"
+                      title="Post a comment"></span>
+            </div>
+        </div>
+        <hr class="margin-bottom-15 margin-top-10">
+        <section id="comments">
+            @include('frontend._comments', ['comments' => $article->comments])
+        </section>
     </div>
-    <hr class="margin-bottom-15 margin-top-10">
-    @include('frontend._comments', ['comments' => $article->comments])
+@endsection
+
+@section("inPageJS")
+    <script>
+        new Vue({
+            el: "#comment-form",
+            data: { comment:{}},
+            methods:{
+                addComment : function(comment){
+                    console.debug(comment);
+                    Vue.http.post("{{route('add-comment', $article->id)}}", comment)
+                            .then(function(data){
+                                $("#comments").html(data.body);
+                                $('#comment-form').hide();
+                                console.debug(data);
+                            });
+                    return false;
+                }
+            }
+        });
+    </script>
 @endsection
