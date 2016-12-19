@@ -59,7 +59,12 @@ class CommentController extends Controller
             return redirect()->back()->with('errorMsg', $this->getMessage($e))->withInput();
         }
         //return response()->json(['message' => 'Article created successfully!', 'entity' => $newComment]);
-        return redirect()->route('get-article', $articleId)->with('successMsg', 'Comment posted');
+        //return redirect()->route('get-article', $articleId)->with('successMsg', 'Comment posted');
+        $comments = Comment::where('is_published', 1)
+            ->where('article_id', $articleId)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('frontend._comments', compact('comments') );
     }
 
     public function update(Request $request, $commentId){
