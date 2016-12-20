@@ -1,16 +1,12 @@
-@if(session('successMsg'))
-    <div class="alert alert-success" id="success-alert">
-        <button type="button" class="close" data-dismiss="alert">x</button>
-        <strong>Success! </strong>{{session('successMsg')}}
-    </div>
-@elseif(session('errorMsg'))
-    <div class="alert alert-danger" id="success-alert">
-        <button type="button" class="close" data-dismiss="alert">x</button>
-        <strong>Error; </strong>{{session('errorMsg')}}
-    </div>
-@elseif(session('warningMsg'))
-    <div class="alert alert-warning" id="success-alert">
-        <button type="button" class="close" data-dismiss="alert">x</button>
-        <strong>Warning, </strong>{{session('warningMsg')}}
-    </div>
-@endif
+<div class="alert alert-success" id="success-alert" style="display: {{session('successMsg') ? "block" : "none"}};">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Success! </strong><span id="success-msg">{{session('successMsg')}}</span>
+</div>
+<div class="alert alert-danger" id="error-alert" style="display: {{session('errorMsg') ? "block" : "none"}};">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Error; </strong><span id="error-msg">{{session('errorMsg')}}</span>
+</div>
+<div class="alert alert-warning" id="warning-alert" style="display: {{session('warningMsg') ? "block" : "none"}};">
+    <button type="button" class="close" data-dismiss="alert">x</button>
+    <strong>Warning, </strong><span id="warning-msg">{{session('warningMsg')}}</span>
+</div>

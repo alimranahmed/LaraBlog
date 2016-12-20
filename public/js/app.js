@@ -76,7 +76,7 @@ eval("'use strict';\n\nwindow._ = __webpack_require__(6);\n\n//load Jquery & boo
 /***/ function(module, exports) {
 
 "use strict";
-eval("\"use strict\";\n\n$(\"#success-alert\").fadeTo(5000, 500).slideUp(500, function () {\n    $(\"#success-alert\").slideUp(500);\n});//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9yZXNvdXJjZXMvYXNzZXRzL2pzL2FsZXJ0LWF1dG9oaWRlLmpzPzk1ZmIiXSwic291cmNlc0NvbnRlbnQiOlsiXCJ1c2Ugc3RyaWN0XCI7XG5cbiQoXCIjc3VjY2Vzcy1hbGVydFwiKS5mYWRlVG8oNTAwMCwgNTAwKS5zbGlkZVVwKDUwMCwgZnVuY3Rpb24gKCkge1xuICAgICQoXCIjc3VjY2Vzcy1hbGVydFwiKS5zbGlkZVVwKDUwMCk7XG59KTtcblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gcmVzb3VyY2VzL2Fzc2V0cy9qcy9hbGVydC1hdXRvaGlkZS5qcyJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsInNvdXJjZVJvb3QiOiIifQ==");
+eval("\"use strict\";\n\n/*\n$(\"#success-alert\").fadeTo(5000, 500).slideUp(500, function(){\n    $(\"#success-alert\").slideUp(500);\n});*/\n\n$(\"#success-alert\").fadeOut(1000 * 10);//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9yZXNvdXJjZXMvYXNzZXRzL2pzL2FsZXJ0LWF1dG9oaWRlLmpzPzk1ZmIiXSwic291cmNlc0NvbnRlbnQiOlsiXCJ1c2Ugc3RyaWN0XCI7XG5cbi8qXG4kKFwiI3N1Y2Nlc3MtYWxlcnRcIikuZmFkZVRvKDUwMDAsIDUwMCkuc2xpZGVVcCg1MDAsIGZ1bmN0aW9uKCl7XG4gICAgJChcIiNzdWNjZXNzLWFsZXJ0XCIpLnNsaWRlVXAoNTAwKTtcbn0pOyovXG5cbiQoXCIjc3VjY2Vzcy1hbGVydFwiKS5mYWRlT3V0KDEwMDAgKiAxMCk7XG5cblxuLy8gV0VCUEFDSyBGT09URVIgLy9cbi8vIHJlc291cmNlcy9hc3NldHMvanMvYWxlcnQtYXV0b2hpZGUuanMiXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7Ozs7OztBQU1BIiwic291cmNlUm9vdCI6IiJ9");
 
 /***/ },
 /* 2 */
