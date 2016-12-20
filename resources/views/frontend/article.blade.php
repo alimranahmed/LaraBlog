@@ -35,10 +35,18 @@
                 addComment : function(comment){
                     console.debug(comment);
                     Vue.http.post("{{route('add-comment', $article->id)}}", comment)
-                            .then(function(data){
-                                $("#comments").html(data.body);
+                            .then(function(response){
+                                $("#comments").html(response.body);
                                 $('#comment-form').hide();
-                                console.debug(data);
+                                var successAlert = $('#success-alert');
+                                successAlert.show();
+                                successAlert.fadeOut(1000 * 10);
+                                $('#success-msg').html('Comment posted successfully');
+                            }, function(response){
+                                var errorAlert = $('#error-alert');
+                                errorAlert.show();
+                                errorAlert.fadeOut(1000 * 10);
+                                $('#error-msg').html('Operation failed, please try again');
                             });
                     return false;
                 }
