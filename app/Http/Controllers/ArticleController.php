@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -42,10 +44,15 @@ class ArticleController extends Controller
         return response()->json(['message' => 'Updated successfully!']);
     }
 
+    public function create(Request $request){
+        $categories = Category::where('is_active', 1)->get();
+        return view('backend.article_create', compact('categories'));
+    }
+
     public function store(Request $request){
         $clientIP = $_SERVER['REMOTE_ADDR'];
 
-        $newArticle = $request->only(['heading', 'content']);
+        $newArticle = $request->only(['heading', 'content', 'category_id']);
         $newAddress = ['ip' => $clientIP];
 
         try{
@@ -53,6 +60,7 @@ class ArticleController extends Controller
             $newAddress = Address::create($newAddress);
             //Create new article
             $newArticle['address_id'] = $newAddress->id;
+            $newArticle['category_id'] = $newAddress->id;
             $newArticle['published_at'] = new \DateTime();
             $newArticle['user_id'] = Auth::user()->id;
             $newArticle = Article::create($newArticle);
@@ -60,7 +68,7 @@ class ArticleController extends Controller
             return response()->json(['message' => $this->getMessage($e)]);
         }
 
-        return response()->json(['message' => 'Article created successfully!', 'entity' => $newArticle]);
+        return redirect()->route('admin-articles');
     }
 
     public function togglePublish(Request $request, $articleId){
