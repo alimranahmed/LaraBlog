@@ -21,7 +21,7 @@ class AuthController extends Controller
         if(Auth::attempt($request->only('email', 'password'), $request->has('remember_me'))){
             return redirect()->route('admin-dashboard');
         }else{
-            return back()->with('auth_error','Invalid credentials');
+            return back()->with('auth_error','Invalid credentials')->withInput();
         }
     }
 
