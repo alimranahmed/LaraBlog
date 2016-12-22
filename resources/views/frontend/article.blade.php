@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 text-justify text-md">{{$article->content}}</div>
+            <div class="col-sm-12 text-justify text-md">{!! $article->content !!}</div>
         </div>
         <div class="row margin-top-15" style="display: none;" id="comment-form">
             @include('frontend._form_comment')
