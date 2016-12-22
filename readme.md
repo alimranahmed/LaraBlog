@@ -2,19 +2,17 @@
 A blogging system for personal use. 
 
 ### Features
-1. Posting and Managing blog
-2. Managing visitor's comment
-3. Visitor can comment on published blog
-4. Search for blog
+1. Posting and Managing blog posts
+2. Managing visitor's comments
+3. Visitor can comment on published article
+4. Search for article
 5. Monitoring visitors
 
-### Technology Used: 
+### Technologies Used: 
 1. Laravel 5.3
 2. VueJS 2
 3. Bootstrap 3
-
-### Library
-1. Entrust for permission management
+4. JQuery 3
 
 ### Installation Process
 1. Execute `git clone https://github.com/alimranahmed/Personal-Blog-Using-Laravel5.git` on your terminal to download this project.
