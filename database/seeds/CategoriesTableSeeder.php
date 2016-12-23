@@ -11,6 +11,57 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Category::class, 5)->create();
+        //factory(\App\Models\Category::class, 5)->create();
+
+        $categories[] = [
+            'name' => 'OOP',
+            'alias' => 'oop',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ];
+
+        $categories[] = [
+            'name' => 'Programming',
+            'alias' => 'programming',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ];
+
+        $categories[] = [
+            'name' => 'PHP',
+            'alias' => 'php',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ];
+
+        $categories[] = [
+            'name' => 'Java',
+            'alias' => 'java',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ];
+
+        $categories[] = [
+            'name' => 'Python',
+            'alias' => 'python',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ];
+
+        $categories[] = [
+            'name' => 'Web Frontend',
+            'alias' => 'web_frontend',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ];
+
+        $categories[] = [
+            'name' => 'বাংলা',
+            'alias' => 'bangla',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ];
+
+        \App\Models\Category::insert($categories);
     }
 }
