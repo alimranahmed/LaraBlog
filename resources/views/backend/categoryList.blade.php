@@ -7,7 +7,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Alias</th>
-                <th>Created</th>
+                {{--<th>Created</th>--}}
                 <th>Articles</th>
                 <th class="text-center">Operations</th>
             </tr>
@@ -19,7 +19,7 @@
                 <td class="{{$errors->has('alias') ? 'has-error has-feedback' : ''}}">
                     <input type="text" name="alias" class="form-control" placeholder="Alias" value="{{old('alias')}}">
                 </td>
-                <td>Now</td>
+                {{--<td>Now</td>--}}
                 <td>0</td>
                 <td class="text-center">
                     <button type="submit" class="btn btn-success">Add</button>
@@ -30,7 +30,7 @@
                     <td>{{$category->id}}</td>
                     <td>{{$category->name}}</td>
                     <td>{{$category->alias}}</td>
-                    <td>{{$category->createdAtHuman}}</td>
+                    {{--<td>{{$category->createdAtHuman}}</td>--}}
                     <td>
                         <a href="{{route('articles-by-category', $category->alias)}}">{{$category->articles->count()}}</a>
                     </td>
