@@ -33,8 +33,8 @@ Route::get('admin/article/toggle-publish/{articleID}', 'ArticleController@toggle
 Route::get('admin/article/{articleId}/delete', 'ArticleController@destroy')->name('delete-article');
 Route::get('admin/article/create', 'ArticleController@create')->name('create-article');
 Route::post('article', 'ArticleController@store')->name('store-article');
-Route::get('article/edit/{articleId}', 'ArticleController@update')->name('edit-article');
-Route::put('article/{articleId}', 'ArticleController@update')->name('article-update');
+Route::get('article/{articleId}/edit', 'ArticleController@edit')->name('edit-article');
+Route::put('article/{articleId}', 'ArticleController@update')->name('update-article');
 
 //Admin comments
 Route::get('admin/comment', 'CommentController@index')->name('comments');

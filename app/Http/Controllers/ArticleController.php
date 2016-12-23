@@ -34,14 +34,21 @@ class ArticleController extends Controller
         return view('frontend.article', compact('article'));
     }
 
+    public function edit(Request $request, $articleId){
+        $article = Article::find($articleId);
+        $categories = Category::where('is_active', 1)->get();
+        return view('backend.article_edit', compact('categories', 'article'));
+    }
+
     public function update(Request $request, $articleId){
-        $updatedArticle = $request->only(['heading', 'content']);
+        $updatedArticle = $request->only(['heading', 'content', 'category_id']);
         try{
             Article::where('id', $articleId)->update($updatedArticle);
         }catch(\PDOException $e){
-            return response()->json(['message' => $this->getMessage($e)]);
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
-        return response()->json(['message' => 'Updated successfully!']);
+
+        return redirect()->route('admin-articles');
     }
 
     public function create(Request $request){
@@ -60,12 +67,11 @@ class ArticleController extends Controller
             $newAddress = Address::create($newAddress);
             //Create new article
             $newArticle['address_id'] = $newAddress->id;
-            $newArticle['category_id'] = $newAddress->id;
             $newArticle['published_at'] = new \DateTime();
             $newArticle['user_id'] = Auth::user()->id;
-            $newArticle = Article::create($newArticle);
+            Article::create($newArticle);
         }catch(\PDOException $e){
-            return response()->json(['message' => $this->getMessage($e)]);
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
 
         return redirect()->route('admin-articles');
