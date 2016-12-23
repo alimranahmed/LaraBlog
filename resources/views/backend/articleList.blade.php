@@ -35,7 +35,9 @@
                     <td class="text-center">{{$article->comment_count}}</td>
                     <td class="text-center">{{$article->hit_count}}</td>
                     <td class="text-center">
-                        <span class="fa fa-edit text-primary"></span>&nbsp;
+                        <a href="{{route('edit-article', $article->id)}}">
+                            <span class="fa fa-edit text-primary"></span>
+                        </a>&nbsp;
                         <a href="{{route('delete-article', $article->id)}}"
                            onclick="return confirm('Are you sure to delete?')">
                             <span class="fa fa-trash text-danger"></span>
