@@ -36,13 +36,19 @@
                     console.debug(comment);
                     Vue.http.post("{{route('add-comment', $article->id)}}", comment)
                             .then(function(response){
+                                //hide comment form
                                 $("#comments").html(response.body);
                                 $('#comment-form').hide();
+                                //show success alert
                                 var successAlert = $('#success-alert');
                                 successAlert.show();
                                 successAlert.fadeOut(1000 * 10);
                                 $('#success-msg').html('Comment posted successfully');
+                                //clear form values
+                                $('input').val('');
+                                $('textarea').val('')
                             }, function(response){
+                                //show error alert
                                 var errorAlert = $('#error-alert');
                                 errorAlert.show();
                                 errorAlert.fadeOut(1000 * 10);
