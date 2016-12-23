@@ -15,10 +15,6 @@ class CategoryController extends Controller
         return view('backend.categoryList', compact('categories'));
     }
 
-    public function show(Request $request, $categoryId){
-        return Category::with('articles')->find($categoryId);
-    }
-
     public function update(CategoryRequest $request, $categoryId){
         $updatedCategory = $request->only(['name', 'alias', 'position', 'parent_category_id']);
         try{
@@ -51,7 +47,7 @@ class CategoryController extends Controller
 
     public function getArticles(Request $request, $categoryAlias){
         $category = Category::where('alias', $categoryAlias)->with(['articles'  => function($articles){
-            $articles->where('is_published', 1)->where('is_deleted', 0);
+            $articles->where('is_published', 1)->where('is_deleted', 0)->orderBy('created_at', 'desc');
         }])->first();
         $articles = $category->articles;
         return view('frontend.articles', compact('articles'));
