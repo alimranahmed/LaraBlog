@@ -12,7 +12,7 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        Role::create([
+        /*Role::create([
             'name' => 'OWNER',
             'level' => '1',
         ]);
@@ -20,6 +20,6 @@ class RolesTableSeeder extends Seeder
         Role::create([
             'name' => 'VISITOR',
             'level' => '2',
-        ]);
+        ]);*/
     }
 }

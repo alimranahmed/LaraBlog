@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
                 'username' => 'admin',
                 'password' => \Hash::make('admin'),
                 'email' => 'admin@gmail.com',
-                'role_id' => Role::where('name', 'OWNER')->first()->id,
+                //'role_id' => Role::where('name', 'OWNER')->first()->id,
                 'last_ip' => '127.0.0.1',
             ]
         );
