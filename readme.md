@@ -13,6 +13,7 @@ A blogging system for personal use.
 2. VueJS 2
 3. Bootstrap 3
 4. JQuery 3
+5. Entrust
 
 ### Installation Process
 1. Execute `git clone https://github.com/alimranahmed/Personal-Blog-Using-Laravel5.git` on your terminal to download this project.
