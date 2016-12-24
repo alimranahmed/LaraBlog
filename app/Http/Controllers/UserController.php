@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(Request $request){
-        $users = User::with('role')->get();
+        $users = User::with('roles')->get();
         return view('backend.userList', compact('users'));
     }
 

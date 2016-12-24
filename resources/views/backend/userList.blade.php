@@ -16,7 +16,7 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->username}}</td>
                 <td>{{$user->email}}</td>
-                <td class="text-center">{{$user->role->name}}</td>
+                <td class="text-center">{{implode(",",$user->roles->pluck('name')->toArray())}}</td>
                 <td>{{$user->createdAtHuman}}</td>
                 <td class="text-center">
                     <span class="fa fa-edit text-primary"></span>&nbsp;
