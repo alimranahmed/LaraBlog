@@ -5,10 +5,12 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use EntrustUserTrait;
 
     protected $guarded = ['id'];
     protected $appends = ['createdAtHuman'];
@@ -25,9 +27,9 @@ class User extends Authenticatable
         return $this->hasOne(Reader::class);
     }
 
-    public function role(){
+    /*public function role(){
         return $this->belongsTo(Role::class);
-    }
+    }*/
 
     public function getIsReaderAttribute(){
         return !is_null($this->reader);
