@@ -37,8 +37,8 @@ class CommentController extends Controller
                     $newUser = User::where('email', $request->get('email'))->first();
                     if(is_null($newUser)){
                         $newUser = $request->only('email');
-                        $newUser['role_id'] = Role::where('name', 'VISITOR')->first()->id;
                         $newUser = User::create($newUser);
+                        $newUser->attachRole(Role::where('name', 'reader')->first());
                     }
                     //If name provided then add name to the created user
                     if($request->has('name')){
@@ -56,7 +56,8 @@ class CommentController extends Controller
             //TODO as reader doesn't need to login, their comment need to be confirmed
             //Mail::to("name@gmail.com")->send(new CommentConfirmation());
         }catch(\Exception $e){
-            return redirect()->back()->with('errorMsg', $this->getMessage($e))->withInput();
+            //return redirect()->back()->with('errorMsg', $this->getMessage($e))->withInput();
+            return response()->json(['errorMsg' => $this->getMessage($e)], 503);
         }
         //return response()->json(['message' => 'Article created successfully!', 'entity' => $newComment]);
         //return redirect()->route('get-article', $articleId)->with('successMsg', 'Comment posted');
