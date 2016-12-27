@@ -4,6 +4,8 @@
         <div class="row">
             <div class="col-sm-12">
                 <h1 class="article-heading text-xlg">{{$article->heading}}</h1>
+                <span class="text-grey">{{$article->createdAtHuman}};</span>
+                <a href="{{route('articles-by-category', $article->category->alias)}}">{{$article->category->name}}</a>
             </div>
         </div>
         <div class="row">

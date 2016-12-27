@@ -22,7 +22,7 @@ class ArticleController extends Controller
         $article = Article::where('id', $articleId)
             ->where('is_published', 1)
             ->where('is_deleted', 0)
-            ->with(['comments' => function($comments){
+            ->with(['category', 'comments' => function($comments){
                 $comments->where('is_published', 1)->orderBy('created_at', 'desc');
             }])->first();
         //TODO keep log of which ip has hit the article
