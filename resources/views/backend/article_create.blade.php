@@ -19,7 +19,8 @@
                 <form action="{{route('store-article')}}" method="post">
                     {{csrf_field()}}
                     <div class="form-group">
-                        <input type="text" v-model="article.heading" class="form-control" name="heading" placeholder="*Heading..." required>
+                        <input type="text" v-model="article.heading" class="form-control" name="heading"
+                               placeholder="*Heading..." required>
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="category_id">
@@ -29,7 +30,14 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <textarea name="content" v-model="article.content" class="form-control" rows="10" placeholder="*Write here..." required></textarea>
+                        <textarea name="content" v-model="article.content" class="form-control" rows="10"
+                                  placeholder="*Write here..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" name="language" value="বাংলা" checked>
+                        <label>বাংলা</label>
+                        <input type="radio" name="language" value="English">
+                        <label>English</label>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-success">Create</button>
@@ -55,10 +63,10 @@
         new Vue({
             el: "#create-article",
             data: {
-                'article':{'heading': '', 'content':''}
+                'article': {'heading': '', 'content': ''}
             },
-            methods:{
-                'updatePreview': function(article){
+            methods: {
+                'updatePreview': function (article) {
                     $("#article-heading").html(article.heading);
                     $("#article-content").html(article.content);
                 }

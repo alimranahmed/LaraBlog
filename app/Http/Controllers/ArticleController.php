@@ -41,14 +41,14 @@ class ArticleController extends Controller
     }
 
     public function update(Request $request, $articleId){
-        $updatedArticle = $request->only(['heading', 'content', 'category_id']);
+        $updatedArticle = $request->only(['heading', 'content', 'category_id', 'language']);
         try{
             Article::where('id', $articleId)->update($updatedArticle);
         }catch(\PDOException $e){
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
 
-        return redirect()->route('admin-articles');
+        return redirect()->route('admin-articles')->with('successMsg', 'Article updated');
     }
 
     public function create(Request $request){
@@ -59,7 +59,7 @@ class ArticleController extends Controller
     public function store(Request $request){
         $clientIP = $_SERVER['REMOTE_ADDR'];
 
-        $newArticle = $request->only(['heading', 'content', 'category_id']);
+        $newArticle = $request->only(['heading', 'content', 'category_id', 'language']);
         $newAddress = ['ip' => $clientIP];
 
         try{

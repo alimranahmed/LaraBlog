@@ -33,6 +33,12 @@
                         <textarea name="content" id="content" class="form-control" rows="10" placeholder="*Write here..." required>{!! $article->content !!}</textarea>
                     </div>
                     <div class="form-group">
+                        <input type="radio" name="language" value="বাংলা" {{$article->language == 'বাংলা' ? 'checked' : ''}}>
+                        <label>বাংলা</label>
+                        <input type="radio" name="language" value="English" {{$article->language == 'English' ? 'checked' : ''}}>
+                        <label>English</label>
+                    </div>
+                    <div class="form-group">
                         <button type="submit" class="btn btn-success">Update</button>
                     </div>
                 </form>
