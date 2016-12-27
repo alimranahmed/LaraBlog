@@ -55,13 +55,6 @@ class CategoriesTableSeeder extends Seeder
             'updated_at' => new DateTime(),
         ];
 
-        $categories[] = [
-            'name' => 'বাংলা',
-            'alias' => 'bangla',
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime(),
-        ];
-
         \App\Models\Category::insert($categories);
     }
 }

@@ -10,6 +10,7 @@
                 <th>Title</th>
                 <th>Category</th>
                 <th>Written</th>
+                <th>Language</th>
                 <th>Is Published</th>
                 <th>Published</th>
                 <th>Edited</th>
@@ -23,6 +24,7 @@
                     <td>{{$article->heading}}</td>
                     <td>{{$article->category->name}}</td>
                     <td class="text-center">{{$article->createdAtHuman}}</td>
+                    <td class="text-center">{{$article->language}}</td>
                     <td class="text-center">
                         <a href="{{route('toggle-article-publish', $article->id)}}">
                             <strong class="fa fa-lg {{$article->is_published ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></strong>
