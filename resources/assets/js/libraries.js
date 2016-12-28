@@ -9,4 +9,5 @@ require('bootstrap-sass');
 //load custom js
 require('./navbar-autohide');
 require('./alert-autohide');
+require('./indent-textarea-by-tab');
 require('./script');

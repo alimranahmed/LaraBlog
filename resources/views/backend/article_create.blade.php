@@ -30,7 +30,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <textarea name="content" v-model="article.content" class="form-control" rows="10"
+                        <textarea name="content" v-model="article.content" class="form-control textarea-indent" rows="10"
                                   placeholder="*Write here..." required></textarea>
                     </div>
                     <div class="form-group">
