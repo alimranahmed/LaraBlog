@@ -19,12 +19,13 @@ A blogging system for personal use. Minimal library used. No frontend theme and 
 ### Installation Process
 1. Execute `git clone https://github.com/alimranahmed/Personal-Blog-Using-Laravel5.git` on your terminal to download this project.
 2. Go to the project root directory and execute `composer install` to install all PHP dependencies of the project
-3. Then execute `php artisan generate:key` on your terminal/cmd to generate environment key
-4. Then create a Database for this project and edit the .env file to authorized this project on your database. 
-5. Execute `php artisan migrate:refresh --seed` terminal on your terminal.
-6. Now you are ready to go, If you don't want to create any vertual host for this project then execute
+3. Create a file named as .env and copy the content of .env.example to newly created .env file 
+4. Then execute `php artisan generate:key` on your terminal/cmd to generate environment key
+5. Then create a Database for this project and edit the .env file to authorized this project on your database. 
+6. Execute `php artisan migrate:refresh --seed` terminal on your terminal.
+7. Now you are ready to go, If you don't want to create any vertual host for this project then execute
   `php artisan server`
-7. Now follow vist the url shown on your terminal, something like `localhost:8000`. Its running. 
+8. Now visit the url shown on your terminal, something like `localhost:8000`. Its running!. 
 
 ### Contribution 
 Anyone is always welcome to contribute on the project. If you want to work with, just create and issue(even if you want to fix the issue). After fixing any issue or adding any new feature just send a pull request, I will be happy to add your code for the betterment of this project. Thanks.
