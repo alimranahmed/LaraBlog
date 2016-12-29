@@ -1,6 +1,6 @@
 # Personal Blog Using Laravel 5.3
-#### Let's keep as simple as possible
-A blogging system for personal use. Minimal library used. No frontend theme and anything heavy or unnacessary libraries used.  
+#### Let's keep it as simple as possible
+A blogging system for personal use. Minimal library used. No frontend theme and anything heavy or unnacessary library used.  
 
 ### Features
 1. Posting and Managing blog posts
