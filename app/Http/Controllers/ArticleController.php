@@ -25,11 +25,14 @@ class ArticleController extends Controller
             ->with(['category', 'comments' => function($comments){
                 $comments->where('is_published', 1)->orderBy('created_at', 'desc');
             }])->first();
+        if(is_null($article)){
+            return redirect()->route('home')->with('warningMsg', 'Article not found');
+        }
         //TODO keep log of which ip has hit the article
         try{
             $article->increment('hit_count');
         }catch(\PDOException $e){
-            //TODO add log
+            return redirect()->route('home')->with('errorMsg', $this->getMessage($e));
         }
         return view('frontend.article', compact('article'));
     }
