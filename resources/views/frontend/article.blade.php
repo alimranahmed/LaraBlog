@@ -3,10 +3,12 @@
     <div id="article">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="article-heading text-xlg">{{$article->heading}}</h1>
-                <span class="text-grey">Written {{$article->createdAtHuman}}</span>
-                <span class="text-grey">by {{$article->user->name}} on </span>
-                <a href="{{route('articles-by-category', $article->category->alias)}}">{{$article->category->name}}</a>
+                <h1 class="article-heading text-xlg no-margin-bottom">{{$article->heading}}</h1>
+                <div class="margin-bottom-10">
+                    <span class="text-grey">Written {{$article->createdAtHuman}}</span>
+                    <span class="text-grey">by {{$article->user->name}} on </span>
+                    <a href="{{route('articles-by-category', $article->category->alias)}}">{{$article->category->name}}</a>
+                </div>
             </div>
         </div>
         <div class="row">
