@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create(
+        $owner = User::create(
             [
                 'name' => 'Al- Imran Ahmed',
                 'username' => 'owner',
@@ -22,9 +22,42 @@ class UsersTableSeeder extends Seeder
                 'last_ip' => '127.0.0.1',
             ]
         );
+
+        $admin = User::create(
+            [
+                'name' => 'Admin',
+                'username' => 'admin',
+                'password' => \Hash::make('admin'),
+                'email' => 'admin@gmail.com',
+                'last_ip' => '127.0.0.1',
+            ]
+        );
+
+        $author = User::create(
+            [
+                'name' => 'Author',
+                'username' => 'author',
+                'password' => \Hash::make('author'),
+                'email' => 'author@gmail.com',
+                'last_ip' => '127.0.0.1',
+            ]
+        );
+        $reader = User::create(
+            [
+                'name' => 'Reader',
+                'username' => 'reader',
+                'password' => \Hash::make('reader'),
+                'email' => 'reader@gmail.com',
+                'last_ip' => '127.0.0.1',
+            ]
+        );
         $ownerRole = Role::where('name', 'owner')->first();
         $adminRole = Role::where('name', 'admin')->first();
         $authorRole = Role::where('name', 'author')->first();
-        $user->attachRoles([$ownerRole, $adminRole, $authorRole]);
+        $readerRole = Role::where('name', 'reader')->first();
+        $owner->attachRoles([$ownerRole, $adminRole, $authorRole, $readerRole]);
+        $admin->attachRoles([$adminRole, $authorRole, $readerRole]);
+        $author->attachRoles([$authorRole, $readerRole]);
+        $reader->attachRoles([$readerRole]);
     }
 }
