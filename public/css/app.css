@@ -7962,12 +7962,7 @@ textarea {
   resize: vertical; }
 
 pre {
-  padding: 2px 4px;
-  font-size: 90%;
-  color: #c7254e;
-  background-color: #f9f2f4;
-  border-radius: 4px;
-  border: 1px solid #ffcdd2; }
+  font-size: .9em; }
 
 .text-grey {
   color: #777; }
