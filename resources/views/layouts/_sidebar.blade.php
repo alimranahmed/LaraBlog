@@ -13,42 +13,46 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="sidebar">
             <ul class="nav navbar-nav">
-                <li class="{{Request::is('admin/dashboard*') ? "active":""}}">
-                    <a href="{{route('admin-dashboard')}}">
-                        <i class="fa fa-dashboard"></i>
-                        <span class="hidden-sm">Dashboard</span>
-                    </a>
-                </li>
-                <li class="{{Request::is('admin/article*') ? "active":""}}">
-                    <a href="{{route('admin-articles')}}">
-                        <i class="fa fa-file-text"></i>
-                        <span class="hidden-sm">Articles</span>
-                    </a>
-                </li>
-                <li class="{{Request::is('admin/category*') ? "active":""}}">
-                    <a href="{{route('categories')}}">
-                        <span class="fa fa-share-alt"></span>
-                        <span class="hidden-sm">Categories</span>
-                    </a>
-                </li>
-                <li class="{{Request::is('admin/comment*') ? "active":""}}">
-                    <a href="{{route('comments')}}">
-                        <span class="fa fa-comment-o"></span>
-                        <span class="hidden-sm">Comments</span>
-                    </a>
-                </li>
-                <li class="{{Request::is('admin/keyword*') ? "active":""}}">
-                    <a href="{{route('keywords')}}">
-                        <span class="fa fa-file"></span>
-                        <span class="hidden-sm">Keywords</span>
-                    </a>
-                </li>
-                <li class="{{Request::is('admin/user*') ? "active":""}}">
-                    <a href="{{route('users')}}">
-                        <span class="fa fa-user"></span>
-                        <span class="hidden-sm">Users</span>
-                    </a>
-                </li>
+                @if(\Entrust::hasRole(['owner', 'admin', 'author']))
+                    <li class="{{Request::is('admin/dashboard*') ? "active":""}}">
+                        <a href="{{route('admin-dashboard')}}">
+                            <i class="fa fa-dashboard"></i>
+                            <span class="hidden-sm">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="{{Request::is('admin/article*') ? "active":""}}">
+                        <a href="{{route('admin-articles')}}">
+                            <i class="fa fa-file-text"></i>
+                            <span class="hidden-sm">Articles</span>
+                        </a>
+                    </li>
+                    <li class="{{Request::is('admin/comment*') ? "active":""}}">
+                        <a href="{{route('comments')}}">
+                            <span class="fa fa-comment-o"></span>
+                            <span class="hidden-sm">Comments</span>
+                        </a>
+                    </li>
+                @endif
+                @if(\Entrust::hasRole(['owner','admin']))
+                    <li class="{{Request::is('admin/category*') ? "active":""}}">
+                        <a href="{{route('categories')}}">
+                            <span class="fa fa-share-alt"></span>
+                            <span class="hidden-sm">Categories</span>
+                        </a>
+                    </li>
+                    <li class="{{Request::is('admin/keyword*') ? "active":""}}">
+                        <a href="{{route('keywords')}}">
+                            <span class="fa fa-file"></span>
+                            <span class="hidden-sm">Keywords</span>
+                        </a>
+                    </li>
+                    <li class="{{Request::is('admin/user*') ? "active":""}}">
+                        <a href="{{route('users')}}">
+                            <span class="fa fa-user"></span>
+                            <span class="hidden-sm">Users</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
