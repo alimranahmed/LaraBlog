@@ -18,9 +18,8 @@ Route::get('category/{categoryId}', 'CategoryController@show')->name('get-catego
 Route::get('admin/login', 'AuthController@showLoginForm')->name('loginForm');
 Route::post('admin/login', 'AuthController@login')->name('login');
 Route::get('admin/logout', 'AuthController@logout')->name('logout');
-Route::get('admin/dashboard', 'DashboardController@index')->name('admin-dashboard');
 
-Route::group(['middleware' => 'customAuth', 'role:owner|admin'], function(){
+Route::group(['middleware' => ['customAuth', 'role:owner|admin']], function(){
     //admin category
     Route::get('admin/category', 'CategoryController@index')->name('categories');
     Route::get('admin/category/toggle-active/{categoryId}', 'CategoryController@toggleActive')->name('toggle-category-active');
@@ -41,8 +40,9 @@ Route::group(['middleware' => 'customAuth', 'role:owner|admin'], function(){
     Route::get('admin/keyword/{keywordId}/delete', 'KeywordController@destroy')->name('delete-keyword');
 });
 
-Route::group(['middleware' => 'customAuth', 'role:owner|admin|author'], function(){
+Route::group(['middleware' => ['customAuth', 'role:owner|admin|author']], function(){
     //admin articles
+    Route::get('admin/dashboard', 'DashboardController@index')->name('admin-dashboard');
     Route::get('admin/article', 'ArticleController@adminArticle')->name('admin-articles');
     Route::get('admin/article/toggle-publish/{articleID}', 'ArticleController@togglePublish')->name('toggle-article-publish');
     Route::get('admin/article/{articleId}/delete', 'ArticleController@destroy')->name('delete-article');
