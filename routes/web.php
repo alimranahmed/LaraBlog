@@ -20,7 +20,7 @@ Route::post('admin/login', 'AuthController@login')->name('login');
 Route::get('admin/logout', 'AuthController@logout')->name('logout');
 Route::get('admin/dashboard', 'DashboardController@index')->name('admin-dashboard');
 
-Route::group(['middleware' => 'customAuth'], function(){
+Route::group(['middleware' => 'customAuth', 'role:owner|admin'], function(){
     //admin category
     Route::get('admin/category', 'CategoryController@index')->name('categories');
     Route::get('admin/category/toggle-active/{categoryId}', 'CategoryController@toggleActive')->name('toggle-category-active');
@@ -28,6 +28,20 @@ Route::group(['middleware' => 'customAuth'], function(){
     Route::post('admin/category', 'CategoryController@store')->name('add-category');
     Route::get('admin/category/{categoryId}/delete', 'CategoryController@destroy')->name('delete-category');
 
+    //Admin users
+    Route::get('admin/user', 'UserController@index')->name('users');
+    Route::get('admin/user/{userId}/delete', 'UserController@destroy')->name('delete-user');
+    Route::put('admin/user/change-password', 'UserController@changePassword')->name('change-password');
+
+    //Admin keywords
+    Route::post('admin/keyword', 'KeywordController@store')->name('add-keyword');
+    Route::get('admin/keyword', 'KeywordController@index')->name('keywords');
+    Route::get('admin/keyword/toggle-active/{keywordId}', 'KeywordController@toggleActive')->name('toggle-keyword-active');
+    Route::put('admin/keyword/{keywordId}', 'KeywordController@update')->name('update-keyword');
+    Route::get('admin/keyword/{keywordId}/delete', 'KeywordController@destroy')->name('delete-keyword');
+});
+
+Route::group(['middleware' => 'customAuth', 'role:owner|admin|author'], function(){
     //admin articles
     Route::get('admin/article', 'ArticleController@adminArticle')->name('admin-articles');
     Route::get('admin/article/toggle-publish/{articleID}', 'ArticleController@togglePublish')->name('toggle-article-publish');
@@ -42,16 +56,4 @@ Route::group(['middleware' => 'customAuth'], function(){
     Route::get('admin/comment/{commentId}/delete', 'CommentController@destroy')->name('delete-comment');
     Route::get('admin/comment/toggle-publish/{commentId}', 'CommentController@togglePublish')->name('toggle-comment-publish');
     Route::put('admin/comment/{commentId}', 'CommentController@update')->name('update-comment');
-
-    //Admin users
-    Route::get('admin/user', 'UserController@index')->name('users');
-    Route::get('admin/user/{userId}/delete', 'UserController@destroy')->name('delete-user');
-    Route::put('admin/user/change-password', 'UserController@changePassword')->name('change-password');
-
-    //Admin keywords
-    Route::post('admin/keyword', 'KeywordController@store')->name('add-keyword');
-    Route::get('admin/keyword', 'KeywordController@index')->name('keywords');
-    Route::get('admin/keyword/toggle-active/{keywordId}', 'KeywordController@toggleActive')->name('toggle-keyword-active');
-    Route::put('admin/keyword/{keywordId}', 'KeywordController@update')->name('update-keyword');
-    Route::get('admin/keyword/{keywordId}/delete', 'KeywordController@destroy')->name('delete-keyword');
 });
