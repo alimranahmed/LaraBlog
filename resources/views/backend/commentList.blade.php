@@ -22,7 +22,7 @@
                     </a>
                 </td>
                 <td>
-                    <a href="{{route('get-article', $comment->article->id)}}">{{substr($comment->article->heading, 0, 20)}}...</a>
+                    <a href="{{route('get-article', $comment->article->id)}}" target="_blank">{{substr($comment->article->heading, 0, 20)}}...</a>
                 </td>
                 <td class="text-center">
                     <span class="fa fa-edit text-primary pointer" v-on:click="showCommentForm({{$comment}})"></span>&nbsp;
