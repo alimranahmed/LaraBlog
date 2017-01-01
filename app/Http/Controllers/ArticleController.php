@@ -39,6 +39,13 @@ class ArticleController extends Controller
 
     public function edit(Request $request, $articleId){
         $article = Article::find($articleId);
+        if(is_null($article)){
+            return redirect()->route('home')->with('errorMsg', 'Article not found');
+        }
+
+        if(Auth::user()->hasRole(['author']) && $article->user_id != Auth::user()->id){
+            return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
+        }
         $categories = Category::where('is_active', 1)->get();
         return view('backend.article_edit', compact('categories', 'article'));
     }
