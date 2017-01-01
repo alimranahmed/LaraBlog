@@ -8,6 +8,9 @@
                     <span class="text-grey">Written {{$article->createdAtHuman}}</span>
                     <span class="text-grey">by {{$article->user->name}} on </span>
                     <a href="{{route('articles-by-category', $article->category->alias)}}">{{$article->category->name}}</a>
+                    @if(Auth::check() && (\Entrust::hasRole(['owner', 'admin']) || $article->user->id == Auth::user()->id))
+                        <a href="{{route('edit-article', $article->id)}}"><span class="fa fa-edit"></span></a>
+                    @endif
                 </div>
             </div>
         </div>
