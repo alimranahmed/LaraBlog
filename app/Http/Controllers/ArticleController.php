@@ -43,7 +43,7 @@ class ArticleController extends Controller
             return redirect()->route('home')->with('errorMsg', 'Article not found');
         }
 
-        if(Auth::user()->hasRole(['author']) && $article->user_id != Auth::user()->id){
+        if($this->hasArticleAuthorization(Auth::user(), $article)){
             return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
         }
         $categories = Category::where('is_active', 1)->get();
@@ -51,9 +51,17 @@ class ArticleController extends Controller
     }
 
     public function update(Request $request, $articleId){
+        $article = Article::find($articleId);
+        if(is_null($article)){
+            return redirect()->route('home')->with('errorMsg', 'Article not found');
+        }
+
+        if($this->hasArticleAuthorization(Auth::user(), $article)){
+            return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
+        }
         $updatedArticle = $request->only(['heading', 'content', 'category_id', 'language']);
         try{
-            Article::where('id', $articleId)->update($updatedArticle);
+            $article->update($updatedArticle);
         }catch(\PDOException $e){
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
@@ -89,6 +97,13 @@ class ArticleController extends Controller
 
     public function togglePublish(Request $request, $articleId){
         $article = Article::find($articleId);
+        if(is_null($article)){
+            return redirect()->route('home')->with('errorMsg', 'Article not found');
+        }
+
+        if($this->hasArticleAuthorization(Auth::user(), $article)){
+            return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
+        }
         try{
             $article->update([
                 'is_published' => !$article->is_published,
@@ -119,15 +134,30 @@ class ArticleController extends Controller
             ->orderBy('id', 'desc')
             ->get();
         //return $articles;
+        if(Auth::user()->hasRole(['author'])){
+            $articles = $articles->where('user_id', Auth::user()->id);
+        }
         return view('backend.articleList', compact('articles'));
     }
 
     public function destroy(Request $request, $articleId){
+        $article = Article::find($articleId);
+        if(is_null($article)){
+            return redirect()->route('home')->with('errorMsg', 'Article not found');
+        }
+
+        if($this->hasArticleAuthorization(Auth::user(), $article)){
+            return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
+        }
         try{
             Article::where('id', $articleId)->update(['is_deleted' => 1]);
         }catch (\PDOException $e){
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('admin-articles')->with('successMsg', 'Article deleted');
+    }
+
+    private function hasArticleAuthorization($user, $article){
+        return $user->hasRole(['author']) && $article->user_id != $user->id;
     }
 }
