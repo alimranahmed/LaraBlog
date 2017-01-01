@@ -55,9 +55,9 @@ class UsersTableSeeder extends Seeder
         $adminRole = Role::where('name', 'admin')->first();
         $authorRole = Role::where('name', 'author')->first();
         $readerRole = Role::where('name', 'reader')->first();
-        $owner->attachRoles([$ownerRole, $adminRole, $authorRole, $readerRole]);
-        $admin->attachRoles([$adminRole, $authorRole, $readerRole]);
-        $author->attachRoles([$authorRole, $readerRole]);
+        $owner->attachRoles([$ownerRole]);
+        $admin->attachRoles([$adminRole]);
+        $author->attachRoles([$authorRole]);
         $reader->attachRoles([$readerRole]);
     }
 }
