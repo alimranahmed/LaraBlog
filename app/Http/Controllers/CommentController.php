@@ -11,12 +11,20 @@ use App\Models\Reader;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
     public function index(){
-        $comments = Comment::with('article', 'user')->orderBy('id', 'desc')->get();
+        if(Auth::user()->hasRole('author')){
+            $authorsArticleIDs = Article::where('user_id', Auth::user()->id)->pluck('id');
+            $comments = Comment::whereIn('article_id', $authorsArticleIDs)
+                ->with('article', 'user')->orderBy('id', 'desc')
+                ->get();
+        }else{
+            $comments = Comment::with('article', 'user')->orderBy('id', 'desc')->get();
+        }
         return view('backend.commentList', compact('comments'));
     }
 
