@@ -14,7 +14,7 @@ class CategoriesTableSeeder extends Seeder
         //factory(\App\Models\Category::class, 5)->create();
 
         $categories[] = [
-            'name' => 'OOP',
+            'name' => 'Object Oriented Programming',
             'alias' => 'oop',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
