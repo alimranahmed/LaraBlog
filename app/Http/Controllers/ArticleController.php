@@ -123,7 +123,9 @@ class ArticleController extends Controller
             ->where('is_deleted', 0)
             ->where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
-            ->paginate(100);
+            ->paginate(15);
+
+        $articles->setPath(url("search/?query_string=$queryString"));
 
         $searched = new \stdClass();
         $searched->articles = $articles;
