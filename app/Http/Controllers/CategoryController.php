@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
+use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -46,10 +47,16 @@ class CategoryController extends Controller
     }
 
     public function getArticles(Request $request, $categoryAlias){
-        $category = Category::where('alias', $categoryAlias)->with(['articles'  => function($articles){
-            $articles->where('is_published', 1)->where('is_deleted', 0)->orderBy('created_at', 'desc');
-        }])->first();
-        $articles = $category->articles;
+        $category = Category::where('alias', $categoryAlias)->first();
+        if(is_null($category)){
+            return redirect()->route('home')->with('warningMsg', 'Category not found');
+        }
+        $articles = Article::where('category_id', $category->id)
+            ->where('is_deleted', 0)
+            ->where('is_published', 1)
+            ->orderBy('created_at', 'desc')
+            ->paginate(15);
+
         return view('frontend.articles', compact('articles'));
     }
 
