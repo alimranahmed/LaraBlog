@@ -13,3 +13,4 @@
         <h3>No Article Found</h3>
     </div>
 @endforelse
+{{$articles->links()}}
