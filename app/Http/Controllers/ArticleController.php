@@ -14,7 +14,7 @@ class ArticleController extends Controller
         $articles =  Article::where('is_published', 1)->where('is_deleted', 0)
             ->orderBy('published_at', 'desc')
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(15);
         return view('frontend.articles', compact('articles'));
     }
 
@@ -119,12 +119,15 @@ class ArticleController extends Controller
         $this->validate($request, ['query_string' => 'required']);
 
         $queryString = $request->get('query_string');
-        $articles = Article::where('heading', 'LIKE', "%$queryString%")
+        $articles = Article::where('is_published', 1)
+            ->where('is_deleted', 0)
+            ->where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
-            ->get();
+            ->paginate(15);
+
         $searched = new \stdClass();
+        $searched->articles = $articles;
         $searched->query = $queryString;
-        $searched->articles = $articles->where('is_published', 1)->where('is_deleted', 0);
         return view('frontend.search_result', compact('searched'));
     }
 
