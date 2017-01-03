@@ -33,12 +33,13 @@ class CommentController extends Controller
         $newComment = $request->only('content');
         $newAddress = ['ip' => $clientIP];
         try{
-            \DB::transaction(function() use($newComment, $newAddress, $articleId, $request){
+            \DB::transaction(function() use(&$newComment, $newAddress, $articleId, $request){
                 //Create new address
                 $newAddress = Address::create($newAddress);
                 //Create new article
                 $newComment['address_id'] = $newAddress->id;
                 $newComment['article_id'] = $articleId;
+                $newComment['token'] = \Hash::make($newComment['content']);
 
                 //If email exist create new user
                 if($request->has('email')){
@@ -58,11 +59,11 @@ class CommentController extends Controller
                     ]);
                     $newComment['user_id'] = $newUser->id;
                 }
-                Comment::create($newComment);
+                $newComment = Comment::create($newComment);
                 Article::where('id', $articleId)->increment('comment_count');
             });
             //TODO as reader doesn't need to login, their comment need to be confirmed
-            //Mail::to("name@gmail.com")->send(new CommentConfirmation());
+            Mail::to($newComment->user->email)->send(new CommentConfirmation($newComment));
         }catch(\Exception $e){
             //return redirect()->back()->with('errorMsg', $this->getMessage($e))->withInput();
             return response()->json(['errorMsg' => $this->getMessage($e)], 503);

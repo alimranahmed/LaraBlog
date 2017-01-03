@@ -15,9 +15,11 @@ class CommentConfirmation extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $comment;
+
+    public function __construct($comment)
     {
-        //
+        $this->comment = $comment;
     }
 
     /**
@@ -27,7 +29,6 @@ class CommentConfirmation extends Mailable
      */
     public function build()
     {
-        return $this->from('example@example.com')
-            ->view('emails.testMail');
+        return $this->from('al.imran.cse@gmail.com')->view('emails.comment_confirmation');
     }
 }
