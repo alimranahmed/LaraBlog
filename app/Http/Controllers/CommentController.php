@@ -111,4 +111,8 @@ class CommentController extends Controller
         }
         return redirect()->route('comments')->with('successMsg', 'Comment deleted');
     }
+
+    public function confirmComment(Request $request, $commentId, $token){
+        return "It works!";
+    }
 }
