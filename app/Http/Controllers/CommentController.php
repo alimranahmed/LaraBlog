@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
+use App\Jobs\SendConfirmCommentMail;
 use App\Mail\CommentConfirmation;
 use App\Models\Address;
 use App\Models\Article;
@@ -11,6 +12,7 @@ use App\Models\Reader;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -40,6 +42,7 @@ class CommentController extends Controller
                 $newComment['address_id'] = $newAddress->id;
                 $newComment['article_id'] = $articleId;
                 $newComment['token'] = \Hash::make($newComment['content']);
+                $newComment['is_published'] = 0;
 
                 //If email exist create new user
                 if($request->has('email')){
@@ -62,8 +65,7 @@ class CommentController extends Controller
                 $newComment = Comment::create($newComment);
                 Article::where('id', $articleId)->increment('comment_count');
             });
-            //TODO as reader doesn't need to login, their comment need to be confirmed
-            Mail::to($newComment->user->email)->send(new CommentConfirmation($newComment));
+            $this->dispatch(new SendConfirmCommentMail($newComment));
         }catch(\Exception $e){
             //return redirect()->back()->with('errorMsg', $this->getMessage($e))->withInput();
             return response()->json(['errorMsg' => $this->getMessage($e)], 503);
@@ -113,7 +115,21 @@ class CommentController extends Controller
         return redirect()->route('comments')->with('successMsg', 'Comment deleted');
     }
 
-    public function confirmComment(Request $request, $commentId, $token){
-        return "It works!";
+    public function confirmComment(Request $request, $commentId){
+        $comment = Comment::where('id', $commentId)
+            ->where('token', $request->get('token'))
+            ->with('article')
+            ->first();
+        if(is_null($comment)){
+            return redirect()->route('home')->with('errorMsg', 'Invalid request');
+        }
+
+        try{
+            $comment->update(['is_published' => 1, 'is_confirmed' => 1]);
+        }catch (\Exception $e){
+            return response()->json(['errorMsg' => $this->getMessage($e)]);
+        }
+        return redirect()->route('get-article', [$comment->article->id])
+            ->with('successMsg', 'Comment confirmed successfully!');
     }
 }
