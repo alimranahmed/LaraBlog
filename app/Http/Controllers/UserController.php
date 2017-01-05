@@ -15,6 +15,11 @@ class UserController extends Controller
         return view('backend.userList', compact('users'));
     }
 
+    public function show(Request $request, $userId){
+        $user = User::find($userId);
+        return $user;
+    }
+
     public function destroy(Request $request, $userId){
         if(Auth::user()->id == $userId){
             return redirect()->back()->with('errorMsg', 'You cannot delete yourself');
