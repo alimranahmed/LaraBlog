@@ -126,6 +126,10 @@ class CommentController extends Controller
 
         try{
             $comment->update(['is_published' => 1, 'is_confirmed' => 1]);
+            if($comment->user->isReader){
+                dd($comment->user->reader);
+                $comment->user->reader->update(['is_verified' => 1]);
+            }
         }catch (\Exception $e){
             return response()->json(['errorMsg' => $this->getMessage($e)]);
         }
