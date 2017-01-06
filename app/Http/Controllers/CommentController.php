@@ -38,7 +38,7 @@ class CommentController extends Controller
             \DB::transaction(function() use(&$newComment, $newAddress, $articleId, $request){
                 //Create new address
                 $newAddress = Address::create($newAddress);
-                //Create new article
+                //Create new comment
                 $newComment['address_id'] = $newAddress->id;
                 $newComment['article_id'] = $articleId;
                 $newComment['token'] = \Hash::make($newComment['content']);
@@ -51,15 +51,16 @@ class CommentController extends Controller
                         $newUser = $request->only('email');
                         $newUser = User::create($newUser);
                         $newUser->attachRole(Role::where('name', 'reader')->first());
+
+                        $newUser->reader()->create([
+                            'notify' => $request->has('notify'),
+                        ]);
                     }
                     //If name provided then add name to the created user
                     if($request->has('name')){
                         $newUser->name = $request->get('name');
                         $newUser->save();
                     }
-                    $newUser->reader()->create([
-                        'notify' => $request->has('notify'),
-                    ]);
                     $newComment['user_id'] = $newUser->id;
                 }
                 $newComment = Comment::create($newComment);
