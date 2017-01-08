@@ -66,7 +66,8 @@ class CommentController extends Controller
                 $newComment = Comment::create($newComment);
                 Article::where('id', $articleId)->increment('comment_count');
             });
-            $this->dispatch(new SendConfirmCommentMail($newComment));
+            Mail::to($request->get('email'))->queue(new CommentConfirmation($newComment));
+            //$this->dispatch(new SendConfirmCommentMail($newComment));
         }catch(\Exception $e){
             //return redirect()->back()->with('errorMsg', $this->getMessage($e))->withInput();
             return response()->json(['errorMsg' => $this->getMessage($e)], 503);
