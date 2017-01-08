@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\User;
+use App\Mail\NotifySubscriberForNewArticle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
@@ -87,12 +90,15 @@ class ArticleController extends Controller
             $newArticle['address_id'] = $newAddress->id;
             $newArticle['published_at'] = new \DateTime();
             $newArticle['user_id'] = Auth::user()->id;
-            Article::create($newArticle);
+            $newArticle = Article::create($newArticle);
+            //Notify all suscriber about the new article
+            Mail::to(User::getSubscribedUsers()->pluck('email')->toArray())
+                ->queue(new NotifySubscriberForNewArticle($newArticle)); 
         }catch(\PDOException $e){
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
 
-        return redirect()->route('admin-articles');
+        return redirect()->route('admin-articles')->with('successMsg', 'Application published successfully!');
     }
 
     public function togglePublish(Request $request, $articleId){
