@@ -29,6 +29,8 @@ class CommentConfirmation extends Mailable
      */
     public function build()
     {
-        return $this->from('al.imran.cse@gmail.com')->view('emails.comment_confirmation');
+        return $this->from('al.imran.cse@gmail.com')
+            ->subject('Confirm Your Comment')
+            ->view('emails.comment_confirmation');
     }
 }

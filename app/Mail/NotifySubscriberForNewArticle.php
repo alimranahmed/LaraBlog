@@ -31,6 +31,8 @@ class NotifySubscriberForNewArticle extends Mailable
      */
     public function build()
     {
-        return $this->from('al.imran.cse@gmail.com')->view('emails.notify_new_article');
+        return $this->from('al.imran.cse@gmail.com')
+            ->subject("New article Published")
+            ->view('emails.notify_new_article');
     }
 }
