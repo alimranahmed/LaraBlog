@@ -41,7 +41,7 @@ class User extends Authenticatable
     }
 
     public static function getSubscribedUsers(){
-        $subscribedReadersIds = Reader::where('notify', 1)->pluck('user_id')->toArray();
+        $subscribedReadersIds = Reader::where('notify', 1)->where('is_verified', 1)->pluck('user_id')->toArray();
         $users = self::whereIn('id',$subscribedReadersIds)->get();
         return $users;
     } 

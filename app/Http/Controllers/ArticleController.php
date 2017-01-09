@@ -91,6 +91,7 @@ class ArticleController extends Controller
             $newArticle['published_at'] = new \DateTime();
             $newArticle['user_id'] = Auth::user()->id;
             $newArticle = Article::create($newArticle);
+            //dd(User::getSubscribedUsers()->pluck('email'));
             //Notify all suscriber about the new article
             Mail::to(User::getSubscribedUsers()->pluck('email')->toArray())
                 ->queue(new NotifySubscriberForNewArticle($newArticle)); 
@@ -98,7 +99,7 @@ class ArticleController extends Controller
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
 
-        return redirect()->route('admin-articles')->with('successMsg', 'Application published successfully!');
+        return redirect()->route('admin-articles')->with('successMsg', 'Article published successfully!');
     }
 
     public function togglePublish(Request $request, $articleId){
