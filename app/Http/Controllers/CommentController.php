@@ -35,7 +35,7 @@ class CommentController extends Controller
         $newComment = $request->only('content');
         $newAddress = ['ip' => $clientIP];
         try{
-            \DB::transaction(function() use(&$newComment, $newAddress, $articleId, $request){
+            \DB::transaction(function() use(&$newComment, $newAddress, $articleId, $request, $clientIP){
                 //Create new address
                 $newAddress = Address::create($newAddress);
                 //Create new comment
@@ -44,7 +44,6 @@ class CommentController extends Controller
                 $newComment['token'] = \Hash::make($newComment['content']);
                 $newComment['is_published'] = 0;
 
-                //If email exist create new user
                 if($request->has('email')){
                     $newUser = User::where('email', $request->get('email'))->first();
                     if(is_null($newUser)){
@@ -56,11 +55,7 @@ class CommentController extends Controller
                             'notify' => $request->has('notify'),
                         ]);
                     }
-                    //If name provided then add name to the created user
-                    if($request->has('name')){
-                        $newUser->name = $request->get('name');
-                        $newUser->save();
-                    }
+                    $newUser->update(['last_ip'=>$clientIP]);
                     $newComment['user_id'] = $newUser->id;
                 }
                 $newComment = Comment::create($newComment);
