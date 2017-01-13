@@ -44,20 +44,22 @@ class CommentController extends Controller
                 $newComment['token'] = \Hash::make($newComment['content']);
                 $newComment['is_published'] = 0;
 
-                if($request->has('email')){
-                    $newUser = User::where('email', $request->get('email'))->first();
-                    if(is_null($newUser)){
-                        $newUser = $request->only('email');
-                        $newUser = User::create($newUser);
-                        $newUser->attachRole(Role::where('name', 'reader')->first());
+                $newUser = User::where('email', $request->get('email'))->first();
+                if(is_null($newUser)){
+                    $newUser = $request->only('email');
+                    $newUser = User::create($newUser);
+                    $newUser->attachRole(Role::where('name', 'reader')->first());
 
-                        $newUser->reader()->create([
-                            'notify' => $request->has('notify'),
-                        ]);
-                    }
-                    $newUser->update(['last_ip'=>$clientIP]);
-                    $newComment['user_id'] = $newUser->id;
+                    $newUser->reader()->create([
+                        'notify' => $request->has('notify'),
+                    ]);
                 }
+                if($request->has('name')){
+                    $newUser->name = $request->get('name');
+                }
+                $newUser->last_ip = $clientIP;
+                $newUser->save();
+                $newComment['user_id'] = $newUser->id;
                 $newComment = Comment::create($newComment);
                 Article::where('id', $articleId)->increment('comment_count');
             });
