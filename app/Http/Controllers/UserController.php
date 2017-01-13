@@ -17,7 +17,7 @@ class UserController extends Controller
 
     public function show(Request $request, $userId){
         $user = User::find($userId);
-        return $user;
+        return view('backend.userDetails', compact('user'));
     }
 
     public function destroy(Request $request, $userId){
