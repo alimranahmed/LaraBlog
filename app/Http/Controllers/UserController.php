@@ -36,7 +36,8 @@ class UserController extends Controller
     }
 
     public function create(){
-
+        $roles = Role::all();
+        return view('backend.createUser', compact('roles'));
     }
 
     public function store(Request $request){
