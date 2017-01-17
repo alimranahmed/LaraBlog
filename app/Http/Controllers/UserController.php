@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
+use App\Models\Address;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use League\Flysystem\Exception;
 
 class UserController extends Controller
 {
@@ -30,6 +33,33 @@ class UserController extends Controller
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->back()->with('successMsg', 'User deleted');
+    }
+
+    public function create(){
+
+    }
+
+    public function store(Request $request){
+        $newUser = $request->only('title', 'name', 'username', 'email', 'password', 'website');
+        $roleId = $request->get('role_id');
+        $newAddress = $request->only('city', 'country');
+        try{
+            $newAddress = Address::create($newAddress);
+            $newAddress['address_id'] = $newAddress->id;
+            $newUser = User::create($newUser);
+            $newUser->attachRole(Role::find($roleId));
+        }catch (\Exception $e){
+            return back()->with('errorMsg', $this->getMessage($e));
+        }
+        return redirect()->route('users')->with('successMsg', 'User created successfully!');
+    }
+
+    public function edit(){
+
+    }
+
+    public function update(){
+
     }
 
     public function changePassword(ChangePasswordRequest $request){
