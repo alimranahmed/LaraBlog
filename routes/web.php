@@ -33,8 +33,10 @@ Route::group(['middleware' => ['customAuth', 'role:owner|admin']], function(){
     Route::get('admin/user/{userId}', 'UserController@show')->name('get-user');
     Route::get('admin/user/{userId}/delete', 'UserController@destroy')->name('delete-user');
     Route::put('admin/user/change-password', 'UserController@changePassword')->name('change-password');
-    Route::get('admin/user/create', 'UserController@create')->name('show-create-user');
-    Route::post('admin/user/create', 'UserController@store')->name('create-user');
+    Route::get('admin/user/create', 'UserController@create')->name('create-user');
+    Route::post('admin/user/create', 'UserController@store')->name('store-user');
+    Route::get('admin/user/{userId}/edit', 'UserController@edit')->name('edit-user');
+    Route::put('admin/user/{userId}/update', 'UserController@update')->name('update-user');
 
     //Admin keywords
     Route::post('admin/keyword', 'KeywordController@store')->name('add-keyword');

@@ -36,7 +36,7 @@ class UserController extends Controller
     }
 
     public function create(){
-        $roles = Role::all();
+        $roles = Role::where('name', '!=', 'owner')->get();
         return view('backend.createUser', compact('roles'));
     }
 
@@ -55,12 +55,14 @@ class UserController extends Controller
         return redirect()->route('users')->with('successMsg', 'User created successfully!');
     }
 
-    public function edit(){
-
+    public function edit(Request $request, $userId){
+        $roles = Role::where('name', '!=', 'owner')->get();
+        $user = User::findOrFail($userId);
+        return view('backend.user_edit', compact('roles', 'user'));
     }
 
-    public function update(){
-
+    public function update(Request $request){
+        return $request->all();
     }
 
     public function changePassword(ChangePasswordRequest $request){
