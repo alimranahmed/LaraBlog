@@ -52,7 +52,7 @@ class UserController extends Controller
         }catch (\Exception $e){
             return back()->with('errorMsg', $this->getMessage($e));
         }
-        return redirect()->route('users')->with('successMsg', 'User created successfully!');
+        return redirect()->route('users')->with('successMsg', 'User created!');
     }
 
     public function edit(Request $request, $userId){
