@@ -61,8 +61,15 @@ class UserController extends Controller
         return view('backend.user_edit', compact('roles', 'user'));
     }
 
-    public function update(Request $request){
-        return $request->all();
+    public function update(Request $request, $userId){
+        $newUser = $request->only('name', 'username', 'email');
+        try{
+            User::where('id', $userId)->update($newUser);
+            //$user->attachRole(Role::where('name', 'author')->first());
+        }catch (\Exception $e){
+            return back()->with('errorMsg', $e->getMessage());
+        }
+        return redirect()->route('get-user', ['userId' => $userId])->with('successMsg', 'User updated');
     }
 
     public function changePassword(ChangePasswordRequest $request){
