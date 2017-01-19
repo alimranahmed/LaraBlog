@@ -25,31 +25,32 @@ class UserController extends Controller
 
     public function destroy(Request $request, $userId){
         if(Auth::user()->id == $userId){
-            return redirect()->back()->with('errorMsg', 'You cannot delete yourself');
+            return back()->with('errorMsg', 'You cannot delete yourself');
         }
         try{
             User::destroy($userId);
         }catch(\PDOException $e){
-            return redirect()->back()->with('errorMsg', $this->getMessage($e));
+            return back()->with('errorMsg', $this->getMessage($e));
         }
-        return redirect()->back()->with('successMsg', 'User deleted');
+        return back()->with('successMsg', 'User deleted');
     }
 
     public function create(){
         $roles = Role::where('name', '!=', 'owner')->get();
-        return view('backend.createUser', compact('roles'));
+        return view('backend.user_create', compact('roles'));
     }
 
     public function store(Request $request){
-        $newUser = $request->only('title', 'name', 'username', 'email', 'password', 'website');
-        $newAddress = $request->only('city', 'country');
+        $newUser = $request->only('title', 'name', 'username', 'email', 'website');
+        $newUser['password'] = Hash::make($request->get('password'));
+        $newAddress = $request->only('city', 'country_name');
         try{
             $newAddress = Address::create($newAddress);
             $newAddress['address_id'] = $newAddress->id;
             $newUser = User::create($newUser);
             $newUser->attachRole(Role::where('name', 'author')->first());
         }catch (\Exception $e){
-            return back()->with('errorMsg', $this->getMessage($e));
+            return back()->with('errorMsg', $this->getMessage($e))->withInput();
         }
         return redirect()->route('users')->with('successMsg', 'User created!');
     }
