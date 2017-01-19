@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+    <a class="btn btn-success margin-top-5 margin-bottom-5" href="{{route('create-user')}}">Add User</a>
     <table class="table table-hover table-bordered">
         <tr class="text-center">
             <th>ID</th>
