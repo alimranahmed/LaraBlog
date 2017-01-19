@@ -38,14 +38,18 @@ footer{
   font-size: 15px;
 }
 
-.sidebar{
-  width: 100%;
-  ul{
-    margin: 0px -15px;
-  };
-  li{
+.sidebar-container{
+  background: $green-light4;
+  min-height: inherit;
+  .sidebar{
     width: 100%;
-  };
+    ul{
+      margin: 0px -15px;
+    };
+    li{
+      width: 100%;
+    };
+  }
 }
 
 //borders

@@ -7982,12 +7982,15 @@ footer {
   padding-top: 20px;
   font-size: 15px; }
 
-.sidebar {
-  width: 100%; }
-  .sidebar ul {
-    margin: 0px -15px; }
-  .sidebar li {
+.sidebar-container {
+  background: #e8f5e9;
+  min-height: inherit; }
+  .sidebar-container .sidebar {
     width: 100%; }
+    .sidebar-container .sidebar ul {
+      margin: 0px -15px; }
+    .sidebar-container .sidebar li {
+      width: 100%; }
 
 .border-bottom {
   border-bottom: 1px solid #a5d6a7; }
