@@ -7,10 +7,10 @@
             <input type="text" name="name" id="name" value="{{$user->name}}" class="form-control" placeholder="Name">
         </div>
         <div class="form-group">
-            <input type="text" name="username" id="name" value="{{$user->username}}" class="form-control" placeholder="Username">
+            <input type="text" name="username" id="username" value="{{$user->username}}" class="form-control" placeholder="Username">
         </div>
         <div class="form-group">
-            <input type="text" name="email" id="name" value="{{$user->email}}" class="form-control" placeholder="Email">
+            <input type="text" name="email" id="email" value="{{$user->email}}" class="form-control" placeholder="Email">
         </div>
         <div class="form-group">
             <button class="btn btn-success" type="submit">Update</button>
