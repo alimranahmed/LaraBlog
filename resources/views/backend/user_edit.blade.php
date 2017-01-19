@@ -13,6 +13,9 @@
             <input type="text" name="email" id="email" value="{{$user->email}}" class="form-control" placeholder="Email">
         </div>
         <div class="form-group">
+            <input type="password" name="password" id="password" value="" class="form-control" placeholder="Password">
+        </div>
+        <div class="form-group">
             <button class="btn btn-success" type="submit">Update</button>
         </div>
     </form>

@@ -63,6 +63,9 @@ class UserController extends Controller
 
     public function update(Request $request, $userId){
         $newUser = $request->only('name', 'username', 'email');
+        if($request->has('password')){
+            $newUser['password'] = $request->get('password');
+        }
         try{
             User::where('id', $userId)->update($newUser);
             //$user->attachRole(Role::where('name', 'author')->first());
