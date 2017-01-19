@@ -42,13 +42,12 @@ class UserController extends Controller
 
     public function store(Request $request){
         $newUser = $request->only('title', 'name', 'username', 'email', 'password', 'website');
-        $roleId = $request->get('role_id');
         $newAddress = $request->only('city', 'country');
         try{
             $newAddress = Address::create($newAddress);
             $newAddress['address_id'] = $newAddress->id;
             $newUser = User::create($newUser);
-            $newUser->attachRole(Role::find($roleId));
+            $newUser->attachRole(Role::where('name', 'author')->first());
         }catch (\Exception $e){
             return back()->with('errorMsg', $this->getMessage($e));
         }
