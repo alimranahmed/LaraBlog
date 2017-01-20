@@ -24,14 +24,14 @@ class UserController extends Controller
         return view('backend.userDetails', compact('user'));
     }
 
-    public function destroy(UserRequest $request, $userId){
+    public function destroy(Request $request, $userId){
         if(Auth::user()->id == $userId){
             return back()->with('errorMsg', 'You cannot delete yourself');
         }
         try{
             User::destroy($userId);
         }catch(\PDOException $e){
-            return back()->with('errorMsg', $this->getMessage($e));
+            return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return back()->with('successMsg', 'User deleted');
     }
@@ -80,14 +80,14 @@ class UserController extends Controller
         $newPassword = $request->get('new_password');
         
         if(!Hash::check($request->get('old_password'), Auth::user()->password)) {
-            return redirect()->back()->with('errorMsg', 'Unauthorized request');
+            return back()->with('errorMsg', 'Unauthorized request');
         }
         try{
             User::where('id', Auth::user()->id)->update(['password' => Hash::make($newPassword)]);
         }catch (\PDOException $e){
-            return redirect()->back()->with('errorMsg', $this->getMessage($e));
+            return back()->with('errorMsg', $this->getMessage($e));
         }
 
-        return redirect()->back()->with('successMsg', 'Password changed');
+        return back()->with('successMsg', 'Password changed');
     }
 }
