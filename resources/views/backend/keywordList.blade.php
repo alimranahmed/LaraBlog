@@ -13,7 +13,7 @@
             <tr>
                 <td></td>
                 <td class="{{$errors->has('name') ? 'has-error has-feedback' : ''}}">
-                    <input type="text" name="name" class="form-control" placeholder="Name" value="{{old('name')}}">
+                    <input type="text" name="name" class="form-control" placeholder="Name*" value="{{old('name')}}">
                 </td>
                 <td>Now</td>
                 <td>0</td>
