@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\Address;
 use App\Models\Role;
 use App\Models\User;
@@ -23,7 +24,7 @@ class UserController extends Controller
         return view('backend.userDetails', compact('user'));
     }
 
-    public function destroy(Request $request, $userId){
+    public function destroy(UserRequest $request, $userId){
         if(Auth::user()->id == $userId){
             return back()->with('errorMsg', 'You cannot delete yourself');
         }
@@ -40,7 +41,7 @@ class UserController extends Controller
         return view('backend.user_create', compact('roles'));
     }
 
-    public function store(Request $request){
+    public function store(UserRequest $request){
         $newUser = $request->only('title', 'name', 'username', 'email', 'website');
         $newUser['password'] = Hash::make($request->get('password'));
         $newAddress = $request->only('city', 'country_name');
@@ -48,7 +49,7 @@ class UserController extends Controller
             $newAddress = Address::create($newAddress);
             $newAddress['address_id'] = $newAddress->id;
             $newUser = User::create($newUser);
-            $newUser->attachRole(Role::where('name', 'author')->first());
+            $newUser->attachRole(Role::find($request->get('user_id')));
         }catch (\Exception $e){
             return back()->with('errorMsg', $this->getMessage($e))->withInput();
         }
