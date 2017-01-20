@@ -1,4 +1,4 @@
-<footer class="container-fluid">
+<footer class="container-fluid border-top">
     <span class="purple-text text-darken-4">© 2016 Al- Imran Ahmed</span>
 </footer>
 </div>
