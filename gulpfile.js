@@ -18,4 +18,5 @@ elixir(function(mix) {
        .webpack('app.js');
 
     mix.copy('resources/assets/js/vendors/vue.js', 'public/js/vue.js');
+    mix.copy('resources/assets/js/vendors/highlight_9.9.0.min.js', 'public/js/highlight.js');
 });
