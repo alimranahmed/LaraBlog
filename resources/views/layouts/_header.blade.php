@@ -9,7 +9,6 @@
     <title>Al- Imran Ahmed (-</title>
     <!-- Fonts -->
     <link href="{{asset("css/app.css")}}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
 </head>
 <body>
 <div id="l5_blog">
