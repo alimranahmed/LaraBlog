@@ -57,15 +57,15 @@ class UserController extends Controller
     }
 
     public function edit(Request $request, $userId){
-        $roles = Role::where('name', '!=', 'owner')->get();
+        $roles = Role::all();
         $user = User::findOrFail($userId);
         return view('backend.user_edit', compact('roles', 'user'));
     }
 
-    public function update(Request $request, $userId){
+    public function update(UserRequest $request, $userId){
         $newUser = $request->only('name', 'username', 'email');
         if($request->has('password')){
-            $newUser['password'] = $request->get('password');
+            $newUser['password'] = \Hash::make($request->get('password'));
         }
         try{
             User::where('id', $userId)->update($newUser);
