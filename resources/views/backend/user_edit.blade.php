@@ -5,22 +5,22 @@
         {{csrf_field()}}
         <div class="form-group {{$errors->has('role_id') ? "has-error" : ""}}">
             <select name="role_id" class="form-control">
-                <option value="">Select User Role*</option>
+                <option value="" readonly="true">Select User Role*</option>
                 @foreach($roles as $role)
                     <option value="{{$role->id}}" {{$user->roles->first()->id == $role->id ? 'selected' : ''}}>{{$role->display_name}}</option>
                 @endforeach
             </select>
         </div>
-        <div class="form-group {{$errors->has('role_id') ? "has-error" : ""}}">
-            <input type="text" name="name" id="name" value="{{$user->name}}" class="form-control" placeholder="Name">
+        <div class="form-group {{$errors->has('name') ? "has-error" : ""}}">
+            <input type="text" name="name" id="name" value="{{$user->name}}" class="form-control" placeholder="Name*">
         </div>
-        <div class="form-group {{$errors->has('role_id') ? "has-error" : ""}}">
+        <div class="form-group {{$errors->has('username') ? "has-error" : ""}}">
             <input type="text" name="username" id="username" value="{{$user->username}}" class="form-control" placeholder="Username">
         </div>
-        <div class="form-group {{$errors->has('role_id') ? "has-error" : ""}}">
-            <input type="text" name="email" id="email" value="{{$user->email}}" class="form-control" placeholder="Email">
+        <div class="form-group {{$errors->has('email') ? "has-error" : ""}}">
+            <input type="text" name="email" id="email" value="{{$user->email}}" class="form-control" placeholder="Email*">
         </div>
-        <div class="form-group {{$errors->has('role_id') ? "has-error" : ""}}">
+        <div class="form-group {{$errors->has('password') ? "has-error" : ""}}">
             <input type="password" name="password" id="password" value="" class="form-control" placeholder="Password">
         </div>
         <div class="form-group {{$errors->has('role_id') ? "has-error" : ""}}">
