@@ -32,6 +32,9 @@
                     <div class="form-group">
                         <textarea name="content" id="content" class="form-control textarea-indent" rows="10" placeholder="*Write here..." required>{!! $article->content !!}</textarea>
                     </div>
+                    <div class="text-grey">
+                        Tips: Enclose source inside &lt;pre&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;
+                    </div>
                     <div class="form-group">
                         <input type="radio" name="language" value="বাংলা" {{$article->language == 'বাংলা' ? 'checked' : ''}}>
                         <label>বাংলা</label>
