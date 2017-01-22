@@ -15,9 +15,7 @@
     "laravel-elixir-vue": "^0.1.4",
     "laravel-elixir-webpack-official": "^1.0.2",
     "lodash": "^4.14.0",
-    "materialize-css": "^0.97.7",
     "vue": "^2.0.3",
-    "vue-resource": "^1.0.3",
-    "vue-router": "^2.0.1"
+    "vue-resource": "^1.0.3"
   }
 }
