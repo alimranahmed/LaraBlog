@@ -90,4 +90,9 @@ class UserController extends Controller
 
         return back()->with('successMsg', 'Password changed');
     }
+
+    public function profile(Request $request){
+        $user = Auth::user();
+        return view('backend.userDetails', compact('user'));
+    }
 }

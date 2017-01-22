@@ -47,6 +47,8 @@ Route::group(['middleware' => ['customAuth', 'role:owner|admin']], function(){
 });
 
 Route::group(['middleware' => ['customAuth', 'role:owner|admin|author']], function(){
+    //profile
+    Route::get('admin/profile', 'UserController@profile')->name('user-profile');
     //admin articles
     Route::get('admin/dashboard', 'DashboardController@index')->name('admin-dashboard');
     Route::get('admin/article', 'ArticleController@adminArticle')->name('admin-articles');
