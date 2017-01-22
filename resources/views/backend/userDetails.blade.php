@@ -3,9 +3,11 @@
     <div class="row margin-top-10">
         <div class="col-sm-4">
             <strong class="text-lg">{{$user->name}}</strong>
-            <a href="{{route('edit-user', ['userId' => $user->id])}}">
-                <span class="fa fa-edit text-primary"></span>
-            </a>
+            @if(\Entrust::hasRole(['owner','admin']))
+                <a href="{{route('edit-user', ['userId' => $user->id])}}">
+                    <span class="fa fa-edit text-primary"></span>
+                </a>
+            @endif
         </div>
     </div>
     <div class="row">
