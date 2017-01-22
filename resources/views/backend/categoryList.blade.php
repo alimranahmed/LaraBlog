@@ -48,37 +48,37 @@
             @endforeach
         </table>
     </form>
-@endsection
-<!-- Modal -->
-<div class="modal fade" id="category-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Edit Category</h4>
+    <!-- Modal -->
+    <div class="modal fade" id="category-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Category</h4>
+                </div>
+                <form class="form-inline" id="category-form" method="POST">
+                    <div class="modal-body">
+                        {{csrf_field()}}
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="form-group {{$errors->has('name') ? 'has-error has-feedback' : ''}}">
+                            <label>Name</label>
+                            <input name="name" placeholder="Name" id="name" class="form-control">
+                        </div>
+                        <div class="form-group {{$errors->has('alias') ? 'has-error has-feedback' : ''}}">
+                            <label>Alias</label>
+                            <input name="alias" placeholder="Alias" id="alias" class="form-control">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
             </div>
-            <form class="form-inline" id="category-form" method="POST">
-                <div class="modal-body">
-                    {{csrf_field()}}
-                    <input type="hidden" name="_method" value="PUT">
-                    <div class="form-group {{$errors->has('name') ? 'has-error has-feedback' : ''}}">
-                        <label>Name</label>
-                        <input name="name" placeholder="Name" id="name" class="form-control">
-                    </div>
-                    <div class="form-group {{$errors->has('alias') ? 'has-error has-feedback' : ''}}">
-                        <label>Alias</label>
-                        <input name="alias" placeholder="Alias" id="alias" class="form-control">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
         </div>
     </div>
-</div>
+@endsection
 
 @section('inPageJS')
     <script type="application/javascript">

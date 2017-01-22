@@ -33,33 +33,33 @@
             </tr>
         @endforeach
     </table>
-@endsection
-<!-- Modal -->
-<div class="modal fade" id="comment-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Edit Comment</h4>
-            </div>
-            <form id="comment-form" method="POST">
-                <div class="modal-body">
-                    {{csrf_field()}}
-                    <input type="hidden" name="_method" value="PUT">
-                    <div class="form-group">
-                        <label>Content</label>
-                        <textarea name="content" placeholder="Content" id="content" class="form-control"></textarea>
+    <!-- Modal -->
+    <div class="modal fade" id="comment-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Comment</h4>
+                </div>
+                <form id="comment-form" method="POST">
+                    <div class="modal-body">
+                        {{csrf_field()}}
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="form-group">
+                            <label>Content</label>
+                            <textarea name="content" placeholder="Content" id="content" class="form-control"></textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+@endsection
 
 @section('inPageJS')
     <script>
