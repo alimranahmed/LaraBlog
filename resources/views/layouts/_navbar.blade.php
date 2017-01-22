@@ -32,7 +32,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">{{Auth::user()->name}} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Profile</a></li>
+                            <li><a href="{{route('user-profile')}}">Profile</a></li>
                             <li><a href="#" data-toggle="modal" data-target="#changePassword">Change Password</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{route('logout')}}">Logout</a></li>
