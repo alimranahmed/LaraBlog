@@ -1,13 +1,24 @@
 # Personal Blog Using Laravel 5.3
 #### Let's keep it as simple as possible
-A blogging system for personal use. Minimal library used. No frontend theme and anything heavy or unnacessary library used.  
-
-### Features
-1. Posting and Managing blog posts
-2. Managing visitor's comments
-3. Visitor can comment on published article
-4. Search for article
-5. Monitoring visitors
+A blogging system for personal use. Minimum library used. No frontend theme and anything heavy or unnacessary library used.  
+ 
+##### There are four several types of users
+1. Owner
+  1.1. Can do anything that can be done by admin
+  1.2. Can also create admin user
+2. Admin
+  * Can manage articles and comments of other users
+  * Can manage categories 
+  * Can manage keywords
+  * Can manage other users except Owner
+3. Author
+  * Can write aritcle and can manage his own article
+  * Can manage comments on his own article
+4. Reader
+  * Can read and comment on article providing his email address. 
+  * Can subscribe to be notified for new article
+  * Can search for article with
+  * Can navigate article based on categories
 
 ### Technologies Used: 
 1. Laravel 5.3
