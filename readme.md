@@ -1,11 +1,11 @@
 # Personal Blog Using Laravel 5.3
-#### Let's keep it as simple as possible
+### Let's keep it as simple as possible
 A blogging system for personal use. Minimum library used. No frontend theme and anything heavy or unnacessary library used.  
  
-##### There are four several types of users
+### There are four several types of users with severl permissions
 1. Owner
-  1.1. Can do anything that can be done by admin
-  1.2. Can also create admin user
+  * Can do anything that can be done by admin
+  * Can also create admin user
 2. Admin
   * Can manage articles and comments of other users
   * Can manage categories 
