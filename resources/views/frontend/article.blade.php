@@ -20,7 +20,9 @@
         <hr class="margin-bottom-10 margin-top-10">
         <div class="row">
             <div class="col-sm-12 text-lg">
-                <strong>More Articles on {{$article->category->name}}</strong>
+                <strong>More Articles on
+                    <a href="{{route('articles-by-category', ['categoryAlias' => $article->category->alias])}}">{{$article->category->name}}</a>
+                </strong>
             </div>
         </div><hr>
         <div class="row">
