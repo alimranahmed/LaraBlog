@@ -1,13 +1,24 @@
 # Personal Blog Using Laravel 5.3
-#### Let's keep it as simple as possible
-A blogging system for personal use. Minimal library used. No frontend theme and anything heavy or unnacessary library used.  
-
-### Features
-1. Posting and Managing blog posts
-2. Managing visitor's comments
-3. Visitor can comment on published article
-4. Search for article
-5. Monitoring visitors
+### Let's keep it as simple as possible
+A blogging system for personal use. Minimum library used. No frontend theme and anything heavy or unnacessary library used.  
+ 
+### There are four several types of users with several permissions
+1. Owner
+  * Can do anything that can be done by admin
+  * Can also create admin user
+2. Admin
+  * Can manage articles and comments of other users
+  * Can manage categories 
+  * Can manage keywords
+  * Can manage other users except Owner
+3. Author
+  * Can write article and can manage his own article
+  * Can manage comments on his own article
+4. Reader
+  * Can read and comment on article providing his email address. 
+  * Can subscribe to be notified for new article
+  * Can search for article with
+  * Can navigate article based on categories
 
 ### Technologies Used: 
 1. Laravel 5.3
@@ -23,7 +34,7 @@ A blogging system for personal use. Minimal library used. No frontend theme and 
 4. Then execute `php artisan key:generate` on your terminal/cmd to generate environment key
 5. Then create a Database for this project and edit the .env file to authorized this project on your database. 
 6. Execute `php artisan migrate:refresh --seed` terminal on your terminal.
-7. Now you are ready to go, If you don't want to create any vertual host for this project then execute
+7. Now you are ready to go, If you don't want to create any virtual host for this project then execute
   `php artisan server`
 8. Now visit the url shown on your terminal, something like `localhost:8000`. Its running!. 
 
