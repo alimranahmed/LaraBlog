@@ -37,7 +37,16 @@ class ArticleController extends Controller
         }catch(\PDOException $e){
             return redirect()->route('home')->with('errorMsg', $this->getMessage($e));
         }
-        return view('frontend.article', compact('article'));
+        $relatedArticles = Article::where('category_id', $article->category->id)
+            ->where('id', '!=', $article->id)
+            ->where('is_published', 1)
+            ->where('is_deleted', 0)
+            ->orderBy('published_at', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
+        return view('frontend.article', compact('article', 'relatedArticles'));
     }
 
     public function edit(Request $request, $articleId){

@@ -10,7 +10,7 @@
     </a>
 @empty
     <div class="row text-grey">
-        <h3>No Article Found</h3>
+        <div class="col-sm-12"><h3>Not Available</h3></div>
     </div>
 @endforelse
-{{$articles->links()}}
+{{method_exists($articles, 'links') ? $articles->links() : ''}}
