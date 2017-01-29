@@ -7974,10 +7974,10 @@ a:hover {
   color: #4a148c !important; }
 
 .main-container {
-  min-height: 560px; }
+  min-height: 90vh; }
 
 footer {
-  height: 55px;
+  height: 10vh;
   background: #e8f5e9;
   padding-top: 20px;
   font-size: 15px; }
