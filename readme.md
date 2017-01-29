@@ -1,4 +1,4 @@
-# Personal Blog Using Laravel 5.3
+# Blog Using Laravel 5
 ### Let's keep it as simple as possible
 A blogging system for personal use. Minimum library used. No frontend theme and anything heavy or unnacessary library used.  
  
@@ -24,8 +24,6 @@ A blogging system for personal use. Minimum library used. No frontend theme and 
 1. Laravel 5.3
 2. VueJS 2
 3. Bootstrap 3
-4. JQuery 3
-5. Entrust 5.2
 
 ### Installation Process
 1. Execute `git clone https://github.com/alimranahmed/Personal-Blog-Using-Laravel5.git` on your terminal to download this project.
