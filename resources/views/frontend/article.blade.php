@@ -18,18 +18,20 @@
             <div class="col-sm-12 text-justify text-md">{!! $article->content !!}</div>
         </div>
         <hr class="margin-bottom-10 margin-top-10">
-        <div class="row">
-            <div class="col-sm-12 text-lg">
-                <strong>More Articles on
-                    <a href="{{route('articles-by-category', ['categoryAlias' => $article->category->alias])}}">{{$article->category->name}}</a>
-                </strong>
+        @if(!$relatedArticles->isEmpty())
+            <div class="row">
+                <div class="col-sm-12 text-lg">
+                    <strong>More Articles on
+                        <a href="{{route('articles-by-category', ['categoryAlias' => $article->category->alias])}}">{{$article->category->name}}</a>
+                    </strong>
+                </div>
+            </div><hr>
+            <div class="row">
+                <div class="col-sm-12" id="related-articles">
+                    @include('frontend._article_list', ['articles' => $relatedArticles])
+                </div>
             </div>
-        </div><hr>
-        <div class="row">
-            <div class="col-sm-12" id="related-articles">
-                @include('frontend._article_list', ['articles' => $relatedArticles])
-            </div>
-        </div>
+        @endif
         <div class="row margin-top-15" style="display: none;" id="comment-form">
             @include('frontend._form_comment')
         </div>
