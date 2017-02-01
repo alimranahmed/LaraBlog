@@ -11,7 +11,7 @@
                     <div class="text-danger">{{session('auth_error')}}</div>
                     <div class="input-group {{$errors->has('email') ? 'has-error has-feedback' : ''}}">
                         <div class="input-group-addon">@</div>
-                        <input type="email" name="email" class="form-control" id="email" value="{{old('email')}}" placeholder="Email">
+                        <input type="email" name="email" class="form-control" id="email" value="{{old('email')}}" autofocus placeholder="Email">
                     </div>
                     <div class="text-danger">{{$errors->first('email')}}</div>
                     <div class="input-group margin-top-15 {{$errors->has('password') ? 'has-error has-feedback' : ''}}">
