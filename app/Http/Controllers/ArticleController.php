@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
         $articles =  Article::where('is_published', 1)->where('is_deleted', 0)
             ->orderBy('published_at', 'desc')
             ->orderBy('created_at', 'desc')
@@ -21,7 +21,7 @@ class ArticleController extends Controller
         return view('frontend.articles', compact('articles'));
     }
 
-    public function show(Request $request, $articleId){
+    public function show($articleId){
         $article = Article::where('id', $articleId)
             ->where('is_published', 1)
             ->where('is_deleted', 0)
@@ -40,7 +40,7 @@ class ArticleController extends Controller
         return view('frontend.article', compact('article'));
     }
 
-    public function edit(Request $request, $articleId){
+    public function edit($articleId){
         $article = Article::find($articleId);
         if(is_null($article)){
             return redirect()->route('home')->with('errorMsg', 'Article not found');
@@ -72,7 +72,7 @@ class ArticleController extends Controller
         return redirect()->route('admin-articles')->with('successMsg', 'Article updated');
     }
 
-    public function create(Request $request){
+    public function create(){
         $categories = Category::where('is_active', 1)->get();
         return view('backend.article_create', compact('categories'));
     }
@@ -91,7 +91,6 @@ class ArticleController extends Controller
             $newArticle['published_at'] = new \DateTime();
             $newArticle['user_id'] = Auth::user()->id;
             $newArticle = Article::create($newArticle);
-            //dd(User::getSubscribedUsers()->pluck('email'));
             //Notify all suscriber about the new article
             Mail::to(User::getSubscribedUsers()->pluck('email')->toArray())
                 ->queue(new NotifySubscriberForNewArticle($newArticle)); 
@@ -102,7 +101,7 @@ class ArticleController extends Controller
         return redirect()->route('admin-articles')->with('successMsg', 'Article published successfully!');
     }
 
-    public function togglePublish(Request $request, $articleId){
+    public function togglePublish($articleId){
         $article = Article::find($articleId);
         if(is_null($article)){
             return redirect()->route('home')->with('errorMsg', 'Article not found');
@@ -142,19 +141,18 @@ class ArticleController extends Controller
         return view('frontend.search_result', compact('searched'));
     }
 
-    public function adminArticle(Request $request){
+    public function adminArticle(){
         $articles =  Article::where('is_deleted', 0)
             ->with('category', 'keywords', 'user')
             ->orderBy('id', 'desc')
             ->get();
-        //return $articles;
         if(Auth::user()->hasRole(['author'])){
             $articles = $articles->where('user_id', Auth::user()->id);
         }
         return view('backend.articleList', compact('articles'));
     }
 
-    public function destroy(Request $request, $articleId){
+    public function destroy($articleId){
         $article = Article::find($articleId);
         if(is_null($article)){
             return redirect()->route('home')->with('errorMsg', 'Article not found');
