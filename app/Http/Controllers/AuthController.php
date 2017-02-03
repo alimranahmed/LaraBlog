@@ -1,14 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function showLoginForm(Request $request){
+    public function showLoginForm(){
         if(Auth::check()){
             return redirect()->route('admin-dashboard');
         }
@@ -25,7 +23,7 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request){
+    public function logout(){
         Auth::logout();
         return redirect()->route('loginForm');
     }
