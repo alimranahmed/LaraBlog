@@ -105,22 +105,20 @@ class UserController extends Controller
                 //Create user comment
                 $newUser = User::where('email', $request->get('email'))->first();
                 if (is_null($newUser)) {
-                    $newUser = $request->only('email');
+                    $newUser = $request->only('email', 'name');
+                    $newUser['last_ip'] = $clientIP;
+                    $newUser['address_id'] = $newAddress->id;
                     $newUser = User::create($newUser);
                     $newUser->attachRole(Role::where('name', 'reader')->first());
 
-                    $newUser->reader()->create([
-                        'notify' => 1,
-                        'name' => $request->get('name'),
-                        'last_ip' => $clientIP,
-                        'address_id' => $newAddress->id,
-                    ]);
+                    $newUser->reader()->create(['notify' => 1,]);
                 }else{
-                    return back()->with('errorMsg', 'Already subscribed');
+                    return back()->with('errorMsg', 'You have already subscribed');
                 }
             });
         }catch (\Exception $e){
             return back()->with('errorMsg', $this->getMessage($e));
         }
+        return back()->with('successMsg', 'You have subscribed successfully!');
     }
 }
