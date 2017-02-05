@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Article;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
         $categories = Category::with(['articles' => function($articles){
             $articles->where('is_deleted', 0);
         }])->get();
@@ -29,14 +28,14 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request){
         $newCategory = $request->only(['name', 'alias', 'position', 'parent_category_id']);
         try{
-            $category = Category::create($newCategory);
+            Category::create($newCategory);
         }catch (\PDOException $e){
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->back()->with('successMsg', 'Category created successfully!');
     }
 
-    public function toggleActive(Request $request, $categoryId){
+    public function toggleActive($categoryId){
         $category = Category::find($categoryId);
         try{
             $category->update(['is_active' => !$category->is_active]);
@@ -46,7 +45,7 @@ class CategoryController extends Controller
         return redirect()->route('categories')->with('successMsg', 'Category updated');
     }
 
-    public function getArticles(Request $request, $categoryAlias){
+    public function getArticles($categoryAlias){
         $category = Category::where('alias', $categoryAlias)->first();
         if(is_null($category)){
             return redirect()->route('home')->with('warningMsg', 'Category not found');
@@ -60,7 +59,7 @@ class CategoryController extends Controller
         return view('frontend.articles', compact('articles'));
     }
 
-    public function destroy(Request $request, $categoryId){
+    public function destroy($categoryId){
         try{
             Category::destroy($categoryId);
         }catch (\PDOException $e){

@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\KeywordRequest;
 use App\Models\Keyword;
-use Illuminate\Http\Request;
 
 class KeywordController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
         $keywords = Keyword::with('articles')->get();
         return view('backend.keywordList', compact('keywords'));
     }
@@ -23,7 +22,7 @@ class KeywordController extends Controller
         return redirect()->route('keywords')->with('successMsg', 'Keyword added');
     }
 
-    public function toggleActive(Request $request, $keywordId){
+    public function toggleActive($keywordId){
         $keyword = Keyword::find($keywordId);
         try{
             $keyword->update(['is_active' => !$keyword->is_active]);
@@ -43,7 +42,7 @@ class KeywordController extends Controller
         return redirect()->route('keywords')->with('successMsg', 'Keyword updated');
     }
 
-    public function destroy(Request $request, $keywordId){
+    public function destroy($keywordId){
         try{
             Keyword::destroy($keywordId);
         }catch (\PDOException $e){
