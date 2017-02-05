@@ -10,21 +10,20 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use League\Flysystem\Exception;
 
 class UserController extends Controller
 {
-    public function index(Request $request){
+    public function index(){
         $users = User::with('roles')->get();
         return view('backend.userList', compact('users'));
     }
 
-    public function show(Request $request, $userId){
+    public function show($userId){
         $user = User::find($userId);
         return view('backend.userDetails', compact('user'));
     }
 
-    public function destroy(Request $request, $userId){
+    public function destroy($userId){
         if(Auth::user()->id == $userId){
             return back()->with('errorMsg', 'You cannot delete yourself');
         }
@@ -56,7 +55,7 @@ class UserController extends Controller
         return redirect()->route('users')->with('successMsg', 'User created!');
     }
 
-    public function edit(Request $request, $userId){
+    public function edit($userId){
         $roles = Role::all();
         $user = User::findOrFail($userId);
         return view('backend.user_edit', compact('roles', 'user'));
@@ -91,7 +90,7 @@ class UserController extends Controller
         return back()->with('successMsg', 'Password changed');
     }
 
-    public function profile(Request $request){
+    public function profile(){
         $user = Auth::user();
         return view('backend.userDetails', compact('user'));
     }

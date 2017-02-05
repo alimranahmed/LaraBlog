@@ -8,11 +8,9 @@ use App\Mail\CommentConfirmation;
 use App\Models\Address;
 use App\Models\Article;
 use App\Models\Comment;
-use App\Models\Reader;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -92,7 +90,7 @@ class CommentController extends Controller
         return redirect()->route('comments')->with('successMsg', 'Comment updated');
     }
 
-    public function togglePublish(Request $request, $commentId){
+    public function togglePublish($commentId){
         $comment = Comment::find($commentId);
         try{
             $comment->update([
@@ -105,7 +103,7 @@ class CommentController extends Controller
         return redirect()->route('comments')->with('successMsg', 'Comment updated');
     }
 
-    public function destroy(Request $request, $commentId){
+    public function destroy($commentId){
         try{
             Comment::destroy($commentId);
         }catch (\PDOException $e){
