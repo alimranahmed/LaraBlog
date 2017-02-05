@@ -1,7 +1,9 @@
 <footer class="container-fluid border-top">
     <div class="row purple-text text-darken-4">
         <div class="col-sm-2">© 2016 Al- Imran Ahmed</div>
-        <div class="col-sm-2">Subscribe</div>
+        <div class="col-sm-2">
+            <a href="">Subscribe</a>
+        </div>
         @if(!Auth::check())
             <div class="col-sm-1 col-sm-offset-7">
                 <a href="{{route('login-form')}}" class="text-grey">Manage</a>

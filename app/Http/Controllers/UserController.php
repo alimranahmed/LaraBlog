@@ -95,4 +95,33 @@ class UserController extends Controller
         $user = Auth::user();
         return view('backend.userDetails', compact('user'));
     }
+
+    public function subscribe(Request $request){
+        $clientIP = $_SERVER['REMOTE_ADDR'];
+        $newAddress = ['ip' => $clientIP];
+        try{
+            \DB::transaction(function() use($newAddress, $request, $clientIP) {
+                //Create new address
+                $newAddress = Address::create($newAddress);
+                //Create user comment
+                $newUser = User::where('email', $request->get('email'))->first();
+                if (is_null($newUser)) {
+                    $newUser = $request->only('email');
+                    $newUser = User::create($newUser);
+                    $newUser->attachRole(Role::where('name', 'reader')->first());
+
+                    $newUser->reader()->create([
+                        'notify' => 1,
+                        'name' => $request->get('name'),
+                        'last_ip' => $clientIP,
+                        'address_id' => $newAddress->id,
+                    ]);
+                }else{
+                    return back()->with('errorMsg', 'Already subscribed');
+                }
+            });
+        }catch (\Exception $e){
+            return back()->with('errorMsg', $this->getMessage($e));
+        }
+    }
 }

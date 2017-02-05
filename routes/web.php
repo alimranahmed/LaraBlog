@@ -2,6 +2,8 @@
 
 //Home
 Route::get('/', 'HomeController@index')->name('home');
+//Subscribe
+Route::post('subscribe', 'UserController@subscribe')->name('subscribe');
 //Article
 Route::get('article', 'ArticleController@index')->name('articles');
 Route::get('article/{articleId}', 'ArticleController@show')->name('get-article');
