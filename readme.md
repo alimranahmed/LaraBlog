@@ -21,7 +21,7 @@ A blogging system for personal use. Minimum library used. No frontend theme and 
   * Can navigate article based on categories
 
 ### Technologies Used: 
-1. Laravel 5.3
+1. Laravel 5.4
 2. VueJS 2
 3. Bootstrap 3
 
