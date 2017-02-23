@@ -3,14 +3,14 @@
 A blogging system for personal use. Minimum library used. No frontend theme and anything heavy or unnacessary library used.  
  
 ### There are four several types of users with several permissions
-1. Owner
-  * Can do anything that can be done by admin
-  * Can also create admin user
-2. Admin
+1. Admin
   * Can manage articles and comments of other users
   * Can manage categories 
   * Can manage keywords
   * Can manage other users except Owner
+2. Owner
+  * Can do anything that can be done by admin
+  * Can also create admin user
 3. Author
   * Can write article and can manage his own article
   * Can manage comments on his own article
@@ -34,7 +34,7 @@ A blogging system for personal use. Minimum library used. No frontend theme and 
 6. Execute `php artisan migrate:refresh --seed` terminal on your terminal.
 7. Now you are ready to go, If you don't want to create any virtual host for this project then execute
   `php artisan server`
-8. Now visit the url shown on your terminal, something like `localhost:8000`. Its running!. 
+8. Now visit the url shown on your terminal, something like `localhost:8000`. Its running!
 
 ### Contribution 
 Anyone is always welcome to contribute on the project. If you want to work with, just create and issue(even if you want to fix the issue). After fixing any issue or adding any new feature just send a pull request, I will be happy to add your code for the betterment of this project. Thanks.
