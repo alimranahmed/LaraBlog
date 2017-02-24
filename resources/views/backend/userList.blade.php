@@ -23,6 +23,9 @@
                     <a href="{{route('edit-user', ['userId' => $user->id])}}">
                         <span class="fa fa-edit text-primary"></span>&nbsp;
                     </a>
+                    <a href="{{route('toggle-user-active', $user->id)}}">
+                        <span class="fa fa-lg {{$user->is_active ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></span>
+                    </a>
                     <a href="{{route('delete-user', $user->id)}}" onclick="return confirm('Are you sure to delete');">
                         <span class="fa fa-trash text-danger"></span>
                     </a>

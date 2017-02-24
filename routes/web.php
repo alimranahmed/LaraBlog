@@ -39,6 +39,7 @@ Route::group(['middleware' => ['customAuth', 'role:owner|admin']], function(){
     Route::post('admin/user/create', 'UserController@store')->name('store-user');
     Route::get('admin/user/{userId}/edit', 'UserController@edit')->name('edit-user');
     Route::put('admin/user/{userId}/update', 'UserController@update')->name('update-user');
+    Route::get('admin/user/toggle-active/{userId}', 'UserController@toggleActive')->name('toggle-user-active');
 
     //Admin keywords
     Route::post('admin/keyword', 'KeywordController@store')->name('add-keyword');

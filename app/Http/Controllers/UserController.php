@@ -121,4 +121,14 @@ class UserController extends Controller
         }
         return back()->with('successMsg', 'You have subscribed successfully!');
     }
+
+    public function toggleActive($userId){
+        try{
+            $user = User::find($userId);
+            $user->update(['is_active' => !$user->is_active]);
+        }catch (\Exception $e){
+            return back()->with('errorMsg', $this->getMessage($e));
+        }
+        return back()->with('successMsg', 'User updated successfully!');
+    }
 }
