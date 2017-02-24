@@ -2,7 +2,7 @@
 @section("content")
     <div class="row margin-top-10">
         <div class="col-sm-6">
-            <strong class="fa fa-circle {{$user->is_active ? 'text-success':'text-primary'}}"></strong>
+            <strong class="fa fa-circle {{$user->is_active ? 'text-success':'text-grey'}}"></strong>
             <strong class="text-lg">{{$user->name}}</strong>
             @if(\Entrust::hasRole(['owner','admin']))
                 <a href="{{route('edit-user', ['userId' => $user->id])}}">
