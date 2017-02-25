@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(KeywordsTableSeeder::class);
         $this->call(ArticlesTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
+        $this->call(ConfigsTableSeeder::class);
         $this->command->info('All table seeded successfully!');
         $this->command->info('Admin Route: domain-name/admin');
         $this->command->info('username: owner@gmail.com | password: owner');
