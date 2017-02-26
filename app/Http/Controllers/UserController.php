@@ -116,10 +116,16 @@ class UserController extends Controller
                     return back()->with('errorMsg', 'You have already subscribed');
                 }
             });
+            //TODO user should confirm through email
         }catch (\Exception $e){
             return back()->with('errorMsg', $this->getMessage($e));
         }
         return back()->with('successMsg', 'You have subscribed successfully!');
+    }
+
+    public function feedback(Request $request){
+        //TODO feedback need to be implemented
+        return back()->with('warningMsg', 'Not implemented yet');
     }
 
     public function toggleActive($userId){
