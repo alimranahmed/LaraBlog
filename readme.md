@@ -1,5 +1,5 @@
 # Blog Using Laravel 5
-### Let's keep it as simple as possible
+### Let's keep it as simple as possible. Configure anything you want
 A blogging system for personal use. Minimum library used. No frontend theme and anything heavy or unnacessary library used.  
  
 ### There are four several types of users with several permissions
