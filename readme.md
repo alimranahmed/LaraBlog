@@ -38,7 +38,7 @@ A blogging system for personal use. Minimum library used. No frontend theme and 
 
 ### Screenshot
 
-##### Here is a view of a post
+##### Single article view
 ![single blog](https://cloud.githubusercontent.com/assets/7629427/23341414/5280728c-fc71-11e6-9ae4-be9405e04e40.png)
 
 ##### Admin panel view
