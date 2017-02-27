@@ -61,6 +61,7 @@
 @endsection
 
 @section('inPageJS')
+    @parent
     <script>
         new Vue({
             el: "#edit-article",

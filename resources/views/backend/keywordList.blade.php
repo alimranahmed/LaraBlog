@@ -69,6 +69,7 @@
 @endsection
 
 @section('inPageJS')
+    @parent
     <script type="application/javascript">
         new Vue({
             el: '#keywordList',
