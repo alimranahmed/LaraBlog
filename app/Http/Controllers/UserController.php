@@ -113,7 +113,7 @@ class UserController extends Controller
 
                     $newUser->reader()->create(['notify' => 1,]);
                 }else{
-                    return back()->with('errorMsg', 'You have already subscribed');
+                    return back()->with('warningMsg', 'You have already subscribed');
                 }
             });
             //TODO user should confirm through email
