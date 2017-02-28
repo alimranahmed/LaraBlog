@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\Address;
+use App\Models\Feedback;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -124,8 +125,18 @@ class UserController extends Controller
     }
 
     public function feedback(Request $request){
-        //TODO feedback need to be implemented
-        return back()->with('warningMsg', 'Not implemented yet');
+        $this->validate($request, ['email' => 'required', 'name' => 'required', 'content' => 'required']);
+        try{
+            Feedback::create([
+                'email' => $request->get('email'),
+                'name' => $request->get('name'),
+                'content' => $request->get('content'),
+                'ip' => $clientIP = $_SERVER['REMOTE_ADDR'],
+            ]);
+        }catch(\Exception $e){
+            return back()->with('errorMsg', $this->getMessage($e));
+        }
+        return back()->with('successMsg', 'Thanks for your time to provide feedback');
     }
 
     public function toggleActive($userId){

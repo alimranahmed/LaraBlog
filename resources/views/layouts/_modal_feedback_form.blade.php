@@ -10,7 +10,7 @@
                 <div class="modal-body">
                     <input type="text" placeholder="Name*" name="name" class="form-control">
                     <input type="email" placeholder="Email*" name="email" class="form-control margin-top-10">
-                    <textarea placeholder="Feedback*" class="form-control margin-top-10"></textarea>
+                    <textarea placeholder="Feedback*" class="form-control margin-top-10" name="content"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Subscribe</button>
