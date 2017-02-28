@@ -68,4 +68,9 @@ Route::group(['middleware' => ['customAuth', 'role:owner|admin|author']], functi
     Route::get('admin/comment/{commentId}/delete', 'CommentController@destroy')->name('delete-comment');
     Route::get('admin/comment/toggle-publish/{commentId}', 'CommentController@togglePublish')->name('toggle-comment-publish');
     Route::put('admin/comment/{commentId}', 'CommentController@update')->name('update-comment');
+
+    //Admin feedback
+    Route::get('admin/feedback', 'FeedbackController@index')->name('feedbacks');
+    Route::get('admin/feedback/toggle-resolved/{feedbackId}', 'FeedbackController@toggleResolved')->name('toggle-feedback-resolved');
+    Route::get('admin/feedback/close/{feedbackId}', 'FeedbackController@close')->name('close-feedback');
 });
