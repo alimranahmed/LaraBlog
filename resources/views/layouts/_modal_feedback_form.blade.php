@@ -5,7 +5,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Feel free to share your thoughts</h4>
             </div>
-            <form method="post" action="{{route('feedback')}}">
+            <form method="post" action="{{route('add-feedback')}}">
                 {{csrf_field()}}
                 <div class="modal-body">
                     <input type="text" placeholder="Name*" name="name" class="form-control">
