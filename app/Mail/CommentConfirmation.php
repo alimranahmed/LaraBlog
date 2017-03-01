@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Config;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -29,7 +30,7 @@ class CommentConfirmation extends Mailable
      */
     public function build()
     {
-        return $this->from('al.imran.cse@gmail.com')
+        return $this->from(Config::get('admin_email'))
             ->subject('Confirm Your Comment')
             ->view('emails.comment_confirmation');
     }
