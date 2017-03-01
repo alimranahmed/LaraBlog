@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UserRequest;
+use App\Mail\SubscribeConfirmation;
 use App\Models\Address;
 use App\Models\Feedback;
 use App\Models\Role;
@@ -11,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -109,19 +111,38 @@ class UserController extends Controller
                     $newUser = $request->only('email', 'name');
                     $newUser['last_ip'] = $clientIP;
                     $newUser['address_id'] = $newAddress->id;
+                    $newUser['token'] = Hash::make($request->get('email'));
                     $newUser = User::create($newUser);
                     $newUser->attachRole(Role::where('name', 'reader')->first());
 
-                    $newUser->reader()->create(['notify' => 1,]);
+                    $newUser->reader()->create(['notify' => 0,]);
+                    Mail::to($request->get('email'))->queue(new SubscribeConfirmation($newUser));
                 }else{
-                    return back()->with('warningMsg', 'You have already subscribed');
+                    return back()->with('warningMsg', 'You are already subscribed');
                 }
             });
-            //TODO user should confirm through email
         }catch (\Exception $e){
             return back()->with('errorMsg', $this->getMessage($e));
         }
-        return back()->with('successMsg', 'You have subscribed successfully!');
+        return back()->with('successMsg', 'Thanks, a mail has been to confirm you subscription');
+    }
+
+    public function confirmSubscribe(Request $request, $userId){
+        $user = User::where('id', $userId)
+            ->where('token', $request->get('token'))
+            ->first();
+        if(is_null($user)){
+            return redirect()->route('home')->with('errorMsg', 'Invalid request');
+        }
+
+        try{
+            if($user->isReader){
+                $user->reader->update(['is_verified' => 1, 'notify' => 1]);
+            }
+        }catch (\Exception $e){
+            return response()->json(['errorMsg' => $this->getMessage($e)]);
+        }
+        return redirect()->route('home')->with('successMsg', 'Congratulation, your subscription confirmed');
     }
 
     public function toggleActive($userId){

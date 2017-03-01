@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Config;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -16,9 +17,10 @@ class SubscribeConfirmation extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $user;
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -28,6 +30,8 @@ class SubscribeConfirmation extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->from(Config::get('admin_email'))
+            ->subject('Confirm Your Subscription')
+            ->view('emails.subscribe_confirmation');
     }
 }
