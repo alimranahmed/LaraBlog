@@ -31,7 +31,7 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }*/
 
-    public function getIsReaderAttribute(){
+    public function isReader(){
         return !is_null($this->reader);
     }
 
