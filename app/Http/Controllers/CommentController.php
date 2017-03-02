@@ -123,7 +123,7 @@ class CommentController extends Controller
 
         try{
             $comment->update(['is_published' => 1, 'is_confirmed' => 1]);
-            if($comment->user->isReader){
+            if($comment->user->isReader()){
                 $comment->user->reader->update(['is_verified' => 1]);
             }
         }catch (\Exception $e){
