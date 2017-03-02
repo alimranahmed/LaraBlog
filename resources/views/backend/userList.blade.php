@@ -17,7 +17,12 @@
                 <td ><a href="{{route("get-user", ["userId"=>$user->id])}}">{{$user->name}}</a></td>
                 <td>{{$user->username}}</td>
                 <td>{{$user->email}}</td>
-                <td class="text-center">{{implode(",",$user->roles->pluck('name')->toArray())}}</td>
+                <td class="text-center">
+                    {{implode(",",$user->roles->pluck('name')->toArray())}}
+                    @if(isset($user->reader))
+                        [{{ $user->reader->is_verified ? 'Verified' : 'Unverified'}}, {{ $user->reader->notify ? 'Notify' : 'Not Notify'}}]
+                    @endif
+                </td>
                 <td>{{$user->createdAtHuman}}</td>
                 <td class="text-center">
                     <a href="{{route('edit-user', ['userId' => $user->id])}}">
