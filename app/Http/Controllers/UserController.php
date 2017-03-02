@@ -136,13 +136,14 @@ class UserController extends Controller
         }
 
         try{
-            if($user->isReader){
+            if($user->isReader()){
                 $user->reader->update(['is_verified' => 1, 'notify' => 1]);
+                return redirect()->route('home')->with('successMsg', 'Congratulation, your subscription confirmed');
             }
         }catch (\Exception $e){
             return response()->json(['errorMsg' => $this->getMessage($e)]);
         }
-        return redirect()->route('home')->with('successMsg', 'Congratulation, your subscription confirmed');
+        return redirect()->route('home')->with('warningMsg', 'Something went wrong');
     }
 
     public function toggleActive($userId){
