@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Keyword;
 use App\Models\User;
 use App\Mail\NotifySubscriberForNewArticle;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class ArticleController extends Controller
         $article = Article::where('id', $articleId)
             ->where('is_published', 1)
             ->where('is_deleted', 0)
-            ->with(['category', 'comments' => function($comments){
+            ->with(['category', 'keywords', 'comments' => function($comments){
                 $comments->where('is_published', 1)->orderBy('created_at', 'desc');
             }])->first();
         if(is_null($article)){
@@ -134,8 +135,12 @@ class ArticleController extends Controller
         $this->validate($request, ['query_string' => 'required']);
 
         $queryString = $request->get('query_string');
+        $keywords = Keyword::where('name', 'LIKE', "%$queryString%")->where('is_active', 1)->get();
+        $articleIDsByKeywords = Keyword::getArticleIDs($keywords);
+
         $articles = Article::where('is_published', 1)
             ->where('is_deleted', 0)
+            ->whereIn('id', $articleIDsByKeywords)
             ->where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
             ->orderBy('published_at', 'desc')
