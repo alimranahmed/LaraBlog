@@ -118,7 +118,7 @@ class UserController extends Controller
                     $newUser->reader()->create(['notify' => 0,]);
                     Mail::to($request->get('email'))->queue(new SubscribeConfirmation($newUser));
                 }else{
-                    return back()->with('warningMsg', 'You are already subscribed');
+                    return back()->with('warningMsg', 'You have already subscribed, please contact with admin');
                 }
             });
         }catch (\Exception $e){

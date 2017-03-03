@@ -26,6 +26,31 @@ Route::get('admin/login', 'AuthController@showLoginForm')->name('login-form');
 Route::post('admin/login', 'AuthController@login')->name('login');
 Route::get('admin/logout', 'AuthController@logout')->name('logout');
 
+Route::group(['middleware' => ['customAuth', 'role:owner|admin|author']], function(){
+    //profile
+    Route::get('admin/profile', 'UserController@profile')->name('user-profile');
+    //admin articles
+    Route::get('admin/dashboard', 'DashboardController@index')->name('admin-dashboard');
+    Route::get('admin/article', 'ArticleController@adminArticle')->name('admin-articles');
+    Route::get('admin/article/toggle-publish/{articleID}', 'ArticleController@togglePublish')->name('toggle-article-publish');
+    Route::get('admin/article/{articleId}/delete', 'ArticleController@destroy')->name('delete-article');
+    Route::get('admin/article/create', 'ArticleController@create')->name('create-article');
+    Route::post('article', 'ArticleController@store')->name('store-article');
+    Route::get('article/{articleId}/edit', 'ArticleController@edit')->name('edit-article');
+    Route::put('article/{articleId}', 'ArticleController@update')->name('update-article');
+
+    //Admin comments
+    Route::get('admin/comment', 'CommentController@index')->name('comments');
+    Route::get('admin/comment/{commentId}/delete', 'CommentController@destroy')->name('delete-comment');
+    Route::get('admin/comment/toggle-publish/{commentId}', 'CommentController@togglePublish')->name('toggle-comment-publish');
+    Route::put('admin/comment/{commentId}', 'CommentController@update')->name('update-comment');
+
+    //Admin feedback
+    Route::get('admin/feedback', 'FeedbackController@index')->name('feedbacks');
+    Route::get('admin/feedback/toggle-resolved/{feedbackId}', 'FeedbackController@toggleResolved')->name('toggle-feedback-resolved');
+    Route::get('admin/feedback/close/{feedbackId}', 'FeedbackController@close')->name('close-feedback');
+});
+
 Route::group(['middleware' => ['customAuth', 'role:owner|admin']], function(){
     //admin category
     Route::get('admin/category', 'CategoryController@index')->name('categories');
@@ -51,29 +76,4 @@ Route::group(['middleware' => ['customAuth', 'role:owner|admin']], function(){
     Route::get('admin/keyword/toggle-active/{keywordId}', 'KeywordController@toggleActive')->name('toggle-keyword-active');
     Route::put('admin/keyword/{keywordId}', 'KeywordController@update')->name('update-keyword');
     Route::get('admin/keyword/{keywordId}/delete', 'KeywordController@destroy')->name('delete-keyword');
-});
-
-Route::group(['middleware' => ['customAuth', 'role:owner|admin|author']], function(){
-    //profile
-    Route::get('admin/profile', 'UserController@profile')->name('user-profile');
-    //admin articles
-    Route::get('admin/dashboard', 'DashboardController@index')->name('admin-dashboard');
-    Route::get('admin/article', 'ArticleController@adminArticle')->name('admin-articles');
-    Route::get('admin/article/toggle-publish/{articleID}', 'ArticleController@togglePublish')->name('toggle-article-publish');
-    Route::get('admin/article/{articleId}/delete', 'ArticleController@destroy')->name('delete-article');
-    Route::get('admin/article/create', 'ArticleController@create')->name('create-article');
-    Route::post('article', 'ArticleController@store')->name('store-article');
-    Route::get('article/{articleId}/edit', 'ArticleController@edit')->name('edit-article');
-    Route::put('article/{articleId}', 'ArticleController@update')->name('update-article');
-
-    //Admin comments
-    Route::get('admin/comment', 'CommentController@index')->name('comments');
-    Route::get('admin/comment/{commentId}/delete', 'CommentController@destroy')->name('delete-comment');
-    Route::get('admin/comment/toggle-publish/{commentId}', 'CommentController@togglePublish')->name('toggle-comment-publish');
-    Route::put('admin/comment/{commentId}', 'CommentController@update')->name('update-comment');
-
-    //Admin feedback
-    Route::get('admin/feedback', 'FeedbackController@index')->name('feedbacks');
-    Route::get('admin/feedback/toggle-resolved/{feedbackId}', 'FeedbackController@toggleResolved')->name('toggle-feedback-resolved');
-    Route::get('admin/feedback/close/{feedbackId}', 'FeedbackController@close')->name('close-feedback');
 });
