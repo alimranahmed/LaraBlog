@@ -2,7 +2,7 @@
 @include('layouts._navbar')
 @include('layouts._alert')
 <div class="main-container container" id="app">
-    <h1 class="text-center border-bottom" id="site-heading">Al- Imran Ahmed</h1>
+    <h1 class="text-center border-bottom" id="site-heading">{{$configs->site_title}}</h1>
     <div class="col-sm-offset-1 col-sm-10">
         @yield('content')
     </div>
