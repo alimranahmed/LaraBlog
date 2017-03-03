@@ -18,6 +18,17 @@
             <div class="col-sm-12 text-justify text-md">{!! $article->content !!}</div>
         </div>
         <hr class="margin-bottom-10 margin-top-10">
+        <div class="row">
+            <div class="col-sm-1"><strong>Keywords:</strong></div>
+            <div class="col-md-11">
+                @foreach($article->keywords as $keyword)
+                    <a href="{{route('articles-by-keyword', [$keyword->name])}}">
+                        <span class="label label-info">{{$keyword->name}}</span>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+        <hr class="margin-bottom-10 margin-top-10">
         @if(!$relatedArticles->isEmpty())
             <div class="row">
                 <div class="col-sm-12 text-lg">
