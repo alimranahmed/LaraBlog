@@ -13,4 +13,13 @@ class Config extends Model
         }
         return $config->value;
     }
+
+    public static function allFormatted($isActive = 1){
+        $configs = new \stdClass();
+        $dbConfigs = self::where('is_active', $isActive)->get();
+        foreach($dbConfigs as $config){
+            $configs->{$config->name} = $config->value;
+        }
+        return $configs;
+    }
 }
