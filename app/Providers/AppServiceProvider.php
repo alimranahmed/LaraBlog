@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\Config;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -18,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         try{
             View::share('navCategories', Category::where('is_active', 1)->get());
+            View::share('configs', Config::allFormatted());
         }catch(\PDOException $e){
             //TODO handle response
         }
