@@ -73,8 +73,16 @@ class ArticleController extends Controller
             return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
         }
         $updatedArticle = $request->only(['heading', 'content', 'category_id', 'language']);
+        $keywords = array_unique(explode(' ',$request->get('keywords')));
         try{
             $article->update($updatedArticle);
+            foreach($keywords as $keyword){
+                $keywordExist = $article->keywords->where('name', $keyword)->first();
+                if(!$keywordExist){
+                    $newKeyword = Keyword::firstOrCreate(['name' => $keyword]);
+                    $article->keywords()->attach($newKeyword->id);
+                }
+            }
         }catch(\PDOException $e){
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
