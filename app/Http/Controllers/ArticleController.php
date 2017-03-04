@@ -76,6 +76,7 @@ class ArticleController extends Controller
         $keywordsToAttach = array_unique(explode(' ',$request->get('keywords')));
         try{
             $article->update($updatedArticle);
+            //remove all keywords then add all keywords from input
             $article->keywords()->detach();
             foreach($keywordsToAttach as $keywordToAttach){
                 $newKeyword = Keyword::firstOrCreate(['name' => $keywordToAttach]);
@@ -107,6 +108,12 @@ class ArticleController extends Controller
             $newArticle['published_at'] = new \DateTime();
             $newArticle['user_id'] = Auth::user()->id;
             $newArticle = Article::create($newArticle);
+            //add keywords
+            $keywordsToAttach = array_unique(explode(' ',$request->get('keywords')));
+            foreach($keywordsToAttach as $keywordToAttach){
+                $newKeyword = Keyword::firstOrCreate(['name' => $keywordToAttach]);
+                $newArticle->keywords()->attach($newKeyword->id);
+            }
             //Notify all subscriber about the new article
             Mail::to(User::getSubscribedUsers()->pluck('email')->toArray())
                 ->queue(new NotifySubscriberForNewArticle($newArticle)); 
