@@ -39,7 +39,7 @@
                         Tips for keywords: separate your keywords by space. Some popular keywords are:
                     </div>
                     <div class="form-group">
-                        <input type="text" id="" class="form-control" name="keywords" placeholder="*Keywords" required value="{{implode(' ',$article->keywords->pluck('name')->toArray())}}">
+                        <input type="text" id="" class="form-control" name="keywords" placeholder="Keywords" value="{{implode(' ',$article->keywords->pluck('name')->toArray())}}">
                     </div>
                     <div class="form-group">
                         <input type="radio" name="language" value="বাংলা" {{$article->language == 'বাংলা' ? 'checked' : ''}}>
