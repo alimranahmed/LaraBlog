@@ -36,8 +36,7 @@
                         <textarea name="content" id="content" class="form-control textarea-indent" rows="10" placeholder="*Write here..." required>{!! $article->content !!}</textarea>
                     </div>
                     <div class="text-grey">
-                        Tips for keywords: separate your keywords by space;<br>
-                        Some popular keywords are:
+                        Tips for keywords: separate your keywords by space. Some popular keywords are:
                     </div>
                     <div class="form-group">
                         <input type="text" id="" class="form-control" name="keywords" placeholder="*Keywords" required value="{{implode(' ',$article->keywords->pluck('name')->toArray())}}">
