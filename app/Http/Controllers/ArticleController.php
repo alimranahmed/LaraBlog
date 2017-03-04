@@ -101,7 +101,7 @@ class ArticleController extends Controller
             $newArticle['published_at'] = new \DateTime();
             $newArticle['user_id'] = Auth::user()->id;
             $newArticle = Article::create($newArticle);
-            //Notify all suscriber about the new article
+            //Notify all subscriber about the new article
             Mail::to(User::getSubscribedUsers()->pluck('email')->toArray())
                 ->queue(new NotifySubscriberForNewArticle($newArticle)); 
         }catch(\PDOException $e){

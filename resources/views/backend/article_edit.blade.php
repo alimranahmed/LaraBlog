@@ -29,11 +29,18 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="text-grey">
+                        Tips for article content: Enclose source inside &lt;pre&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;
+                    </div>
                     <div class="form-group">
                         <textarea name="content" id="content" class="form-control textarea-indent" rows="10" placeholder="*Write here..." required>{!! $article->content !!}</textarea>
                     </div>
                     <div class="text-grey">
-                        Tips: Enclose source inside &lt;pre&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;
+                        Tips for keywords: separate your keywords by space;<br>
+                        Some popular keywords are:
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="" class="form-control" name="keywords" placeholder="*Keywords" required value="{{implode(' ',$article->keywords->pluck('name')->toArray())}}">
                     </div>
                     <div class="form-group">
                         <input type="radio" name="language" value="বাংলা" {{$article->language == 'বাংলা' ? 'checked' : ''}}>
