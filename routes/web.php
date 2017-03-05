@@ -77,3 +77,8 @@ Route::group(['middleware' => ['customAuth', 'role:owner|admin']], function(){
     Route::put('admin/keyword/{keywordId}', 'KeywordController@update')->name('update-keyword');
     Route::get('admin/keyword/{keywordId}/delete', 'KeywordController@destroy')->name('delete-keyword');
 });
+
+Route::group(['middleware' => ['customAuth', 'role:owner']], function(){
+    //admin category
+    Route::get('admin/configurations', 'ConfigController@index')->name('configurations');
+});
