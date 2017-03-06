@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         try{
             View::share('navCategories', Category::where('is_active', 1)->get());
-            View::share('configs', Config::allFormatted());
+            View::share('globalConfigs', Config::allFormatted());
         }catch(\PDOException $e){
             //TODO handle response
         }
