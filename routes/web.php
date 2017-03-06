@@ -79,7 +79,7 @@ Route::group(['middleware' => ['customAuth', 'role:owner|admin']], function(){
 });
 
 Route::group(['middleware' => ['customAuth', 'role:owner']], function(){
-    //admin category
+    //admin config
     Route::get('admin/config', 'ConfigController@index')->name('configs');
     Route::put('admin/config/{configId}', 'ConfigController@update')->name('update-config');
 });
