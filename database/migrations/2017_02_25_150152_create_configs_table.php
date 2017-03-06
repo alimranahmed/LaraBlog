@@ -18,6 +18,7 @@ class CreateConfigsTable extends Migration
             $table->string('name');
             $table->text('value');
             $table->integer('is_active')->unsigned()->default(1);
+            $table->integer('is_mandatory')->unsigned()->default(1);
             $table->timestamps();
         });
     }
