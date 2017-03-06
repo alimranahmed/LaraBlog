@@ -59,6 +59,14 @@
                             </a>
                         </li>
                 @endif
+                @if(\Entrust::hasRole(['owner']))
+                    <li class="{{Request::is('admin/config*') ? "active":""}}">
+                        <a href="{{route('configs')}}">
+                            <span class="fa fa-share-alt"></span>
+                            <span class="hidden-sm">Configurations</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
