@@ -10,7 +10,8 @@ A full-featured blogging system for personal use. Minimum library used. No front
   * Can manage other users except Owner
 2. Owner
   * Can do anything that can be done by admin
-  * Can also create admin user
+  * Create admin user
+  * Change system configuration variables
 3. Author
   * Can write article and can manage his own article
   * Can manage comments on his own article
@@ -48,4 +49,4 @@ A full-featured blogging system for personal use. Minimum library used. No front
 Anyone is always welcome to contribute on the project. If you want to work with, just create and issue(even if you want to fix the issue). After fixing any issue or adding any new feature just send a pull request, I will be happy to add your code for the betterment of this project. Thanks.
 
 ##### Note
-If you have any question feel free to ask me. 
+If you cloned the project little bit earlier and after pulling the newer changes it's not working now, please execute the `composer update` command in the CLI when you are the root directory of the project. Beside, don't forge to cross match your `.env` file version with newly pulled `.env.example` file.
