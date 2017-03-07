@@ -29,8 +29,9 @@ Route::get('admin/logout', 'AuthController@logout')->name('logout');
 Route::group(['middleware' => ['customAuth', 'role:owner|admin|author']], function(){
     //profile
     Route::get('admin/profile', 'UserController@profile')->name('user-profile');
-    //admin articles
+    //dashboard
     Route::get('admin/dashboard', 'DashboardController@index')->name('admin-dashboard');
+    //admin articles
     Route::get('admin/article', 'ArticleController@adminArticle')->name('admin-articles');
     Route::get('admin/article/toggle-publish/{articleID}', 'ArticleController@togglePublish')->name('toggle-article-publish');
     Route::get('admin/article/{articleId}/delete', 'ArticleController@destroy')->name('delete-article');
