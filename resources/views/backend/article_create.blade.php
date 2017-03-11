@@ -40,7 +40,8 @@
                         Tips for keywords: separate your keywords by space. Some popular keywords are:
                     </div>
                     <div class="form-group">
-                        <input type="text" id="#keyword" v-on:keyup.space="formatKeyword('#keyword')" class="form-control" name="keywords" placeholder="Keywords" required>
+                        <strong>Keywords: </strong><label id="keywords-show"></label>
+                        <input type="text" id="keyword" v-on:keyup.space.delete="formatKeyword('#keyword', '#keywords-show')" class="form-control" name="keywords" placeholder="Keywords" required>
                     </div>
                     <div class="form-group">
                         <input type="radio" name="language" value="বাংলা" checked>
@@ -81,8 +82,14 @@
                     $("#article-content").html(article.content);
                 },
 
-                'formatKeyword': function(inputId){
-                    console.debug(inputId+" changed");
+                'formatKeyword': function(inputId, displayId){
+
+                    var keywords = $(inputId).val().split(' ');
+                    var htmlToShow = '';
+                    for(var i = 0; i < keywords.length; i++){
+                        htmlToShow += "<span class='label label-info margin-right-5'>"+keywords[i]+"</span>";
+                    }
+                    $(displayId).html(htmlToShow);
                 }
             }
         });
