@@ -80,6 +80,7 @@
                     $("#article-heading").html($("#heading").val());
                     $("#article-content").html($("#content").val());
                 },
+
                 'formatKeyword': function(inputId, displayId){
 
                     var keywords = $(inputId).val().split(' ');
@@ -89,6 +90,9 @@
                     }
                     $(displayId).html(htmlToShow);
                 }
+            },
+            created: function(){
+                this.formatKeyword("#keyword", "#keywords-show");
             }
         });
     </script>
