@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group">
                         <strong>Keywords: </strong><label id="keywords-show"></label>
-                        <input type="text" id="keyword" v-on:keyup.space.delete="formatKeyword('#keyword', '#keywords-show')" class="form-control" name="keywords" placeholder="Keywords" required>
+                        <input type="text" id="keyword" v-on:keyup="formatKeyword('#keyword', '#keywords-show')" class="form-control" name="keywords" placeholder="Keywords" required>
                     </div>
                     <div class="form-group">
                         <input type="radio" name="language" value="বাংলা" checked>

@@ -40,7 +40,7 @@
                     </div>
                     <div class="form-group">
                         <strong>Keywords: </strong><label id="keywords-show"></label>
-                        <input type="text" id="keyword" v-on:keyup.space.delete="formatKeyword('#keyword', '#keywords-show')" class="form-control" name="keywords" placeholder="Keywords" value="{{implode(' ',$article->keywords->pluck('name')->toArray())}}">
+                        <input type="text" id="keyword" v-on:keyup="formatKeyword('#keyword', '#keywords-show')" class="form-control" name="keywords" placeholder="Keywords" value="{{implode(' ',$article->keywords->pluck('name')->toArray())}}">
                     </div>
                     <div class="form-group">
                         <input type="radio" name="language" value="বাংলা" {{$article->language == 'বাংলা' ? 'checked' : ''}}>
