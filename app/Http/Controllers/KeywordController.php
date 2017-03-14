@@ -45,6 +45,7 @@ class KeywordController extends Controller
 
     public function destroy($keywordId){
         try{
+            Keyword::find($keywordId)->articles()->detach();
             Keyword::destroy($keywordId);
         }catch (\PDOException $e){
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
