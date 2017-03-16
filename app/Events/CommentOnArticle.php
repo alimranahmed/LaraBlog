@@ -20,6 +20,7 @@ class CommentOnArticle implements ShouldBroadcast
      * @return void
      */
     public $message;
+
     public function __construct($message)
     {
         $this->message = $message;
@@ -32,6 +33,10 @@ class CommentOnArticle implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['article-comment'];
+        return new PrivateChannel('visitor-activity');
+    }
+
+    public function broadcastAs(){
+        return 'comment-on-article';
     }
 }
