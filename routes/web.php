@@ -86,9 +86,10 @@ Route::group(['middleware' => ['customAuth', 'role:owner']], function(){
 });
 
 Route::get('/broadcast',function(){
-    //event(new \App\Events\CommentOnArticle('Broadcasting in Laravel using Pusher!'));
-    $data['message'] = 'A new comment made';
-    $pusher = new Pusher(env('PUSHER_KEY'),env('PUSHER_SECRET'), env('PUSHER_APP_ID'));
-    $pusher->trigger('comment-channel', 'comment-event', $data);
+    event(new \App\Events\CommentOnArticle('Broadcasting in Laravel using Pusher!'));
     return "sent to pusher!";
+});
+
+Broadcast::channel('visitor-activity', function ($user) {
+    return $user->hasRole(['owner','admin']);
 });
