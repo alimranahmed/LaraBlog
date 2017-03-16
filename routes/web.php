@@ -84,3 +84,11 @@ Route::group(['middleware' => ['customAuth', 'role:owner']], function(){
     Route::get('admin/config', 'ConfigController@index')->name('configs');
     Route::put('admin/config/{configId}', 'ConfigController@update')->name('update-config');
 });
+
+Route::get('/broadcast',function(){
+    //event(new \App\Events\CommentOnArticle('Broadcasting in Laravel using Pusher!'));
+    $data['message'] = 'A new comment made';
+    $pusher = new Pusher(env('PUSHER_KEY'),env('PUSHER_SECRET'), env('PUSHER_APP_ID'));
+    $pusher->trigger('comment-channel', 'comment-event', $data);
+    return "sent to pusher!";
+});
