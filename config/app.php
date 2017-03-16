@@ -227,6 +227,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         //custom added
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
     ],
