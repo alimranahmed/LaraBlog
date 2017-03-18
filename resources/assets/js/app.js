@@ -15,6 +15,11 @@ import Echo from "laravel-echo"
 
 window.Pusher = require('pusher-js');
 
+var pusher = new Pusher('bbadb783c3924ad225f7', {
+    authEndpoint: "/broadcasting/auth",
+    encrypted: true
+});
+/*
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: 'bbadb783c3924ad225f7',
@@ -24,4 +29,4 @@ window.Echo = new Echo({
 window.Echo.private('visitor-activity')
     .listen('comment-on-article', function(e){
         console.debug(e);
-});
+});*/
