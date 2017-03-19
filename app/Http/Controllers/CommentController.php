@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentOnArticle;
 use App\Http\Requests\CommentRequest;
 use App\Jobs\SendConfirmCommentMail;
 use App\Mail\CommentConfirmation;
@@ -61,6 +62,7 @@ class CommentController extends Controller
                 $newComment = Comment::create($newComment);
                 Article::where('id', $articleId)->increment('comment_count');
             });
+            event(new CommentOnArticle('New comment posted!'));
             Mail::to($request->get('email'))->queue(new CommentConfirmation($newComment));
             //$this->dispatch(new SendConfirmCommentMail($newComment));
         }catch(\Exception $e){
