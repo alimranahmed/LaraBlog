@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Pusher;
 
 class CommentOnArticle implements ShouldBroadcast
 {
@@ -24,6 +25,22 @@ class CommentOnArticle implements ShouldBroadcast
     public function __construct($message)
     {
         $this->message = $message;
+        $this->broadcastToPusher();
+    }
+
+    private function broadcastToPusher(){
+        $options = array(
+            'encrypted' => true
+        );
+        $pusher = new Pusher(
+            env('PUSHER_KEY'),
+            env('PUSHER_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options
+        );
+
+        $data['message'] = $this->message;
+        $pusher->trigger('visitor-activity', 'comment', $data);
     }
 
     /**
