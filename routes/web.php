@@ -84,12 +84,3 @@ Route::group(['middleware' => ['customAuth', 'role:owner']], function(){
     Route::get('admin/config', 'ConfigController@index')->name('configs');
     Route::put('admin/config/{configId}', 'ConfigController@update')->name('update-config');
 });
-
-Route::get('/broadcast',function(){
-    event(new \App\Events\CommentOnArticle('Broadcasting in Laravel using Pusher!'));
-    return "sent to pusher!";
-});
-
-Broadcast::channel('visitor-activity', function ($user) {
-    return $user->hasRole(['owner','admin']);
-});
