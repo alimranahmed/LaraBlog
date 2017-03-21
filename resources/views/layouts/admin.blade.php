@@ -8,7 +8,7 @@
             @include('layouts._sidebar')
         @endif
     </aside>
-    <div class="col-sm-10">
+    <div class="col-sm-10 no-padding">
         @yield('content')
     </div>
 </div>
