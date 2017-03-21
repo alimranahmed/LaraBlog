@@ -1,5 +1,12 @@
 @extends("layouts.admin")
 @section("content")
+    <div class="panel panel-default no-margin-bottom">
+        <div class="panel-heading">
+            <strong>Edit Information of {{$user->name}}</strong>
+        </div>
+        <div class="panel-body">
+        </div>
+    </div>
     <form action="{{route('update-user', ['userId' => $user->id])}}" class="margin-top-15" method="post">
         <input type="hidden" name="_method" value="PUT">
         {{csrf_field()}}

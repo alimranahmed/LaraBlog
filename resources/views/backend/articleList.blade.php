@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="panel panel-default" style="padding-bottom: 0; margin-bottom: 0">
+    <div class="panel panel-default no-margin-bottom">
         <div class="panel-heading">
             <strong>All Articles</strong>&nbsp;
             <a href="{{route('create-article')}}"><span class="fa fa-plus"></span></a>
