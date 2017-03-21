@@ -16,12 +16,13 @@
             <tr>
                 <td>{{$user->id}}</td>
                 <td><a href="{{route("get-user", ["userId"=>$user->id])}}">{{$user->name}}</a></td>
-                <td>{{$user->username}}</td>
+                <td>{{$user->username or "<<empty>>"}}</td>
                 <td>{{$user->email}}</td>
                 <td class="text-center">
                     {{implode(",",$user->roles->pluck('name')->toArray())}}
                 </td>
-                <td>@if(isset($user->reader))
+                <td class="text-center  ">
+                    @if(isset($user->reader))
                         @if($user->reader->is_verified)
                             <label class="label label-success">Verified</label>
                         @else
@@ -32,6 +33,8 @@
                         @else
                             <label class="label label-warning">Not Notify</label>
                         @endif
+                    @else
+                        <span class="text-grey">N/A</span>
                     @endif
                 </td>
                 <td>{{$user->createdAtHuman}}</td>
