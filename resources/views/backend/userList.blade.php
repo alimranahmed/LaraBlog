@@ -8,19 +8,30 @@
             <th>Username</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Status</th>
             <th>Created</th>
             <th class="text-center">Operations</th>
         </tr>
         @foreach($users as $user)
             <tr>
                 <td>{{$user->id}}</td>
-                <td ><a href="{{route("get-user", ["userId"=>$user->id])}}">{{$user->name}}</a></td>
+                <td><a href="{{route("get-user", ["userId"=>$user->id])}}">{{$user->name}}</a></td>
                 <td>{{$user->username}}</td>
                 <td>{{$user->email}}</td>
                 <td class="text-center">
                     {{implode(",",$user->roles->pluck('name')->toArray())}}
-                    @if(isset($user->reader))
-                        [{{ $user->reader->is_verified ? 'Verified' : 'Unverified'}}, {{ $user->reader->notify ? 'Notify' : 'Not Notify'}}]
+                </td>
+                <td>@if(isset($user->reader))
+                        @if($user->reader->is_verified)
+                            <label class="label label-success">Verified</label>
+                        @else
+                            <label class="label label-danger">Unverified</label>
+                        @endif
+                        @if($user->reader->notify)
+                            <label class="label label-success">Notify</label>
+                        @else
+                            <label class="label label-warning">Not Notify</label>
+                        @endif
                     @endif
                 </td>
                 <td>{{$user->createdAtHuman}}</td>
