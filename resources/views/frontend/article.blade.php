@@ -87,7 +87,8 @@
                                 var errorAlert = $('#error-alert');
                                 errorAlert.show();
                                 errorAlert.fadeOut(1000 * 10);
-                                $('#error-msg').html('Operation failed, please try again');
+                                console.debug(response);
+                                $('#error-msg').html(response.body.errorMsg);
                             });
                     return false;
                 }
