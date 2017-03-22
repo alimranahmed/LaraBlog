@@ -6,9 +6,11 @@ use App\Events\CommentOnArticle;
 use App\Http\Requests\CommentRequest;
 use App\Jobs\SendConfirmCommentMail;
 use App\Mail\CommentConfirmation;
+use App\Mail\NotifyAdmin;
 use App\Models\Address;
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Config;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -62,8 +64,6 @@ class CommentController extends Controller
                 $newComment = Comment::create($newComment);
                 Article::where('id', $articleId)->increment('comment_count');
             });
-            event(new CommentOnArticle('New comment posted!'));
-            Mail::to($request->get('email'))->queue(new CommentConfirmation($newComment));
             //$this->dispatch(new SendConfirmCommentMail($newComment));
         }catch(\Exception $e){
             //return redirect()->back()->with('errorMsg', $this->getMessage($e))->withInput();
@@ -75,6 +75,11 @@ class CommentController extends Controller
             ->where('article_id', $articleId)
             ->orderBy('created_at', 'desc')
             ->get();
+
+//        event(new CommentOnArticle('New comment posted!'));
+//        Mail::to($request->get('email'))->queue(new CommentConfirmation($newComment));
+//        Mail::to(Config::get('admin_email'))->queue(new NotifyAdmin($newComment->content, route('get-article', $articleId)));
+
         return view('frontend._comments', compact('comments') );
     }
 

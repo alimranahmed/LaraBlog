@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function getMessage($e, $msg = null){
+    public function getMessage(\Exception $e, $msg = null){
         if(env('APP_ENV') == 'local'){
             return $e->getMessage();
         }else{
