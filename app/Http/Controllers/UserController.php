@@ -6,7 +6,6 @@ use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UserRequest;
 use App\Mail\SubscribeConfirmation;
 use App\Models\Address;
-use App\Models\Feedback;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
