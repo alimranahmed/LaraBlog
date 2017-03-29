@@ -51,9 +51,9 @@ class UserController extends Controller
             $newAddress = Address::create($newAddress);
             $newAddress['address_id'] = $newAddress->id;
             $newUser = User::create($newUser);
-            $newUser->attachRole(Role::find($request->get('user_id')));
+            $newUser->roles()->attach($request->get('role_id'));
         }catch (\Exception $e){
-            return back()->with('errorMsg', $this->getMessage($e))->withInput();
+            return back()->withInput()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('users')->with('successMsg', 'User created!');
     }
@@ -66,11 +66,16 @@ class UserController extends Controller
 
     public function update(UserRequest $request, $userId){
         $newUser = $request->only('name', 'username', 'email');
-        if($request->has('password')){
-            $newUser['password'] = \Hash::make($request->get('password'));
-        }
         try{
-            User::where('id', $userId)->update($newUser);
+            if($request->has('password')){
+                $newUser['password'] = \Hash::make($request->get('password'));
+            }
+            $user = User::where('id', $userId)->first();
+            $user->update($newUser);
+            if($request->has('role_id')){
+                $user->roles()->detach();
+                $user->roles()->attach($request->get('role_id'));
+            }
             //$user->attachRole(Role::where('name', 'author')->first());
         }catch (\Exception $e){
             return back()->with('errorMsg', $e->getMessage());
