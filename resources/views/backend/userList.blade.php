@@ -21,7 +21,7 @@
                     <tr>
                         <td>{{$user->id}}</td>
                         <td><a href="{{route("get-user", ["userId"=>$user->id])}}">{{$user->name}}</a></td>
-                        <td>{{$user->username or "<<empty>>"}}</td>
+                        <td>{{ empty($user->username) ? "<<empty>>" : $user->username }}</td>
                         <td>{{$user->email}}</td>
                         <td class="text-center">
                             {{implode(",",$user->roles->pluck('name')->toArray())}}
