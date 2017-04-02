@@ -78,7 +78,7 @@
                                 var successAlert = $('#success-alert');
                                 successAlert.show();
                                 successAlert.fadeOut(1000 * 10);
-                                $('#success-msg').html('An email has been set to the email to confirm your comment');
+                                $('#success-msg').html('Success! your comment will be published soon');
                                 //clear form values
                                 $('input').val('');
                                 $('textarea').val('')
