@@ -36,7 +36,8 @@
                         <a href="{{route('articles-by-category', ['categoryAlias' => $article->category->alias])}}">{{$article->category->name}}</a>
                     </strong>
                 </div>
-            </div><hr>
+            </div>
+            <hr>
             <div class="row">
                 <div class="col-sm-12" id="related-articles">
                     @include('frontend._article_list', ['articles' => $relatedArticles])
@@ -65,31 +66,31 @@
     <script>
         new Vue({
             el: "#comment-form",
-            data: { comment:{}},
-            methods:{
-                addComment : function(comment){
+            data: {comment: {}},
+            methods: {
+                addComment: function (comment) {
                     console.debug(comment);
                     Vue.http.post("{{route('add-comment', $article->id)}}", comment)
-                            .then(function(response){
-                                //hide comment form
-                                $("#comments").html(response.body);
-                                $('#comment-form').hide();
-                                //show success alert
-                                var successAlert = $('#success-alert');
-                                successAlert.show();
-                                successAlert.fadeOut(1000 * 10);
-                                $('#success-msg').html('Success! your comment will be published soon');
-                                //clear form values
-                                $('input').val('');
-                                $('textarea').val('')
-                            }, function(response){
-                                //show error alert
-                                var errorAlert = $('#error-alert');
-                                errorAlert.show();
-                                errorAlert.fadeOut(1000 * 10);
-                                console.debug(response);
-                                $('#error-msg').html(response.body.errorMsg);
-                            });
+                        .then(function (response) {
+                            //hide comment form
+                            $("#comments").html(response.body);
+                            $('#comment-form').hide();
+                            //show success alert
+                            var successAlert = $('#success-alert');
+                            successAlert.show();
+                            successAlert.fadeOut(1000 * 10);
+                            $('#success-msg').html('Success! your comment will be published soon');
+                            //clear form values
+                            $('input').val('');
+                            $('textarea').val('')
+                        }, function (response) {
+                            //show error alert
+                            var errorAlert = $('#error-alert');
+                            errorAlert.show();
+                            errorAlert.fadeOut(1000 * 10);
+                            console.debug(response);
+                            $('#error-msg').html(response.body.errorMsg);
+                        });
                     return false;
                 }
             }
