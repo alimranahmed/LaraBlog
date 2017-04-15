@@ -1,5 +1,8 @@
 <footer class="container-fluid border-top">
     <div class="row purple-text text-darken-4">
+        <div class="col-sm-2">Powered by
+            <a href="https://github.com/alimranahmed/LaraBlog" target="_blank">LaraBlog</a>
+        </div>
         <div class="col-sm-2">© {{date('Y').' '.$globalConfigs->copyright_owner}} </div>
         @if(!Auth::check())
             <div class="col-sm-1">
@@ -8,7 +11,7 @@
             <div class="col-sm-1">
                 <span class="pointer" data-toggle="modal" data-target="#feedback-form">Feedback</span>
             </div>
-            <div class="col-sm-1 col-sm-offset-7">
+            <div class="col-sm-1 col-sm-offset-5">
                 <a href="{{route('login-form')}}" class="text-grey">Manage</a>
             </div>
         @endif
