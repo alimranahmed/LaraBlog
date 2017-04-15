@@ -15,6 +15,11 @@ class CreateHitLoggersTable extends Migration
     {
         Schema::create('hit_loggers', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('address_id')->unsigned();
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('cascade');
+            $table->integer('article_id')->unsigned();
+            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
+            $table->integer('count')->unsigned()->default(1);
             $table->timestamps();
         });
     }

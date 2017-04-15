@@ -48,4 +48,8 @@ class Article extends Model
         $carbonDate = new Carbon($this->updated_at);
         return $carbonDate->diffForHumans();
     }
+
+    public function hits(){
+        return $this->hasMany(HitLogger::class);
+    }
 }
