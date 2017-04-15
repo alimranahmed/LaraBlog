@@ -34,7 +34,6 @@ class ArticleController extends Controller
         if(is_null($article)){
             return redirect()->route('home')->with('warningMsg', 'Article not found');
         }
-        //TODO keep log of which ip has hit the article
         try{
             $article->increment('hit_count');
             $address = Address::firstOrCreate(['ip' => $clientIP]);
