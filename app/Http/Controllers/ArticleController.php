@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\HitLogger;
 use App\Models\Keyword;
 use App\Models\User;
 use App\Mail\NotifySubscriberForNewArticle;
@@ -23,6 +24,7 @@ class ArticleController extends Controller
     }
 
     public function show($articleId){
+        $clientIP = $_SERVER['REMOTE_ADDR'];
         $article = Article::where('id', $articleId)
             ->where('is_published', 1)
             ->where('is_deleted', 0)
@@ -35,6 +37,13 @@ class ArticleController extends Controller
         //TODO keep log of which ip has hit the article
         try{
             $article->increment('hit_count');
+            $address = Address::firstOrCreate(['ip' => $clientIP]);
+            $hitLogger = HitLogger::where('article_id', $articleId)->where('address_id', $address->id)->first();
+            if(is_null($hitLogger)){
+                HitLogger::create(['article_id' => $articleId, 'address_id' => $address->id, 'count' => 1]);
+            }else{
+                $hitLogger->update(['count'=> ++$hitLogger->count]);
+            }
         }catch(\PDOException $e){
             return redirect()->route('home')->with('errorMsg', $this->getMessage($e));
         }
