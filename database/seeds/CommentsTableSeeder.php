@@ -11,6 +11,8 @@ class CommentsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Comment::class, 10)->create();
+        if(env("APP_ENV") == 'local') {
+            factory(\App\Models\Comment::class, 10)->create();
+        }
     }
 }

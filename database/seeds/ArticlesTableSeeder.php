@@ -10,11 +10,13 @@ class ArticlesTableSeeder extends Seeder {
      * @return void
      */
     public function run() {
-        factory(\App\Models\Article::class, 10)->create();
-        $articles = Article::all();
-        $faker = \Faker\Factory::create();
-        foreach ($articles as $article){
-            $article->keywords()->attach($faker->numberBetween(1, 5));
+        if(env("APP_ENV") == 'local') {
+            factory(\App\Models\Article::class, 10)->create();
+            $articles = Article::all();
+            $faker = \Faker\Factory::create();
+            foreach ($articles as $article) {
+                $article->keywords()->attach($faker->numberBetween(1, 5));
+            }
         }
     }
 }

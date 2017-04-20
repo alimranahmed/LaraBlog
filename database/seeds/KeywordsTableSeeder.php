@@ -11,6 +11,8 @@ class KeywordsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\Keyword::class, 5)->create();
+        if(env("APP_ENV") == 'local') {
+            factory(\App\Models\Keyword::class, 5)->create();
+        }
     }
 }
