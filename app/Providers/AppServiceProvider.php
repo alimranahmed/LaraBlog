@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         try{
-            View::share('navCategories', Category::where('is_active', 1)->get());
+            View::share('navCategories', Category::getNonEmptyOnly());
             View::share('globalConfigs', Config::allFormatted());
         }catch(\PDOException $e){
             //TODO handle response

@@ -26,4 +26,11 @@ class Category extends Model
         $carbonDate = new Carbon($this->updated_at);
         return $carbonDate->diffForHumans();
     }
+
+    public static function getNonEmptyOnly(){
+        $categories = Category::where('is_active', 1)->get();
+        return $categories->filter(function($category){
+           return $category->articles->isNotEmpty();
+        });
+    }
 }
