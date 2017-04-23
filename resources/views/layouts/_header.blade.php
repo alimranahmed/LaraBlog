@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta id="token" name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="shortcut icon" type="image/png" href="{{asset('img/favicon1.jpg')}}"/>
 
     <title>{{$globalConfigs->site_title}}</title>
     <!-- Fonts -->
