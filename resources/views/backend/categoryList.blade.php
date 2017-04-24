@@ -19,10 +19,10 @@
                     <tr>
                         <td></td>
                         <td class="{{$errors->has('name') ? 'has-error has-feedback' : ''}}">
-                            <input type="text" name="name" class="form-control" placeholder="Name*" value="{{old('name')}}">
+                            <input type="text" name="name" class="form-control" placeholder="Name*" value="{{old('name')}}" required>
                         </td>
                         <td class="{{$errors->has('alias') ? 'has-error has-feedback' : ''}}">
-                            <input type="text" name="alias" class="form-control" placeholder="Alias*" value="{{old('alias')}}">
+                            <input type="text" name="alias" class="form-control" placeholder="Alias*" value="{{old('alias')}}" required>
                         </td>
                         {{--<td>Now</td>--}}
                         <td>0</td>
@@ -37,7 +37,7 @@
                             <td>{{$category->alias}}</td>
                             {{--<td>{{$category->createdAtHuman}}</td>--}}
                             <td>
-                                <a href="{{route('articles-by-category', $category->alias)}}">{{$category->articles->count()}}</a>
+                                <a href="{{route('articles-by-category', $category->alias)}}" target="_blank">{{$category->articles->count()}}</a>
                             </td>
                             <td class="text-center">
                         <span class="fa fa-edit text-primary pointer"
