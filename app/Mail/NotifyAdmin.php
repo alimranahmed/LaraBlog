@@ -12,18 +12,18 @@ class NotifyAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $message;
+    public $msg;
     public $url;
 
     /**
      * Create a new message instance.
      *
-     * @param $message
+     * @param $msg
      * @param $url
      */
-    public function __construct($message, $url)
+    public function __construct($msg, $url)
     {
-        $this->message = $message;
+        $this->msg = $msg;
         $this->url = $url;
     }
 
