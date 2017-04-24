@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Events\CommentOnArticle;
 use App\Http\Requests\CommentRequest;
-use App\Jobs\SendConfirmCommentMail;
 use App\Mail\CommentConfirmation;
 use App\Mail\NotifyAdmin;
 use App\Models\Address;
@@ -76,9 +75,11 @@ class CommentController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-//        event(new CommentOnArticle('New comment posted!'));
-//        Mail::to($request->get('email'))->queue(new CommentConfirmation($newComment));
-//        Mail::to(Config::get('admin_email'))->queue(new NotifyAdmin($newComment->content, route('get-article', $articleId)));
+        //event(new CommentOnArticle('New comment posted!'));
+        //Mail::to($request->get('email'))->queue(new CommentConfirmation($newComment));
+        //Mail::to(Config::get('admin_email'))->queue(new NotifyAdmin($newComment->content, route('get-article', $articleId)));
+        Mail::to($request->get('email'))->send(new CommentConfirmation($newComment));
+        Mail::to(Config::get('admin_email'))->send(new NotifyAdmin($newComment->content, route('get-article', $articleId)));
 
         return view('frontend._comments', compact('comments') );
     }

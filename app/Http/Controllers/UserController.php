@@ -120,7 +120,8 @@ class UserController extends Controller
                     $newUser->attachRole(Role::where('name', 'reader')->first());
 
                     $newUser->reader()->create(['notify' => 0,]);
-                    Mail::to($request->get('email'))->queue(new SubscribeConfirmation($newUser));
+                    //Mail::to($request->get('email'))->queue(new SubscribeConfirmation($newUser));
+                    Mail::to($request->get('email'))->send(new SubscribeConfirmation($newUser));
                 }else{
                     return back()->with('warningMsg', 'You have already subscribed, please contact with admin');
                 }

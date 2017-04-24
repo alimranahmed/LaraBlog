@@ -24,6 +24,7 @@ class FeedbackController extends Controller
                 'ip' => $clientIP = $_SERVER['REMOTE_ADDR'],
             ]);
             //Mail::to(Config::get('admin_email'))->queue(new NotifyAdmin($feedback->content, route('login-form')));
+            Mail::to(Config::get('admin_email'))->send(new NotifyAdmin($feedback->content, route('login-form')));
         }catch(\Exception $e){
             return back()->with('errorMsg', $this->getMessage($e));
         }
