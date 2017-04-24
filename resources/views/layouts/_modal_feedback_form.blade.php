@@ -13,7 +13,7 @@
                     <textarea placeholder="Feedback*" class="form-control margin-top-10" name="content" required></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>
