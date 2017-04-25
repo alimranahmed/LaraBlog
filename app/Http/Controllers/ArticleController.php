@@ -35,11 +35,11 @@ class ArticleController extends Controller
             return redirect()->route('home')->with('warningMsg', 'Article not found');
         }
         try{
-            $article->increment('hit_count');
             $address = Address::firstOrCreate(['ip' => $clientIP]);
             $hitLogger = HitLogger::where('article_id', $articleId)->where('address_id', $address->id)->first();
             if(is_null($hitLogger)){
                 HitLogger::create(['article_id' => $articleId, 'address_id' => $address->id, 'count' => 1]);
+                $article->increment('hit_count');
             }else{
                 $hitLogger->update(['count'=> ++$hitLogger->count]);
             }
