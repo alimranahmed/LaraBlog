@@ -10731,6 +10731,10 @@ button.close {
   }
 }
 
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
 body, li {
   color: #333;
 }
@@ -10987,7 +10991,7 @@ hr {
 
 #site-heading {
   margin-top: 10px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .hljs {
