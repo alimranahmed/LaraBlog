@@ -6,10 +6,10 @@
         <div class="col-sm-2">© {{date('Y').' '.$globalConfigs->copyright_owner}} </div>
         @if(!Auth::check())
             <div class="col-sm-1">
-                <span class="pointer" data-toggle="modal" data-target="#subscribe-form">Subscribe</span>
+                <span class="pointer text-info" data-toggle="modal" data-target="#subscribe-form">Subscribe</span>
             </div>
             <div class="col-sm-1">
-                <span class="pointer" data-toggle="modal" data-target="#feedback-form">Feedback</span>
+                <span class="pointer text-info" data-toggle="modal" data-target="#feedback-form">Feedback</span>
             </div>
             <div class="col-sm-1 col-sm-offset-5">
                 <a href="{{route('login-form')}}" class="text-grey">Manage</a>
