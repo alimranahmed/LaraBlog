@@ -55,6 +55,13 @@ class CategoriesTableSeeder extends Seeder
             'updated_at' => new DateTime(),
         ];
 
+        $categories[] = [
+            'name' => 'Miscellaneous',
+            'alias' => 'misc',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+        ];
+
         \App\Models\Category::insert($categories);
     }
 }
