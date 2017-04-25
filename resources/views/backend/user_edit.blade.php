@@ -12,7 +12,7 @@
                     <select name="role_id" class="form-control">
                         <option value="" readonly="true">Select User Role*</option>
                         @foreach($roles as $role)
-                            <option value="{{$role->id}}" {{$user->roles->first()->id == $role->id ? 'selected' : ''}}>{{$role->display_name}}</option>
+                            <option value="{{$role->id}}" {{!$user->roles->isEmpty() && $user->roles->first()->id == $role->id ? 'selected' : ''}}>{{$role->display_name}}</option>
                         @endforeach
                     </select>
                 </div>
