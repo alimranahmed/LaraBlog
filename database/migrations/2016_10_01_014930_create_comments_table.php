@@ -24,15 +24,18 @@ class CreateCommentsTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->onDelete('cascade');
             $table->integer('address_id')->unsigned()->nullable();
             $table->foreign('address_id')
                 ->references('id')
-                ->on('addresses');
+                ->on('addresses')
+                ->onDelete('cascade');
             $table->integer('parent_comment_id')->unsigned()->nullable();
             $table->foreign('parent_comment_id')
                 ->references('id')
-                ->on('comments');
+                ->on('comments')
+                ->onDelete('cascade');
             $table->integer('is_published')->unsigned()->default(1);
             $table->dateTime('published_at')->nullable();
             $table->integer('countEdit')->unsigned()->default(0);

@@ -18,7 +18,8 @@ class CreateReadersTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->onDelete('cascade');
             $table->integer('is_verified')->default(0);
             $table->integer('notify')->default(0);
             $table->string('token')->nullable();
