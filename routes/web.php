@@ -1,5 +1,5 @@
 <?php
-
+Route::get('/test', 'Controller@test')->name('test');
 //Home
 Route::get('/', 'HomeController@index')->name('home');
 //Subscribe
