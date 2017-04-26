@@ -14,8 +14,8 @@ class HttpClient {
     public function send($url, $method = 'GET', $data = [], $headers = ["content-type: text/xml"]){
         $this->curlSession = curl_init();
 
-        Utility::saveLog("[HttpClient][send] requesting to $url ...");
-        Utility::saveLog("[HttpClient][send] headers: ".json_encode($headers)." data: ".(is_array($data) ? json_encode($data): $data));
+        //Utility::saveLog("[HttpClient][send] requesting to $url ...");
+        //Utility::saveLog("[HttpClient][send] headers: ".json_encode($headers)." data: ".(is_array($data) ? json_encode($data): $data));
         curl_setopt_array($this->curlSession, array(
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
@@ -42,14 +42,14 @@ class HttpClient {
             $httpCode = curl_getinfo($this->curlSession, CURLINFO_HTTP_CODE);
             $response->body = $content;
             $response->statusCode = $httpCode;
-            Utility::saveLog("[HttpClient][send] response status: $httpCode content: ".json_encode($content));
+            //Utility::saveLog("[HttpClient][send] response status: $httpCode content: ".json_encode($content));
             if($httpCode != 200){
                 $response->body->error = $content;
             }
         }else{
             $response->body = curl_error($this->curlSession);
-            Utility::saveLog("[HttpClient][send][FAILED] response ".json_encode($response));
-            return false;
+            //Utility::saveLog("[HttpClient][send][FAILED] response ".json_encode($response));
+            return $response;
         }
 
         curl_close($this->curlSession);
