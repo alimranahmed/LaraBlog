@@ -30,7 +30,7 @@ class SubscribeConfirmation extends Mailable
      */
     public function build()
     {
-        return $this->from(Config::get('admin_email'))
+        return $this->from(Config::get('admin_email'), Config::get('site_name'))
             ->subject('Confirm Your Subscription')
             ->view('emails.subscribe_confirmation');
     }

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Config;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -31,7 +32,7 @@ class NotifySubscriberForNewArticle extends Mailable
      */
     public function build()
     {
-        return $this->from('al.imran.cse@gmail.com')
+        return $this->from(Config::get('admin_email'), Config::get('site_name'))
             ->subject("New article Published")
             ->view('emails.notify_new_article');
     }

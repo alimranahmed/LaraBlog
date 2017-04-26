@@ -34,7 +34,7 @@ class NotifyAdmin extends Mailable
      */
     public function build()
     {
-        return $this->from(Config::get('admin_email'))
+        return $this->from(Config::get('admin_email'), Config::get('site_name'))
             ->subject('User response in your Blog')
             ->view('emails.notify_admin');
     }
