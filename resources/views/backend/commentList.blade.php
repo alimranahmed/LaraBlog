@@ -20,9 +20,9 @@
                         <td>{{$comment->id}}</td>
                         <td>{{$comment->content}}</td>
                         <td>
-                            <span>{{$comment->user->name}}</span>
-                            <span>{{' ('.$comment->user->email.')'}}</span>
-                            <span>{{isset($comment->address) ? ' ('.$comment->address->ip.')' : ''}}</span>
+                            <span>{{$comment->user->name}}</span><br>
+                            <span>{{' ('.$comment->user->email.')'}}</span><br>
+                            <span>{{isset($comment->address) ? ' ('.$comment->address->city.', '.$comment->address->country_name.')' : ''}}</span>
                         </td>
                         <td class="text-center">{{$comment->createdAtHuman}}</td>
                         <td class="text-center">
