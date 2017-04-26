@@ -13,7 +13,7 @@ class GetLocationByIP extends Command
      *
      * @var string
      */
-    protected $signature = 'get-ip:location';
+    protected $signature = 'get-ip-location';
 
     /**
      * The console command description.
