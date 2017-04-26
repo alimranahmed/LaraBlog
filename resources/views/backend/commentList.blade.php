@@ -19,7 +19,11 @@
                     <tr>
                         <td>{{$comment->id}}</td>
                         <td>{{$comment->content}}</td>
-                        <td>{{$comment->user->name.' ('.$comment->user->email.')'}}</td>
+                        <td>
+                            <span>{{$comment->user->name}}</span>
+                            <span>{{' ('.$comment->user->email.')'}}</span>
+                            <span>{{isset($comment->address) ? ' ('.$comment->address->ip.')' : ''}}</span>
+                        </td>
                         <td class="text-center">{{$comment->createdAtHuman}}</td>
                         <td class="text-center">
                             <a href="{{route('toggle-comment-publish', $comment->id)}}">
