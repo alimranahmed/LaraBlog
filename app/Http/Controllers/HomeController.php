@@ -9,7 +9,8 @@ class HomeController extends Controller
 {
     public function index(){
         if(Auth::check()){
-           return view('backend.dashboard');
+            $dashboard = new DashboardController();
+            return $dashboard->index();
         }else{
             $articles =  Article::where('is_published', 1)->where('is_deleted', 0)
                 ->orderBy('published_at', 'desc')
