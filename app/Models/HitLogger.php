@@ -17,10 +17,10 @@ class HitLogger extends Model
     }
 
     public function getCountryAttribute(){
-        return isset($this->address->country_name) ? $this->address->country_name : 'Unknown';
+        return empty($this->address->country_name) ? 'Unknown' : $this->address->country_name;
     }
 
     public function getCityAttribute(){
-        return isset($this->address->city) ? $this->address->city : 'Unknown';
+        return isset($this->address->city) ? 'Unknown' : $this->address->city;
     }
 }
