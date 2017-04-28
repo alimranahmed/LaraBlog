@@ -5,6 +5,7 @@
             <strong>Welcome to laraBlog's Admin portal!</strong>
         </div>
         <div class="panel-body">
+            {{--Country vs hits--}}
             <div class="col-sm-4">
                 <div class="panel panel-default no-margin-bottom">
                     <div class="panel-heading">
@@ -18,6 +19,25 @@
                             </tr>
                             @foreach($hitCountries as $key => $country)
                                 <tr><td>{{$key}}</td><td>{{count($country)}}</td></tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {{--Article by category--}}
+            <div class="col-sm-4">
+                <div class="panel panel-default no-margin-bottom">
+                    <div class="panel-heading">
+                        <strong>Article by Category</strong>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <tr>
+                                <th class="text-left">Category Name</th>
+                                <th class="text-left">Number of Article</th>
+                            </tr>
+                            @foreach($articleCategories as $key => $category)
+                                <tr><td>{{$key}}</td><td>{{count($category)}}</td></tr>
                             @endforeach
                         </table>
                     </div>
