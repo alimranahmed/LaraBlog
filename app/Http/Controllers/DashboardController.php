@@ -12,8 +12,8 @@ class DashboardController extends Controller
     public function index(){
         $categories = Category::all();
         $comments = Comment::all();
-        $articles = Article::all();
+        $articleCategories = Article::all()->groupBy('category_name');
         $hitCountries = HitLogger::all()->groupBy('country');
-        return view('backend.dashboard', compact('hitCountries'));
+        return view('backend.dashboard', compact('hitCountries', 'articleCategories'));
     }
 }
