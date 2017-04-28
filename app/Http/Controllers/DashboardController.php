@@ -13,7 +13,7 @@ class DashboardController extends Controller
         $categories = Category::all();
         $comments = Comment::all();
         $articles = Article::all();
-        $hitLoggers = HitLogger::all()->groupBy('country');
-        return view('backend.dashboard');
+        $hitCountries = HitLogger::all()->groupBy('country');
+        return view('backend.dashboard', compact('hitCountries'));
     }
 }
