@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Comment;
 use App\Models\Config;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -12,18 +13,18 @@ class NotifyAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $msg;
+    public $comment;
     public $url;
 
     /**
      * Create a new message instance.
      *
-     * @param $msg
+     * @param Comment $comment
      * @param $url
      */
-    public function __construct($msg, $url)
+    public function __construct(Comment $comment, $url)
     {
-        $this->msg = $msg;
+        $this->comment = $comment;
         $this->url = $url;
     }
 
