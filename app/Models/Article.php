@@ -15,7 +15,7 @@ class Article extends Model
     }
 
     public function comments(){
-        return $this->hasMany(Comment::class)->with('user');
+        return $this->hasMany(Comment::class)->with('user')->orderBy('id');
     }
 
     public function category(){
