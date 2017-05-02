@@ -44,7 +44,7 @@
                 </div>
             </div>
         @endif
-        <div class="row margin-top-15" style="display: none;" id="comment-form">
+        <div class="row margin-top-15" id="comment-form">
             @include('frontend._form_comment')
         </div>
         <div class="row">
