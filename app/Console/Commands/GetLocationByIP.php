@@ -45,18 +45,20 @@ class GetLocationByIP extends Command
             $ip = $address->ip;
             $response = $httpClient->send("http://freegeoip.net/json/$ip");
             $location = json_decode($response->body);
-            $address->update([
-                'country_code' => $location->country_code,
-                'country_name' => $location->country_name,
-                'region_name' => $location->region_name,
-                'city' => $location->city,
-                'zip_code' => $location->zip_code,
-                'extra' => isset($location->extray) ? $location->extra : '',
-                'timezone' => $location->time_zone,
-                'latitude' => $location->latitude,
-                'longitude' => $location->longitude,
-                'metro_code' => $location->metro_code,
-            ]);
+            if(!empty($location)){
+                $address->update([
+                    'country_code' => $location->country_code,
+                    'country_name' => $location->country_name,
+                    'region_name' => $location->region_name,
+                    'city' => $location->city,
+                    'zip_code' => $location->zip_code,
+                    'extra' => isset($location->extray) ? $location->extra : '',
+                    'timezone' => $location->time_zone,
+                    'latitude' => $location->latitude,
+                    'longitude' => $location->longitude,
+                    'metro_code' => $location->metro_code,
+                ]);
+            }
         }
     }
 }
