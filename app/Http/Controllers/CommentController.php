@@ -113,6 +113,8 @@ class CommentController extends Controller
 
     public function destroy($commentId){
         try{
+            $comment = Comment::find($commentId);
+            Article::where('id', $comment->article_id)->decrement('comment_count');
             Comment::destroy($commentId);
         }catch (\PDOException $e){
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
