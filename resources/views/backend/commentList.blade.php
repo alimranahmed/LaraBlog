@@ -28,10 +28,10 @@
                             <a href="{{route('get-article', $comment->article->id)}}" target="_blank">{{substr($comment->article->heading, 0, 20)}}...</a>
                         </td>
                         <td class="text-center">
-                            <a href="{{route('toggle-comment-publish', $comment->id)}}">
-                                <strong class="fa fa-lg {{$comment->is_published ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></strong>
-                            </a>
                             <span class="fa fa-edit text-primary pointer" v-on:click="showCommentForm({{$comment}})"></span>&nbsp;
+                            <a href="{{route('toggle-comment-publish', $comment->id)}}">
+                                <strong class="fa fa-lg {{$comment->is_published ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}" title="Toggle publish"></strong>
+                            </a>&nbsp;
                             <a href="{{route('delete-comment', $comment->id)}}" onclick="return confirm('Are you sure to delete?')">
                                 <span class="fa fa-trash text-danger"></span>
                             </a>

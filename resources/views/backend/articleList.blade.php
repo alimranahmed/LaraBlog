@@ -17,7 +17,6 @@
                     <th>Edited</th>
                     <th>Comments</th>
                     <th>Hits</th>
-                    <th>Is Published</th>
                     <th>Operations</th>
                 </tr>
                 @foreach($articles as $article)
@@ -36,13 +35,11 @@
                         <td class="text-center">{{$article->comment_count}}</td>
                         <td class="text-center">{{$article->hit_count}}</td>
                         <td class="text-center">
-                            <a href="{{route('toggle-article-publish', $article->id)}}">
-                                <strong class="fa fa-lg {{$article->is_published ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"></strong>
-                            </a>
-                        </td>
-                        <td class="text-center">
                             <a href="{{route('edit-article', $article->id)}}">
                                 <span class="fa fa-edit text-primary"></span>
+                            </a>&nbsp;
+                            <a href="{{route('toggle-article-publish', $article->id)}}">
+                                <strong class="fa fa-lg {{$article->is_published ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}" title="Toggle publish"></strong>
                             </a>&nbsp;
                             <a href="{{route('delete-article', $article->id)}}"
                                onclick="return confirm('Are you sure to delete?')">
