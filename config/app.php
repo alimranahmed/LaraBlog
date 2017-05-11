@@ -180,6 +180,7 @@ return [
 
         //customer added providers
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
     ],
 
     /*
@@ -230,6 +231,7 @@ return [
         'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         //custom added
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
     ],
 
 ];
