@@ -9,7 +9,8 @@
         "laravel/framework": "5.4.*",
         "guzzlehttp/guzzle": "^6.2",
         "zizaco/entrust": "5.2.x-dev",
-        "pusher/pusher-php-server": "^2.6"
+        "pusher/pusher-php-server": "^2.6",
+        "bugsnag/bugsnag-laravel": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
