@@ -151,6 +151,25 @@ class UserController extends Controller
         return redirect()->route('home')->with('warningMsg', 'Something went wrong');
     }
 
+    public function unSubscribe(Request $request, $userId){
+        $user = User::where('id', $userId)
+            ->where('token', $request->get('token'))
+            ->first();
+        if(is_null($user)){
+            return redirect()->route('home')->with('errorMsg', 'Invalid request');
+        }
+
+        try{
+            if($user->isReader()){
+                $user->reader->update(['is_verified' => 1, 'notify' => 0]);
+                return redirect()->route('home')->with('successMsg', 'You have un-subscribed confirmed');
+            }
+        }catch (\Exception $e){
+            return response()->json(['errorMsg' => $this->getMessage($e)]);
+        }
+        return redirect()->route('home')->with('warningMsg', 'Something went wrong');
+    }
+
     public function toggleActive($userId){
         try{
             $user = User::find($userId);

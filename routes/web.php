@@ -4,6 +4,7 @@ Route::get('/test', 'Controller@test')->name('test');
 Route::get('/', 'HomeController@index')->name('home');
 //Subscribe
 Route::post('subscribe', 'UserController@subscribe')->name('subscribe');
+Route::post('un-subscribe', 'UserController@unSubscribe')->name('un-subscribe');
 Route::get('confirm-subscription/{userId}', 'UserController@confirmSubscribe')->name('confirm-subscribe');
 //feedback
 Route::post('feedback', 'FeedbackController@store')->name('add-feedback');
