@@ -11,8 +11,8 @@ A full-featured blogging system for personal use. Minimum library used. No front
   
 2. Owner
   * Can do anything that can be done by admin
-  * Create admin user
-  * Change system configuration variables
+  * Create admin user
+  * Change system configuration variables
   
 3. Author
   * Can write article and can manage his own article
