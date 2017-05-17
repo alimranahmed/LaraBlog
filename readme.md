@@ -8,15 +8,16 @@ A full-featured blogging system for personal use. Minimum library used. No front
   * Can manage categories 
   * Can manage keywords
   * Can manage other users except Owner
+  
 2. Owner
   * Can do anything that can be done by admin
-
   * Create admin user
-
   * Change system configuration variables
+  
 3. Author
   * Can write article and can manage his own article
   * Can manage comments on his own article
+  
 4. Reader
   * Can read and comment on article providing his email address. 
   * Can subscribe to be notified for new article
