@@ -55,7 +55,7 @@
             </div>
         </div>
         <hr class="margin-bottom-15 margin-top-10">
-        <section id="comments">
+        <section id="comments" class="margin-bottom-15">
             @include('frontend._comments', ['comments' => $article->comments])
         </section>
     </div>
