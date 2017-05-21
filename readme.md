@@ -40,13 +40,16 @@ A full-featured blogging system for personal use. Minimum library used. No front
   `php artisan server`
 8. Now visit the url shown on your terminal, something like `localhost:8000`. Its running!
 
-### Screenshot
+### Screen shots
+
+##### Home page
+![home_page](https://cloud.githubusercontent.com/assets/7629427/26286312/ecbaaeb8-3e83-11e7-8cd2-9f049ff7e04c.png)
 
 ##### Single article view
-![single blog](https://cloud.githubusercontent.com/assets/7629427/23341414/5280728c-fc71-11e6-9ae4-be9405e04e40.png)
+![article_page](https://cloud.githubusercontent.com/assets/7629427/26286311/e5a98770-3e83-11e7-95e2-f6a60fff8051.png)
 
 ##### Admin panel view
-![admin_panel](https://cloud.githubusercontent.com/assets/7629427/23618709/5e05eac4-02bb-11e7-819a-bb13d7c5b0cd.png)
+![configurations](https://cloud.githubusercontent.com/assets/7629427/26286313/f3499924-3e83-11e7-9418-99903a4ef136.png)
 
 ### Contribution 
 Anyone is always welcome to contribute on the project. If you want to work with, just create and issue(even if you want to fix the issue). After fixing any issue or adding any new feature just send a pull request, I will be happy to add your code for the betterment of this project. Thanks.
