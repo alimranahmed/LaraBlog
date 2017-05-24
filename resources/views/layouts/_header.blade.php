@@ -7,7 +7,7 @@
     <meta id="token" name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" type="image/png" href="{{asset('img/favicon1.jpg')}}"/>
 
-    <title>{{$globalConfigs->site_title}}</title>
+    <title>{{isset($article) ? $article->heading : $globalConfigs->site_title}}</title>
     <!-- Fonts -->
     <link href="{{asset("css/app.css")}}" rel="stylesheet" type="text/css">
 </head>
