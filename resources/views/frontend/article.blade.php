@@ -64,6 +64,9 @@
 @section("inPageJS")
     @parent
     <script>
+        $(document).ready(function(){
+            $("title").html($(".article-heading").html());
+        });
         new Vue({
             el: "#comment-form",
             data: {comment: {}},
