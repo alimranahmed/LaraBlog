@@ -10,10 +10,16 @@ use Illuminate\Support\Facades\Auth;
 class DashboardController extends Controller
 {
     public function index(){
-        $categories = Category::all();
-        $comments = Comment::all();
         $articleCategories = Article::all()->groupBy('category_name');
         $hitCountries = HitLogger::all()->groupBy('country');
-        return view('backend.dashboard', compact('hitCountries', 'articleCategories'));
+        $hitCountByCountries = collect([]);
+        foreach ($hitCountries as $country => $hits){
+            $hitCount = new \stdClass();
+            $hitCount->country = $country;
+            $hitCount->totalHit = $hits->count();
+            $hitCountByCountries->push($hitCount);
+        }
+        $hitCountByCountries = $hitCountByCountries->sortByDesc('totalHit');
+        return view('backend.dashboard', compact('hitCountByCountries', 'articleCategories'));
     }
 }

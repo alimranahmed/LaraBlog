@@ -17,8 +17,8 @@
                                 <th class="text-left">Country Name</th>
                                 <th class="text-left">Hit Count</th>
                             </tr>
-                            @foreach($hitCountries as $key => $country)
-                                <tr><td>{{$key}}</td><td>{{count($country)}}</td></tr>
+                            @foreach($hitCountByCountries as $hit)
+                                <tr><td>{{$hit->country}}</td><td>{{$hit->totalHit}}</td></tr>
                             @endforeach
                         </table>
                     </div>
