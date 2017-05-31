@@ -2,7 +2,7 @@
     <div class="row article-list">
         <div class="col-sm-12">
             <div class="row">
-                <a href="{{route('get-article', $article->id)}}">
+                <a href="{{route('get-article', [$article->id, str_replace(' ','-', strtolower($article->heading))])}}">
                     <h3 class="heading">{{$article->heading}}</h3>
                 </a>
             </div>

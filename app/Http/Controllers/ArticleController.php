@@ -23,7 +23,7 @@ class ArticleController extends Controller
         return view('frontend.articles', compact('articles'));
     }
 
-    public function show($articleId){
+    public function show($articleId, $articleHeading){
         $clientIP = $_SERVER['REMOTE_ADDR'];
         $article = Article::where('id', $articleId)
             ->where('is_published', 1)
