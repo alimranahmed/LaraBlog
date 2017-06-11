@@ -37,6 +37,11 @@ class BackupSiteData extends Command
      */
     public function handle()
     {
-        //
+        $user = env('DB_USERNAME');
+        $host = env('DB_HOST');
+        $pass = env('DB_PASSWORD');
+        $dbName = env('DB_DATABASE');
+        $path = "~/backup/$dbName.sql";
+        exec("mysqldump --user=$user --password=$pass --host=$host $dbName > $path");
     }
 }

@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\GetLocationByIP::class,
+        Commands\BackupSiteData::class,
     ];
 
     /**
