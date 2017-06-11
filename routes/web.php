@@ -37,9 +37,9 @@ Route::group(['middleware' => ['customAuth', 'role:owner|admin|author']], functi
     Route::get('admin/article/toggle-publish/{articleID}', 'ArticleController@togglePublish')->name('toggle-article-publish');
     Route::get('admin/article/{articleId}/delete', 'ArticleController@destroy')->name('delete-article');
     Route::get('admin/article/create', 'ArticleController@create')->name('create-article');
-    Route::post('article', 'ArticleController@store')->name('store-article');
-    Route::get('article/{articleId}/edit', 'ArticleController@edit')->name('edit-article');
-    Route::put('article/{articleId}', 'ArticleController@update')->name('update-article');
+    Route::post('admin/article', 'ArticleController@store')->name('store-article');
+    Route::get('admin/article/{articleId}/edit', 'ArticleController@edit')->name('edit-article');
+    Route::put('admin/article/{articleId}', 'ArticleController@update')->name('update-article');
 
     //Admin comments
     Route::get('admin/comment', 'CommentController@index')->name('comments');
