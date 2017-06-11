@@ -23,7 +23,7 @@
                     <tr>
                         <td>{{$article->id}}</td>
                         <td>
-                            <a href="{{route('get-article', $article->id)}}" target="_blank">{{$article->heading}}</a>
+                            <a href="{{route('get-article', [$article->id, str_replace(' ','-', strtolower($article->heading))])}}" target="_blank">{{$article->heading}}</a>
                         </td>
                         <td>{{$article->category->name}}</td>
                         <td class="text-center">{{$article->createdAtHuman}}</td>
