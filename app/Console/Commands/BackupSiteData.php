@@ -2,7 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\BackUpDatabase;
+use App\Models\Config;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
 
 class BackupSiteData extends Command
 {
@@ -41,7 +44,8 @@ class BackupSiteData extends Command
         $host = env('DB_HOST');
         $pass = env('DB_PASSWORD');
         $dbName = env('DB_DATABASE');
-        $path = "~/backup/$dbName.sql";
+        $path = "/home/backup/$dbName.sql";
         exec("mysqldump --user=$user --password=$pass --host=$host $dbName > $path");
+        Mail::to(Config::get('admin_email'))->send(new BackUpDatabase($path));
     }
 }
