@@ -10,7 +10,7 @@ Route::get('confirm-subscription/{userId}', 'UserController@confirmSubscribe')->
 Route::post('feedback', 'FeedbackController@store')->name('add-feedback');
 //Article
 Route::get('article', 'ArticleController@index')->name('articles');
-Route::get('article/{articleId}/{articleHeading}', 'ArticleController@show')->name('get-article');
+Route::get('article/{articleId}/{articleHeading?}', 'ArticleController@show')->name('get-article');
 Route::get('confirm-comment/{commentId}', 'CommentController@confirmComment')->name('confirm-comment');
 Route::get('category/article/{categoryAlias}', 'CategoryController@getArticles')->name('articles-by-category');
 Route::get('keyword/article/{keywordName}', 'KeywordController@getArticles')->name('articles-by-keyword');
