@@ -25,27 +25,34 @@ class ArticleController extends Controller
 
     public function show($articleId, $articleHeading = ''){
         $clientIP = $_SERVER['REMOTE_ADDR'];
+
         $article = Article::where('id', $articleId)
             ->where('is_published', 1)
             ->where('is_deleted', 0)
             ->with(['category', 'keywords', 'comments' => function($comments){
                 $comments->where('is_published', 1)->orderBy('created_at', 'desc');
             }])->first();
+
         if(is_null($article)){
             return redirect()->route('home')->with('warningMsg', 'Article not found');
         }
+
         try{
             $address = Address::firstOrCreate(['ip' => $clientIP]);
             $hitLogger = HitLogger::where('article_id', $articleId)->where('address_id', $address->id)->first();
+
             if(is_null($hitLogger)){
                 HitLogger::create(['article_id' => $articleId, 'address_id' => $address->id, 'count' => 1]);
                 $article->increment('hit_count');
             }else{
                 $hitLogger->update(['count'=> ++$hitLogger->count]);
             }
+            
         }catch(\PDOException $e){
+
             return redirect()->route('home')->with('errorMsg', $this->getMessage($e));
         }
+
         $relatedArticles = Article::where('category_id', $article->category->id)
             ->where('id', '!=', $article->id)
             ->where('is_published', 1)
