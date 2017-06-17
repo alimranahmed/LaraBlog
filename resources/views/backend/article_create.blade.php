@@ -53,8 +53,8 @@
                             <label>English</label>
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="is_comment_enabled" value="1" checked>
-                            <label>Comment Allowed</label>
+                            <input type="checkbox" name="is_comment_enabled" value="1" checked id="comment-enabled">
+                            <label for="comment-enabled">Comment Allowed</label>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-success">Create</button>

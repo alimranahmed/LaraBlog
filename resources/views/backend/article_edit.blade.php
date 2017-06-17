@@ -58,9 +58,9 @@
                             <label>English</label>
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="is_comment_enabled"
+                            <input type="checkbox" name="is_comment_enabled" id="comment_enabled"
                                    value="1" {{$article->is_comment_enabled ? 'checked' : ''}}>
-                            <label>Comment Allowed</label>
+                            <label for="comment_enabled">Comment Allowed</label>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-success">Update</button>
