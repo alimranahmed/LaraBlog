@@ -88,6 +88,7 @@ class ArticleController extends Controller
             return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
         }
         $updatedArticle = $request->only(['heading', 'content', 'category_id', 'language']);
+        $updatedArticle['is_comment_enabled'] = $request->has('is_comment_enabled');
         $keywordsToAttach = array_unique(explode(' ',$request->get('keywords')));
         try{
             $article->update($updatedArticle);
@@ -113,6 +114,7 @@ class ArticleController extends Controller
         $clientIP = $_SERVER['REMOTE_ADDR'];
 
         $newArticle = $request->only(['heading', 'content', 'category_id', 'language']);
+        $newArticle['is_comment_enabled'] = $request->has('is_comment_enabled');
         $newAddress = ['ip' => $clientIP];
 
         try{
