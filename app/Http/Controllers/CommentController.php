@@ -31,6 +31,15 @@ class CommentController extends Controller
     }
 
     public function store(CommentRequest $request, $articleId){
+        $article = Article::find($articleId);
+        if(is_null($article)){
+            return response()->json(['errorMsg'=> 'Article not found'], 404);
+        }
+
+        if(!$article->is_comment_enabled){
+            return response()->json(['errorMsg' => 'Comment is not allowed for this article'], 403);
+        }
+
         $clientIP = $_SERVER['REMOTE_ADDR'];
         $newComment = $request->only('content');
         $newAddress = ['ip' => $clientIP];
