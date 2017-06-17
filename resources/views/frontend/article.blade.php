@@ -44,20 +44,22 @@
                 </div>
             </div>
         @endif
-        <div class="row margin-top-15" id="comment-form">
-            @include('frontend._form_comment')
-        </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <strong class="text-lg">Comments({{count($article->comments)}})</strong>
-                <span class="fa fa-3x fa-commenting-o text-primary pointer" id="comment-btn"
-                      title="Post a comment"></span>
+        @if($article->is_comment_enabled)
+            <div class="row margin-top-15" id="comment-form">
+                @include('frontend._form_comment')
             </div>
-        </div>
-        <hr class="margin-bottom-15 margin-top-10">
-        <section id="comments" class="margin-bottom-15">
-            @include('frontend._comments', ['comments' => $article->comments])
-        </section>
+            <div class="row">
+                <div class="col-sm-12">
+                    <strong class="text-lg">Comments({{count($article->comments)}})</strong>
+                    <span class="fa fa-3x fa-commenting-o text-primary pointer" id="comment-btn"
+                          title="Post a comment"></span>
+                </div>
+            </div>
+            <hr class="margin-bottom-15 margin-top-10">
+            <section id="comments" class="margin-bottom-15">
+                @include('frontend._comments', ['comments' => $article->comments])
+            </section>
+        @endif
     </div>
 @endsection
 
