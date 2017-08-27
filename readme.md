@@ -56,3 +56,6 @@ Anyone is always welcome to contribute on the project. If you want to work with,
 
 ##### Note
 If you cloned the project little bit earlier and after pulling the newer changes it's not working now, please execute the `composer update` command in the CLI when you are the root directory of the project. Beside, don't forge to cross match your `.env` file version with newly pulled `.env.example` file.
+
+##### License
+MIT
