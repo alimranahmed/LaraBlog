@@ -1,6 +1,6 @@
 # Blog Using Laravel 5
 ### Let's keep it as simple as possible. Configure anything you want
-A full-featured blogging system for personal use. Minimum library used. No frontend theme and anything heavy or unnacessary library used.  
+A full-featured blogging system for personal use. Minimum library used. No frontend theme and anything heavy or unnecessary library used.  
  
 ### There are four several types of users with several permissions
 1. Admin
@@ -25,7 +25,7 @@ A full-featured blogging system for personal use. Minimum library used. No front
   * Can navigate article based on categories
 
 ### Technologies Used: 
-1. Laravel 5.4
+1. Laravel 5.5
 2. VueJS 2
 3. Bootstrap 3
 
