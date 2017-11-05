@@ -15,11 +15,8 @@ use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
-    public function index(){
-        $articles =  Article::where('is_published', 1)->where('is_deleted', 0)
-            ->orderBy('published_at', 'desc')
-            ->orderBy('created_at', 'desc')
-            ->paginate(15);
+    public function index(Request $request){
+        $articles =  Article::getPaginate($request);
         return view('frontend.articles', compact('articles'));
     }
 

@@ -47,9 +47,9 @@
                             <input type="text" id="keyword" v-on:keyup="formatKeyword('#keyword', '#keywords-show')" class="form-control" name="keywords" placeholder="Keywords" required>
                         </div>
                         <div class="form-group">
-                            <input type="radio" name="language" value="বাংলা" checked>
+                            <input type="radio" name="language" value="ben" checked>
                             <label>বাংলা</label>
-                            <input type="radio" name="language" value="English">
+                            <input type="radio" name="language" value="eng">
                             <label>English</label>
                         </div>
                         <div class="form-group">

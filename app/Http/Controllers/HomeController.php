@@ -3,19 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         if(Auth::check()){
             $dashboard = new DashboardController();
             return $dashboard->index();
         }else{
-            $articles =  Article::where('is_published', 1)->where('is_deleted', 0)
-                ->orderBy('published_at', 'desc')
-                ->orderBy('created_at', 'desc')
-                ->paginate(15);
+            $articles =  Article::getPaginate($request, 5);
             return view('frontend.articles', compact('articles'));
         }
     }

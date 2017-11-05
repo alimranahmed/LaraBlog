@@ -21,6 +21,7 @@
                     <span class="text-grey {{!$article->hit_count ? 'hide':''}}">
                         ({{$article->hit_count}} {{$article->hit_count > 1 ? 'reads' : 'read'}})
                     </span>
+                    {{$article->language}}
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class Article extends Model
 {
@@ -55,5 +56,17 @@ class Article extends Model
 
     public function getCategoryNameAttribute(){
         return $this->category->name;
+    }
+
+    public static function getPaginate(Request $request, $perPage = 15){
+        $articleQuery = Article::where('is_published', 1)->where('is_deleted', 0);
+        if($request->has('lang')){
+            $articleQuery = $articleQuery->where('language', $request->lang);
+        }
+        $articles = $articleQuery->orderBy('published_at', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->paginate($perPage)
+            ->withPath($request->getRequestUri());
+        return $articles;
     }
 }

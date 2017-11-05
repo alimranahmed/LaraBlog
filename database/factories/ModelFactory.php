@@ -15,6 +15,7 @@ $factory->define(App\Models\Article::class, function (Faker\Generator $faker) {
         'content' => implode(' ',$faker->paragraphs(15)),
         'published_at' => new \DateTime(),
         'user_id' => 1,
+        'language' => $faker->randomElement(['ben', 'eng']),
         'category_id' => $faker->numberBetween(1, 5),
     ];
 });

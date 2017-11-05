@@ -51,10 +51,10 @@
                         </div>
                         <div class="form-group">
                             <input type="radio" name="language"
-                                   value="বাংলা" {{$article->language == 'বাংলা' ? 'checked' : ''}}>
+                                   value="ben" {{$article->language == 'বাংলা' ? 'checked' : ''}}>
                             <label>বাংলা</label>
                             <input type="radio" name="language"
-                                   value="English" {{$article->language == 'English' ? 'checked' : ''}}>
+                                   value="eng" {{$article->language == 'English' ? 'checked' : ''}}>
                             <label>English</label>
                         </div>
                         <div class="form-group">
