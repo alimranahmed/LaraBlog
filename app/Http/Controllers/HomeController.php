@@ -13,7 +13,7 @@ class HomeController extends Controller
             $dashboard = new DashboardController();
             return $dashboard->index();
         }else{
-            $articles =  Article::getPaginate($request, 5);
+            $articles =  Article::getPaginate($request, 15);
             return view('frontend.articles', compact('articles'));
         }
     }

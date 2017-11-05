@@ -60,13 +60,15 @@ class Article extends Model
 
     public static function getPaginate(Request $request, $perPage = 15){
         $articleQuery = Article::where('is_published', 1)->where('is_deleted', 0);
+        $paginateUrl = '';
         if($request->has('lang')){
             $articleQuery = $articleQuery->where('language', $request->lang);
+            $paginateUrl = '?lang='.$request->lang;
         }
         $articles = $articleQuery->orderBy('published_at', 'desc')
             ->orderBy('created_at', 'desc')
             ->paginate($perPage)
-            ->withPath($request->getRequestUri());
+            ->withPath($paginateUrl);
         return $articles;
     }
 }
