@@ -10976,6 +10976,12 @@ hr {
   margin-bottom: 0;
 }
 
+.lang-filter {
+  position: fixed;
+  top: 50px;
+  left: 15px;
+}
+
 .hljs {
   display: block;
   overflow-x: auto;
