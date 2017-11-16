@@ -36,7 +36,8 @@
                             Tips for article content: Enclose source inside &lt;pre&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;
                         </div>
                         <div class="form-group">
-                        <textarea name="content" v-model="article.content" class="form-control textarea-indent" rows="10"
+                        <textarea name="content" v-model="article.content" class="form-control textarea-indent"
+                                  rows="10"
                                   placeholder="*Write here..." required></textarea>
                         </div>
                         <div class="text-grey">
@@ -44,13 +45,14 @@
                         </div>
                         <div class="form-group">
                             <strong>Keywords: </strong><label id="keywords-show"></label>
-                            <input type="text" id="keyword" v-on:keyup="formatKeyword('#keyword', '#keywords-show')" class="form-control" name="keywords" placeholder="Keywords" required>
+                            <input type="text" id="keyword" v-on:keyup="formatKeyword('#keyword', '#keywords-show')"
+                                   class="form-control" name="keywords" placeholder="Keywords" required>
                         </div>
                         <div class="form-group">
-                            <input type="radio" name="language" value="ben" checked>
-                            <label>বাংলা</label>
-                            <input type="radio" name="language" value="eng">
-                            <label>English</label>
+                            @foreach(config('fields.lang') as $lang => $fullLang)
+                                <input id="{{'radio-'.$lang}}" type="radio" name="language" value="{{$lang}}" {{$loop->first ? 'checked' : ''}}>
+                                <label for="{{'radio-'.$lang}}">{{$fullLang}}</label>
+                            @endforeach
                         </div>
                         <div class="form-group">
                             <input type="checkbox" name="is_comment_enabled" value="1" checked id="comment-enabled">
@@ -90,12 +92,12 @@
                     $("#article-content").html(article.content);
                 },
 
-                'formatKeyword': function(inputId, displayId){
+                'formatKeyword': function (inputId, displayId) {
 
                     var keywords = $(inputId).val().split(' ');
                     var htmlToShow = '';
-                    for(var i = 0; i < keywords.length; i++){
-                        htmlToShow += "<span class='label label-info margin-right-5'>"+keywords[i]+"</span>";
+                    for (var i = 0; i < keywords.length; i++) {
+                        htmlToShow += "<span class='label label-info margin-right-5'>" + keywords[i] + "</span>";
                     }
                     $(displayId).html(htmlToShow);
                 }

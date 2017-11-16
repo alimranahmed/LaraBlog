@@ -50,12 +50,10 @@
                                    value="{{implode(' ',$article->keywords->pluck('name')->toArray())}}">
                         </div>
                         <div class="form-group">
-                            <input type="radio" name="language"
-                                   value="ben" {{$article->language == 'ben' ? 'checked' : ''}}>
-                            <label>বাংলা</label>
-                            <input type="radio" name="language"
-                                   value="eng" {{$article->language == 'eng' ? 'checked' : ''}}>
-                            <label>English</label>
+                            @foreach(config('fields.lang') as $lang => $fullLang)
+                                <input id="{{'radio-'.$lang}}" type="radio" name="language" value="{{$lang}}" {{$article->language == $lang ? 'checked' : ''}}>
+                                <label for="{{'radio-'.$lang}}">{{$fullLang}}</label>
+                            @endforeach
                         </div>
                         <div class="form-group">
                             <input type="checkbox" name="is_comment_enabled" id="comment_enabled"
