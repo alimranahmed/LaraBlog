@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Article;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index(){
         $categories = Category::with(['articles' => function($articles){
-            $articles->where('is_deleted', 0);
+            return $articles->notDeleted();
         }])->get();
         return view('backend.categoryList', compact('categories'));
     }
@@ -45,16 +46,9 @@ class CategoryController extends Controller
         return redirect()->route('categories')->with('successMsg', 'Category updated');
     }
 
-    public function getArticles($categoryAlias){
-        $category = Category::where('alias', $categoryAlias)->first();
-        if(is_null($category)){
-            return redirect()->route('home')->with('warningMsg', 'Category not found');
-        }
-        $articles = Article::where('category_id', $category->id)
-            ->where('is_deleted', 0)
-            ->where('is_published', 1)
-            ->orderBy('created_at', 'desc')
-            ->paginate(15);
+    public function getArticles(Request $request, $categoryAlias){
+
+        $articles = Article::getPaginate($request);
 
         return view('frontend.articles', compact('articles'));
     }

@@ -24,10 +24,10 @@ class ArticleController extends Controller
         $clientIP = $_SERVER['REMOTE_ADDR'];
 
         $article = Article::where('id', $articleId)
-            ->where('is_published', 1)
-            ->where('is_deleted', 0)
+            ->published()
+            ->notDeleted()
             ->with(['category', 'keywords', 'comments' => function($comments){
-                $comments->where('is_published', 1)->orderBy('created_at', 'desc');
+                $comments->published()->latest();
             }])->first();
 
         if(is_null($article)){
@@ -52,10 +52,8 @@ class ArticleController extends Controller
 
         $relatedArticles = Article::where('category_id', $article->category->id)
             ->where('id', '!=', $article->id)
-            ->where('is_published', 1)
-            ->where('is_deleted', 0)
-            ->orderBy('published_at', 'desc')
-            ->orderBy('created_at', 'desc')
+            ->published()
+            ->latest()
             ->take(3)
             ->get();
 
@@ -165,14 +163,13 @@ class ArticleController extends Controller
         $keywords = Keyword::where('name', 'LIKE', "%$queryString%")->where('is_active', 1)->get();
         $articleIDsByKeywords = Keyword::getArticleIDs($keywords);
 
-        $articles = Article::where('is_published', 1)
-            ->where('is_deleted', 0)
+        $articles = Article::published()
+            ->notDeleted()
             ->whereIn('id', $articleIDsByKeywords)
             ->where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
-            ->orderBy('published_at', 'desc')
-            ->orderBy('created_at', 'desc')
-            ->paginate(15);
+            ->latest()
+            ->paginate(config('view.item_per_page'));
 
         $articles->setPath(url("search/?query_string=$queryString"));
 
@@ -183,9 +180,9 @@ class ArticleController extends Controller
     }
 
     public function adminArticle(){
-        $articles =  Article::where('is_deleted', 0)
+        $articles =  Article::notDeleted()
             ->with('category', 'keywords', 'user')
-            ->orderBy('id', 'desc')
+            ->latest()
             ->get();
         if(Auth::user()->hasRole(['author'])){
             $articles = $articles->where('user_id', Auth::user()->id);
