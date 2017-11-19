@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -24,6 +25,10 @@ class Comment extends Model
 
     public function replies(){
         return $this->hasMany(Comment::class, 'parent_comment_id');
+    }
+
+    public function scopePublished(Builder $builder){
+        return $builder->where('is_published', 1);
     }
 
     public function getCreatedAtHumanAttribute(){
