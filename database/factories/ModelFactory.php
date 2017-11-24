@@ -26,5 +26,6 @@ $factory->define(\App\Models\Comment::class, function(Faker\Generator $faker){
         'content' => $faker->paragraph,
         'article_id' => $faker->numberBetween(1, 10),
         'user_id' => 1,
+        'parent_comment_id' => $faker->randomElement([$faker->numberBetween(1, 5), null]),
     ];
 });
