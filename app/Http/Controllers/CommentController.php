@@ -41,7 +41,7 @@ class CommentController extends Controller
         }
 
         $clientIP = $_SERVER['REMOTE_ADDR'];
-        $newComment = $request->only('content');
+        $newComment = $request->only('content', 'parent_comment_id');
         $newAddress = ['ip' => $clientIP];
         try{
             \DB::transaction(function() use(&$newComment, $newAddress, $articleId, $request, $clientIP){
