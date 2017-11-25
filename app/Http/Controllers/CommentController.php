@@ -77,11 +77,10 @@ class CommentController extends Controller
             //return redirect()->back()->with('errorMsg', $this->getMessage($e))->withInput();
             return response()->json(['errorMsg' => $this->getMessage($e)], 503);
         }
-        //return response()->json(['message' => 'Article created successfully!', 'entity' => $newComment]);
         //return redirect()->route('get-article', $articleId)->with('successMsg', 'Comment posted');
-        $comments = Comment::where('is_published', 1)
-            ->where('article_id', $articleId)
-            ->orderBy('created_at', 'desc')
+        $comments = Comment::where('article_id', $articleId)
+            ->published()
+            ->latest()
             ->get();
 
         //event(new CommentOnArticle('New comment posted!'));
