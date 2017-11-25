@@ -82,6 +82,7 @@ class CommentController extends Controller
         //return redirect()->route('get-article', $articleId)->with('successMsg', 'Comment posted');
         $comments = Comment::where('article_id', $articleId)
             ->published()
+            ->noReplies()
             ->latest()
             ->get();
 
