@@ -31,6 +31,10 @@ class Comment extends Model
         return $builder->where('is_published', 1);
     }
 
+    public function scopeNoReplies(Builder $builder){
+        return $builder->where('parent_comment_id', null);
+    }
+
     public function getCreatedAtHumanAttribute(){
         $carbonDate = new Carbon($this->created_at);
         return $carbonDate->diffForHumans();

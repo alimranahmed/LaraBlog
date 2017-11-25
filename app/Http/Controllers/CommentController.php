@@ -22,10 +22,12 @@ class CommentController extends Controller
         if(Auth::user()->hasRole('author')){
             $authorsArticleIDs = Article::where('user_id', Auth::user()->id)->pluck('id');
             $comments = Comment::whereIn('article_id', $authorsArticleIDs)
-                ->with('article', 'user')->orderBy('id', 'desc')
+                ->with('article', 'user', 'replies')
+                ->latest()
+                ->noReplies()
                 ->get();
         }else{
-            $comments = Comment::with('article', 'user')->orderBy('id', 'desc')->get();
+            $comments = Comment::with('article', 'user', 'replies')->latest()->noReplies()->get();
         }
         return view('backend.commentList', compact('comments'));
     }
