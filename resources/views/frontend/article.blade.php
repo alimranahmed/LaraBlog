@@ -67,11 +67,11 @@
     @parent
     <script>
         new Vue({
-            el: "#comment-form",
-            data: {comment: {}},
+            el: "#article",
+            data: {comment: {}, reply: {}},
             methods: {
                 addComment: function (comment) {
-                    console.debug(comment);
+                    console.log(comment);
                     Vue.http.post("{{route('add-comment', $article->id)}}", comment)
                         .then(function (response) {
                             //hide comment form
@@ -82,6 +82,39 @@
                             successAlert.show();
                             successAlert.fadeOut(1000 * 10);
                             $('#success-msg').html('Success! your comment will be published soon');
+                            //clear form values
+                            $('input').val('');
+                            $('textarea').val('')
+                        }, function (response) {
+                            //show error alert
+                            var errorAlert = $('#error-alert');
+                            errorAlert.show();
+                            errorAlert.fadeOut(1000 * 10);
+                            console.debug(response);
+                            $('#error-msg').html(response.body.errorMsg);
+                        });
+                    return false;
+                },
+
+                initiateReplyForm: function(commentID){
+                    $("#parent_comment_id").val(commentID);
+                },
+
+                addReply: function (reply) {
+                    reply.parent_comment_id = $("#parent_comment_id").val();
+                    console.log(reply);
+                    Vue.http.post("{{route('add-comment', $article->id)}}", reply)
+                        .then(function (response) {
+                            //hide comment form
+                            $("#comments").html(response.body);
+                            $('.modal').modal('hide');
+                            $('body').removeClass('modal-open');
+                            $('.modal-backdrop').remove();
+                            //show success alert
+                            var successAlert = $('#success-alert');
+                            successAlert.show();
+                            successAlert.fadeOut(1000 * 10);
+                            $('#success-msg').html('Success! your reply will be published soon');
                             //clear form values
                             $('input').val('');
                             $('textarea').val('')

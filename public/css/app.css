@@ -10729,6 +10729,10 @@ textarea {
   resize: vertical;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 pre {
   font-size: .9em;
 }
@@ -10808,6 +10812,14 @@ hr {
   margin-bottom: 15px;
 }
 
+.margin-left-15 {
+  margin-left: 15px;
+}
+
+.margin-right-15 {
+  margin-right: 15px;
+}
+
 .margin-top-10 {
   margin-top: 10px;
 }
@@ -10830,6 +10842,10 @@ hr {
 
 .margin-right-5 {
   margin-right: 5px;
+}
+
+.margin-left-30 {
+  margin-left: 30px;
 }
 
 .no-margin {

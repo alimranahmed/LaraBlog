@@ -1,5 +1,5 @@
 <div class="col-sm-12" id="comment-form">
-    <form action="{{route('add-comment', $article->id)}}" method="post" onsubmit="return false;" name="add_comment_form"
+    <form action="#" method="post" onsubmit="return false;" name="add_comment_form"
           v-on:submit="addComment(comment)">
         {{csrf_field()}}
         <div class="form-group col-sm-12 no-padding {{$errors->has('content') ? 'has-error has-feedback' : ''}}">

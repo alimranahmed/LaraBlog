@@ -22,10 +22,12 @@ class CommentController extends Controller
         if(Auth::user()->hasRole('author')){
             $authorsArticleIDs = Article::where('user_id', Auth::user()->id)->pluck('id');
             $comments = Comment::whereIn('article_id', $authorsArticleIDs)
-                ->with('article', 'user')->orderBy('id', 'desc')
+                ->with('article', 'user', 'replies')
+                ->latest()
+                ->noReplies()
                 ->get();
         }else{
-            $comments = Comment::with('article', 'user')->orderBy('id', 'desc')->get();
+            $comments = Comment::with('article', 'user', 'replies')->latest()->noReplies()->get();
         }
         return view('backend.commentList', compact('comments'));
     }
@@ -41,7 +43,7 @@ class CommentController extends Controller
         }
 
         $clientIP = $_SERVER['REMOTE_ADDR'];
-        $newComment = $request->only('content');
+        $newComment = $request->only('content', 'parent_comment_id');
         $newAddress = ['ip' => $clientIP];
         try{
             \DB::transaction(function() use(&$newComment, $newAddress, $articleId, $request, $clientIP){
@@ -77,11 +79,10 @@ class CommentController extends Controller
             //return redirect()->back()->with('errorMsg', $this->getMessage($e))->withInput();
             return response()->json(['errorMsg' => $this->getMessage($e)], 503);
         }
-        //return response()->json(['message' => 'Article created successfully!', 'entity' => $newComment]);
         //return redirect()->route('get-article', $articleId)->with('successMsg', 'Comment posted');
-        $comments = Comment::where('is_published', 1)
-            ->where('article_id', $articleId)
-            ->orderBy('created_at', 'desc')
+        $comments = Comment::where('article_id', $articleId)
+            ->published()
+            ->latest()
             ->get();
 
         //event(new CommentOnArticle('New comment posted!'));
