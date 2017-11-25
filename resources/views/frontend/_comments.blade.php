@@ -5,7 +5,9 @@
         </div>
         <div class="col-sm-12 text-justify">{{$comment->content}}
             <span class="text-grey">&nbsp;{{$comment->createdAtHuman}}</span>
-            <span class="text-primary pointer" data-toggle="modal" data-target="#reply-form">&nbsp;Reply</span>
+            <span class="text-primary pointer" data-toggle="modal"
+                  data-target="#reply-form"
+                  v-on:click="initiateReplyForm({{$comment->id}})">&nbsp;Reply</span>
         </div>
     </div>
     @foreach($comment->replies as $reply)
@@ -25,3 +27,4 @@
         </div>
     </div>
 @endforelse
+@include('frontend._form_reply')
