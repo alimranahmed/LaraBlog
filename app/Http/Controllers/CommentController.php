@@ -92,7 +92,7 @@ class CommentController extends Controller
         Mail::to($request->get('email'))->send(new CommentConfirmation($newComment));
         Mail::to(Config::get('admin_email'))->send(new NotifyAdmin($newComment, route('get-article', $articleId)));
 
-        return view('frontend._comments', compact('comments') );
+        return view('frontend._comments', compact('comments', 'article'));
     }
 
     public function update(Request $request, $commentId){
