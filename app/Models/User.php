@@ -27,12 +27,12 @@ class User extends Authenticatable
         return $this->hasOne(Reader::class);
     }
 
-    /*public function role(){
-        return $this->belongsTo(Role::class);
-    }*/
-
     public function isReader(){
         return !is_null($this->reader);
+    }
+
+    public function scopeActive(Builder $builder){
+        return $builder->where('is_active', 1);
     }
 
     public function getCreatedAtHumanAttribute(){
@@ -41,8 +41,10 @@ class User extends Authenticatable
     }
 
     public static function getSubscribedUsers(){
-        $subscribedReadersIds = Reader::where('notify', 1)->where('is_verified', 1)->pluck('user_id')->toArray();
-        $users = self::whereIn('id',$subscribedReadersIds)->get();
+        $subscribedReadersIds = Reader::subscribed()
+            ->verified()
+            ->pluck('user_id');
+        $users = self::whereIn('id', $subscribedReadersIds)->get();
         return $users;
     } 
 }

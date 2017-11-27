@@ -64,11 +64,14 @@ class CommentController extends Controller
                     $newUser->reader()->create([
                         'notify' => $request->has('notify'),
                     ]);
+                }elseif($newUser->isReader()){
+                    $newUser->reader->update(['notify' => $request->has('notify')]);
                 }
                 if($request->has('name')){
                     $newUser->name = $request->get('name');
                 }
                 $newUser->last_ip = $clientIP;
+                $newUser->token = \Hash::make($newComment['content']);
                 $newUser->save();
                 $newComment['user_id'] = $newUser->id;
                 $newComment = Comment::create($newComment);
@@ -76,10 +79,8 @@ class CommentController extends Controller
             });
             //$this->dispatch(new SendConfirmCommentMail($newComment));
         }catch(\Exception $e){
-            //return redirect()->back()->with('errorMsg', $this->getMessage($e))->withInput();
             return response()->json(['errorMsg' => $this->getMessage($e)], 503);
         }
-        //return redirect()->route('get-article', $articleId)->with('successMsg', 'Comment posted');
         $comments = Comment::where('article_id', $articleId)
             ->published()
             ->noReplies()
@@ -87,10 +88,8 @@ class CommentController extends Controller
             ->get();
 
         //event(new CommentOnArticle('New comment posted!'));
-        //Mail::to($request->get('email'))->queue(new CommentConfirmation($newComment));
-        //Mail::to(Config::get('admin_email'))->queue(new NotifyAdmin($newComment->content, route('get-article', $articleId)));
-        Mail::to($request->get('email'))->send(new CommentConfirmation($newComment));
-        Mail::to(Config::get('admin_email'))->send(new NotifyAdmin($newComment, route('get-article', $articleId)));
+        Mail::to($request->get('email'))->queue(new CommentConfirmation($newComment));
+        Mail::to(Config::get('admin_email'))->queue(new NotifyAdmin($newComment, route('get-article', $articleId)));
 
         return view('frontend._comments', compact('comments', 'article'));
     }

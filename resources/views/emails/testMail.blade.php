@@ -1,1 +1,4 @@
-<h2>Welcome</h2>
+@extends('emails.master')
+@section('content)
+    Welcome
+@endsection
