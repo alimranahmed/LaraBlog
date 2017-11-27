@@ -1,23 +1,27 @@
 <?php
 Route::get('/test', 'Controller@test')->name('test');
+
 //Home
 Route::get('/', 'HomeController@index')->name('home');
+
 //Subscribe
 Route::post('subscribe', 'UserController@subscribe')->name('subscribe');
-Route::post('un-subscribe', 'UserController@unSubscribe')->name('un-subscribe');
 Route::get('confirm-subscription/{userId}', 'UserController@confirmSubscribe')->name('confirm-subscribe');
+Route::get('un-subscribe/{userId}', 'UserController@unSubscribe')->name('un-subscribe');
+
 //feedback
 Route::post('feedback', 'FeedbackController@store')->name('add-feedback');
+
 //Article
 Route::get('article', 'ArticleController@index')->name('articles');
 Route::get('article/{articleId}/{articleHeading?}', 'ArticleController@show')->name('get-article');
-Route::get('confirm-comment/{commentId}', 'CommentController@confirmComment')->name('confirm-comment');
 Route::get('category/article/{categoryAlias}', 'CategoryController@getArticles')->name('articles-by-category');
 Route::get('keyword/article/{keywordName}', 'KeywordController@getArticles')->name('articles-by-keyword');
-
 Route::get('search', 'ArticleController@search')->name('search-article');
+
 //Comment
 Route::post('comment/{articleId}', 'CommentController@store')->name('add-comment');
+Route::get('confirm-comment/{commentId}', 'CommentController@confirmComment')->name('confirm-comment');
 
 //Category
 Route::get('category/{categoryId}', 'CategoryController@show')->name('get-category');
