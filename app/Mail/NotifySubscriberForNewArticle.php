@@ -14,15 +14,17 @@ class NotifySubscriberForNewArticle extends Mailable
 
     public $article;
 
+    public $user;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($article)
+    public function __construct($article, $user)
     {
         $this->article = $article;
-        //
+        $this->user = $user;
     }
 
     /**

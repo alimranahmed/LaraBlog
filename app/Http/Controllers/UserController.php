@@ -84,7 +84,7 @@ class UserController extends Controller
 
     public function changePassword(ChangePasswordRequest $request){
         $newPassword = $request->get('new_password');
-        
+
         if(!Hash::check($request->get('old_password'), Auth::user()->password)) {
             return back()->with('errorMsg', 'Unauthorized request');
         }
@@ -160,14 +160,14 @@ class UserController extends Controller
         }
 
         try{
-            if($user->isReader()){
+            if($user->isReader() && $user->reader->notify){
                 $user->reader->update(['is_verified' => 1, 'notify' => 0]);
                 return redirect()->route('home')->with('successMsg', 'You have un-subscribed confirmed');
             }
         }catch (\Exception $e){
             return response()->json(['errorMsg' => $this->getMessage($e)]);
         }
-        return redirect()->route('home')->with('warningMsg', 'Something went wrong');
+        return redirect()->route('home')->with('errorMsg', 'No subscription found');
     }
 
     public function toggleActive($userId){

@@ -127,8 +127,9 @@ class ArticleController extends Controller
                 $newArticle->keywords()->attach($newKeyword->id);
             }
             //Notify all subscriber about the new article
-            Mail::to(User::getSubscribedUsers()->pluck('email')->toArray())
-                ->queue(new NotifySubscriberForNewArticle($newArticle)); 
+            foreach(User::getSubscribedUsers() as $subscriber){
+                Mail::to($subscriber->email)->queue(new NotifySubscriberForNewArticle($newArticle, $subscriber));
+            }
         }catch(\PDOException $e){
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
