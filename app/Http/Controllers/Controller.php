@@ -21,10 +21,6 @@ class Controller extends BaseController
     }
 
     public function test(){
-        $ip = "118.70.233.193";
-        $httpClient = new HttpClient();
-        $response = $httpClient->send("http://freegeoip.net/json/$ip");
-        $location = json_decode($response->body);
-        dd($response);
+
     }
 }
