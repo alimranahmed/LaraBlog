@@ -65,6 +65,7 @@ class UserController extends Controller
 
     public function update(UserRequest $request, $userId){
         $newUser = $request->only('name', 'username', 'email');
+        $newUser['is_active'] = $request->has('is_active');
         try{
             if($request->has('password')){
                 $newUser['password'] = \Hash::make($request->get('password'));

@@ -28,6 +28,10 @@
                 <div class="form-group {{$errors->has('password') ? "has-error" : ""}}">
                     <input type="password" name="password" id="password" value="" class="form-control" placeholder="Password">
                 </div>
+                <div class="form-group {{$errors->has('is_active') ? "has-error" : ""}}">
+                    <input type="checkbox" name="is_active" id="is_active" {{$user->is_active ? 'checked' : ''}}>
+                    <label for="is_active">Active</label>
+                </div>
                 <div class="form-group {{$errors->has('role_id') ? "has-error" : ""}}">
                     <button class="btn btn-success" type="submit">Update</button>
                 </div>
