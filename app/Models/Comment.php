@@ -27,6 +27,10 @@ class Comment extends Model
         return $this->hasMany(Comment::class, 'parent_comment_id');
     }
 
+    public function parentComment(){
+        return $this->belongsTo(Comment::class, 'parent_comment_id');
+    }
+
     public function scopePublished(Builder $builder){
         return $builder->where('is_published', 1);
     }

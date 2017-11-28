@@ -81,6 +81,7 @@ class CommentController extends Controller
         }catch(\Exception $e){
             return response()->json(['errorMsg' => $this->getMessage($e)], 503);
         }
+
         $comments = Comment::where('article_id', $articleId)
             ->published()
             ->noReplies()
@@ -137,8 +138,14 @@ class CommentController extends Controller
             ->where('token', $request->get('token'))
             ->with('article')
             ->first();
+
         if(is_null($comment)){
             return redirect()->route('home')->with('errorMsg', 'Invalid request');
+        }
+
+        if($comment->is_published){
+            return redirect()->route('get-article', [$comment->article->id])
+                ->with('warningMsg', 'Comment already published');
         }
 
         try{
@@ -146,6 +153,7 @@ class CommentController extends Controller
             if($comment->user->isReader()){
                 $comment->user->reader->update(['is_verified' => 1]);
             }
+            //TODO notify all user of the comment thread about the new comment except him person who replied
         }catch (\Exception $e){
             return response()->json(['errorMsg' => $this->getMessage($e)]);
         }

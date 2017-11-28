@@ -1,7 +1,7 @@
 @extends('emails.master')
 @section('content')
-<h2>Hi, <strong>{{$globalConfigs->copyright_owner}}</strong></h2>
-<p>A user has respond on {{$globalConfigs->site_name}}</p>
+<h2>Hi <strong>{{$globalConfigs->copyright_owner}}</strong></h2>
+<p>A user has respond on <strong>{{$globalConfigs->site_name}}</strong></p>
 
 <h3 style="margin-bottom: 15px;">Response:</h3>
 
