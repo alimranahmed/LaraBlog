@@ -6,6 +6,7 @@ use App\Events\CommentOnArticle;
 use App\Http\Requests\CommentRequest;
 use App\Mail\CommentConfirmation;
 use App\Mail\NotifyAdmin;
+use App\Mail\NotifyCommentThread;
 use App\Models\Address;
 use App\Models\Article;
 use App\Models\Comment;
@@ -153,9 +154,24 @@ class CommentController extends Controller
             if($comment->user->isReader()){
                 $comment->user->reader->update(['is_verified' => 1]);
             }
-            //TODO notify all user of the comment thread about the new comment except him person who replied
+            //notify all user of the comment thread about the new comment except him person who replied
+            if($comment->parent_comment_id){
+                $threadUserIDs = Comment::where('parent_comment_id', $comment->parent_comment_id)
+                    ->orWhere('id', $comment->parent_comment_id)
+                    ->pluck('user_id');
+
+                $threadUserEmails = User::whereIn('id', $threadUserIDs)
+                    ->where('email', '!=', $comment->user->email)
+                    ->pluck('email')
+                    ->unique()
+                    ->toArray();
+
+                Mail::to($threadUserEmails)->queue(new NotifyCommentThread($comment));
+            }
+
         }catch (\Exception $e){
-            return response()->json(['errorMsg' => $this->getMessage($e)]);
+            return redirect()->route('get-article', [$comment->article->id])
+                ->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('get-article', [$comment->article->id])
             ->with('successMsg', 'Comment confirmed successfully!');
