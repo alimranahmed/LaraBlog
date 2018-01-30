@@ -27,7 +27,7 @@ class ArticleController extends Controller
             ->published()
             ->notDeleted()
             ->with(['category', 'keywords', 'comments' => function($comments){
-                $comments->published()->latest();
+                return $comments->published();
             }])->first();
 
         if(is_null($article)){

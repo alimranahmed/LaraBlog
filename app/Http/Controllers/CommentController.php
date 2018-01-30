@@ -86,7 +86,6 @@ class CommentController extends Controller
         $comments = Comment::where('article_id', $articleId)
             ->published()
             ->noReplies()
-            ->latest()
             ->get();
 
         //event(new CommentOnArticle('New comment posted!'));
