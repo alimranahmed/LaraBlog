@@ -52,7 +52,11 @@ A full-featured blogging system for personal use. Minimum library used. No front
 ![configurations](https://cloud.githubusercontent.com/assets/7629427/26286313/f3499924-3e83-11e7-9418-99903a4ef136.png)
 
 ### Contribution 
-Anyone is always welcome to contribute on the project. If you want to work with, just create and issue(even if you want to fix the issue). After fixing any issue or adding any new feature just send a pull request, I will be happy to add your code for the betterment of this project. Thanks.
+**Anyone is always welcome to contribute on the project. If you want to work with:**
+1. Just create and issue(even if you want to fix the issue). 
+2. After fixing any issue or adding any new feature just send a pull request
+3. I will be happy to add your code for the betterment of this project. 
+Thanks.
 
 ##### Note
 If you cloned the project little bit earlier and after pulling the newer changes it's not working now, please execute the `composer update` command in the CLI when you are the root directory of the project. Beside, don't forge to cross match your `.env` file version with newly pulled `.env.example` file.
