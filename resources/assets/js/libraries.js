@@ -5,7 +5,7 @@ window._ = require('lodash');
 window.$ = window.jQuery = require('jquery');
 require('vue-resource');
 //load bootstrap
-require('bootstrap');
+require('bootstrap/dist/js/bootstrap');
 //load custom js
 require('./navbar-autohide');
 require('./alert-autohide');
