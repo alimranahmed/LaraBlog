@@ -4,13 +4,13 @@
 //@import url(http://fonts.googleapis.com/icon?family=Material+Icons);
 
 //Font-Awesome fonts
-@import "node_modules/font-awesome/scss/font-awesome";
+@import "~font-awesome/scss/font-awesome";
 
 //Variables
 @import "variables";
 
 // Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~bootstrap/dist/css/bootstrap.css";
 //Materialize
 //@import "node_modules/materialize-css/sass/materialize";
 
