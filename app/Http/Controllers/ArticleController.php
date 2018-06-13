@@ -15,37 +15,43 @@ use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
-    public function index(Request $request){
-        $articles =  Article::getPaginate($request);
+    public function index(Request $request)
+    {
+        $articles = Article::getPaginate($request);
         return view('frontend.articles', compact('articles'));
     }
 
-    public function show($articleId, $articleHeading = ''){
+    public function show($articleId, $articleHeading = '')
+    {
         $clientIP = $_SERVER['REMOTE_ADDR'];
 
         $article = Article::where('id', $articleId)
             ->published()
             ->notDeleted()
-            ->with(['category', 'keywords', 'comments' => function($comments){
-                return $comments->published();
-            }])->first();
+            ->with([
+                'category',
+                'keywords',
+                'comments' => function ($comments) {
+                    return $comments->published();
+                }
+            ])->first();
 
-        if(is_null($article)){
+        if (is_null($article)) {
             return redirect()->route('home')->with('warningMsg', 'Article not found');
         }
 
-        try{
+        try {
             $address = Address::firstOrCreate(['ip' => $clientIP]);
             $hitLogger = HitLogger::where('article_id', $articleId)->where('address_id', $address->id)->first();
 
-            if(is_null($hitLogger)){
+            if (is_null($hitLogger)) {
                 HitLogger::create(['article_id' => $articleId, 'address_id' => $address->id, 'count' => 1]);
                 $article->increment('hit_count');
-            }else{
-                $hitLogger->update(['count'=> ++$hitLogger->count]);
+            } else {
+                $hitLogger->update(['count' => ++$hitLogger->count]);
             }
-            
-        }catch(\PDOException $e){
+
+        } catch (\PDOException $e) {
 
             return redirect()->route('home')->with('errorMsg', $this->getMessage($e));
         }
@@ -60,59 +66,63 @@ class ArticleController extends Controller
         return view('frontend.article', compact('article', 'relatedArticles'));
     }
 
-    public function edit($articleId){
+    public function edit($articleId)
+    {
         $article = Article::find($articleId);
-        if(is_null($article)){
+        if (is_null($article)) {
             return redirect()->route('home')->with('errorMsg', 'Article not found');
         }
 
-        if($this->hasArticleAuthorization(Auth::user(), $article)){
+        if ($this->hasArticleAuthorization(Auth::user(), $article)) {
             return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
         }
         $categories = Category::where('is_active', 1)->get();
         return view('backend.article_edit', compact('categories', 'article'));
     }
 
-    public function update(Request $request, $articleId){
+    public function update(Request $request, $articleId)
+    {
         $article = Article::find($articleId);
-        if(is_null($article)){
+        if (is_null($article)) {
             return redirect()->route('home')->with('errorMsg', 'Article not found');
         }
 
-        if($this->hasArticleAuthorization(Auth::user(), $article)){
+        if ($this->hasArticleAuthorization(Auth::user(), $article)) {
             return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
         }
         $updatedArticle = $request->only(['heading', 'content', 'category_id', 'language']);
         $updatedArticle['is_comment_enabled'] = $request->has('is_comment_enabled');
-        $keywordsToAttach = array_unique(explode(' ',$request->get('keywords')));
-        try{
+        $keywordsToAttach = array_unique(explode(' ', $request->get('keywords')));
+        try {
             $article->update($updatedArticle);
             //remove all keywords then add all keywords from input
             $article->keywords()->detach();
-            foreach($keywordsToAttach as $keywordToAttach){
+            foreach ($keywordsToAttach as $keywordToAttach) {
                 $newKeyword = Keyword::firstOrCreate(['name' => $keywordToAttach]);
                 $article->keywords()->attach($newKeyword->id);
             }
-        }catch(\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
 
         return redirect()->route('admin-articles')->with('successMsg', 'Article updated');
     }
 
-    public function create(){
+    public function create()
+    {
         $categories = Category::where('is_active', 1)->get();
         return view('backend.article_create', compact('categories'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $clientIP = $_SERVER['REMOTE_ADDR'];
 
         $newArticle = $request->only(['heading', 'content', 'category_id', 'language']);
         $newArticle['is_comment_enabled'] = $request->has('is_comment_enabled');
         $newAddress = ['ip' => $clientIP];
 
-        try{
+        try {
             //Create new address
             $newAddress = Address::create($newAddress);
             //Create new article
@@ -121,43 +131,45 @@ class ArticleController extends Controller
             $newArticle['user_id'] = Auth::user()->id;
             $newArticle = Article::create($newArticle);
             //add keywords
-            $keywordsToAttach = array_unique(explode(' ',$request->get('keywords')));
-            foreach($keywordsToAttach as $keywordToAttach){
+            $keywordsToAttach = array_unique(explode(' ', $request->get('keywords')));
+            foreach ($keywordsToAttach as $keywordToAttach) {
                 $newKeyword = Keyword::firstOrCreate(['name' => $keywordToAttach]);
                 $newArticle->keywords()->attach($newKeyword->id);
             }
             //Notify all subscriber about the new article
-            foreach(User::getSubscribedUsers() as $subscriber){
+            foreach (User::getSubscribedUsers() as $subscriber) {
                 Mail::to($subscriber->email)->queue(new NotifySubscriberForNewArticle($newArticle, $subscriber));
             }
-        }catch(\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
 
         return redirect()->route('admin-articles')->with('successMsg', 'Article published successfully!');
     }
 
-    public function togglePublish($articleId){
+    public function togglePublish($articleId)
+    {
         $article = Article::find($articleId);
-        if(is_null($article)){
+        if (is_null($article)) {
             return redirect()->route('home')->with('errorMsg', 'Article not found');
         }
 
-        if($this->hasArticleAuthorization(Auth::user(), $article)){
+        if ($this->hasArticleAuthorization(Auth::user(), $article)) {
             return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
         }
-        try{
+        try {
             $article->update([
                 'is_published' => !$article->is_published,
                 'published_at' => new \DateTime(),
             ]);
-        }catch(\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('admin-articles')->with('successMsg', 'Article updated');
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $this->validate($request, ['query_string' => 'required']);
 
         $queryString = $request->get('query_string');
@@ -180,35 +192,38 @@ class ArticleController extends Controller
         return view('frontend.search_result', compact('searched'));
     }
 
-    public function adminArticle(){
-        $articles =  Article::notDeleted()
+    public function adminArticle()
+    {
+        $articles = Article::notDeleted()
             ->with('category', 'keywords', 'user')
             ->latest()
             ->get();
-        if(Auth::user()->hasRole(['author'])){
+        if (Auth::user()->hasRole(['author'])) {
             $articles = $articles->where('user_id', Auth::user()->id);
         }
         return view('backend.articleList', compact('articles'));
     }
 
-    public function destroy($articleId){
+    public function destroy($articleId)
+    {
         $article = Article::find($articleId);
-        if(is_null($article)){
+        if (is_null($article)) {
             return redirect()->route('home')->with('errorMsg', 'Article not found');
         }
 
-        if($this->hasArticleAuthorization(Auth::user(), $article)){
+        if ($this->hasArticleAuthorization(Auth::user(), $article)) {
             return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
         }
-        try{
+        try {
             Article::where('id', $articleId)->update(['is_deleted' => 1]);
-        }catch (\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('admin-articles')->with('successMsg', 'Article deleted');
     }
 
-    private function hasArticleAuthorization($user, $article){
+    private function hasArticleAuthorization($user, $article)
+    {
         return $user->hasRole(['author']) && $article->user_id != $user->id;
     }
 }

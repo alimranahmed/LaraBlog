@@ -11,7 +11,8 @@ class Feedback extends Model
     protected $guarded = ['id'];
     protected $appends = ['createdAtHuman'];
 
-    public function getCreatedAtHumanAttribute(){
+    public function getCreatedAtHumanAttribute()
+    {
         $carbonDate = new Carbon($this->created_at);
         return $carbonDate->diffForHumans();
     }

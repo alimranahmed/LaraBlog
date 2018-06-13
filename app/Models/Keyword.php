@@ -11,11 +11,13 @@ class Keyword extends Model
 {
     protected $guarded = ['id'];
 
-    public function articles(){
+    public function articles()
+    {
         return $this->belongsToMany(Article::class, 'article_keyword');
     }
 
-    public function getCreatedAtHumanAttribute(){
+    public function getCreatedAtHumanAttribute()
+    {
         $createdAt = new Carbon($this->created_at);
         return $createdAt->diffForHumans(Carbon::now());
     }
@@ -24,7 +26,8 @@ class Keyword extends Model
      * @param Collection $keywords
      * @return array
      */
-    public static function getArticleIDs(Collection $keywords){
+    public static function getArticleIDs(Collection $keywords)
+    {
         $articleKeywords = DB::table('article_keyword')
             ->select('article_id', 'keyword_id')
             ->whereIn('keyword_id', $keywords->pluck('id')->toArray())

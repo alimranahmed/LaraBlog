@@ -9,54 +9,62 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index(){
-        $categories = Category::with(['articles' => function($articles){
-            return $articles->notDeleted();
-        }])->get();
+    public function index()
+    {
+        $categories = Category::with([
+            'articles' => function ($articles) {
+                return $articles->notDeleted();
+            }
+        ])->get();
         return view('backend.categoryList', compact('categories'));
     }
 
-    public function update(CategoryRequest $request, $categoryId){
+    public function update(CategoryRequest $request, $categoryId)
+    {
         $updatedCategory = $request->only(['name', 'alias', 'position', 'parent_category_id']);
-        try{
+        try {
             Category::where('id', $categoryId)->update($updatedCategory);
-        }catch (\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->back()->with('successMsg', 'Category updated successfully!');
     }
 
-    public function store(CategoryRequest $request){
+    public function store(CategoryRequest $request)
+    {
         $newCategory = $request->only(['name', 'alias', 'position', 'parent_category_id']);
-        try{
+        try {
             Category::create($newCategory);
-        }catch (\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->back()->with('successMsg', 'Category created successfully!');
     }
 
-    public function toggleActive($categoryId){
+    public function toggleActive($categoryId)
+    {
         $category = Category::find($categoryId);
-        try{
+        try {
             $category->update(['is_active' => !$category->is_active]);
-        }catch(\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('categories')->with('successMsg', 'Category updated');
     }
 
-    public function getArticles(Request $request, $categoryAlias){
+    public function getArticles(Request $request, $categoryAlias)
+    {
 
         $articles = Article::getPaginate($request);
 
         return view('frontend.articles', compact('articles'));
     }
 
-    public function destroy($categoryId){
-        try{
+    public function destroy($categoryId)
+    {
+        try {
             Category::destroy($categoryId);
-        }catch (\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->back()->with('successMsg', 'Category deleted');

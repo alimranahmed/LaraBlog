@@ -12,15 +12,17 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function getMessage(\Exception $e, $msg = null){
-        if(env('APP_ENV') == 'local'){
-            return $e->getLine().': '.$e->getFile().' '.$e->getMessage();
-        }else{
+    public function getMessage(\Exception $e, $msg = null)
+    {
+        if (env('APP_ENV') == 'local') {
+            return $e->getLine() . ': ' . $e->getFile() . ' ' . $e->getMessage();
+        } else {
             return is_null($msg) ? 'Oops, operation failed please try again' : $msg;
         }
     }
 
-    public function test(){
+    public function test()
+    {
 
     }
 }

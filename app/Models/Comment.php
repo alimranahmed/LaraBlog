@@ -11,40 +11,49 @@ class Comment extends Model
     protected $guarded = ['id'];
     protected $appends = ['createdAtHuman', 'publishedAtHuman'];
 
-    public function article(){
+    public function article()
+    {
         return $this->belongsTo(Article::class);
     }
 
-    public function address(){
+    public function address()
+    {
         return $this->belongsTo(Address::class);
     }
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function replies(){
+    public function replies()
+    {
         return $this->hasMany(Comment::class, 'parent_comment_id');
     }
 
-    public function parentComment(){
+    public function parentComment()
+    {
         return $this->belongsTo(Comment::class, 'parent_comment_id');
     }
 
-    public function scopePublished(Builder $builder){
+    public function scopePublished(Builder $builder)
+    {
         return $builder->where('is_published', 1);
     }
 
-    public function scopeNoReplies(Builder $builder){
+    public function scopeNoReplies(Builder $builder)
+    {
         return $builder->where('parent_comment_id', null);
     }
 
-    public function getCreatedAtHumanAttribute(){
+    public function getCreatedAtHumanAttribute()
+    {
         $carbonDate = new Carbon($this->created_at);
         return $carbonDate->diffForHumans();
     }
 
-    public function getPublishedAtHumanAttribute(){
+    public function getPublishedAtHumanAttribute()
+    {
         $carbonDate = new Carbon($this->published_at);
         return $carbonDate->diffForHumans();
     }

@@ -9,52 +9,58 @@ use Illuminate\Http\Request;
 
 class KeywordController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $keywords = Keyword::with('articles')->get();
         return view('backend.keywordList', compact('keywords'));
     }
 
-    public function store(KeywordRequest $request){
+    public function store(KeywordRequest $request)
+    {
         $newKeyword = $request->only('name');
-        try{
+        try {
             Keyword::create($newKeyword);
-        }catch(\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('keywords')->with('successMsg', 'Keyword added');
     }
 
-    public function toggleActive($keywordId){
+    public function toggleActive($keywordId)
+    {
         $keyword = Keyword::find($keywordId);
-        try{
+        try {
             $keyword->update(['is_active' => !$keyword->is_active]);
-        }catch(\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('keywords')->with('successMsg', 'Keyword updated');
     }
 
-    public function update(KeywordRequest $request, $keywordId){
+    public function update(KeywordRequest $request, $keywordId)
+    {
         $updatedKeyword = $request->only('name');
-        try{
+        try {
             Keyword::where('id', $keywordId)->update($updatedKeyword);
-        }catch(\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('keywords')->with('successMsg', 'Keyword updated');
     }
 
-    public function destroy($keywordId){
-        try{
+    public function destroy($keywordId)
+    {
+        try {
             Keyword::find($keywordId)->articles()->detach();
             Keyword::destroy($keywordId);
-        }catch (\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('keywords')->with('successMsg', 'Keyword deleted');
     }
 
-    public function getArticles(Request $request, $keywordName){
+    public function getArticles(Request $request, $keywordName)
+    {
         $articles = Article::getPaginate($request);
 
         return view('frontend.articles', compact('articles'));

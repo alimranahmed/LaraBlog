@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
             'email' => 'required|email',
         ];
 
-        if($this->isMethod('POST')){
+        if ($this->isMethod('POST')) {
             $rules['password'] = 'required';
         }
         return $rules;
