@@ -8,11 +8,13 @@ class Address extends Model
 {
     protected $guarded = ['id'];
 
-    public function articles(){
+    public function articles()
+    {
         return $this->hasMany(Article::class);
     }
 
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 }

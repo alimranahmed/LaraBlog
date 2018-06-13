@@ -10,27 +10,32 @@ class Category extends Model
     protected $guarded = ['id'];
     protected $appends = ['createdAtHuman'];
 
-    public function articles(){
+    public function articles()
+    {
         return $this->hasMany(Article::class);
     }
 
-    public function parent(){
+    public function parent()
+    {
         return $this->hasMany(Category::class, 'parent_category_id');
     }
 
-    public function children(){
+    public function children()
+    {
         return $this->belongsTo(Category::class, 'parent_category_id');
     }
 
-    public function getCreatedAtHumanAttribute(){
+    public function getCreatedAtHumanAttribute()
+    {
         $carbonDate = new Carbon($this->updated_at);
         return $carbonDate->diffForHumans();
     }
 
-    public static function getNonEmptyOnly(){
+    public static function getNonEmptyOnly()
+    {
         $categories = Category::where('is_active', 1)->get();
-        return $categories->filter(function($category){
-           return $category->articles->isNotEmpty();
+        return $categories->filter(function ($category) {
+            return $category->articles->isNotEmpty();
         });
     }
 }

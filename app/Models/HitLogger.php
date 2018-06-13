@@ -8,19 +8,24 @@ class HitLogger extends Model
 {
     protected $guarded = ['id'];
     protected $appends = ['country', 'city'];
-    public function article(){
+
+    public function article()
+    {
         return $this->belongsTo(Article::class);
     }
 
-    public function address(){
+    public function address()
+    {
         return $this->belongsTo(Address::class);
     }
 
-    public function getCountryAttribute(){
+    public function getCountryAttribute()
+    {
         return empty($this->address->country_name) ? 'Unknown' : $this->address->country_name;
     }
 
-    public function getCityAttribute(){
+    public function getCityAttribute()
+    {
         return isset($this->address->city) ? 'Unknown' : $this->address->city;
     }
 }

@@ -19,35 +19,37 @@ use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
-    public function index(){
-        if(Auth::user()->hasRole('author')){
+    public function index()
+    {
+        if (Auth::user()->hasRole('author')) {
             $authorsArticleIDs = Article::where('user_id', Auth::user()->id)->pluck('id');
             $comments = Comment::whereIn('article_id', $authorsArticleIDs)
                 ->with('article', 'user', 'replies')
                 ->latest()
                 ->noReplies()
                 ->get();
-        }else{
+        } else {
             $comments = Comment::with('article', 'user', 'replies')->latest()->noReplies()->get();
         }
         return view('backend.commentList', compact('comments'));
     }
 
-    public function store(CommentRequest $request, $articleId){
+    public function store(CommentRequest $request, $articleId)
+    {
         $article = Article::find($articleId);
-        if(is_null($article)){
-            return response()->json(['errorMsg'=> 'Article not found'], 404);
+        if (is_null($article)) {
+            return response()->json(['errorMsg' => 'Article not found'], 404);
         }
 
-        if(!$article->is_comment_enabled){
+        if (!$article->is_comment_enabled) {
             return response()->json(['errorMsg' => 'Comment is not allowed for this article'], 403);
         }
 
         $clientIP = $_SERVER['REMOTE_ADDR'];
         $newComment = $request->only('content', 'parent_comment_id');
         $newAddress = ['ip' => $clientIP];
-        try{
-            \DB::transaction(function() use(&$newComment, $newAddress, $articleId, $request, $clientIP){
+        try {
+            \DB::transaction(function () use (&$newComment, $newAddress, $articleId, $request, $clientIP) {
                 //Create new address
                 $newAddress = Address::create($newAddress);
                 //Create new comment
@@ -57,7 +59,7 @@ class CommentController extends Controller
                 $newComment['is_published'] = 0;
 
                 $newUser = User::where('email', $request->get('email'))->first();
-                if(is_null($newUser)){
+                if (is_null($newUser)) {
                     $newUser = $request->only('email');
                     $newUser = User::create($newUser);
                     $newUser->attachRole(Role::where('name', 'reader')->first());
@@ -65,10 +67,10 @@ class CommentController extends Controller
                     $newUser->reader()->create([
                         'notify' => $request->has('notify'),
                     ]);
-                }elseif($newUser->isReader()){
+                } elseif ($newUser->isReader()) {
                     $newUser->reader->update(['notify' => $request->has('notify')]);
                 }
-                if($request->has('name')){
+                if ($request->has('name')) {
                     $newUser->name = $request->get('name');
                 }
                 $newUser->last_ip = $clientIP;
@@ -79,7 +81,7 @@ class CommentController extends Controller
                 Article::where('id', $articleId)->increment('comment_count');
             });
             //$this->dispatch(new SendConfirmCommentMail($newComment));
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             return response()->json(['errorMsg' => $this->getMessage($e)], 503);
         }
 
@@ -95,66 +97,70 @@ class CommentController extends Controller
         return view('frontend._comments', compact('comments', 'article'));
     }
 
-    public function update(Request $request, $commentId){
+    public function update(Request $request, $commentId)
+    {
         $comment = Comment::find($commentId);
-        try{
+        try {
             $comment->update([
                 'content' => $request->get('content'),
                 'originalContent' => $comment->countEdit == 0 ? $comment->content : $comment->originalContent,
-                'countEdit' => $comment->countEdit+1,
+                'countEdit' => $comment->countEdit + 1,
             ]);
-        }catch(\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('comments')->with('successMsg', 'Comment updated');
     }
 
-    public function togglePublish($commentId){
+    public function togglePublish($commentId)
+    {
         $comment = Comment::find($commentId);
-        try{
+        try {
             $comment->update([
                 'is_published' => !$comment->is_published,
                 'published_at' => new \DateTime(),
             ]);
-        }catch(\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('comments')->with('successMsg', 'Comment updated');
     }
 
-    public function destroy($commentId){
-        try{
+    public function destroy($commentId)
+    {
+        try {
             $comment = Comment::find($commentId);
             Article::where('id', $comment->article_id)->decrement('comment_count');
             Comment::destroy($commentId);
-        }catch (\PDOException $e){
+        } catch (\PDOException $e) {
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('comments')->with('successMsg', 'Comment deleted');
     }
 
-    public function confirmComment(Request $request, $commentId){
+    public function confirmComment(Request $request, $commentId)
+    {
         $comment = Comment::where('id', $commentId)
             ->where('token', $request->get('token'))
             ->with('article')
             ->first();
 
-        if(is_null($comment)){
+        if (is_null($comment)) {
             return redirect()->route('home')->with('errorMsg', 'Invalid request');
         }
 
-        if($comment->is_published){
+        if ($comment->is_published) {
             return redirect()->route('get-article', [$comment->article->id])
                 ->with('warningMsg', 'Comment already published');
         }
 
-        try{
+        try {
             $comment->update(['is_published' => 1, 'is_confirmed' => 1]);
-            if($comment->user->isReader()){
+            if ($comment->user->isReader()) {
                 $comment->user->reader->update(['is_verified' => 1]);
             }
             //notify all user of the comment thread about the new comment except him person who replied
-            if($comment->parent_comment_id){
+            if ($comment->parent_comment_id) {
                 $threadUserIDs = Comment::where('parent_comment_id', $comment->parent_comment_id)
                     ->orWhere('id', $comment->parent_comment_id)
                     ->pluck('user_id');
@@ -168,7 +174,7 @@ class CommentController extends Controller
                 Mail::to($threadUserEmails)->queue(new NotifyCommentThread($comment));
             }
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->route('get-article', [$comment->article->id])
                 ->with('errorMsg', $this->getMessage($e));
         }
