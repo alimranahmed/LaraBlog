@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\ArticleHit;
+use App\Listeners\IncreaseArticleHitCounter;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -16,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\SomeEvent' => [
             'App\Listeners\EventListener',
         ],
+        ArticleHit::class => [
+            IncreaseArticleHitCounter::class,
+        ]
     ];
 
     /**

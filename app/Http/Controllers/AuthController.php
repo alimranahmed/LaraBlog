@@ -17,9 +17,19 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $this->validate($request, ['email' => 'required|email', 'password' => 'required|min:4']);
+        $this->validate(
+            $request,
+            [
+                'email' => 'required|email',
+                'password' => 'required|min:4'
+            ]
+        );
 
-        if (Auth::attempt($request->only('email', 'password'), $request->has('remember_me'))) {
+        $credentials = $request->only('email', 'password');
+
+        $remember = $request->has('remember_me');
+
+        if (Auth::attempt($credentials, $remember)) {
             return redirect()->route('admin-dashboard');
         } else {
             return back()->with('auth_error', 'Invalid credentials')->withInput();
