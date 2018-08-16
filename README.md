@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/alimranahmed/LaraBlog.svg?branch=master)](https://travis-ci.org/alimranahmed/LaraBlog)
+
 # Blog Using Laravel 5
 ### Let's keep it as simple as possible. Configure anything you want
 A full-featured blogging system for personal use. Minimum library used. No frontend theme and anything heavy or unnecessary library used.  
