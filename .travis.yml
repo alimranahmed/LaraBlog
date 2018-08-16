@@ -7,6 +7,7 @@ php:
 before_script:
   - travis_retry composer self-update
   - travis_retry composer install
+  - travis_retry composer dump-autoload
 
 script:
   - vendor/bin/phpunit
