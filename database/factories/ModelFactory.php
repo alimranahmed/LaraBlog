@@ -1,27 +1,54 @@
 <?php
 
-$factory->define(App\Models\Category::class, function(Faker\Generator $faker){
-    return [ 'name' => $name = $faker->word, 'alias' => $name ];
+use Faker\Generator as Faker;
+
+//User
+$factory->define(\App\Models\User::class, function (Faker $faker) {
+    return [
+        'title' => 'Mr',
+        'name' => 'Al Imran Ahmed',
+        'username' => 'imran',
+        'email' => 'imran@gmail.com',
+        'password' => bcrypt('secret'),
+    ];
 });
 
-$factory->define(App\Models\Keyword::class, function(Faker\Generator $faker){
-    return [ 'name' => $faker->word ];
+//Category
+$factory->define(App\Models\Category::class, function (Faker $faker) {
+    return ['name' => $name = $faker->word, 'alias' => $name];
 });
 
-$factory->define(App\Models\Article::class, function (Faker\Generator $faker) {
+//Keyword
+$factory->define(App\Models\Keyword::class, function (Faker $faker) {
+    return ['name' => $faker->word];
+});
+
+//Article
+$factory->define(App\Models\Article::class, function (Faker $faker) {
 
     return [
         'heading' => $faker->sentence,
-        'content' => implode(' ',$faker->paragraphs(15)),
+        'content' => implode(' ', $faker->paragraphs(15)),
         'published_at' => new \DateTime(),
+        'is_published' => 1,
         'user_id' => 1,
         'language' => $faker->randomElement(['ben', 'eng']),
         'category_id' => $faker->numberBetween(1, 5),
     ];
 });
 
+$factory->state(\App\Models\Article::class, 'published', [
+    'is_published' => 1,
+    'published_at' => new \DateTime(),
+]);
 
-$factory->define(\App\Models\Comment::class, function(Faker\Generator $faker){
+$factory->state(\App\Models\Article::class, 'unpublished', [
+    'is_published' => 0,
+    'published_at' => new \DateTime('+3 days'),
+]);
+
+//Comment
+$factory->define(\App\Models\Comment::class, function (Faker $faker) {
     return [
         'content' => $faker->paragraph,
         'article_id' => $faker->numberBetween(1, 10),
