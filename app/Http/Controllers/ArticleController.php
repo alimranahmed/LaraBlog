@@ -24,7 +24,7 @@ class ArticleController extends Controller
 
     public function show($articleId, $articleHeading = '')
     {
-        $clientIP = $_SERVER['REMOTE_ADDR'];
+        $clientIP = $_SERVER['REMOTE_ADDR'] ?? '';
 
         $article = Article::where('id', $articleId)
             ->published()
