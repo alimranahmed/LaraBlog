@@ -59,10 +59,6 @@ class ArticleTest extends TestCase
 
         $this->get("article/{$article->id}/")
             ->assertRedirect()
-
-
-            
-
             ->assertDontSee('Unpublished Heading')
             ->assertDontSee('Unpublished content');
 
