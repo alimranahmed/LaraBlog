@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Config extends Model
 {
+    protected $guarded = ['id'];
+
     public static function get($name)
     {
         $config = self::where('name', $name)->first();
