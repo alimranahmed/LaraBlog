@@ -26,6 +26,6 @@ class HitLogger extends Model
 
     public function getCityAttribute()
     {
-        return isset($this->address->city) ? 'Unknown' : $this->address->city;
+        return empty($this->address->city) ? 'Unknown' : $this->address->city;
     }
 }

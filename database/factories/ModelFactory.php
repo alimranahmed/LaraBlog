@@ -60,3 +60,19 @@ $factory->define(\App\Models\Comment::class, function (Faker $faker) {
         'parent_comment_id' => null,
     ];
 });
+
+
+//Address
+$factory->define(\App\Models\Address::class, function (Faker $faker) {
+    return [
+        'ip' => $faker->ipv4,
+        'country_code' => $faker->countryCode,
+        'country_name' => $faker->country,
+        'region_name' => $faker->city,
+        'city' => $faker->city,
+        'timezone' => $faker->timezone,
+        'zip_code' => $faker->postcode,
+        'latitude' => $faker->latitude,
+        'longitude' => $faker->longitude,
+    ];
+});
