@@ -5,12 +5,15 @@ namespace Tests\Unit;
 use App\Models\Address;
 use App\Models\Article;
 use App\Models\HitLogger;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class HitLoggerTest extends TestCase
 {
+    use DatabaseTransactions;
+
     public function testCountryAttribute()
     {
         $article = factory(Article::class, 1)->create()->first();
