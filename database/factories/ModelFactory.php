@@ -53,7 +53,10 @@ $factory->define(\App\Models\Comment::class, function (Faker $faker) {
     return [
         'content' => $faker->paragraph,
         'article_id' => $faker->numberBetween(1, 10),
+        'is_published' => 1,
+        'published_at' => new \DateTime('+3 days'),
+        'is_confirmed' => 1,
         'user_id' => 1,
-        'parent_comment_id' => $faker->randomElement([$faker->numberBetween(1, 5), null]),
+        'parent_comment_id' => null,
     ];
 });
