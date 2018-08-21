@@ -8,7 +8,7 @@ $factory->define(\App\Models\User::class, function (Faker $faker) {
         'title' => 'Mr',
         'name' => 'Al Imran Ahmed',
         'username' => 'imran',
-        'email' => 'imran@gmail.com',
+        'email' => $faker->email,
         'password' => bcrypt('secret'),
     ];
 });
