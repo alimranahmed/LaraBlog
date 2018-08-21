@@ -68,7 +68,7 @@ class ArticleController extends Controller
         if ($this->hasArticleAuthorization(Auth::user(), $article)) {
             return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
         }
-        $categories = Category::where('is_active', 1)->get();
+        $categories = Category::active()->get();
         return view('backend.article_edit', compact('categories', 'article'));
     }
 

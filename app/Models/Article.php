@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class Article extends Model
 {
     protected $guarded = ['id'];
+    protected $dates = ['published_at'];
     protected $appends = ['publishedAtHuman', 'createdAtHuman', 'updatedAtHuman', 'categoryName'];
 
     public function user()
@@ -60,20 +61,17 @@ class Article extends Model
 
     public function getPublishedAtHumanAttribute($value)
     {
-        $carbonDate = new Carbon($this->published_at);
-        return $carbonDate->diffForHumans();
+        return $this->published_at->diffForHumans();
     }
 
     public function getCreatedAtHumanAttribute($value)
     {
-        $carbonDate = new Carbon($this->created_at);
-        return $carbonDate->diffForHumans();
+        return $this->created_at->diffForHumans();
     }
 
     public function getUpdatedAtHumanAttribute($value)
     {
-        $carbonDate = new Carbon($this->updated_at);
-        return $carbonDate->diffForHumans();
+        return $this->updated_at->diffForHumans();
     }
 
     public function getCategoryNameAttribute()

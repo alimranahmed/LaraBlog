@@ -18,8 +18,7 @@ class Keyword extends Model
 
     public function getCreatedAtHumanAttribute()
     {
-        $createdAt = new Carbon($this->created_at);
-        return $createdAt->diffForHumans(Carbon::now());
+        return $this->created_at->diffForHumans();
     }
 
     /**

@@ -8,7 +8,7 @@ $factory->define(\App\Models\User::class, function (Faker $faker) {
         'title' => 'Mr',
         'name' => 'Al Imran Ahmed',
         'username' => 'imran',
-        'email' => 'imran@gmail.com',
+        'email' => $faker->email,
         'password' => bcrypt('secret'),
     ];
 });
@@ -31,6 +31,7 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
         'content' => implode(' ', $faker->paragraphs(15)),
         'published_at' => new \DateTime(),
         'is_published' => 1,
+        'is_deleted' => 0,
         'user_id' => 1,
         'language' => $faker->randomElement(['ben', 'eng']),
         'category_id' => $faker->numberBetween(1, 5),
@@ -52,7 +53,26 @@ $factory->define(\App\Models\Comment::class, function (Faker $faker) {
     return [
         'content' => $faker->paragraph,
         'article_id' => $faker->numberBetween(1, 10),
+        'is_published' => 1,
+        'published_at' => new \DateTime('+3 days'),
+        'is_confirmed' => 1,
         'user_id' => 1,
-        'parent_comment_id' => $faker->randomElement([$faker->numberBetween(1, 5), null]),
+        'parent_comment_id' => null,
+    ];
+});
+
+
+//Address
+$factory->define(\App\Models\Address::class, function (Faker $faker) {
+    return [
+        'ip' => $faker->ipv4,
+        'country_code' => $faker->countryCode,
+        'country_name' => $faker->country,
+        'region_name' => $faker->city,
+        'city' => $faker->city,
+        'timezone' => $faker->timezone,
+        'zip_code' => $faker->postcode,
+        'latitude' => $faker->latitude,
+        'longitude' => $faker->longitude,
     ];
 });

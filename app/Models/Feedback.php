@@ -13,7 +13,6 @@ class Feedback extends Model
 
     public function getCreatedAtHumanAttribute()
     {
-        $carbonDate = new Carbon($this->created_at);
-        return $carbonDate->diffForHumans();
+        return $this->created_at->diffForHumans();
     }
 }
