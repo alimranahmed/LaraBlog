@@ -29,7 +29,9 @@ class ArticleTest extends WebTestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class, 1)->create(['email' => 'example@test.com'])->first();
+        $this->user = factory(User::class, 1)
+            ->create(['name' => 'Example User', 'email' => 'example@test.com'])
+            ->first();
 
         $this->category = factory(Category::class, 1)->create()->first();
     }
@@ -52,6 +54,9 @@ class ArticleTest extends WebTestCase
         $this->get('article')
             ->assertOk()
             ->assertSee('Test Heading')
+            ->assertSee("published 1 second ago")
+            ->assertSee("by {$this->user->name}")
+            ->assertSee("{$this->category->name}")
             ->assertDontSee('Unpublished Heading');
     }
 
@@ -67,6 +72,9 @@ class ArticleTest extends WebTestCase
         $this->get("article/{$article->id}/")
             ->assertOk()
             ->assertSee('Test Heading')
+            ->assertSee("Written 1 second ago")
+            ->assertSee("by {$this->user->name}")
+            ->assertSee("{$this->category->name}")
             ->assertSee('Test content');
     }
 

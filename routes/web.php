@@ -28,7 +28,7 @@ Route::get('search', 'ArticleController@search')->name('search-article');
 
 //Comment
 Route::post('comment/{articleId}', 'CommentController@store')->name('add-comment');
-Route::get('confirm-comment/{commentId}', 'CommentController@confirmComment')->name('confirm-comment');
+Route::get('comment/{commentId}/confirm', 'CommentController@confirmComment')->name('confirm-comment');
 
 //Category
 Route::get('category/{categoryId}', 'CategoryController@show')->name('get-category');

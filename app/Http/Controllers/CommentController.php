@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CommentOnArticle;
 use App\Http\Requests\CommentRequest;
 use App\Mail\CommentConfirmation;
 use App\Mail\NotifyAdmin;
@@ -14,6 +13,7 @@ use App\Models\Config;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -38,14 +38,14 @@ class CommentController extends Controller
     {
         $article = Article::find($articleId);
         if (is_null($article)) {
-            return response()->json(['errorMsg' => 'Article not found'], 404);
+            return response()->json(['errorMsg' => 'Article not found'], Response::HTTP_NOT_FOUND);
         }
 
         if (!$article->is_comment_enabled) {
-            return response()->json(['errorMsg' => 'Comment is not allowed for this article'], 403);
+            return response()->json(['errorMsg' => 'Comment is not allowed for this article'], Response::HTTP_FORBIDDEN);
         }
 
-        $clientIP = $_SERVER['REMOTE_ADDR'];
+        $clientIP = $_SERVER['REMOTE_ADDR'] ?? '';
         $newComment = $request->only('content', 'parent_comment_id');
         $newAddress = ['ip' => $clientIP];
         try {
@@ -82,7 +82,7 @@ class CommentController extends Controller
             });
             //$this->dispatch(new SendConfirmCommentMail($newComment));
         } catch (\Exception $e) {
-            return response()->json(['errorMsg' => $this->getMessage($e)], 503);
+            return response()->json(['errorMsg' => $this->getMessage($e)], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
         $comments = Comment::where('article_id', $articleId)

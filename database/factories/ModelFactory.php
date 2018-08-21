@@ -29,7 +29,7 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
     return [
         'heading' => $faker->sentence,
         'content' => implode(' ', $faker->paragraphs(15)),
-        'published_at' => new \DateTime(),
+        'published_at' => now(),
         'is_published' => 1,
         'is_deleted' => 0,
         'user_id' => 1,
@@ -40,7 +40,7 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
 
 $factory->state(\App\Models\Article::class, 'published', [
     'is_published' => 1,
-    'published_at' => new \DateTime(),
+    'published_at' => now(),
 ]);
 
 $factory->state(\App\Models\Article::class, 'unpublished', [
@@ -54,7 +54,7 @@ $factory->define(\App\Models\Comment::class, function (Faker $faker) {
         'content' => $faker->paragraph,
         'article_id' => $faker->numberBetween(1, 10),
         'is_published' => 1,
-        'published_at' => new \DateTime('+3 days'),
+        'published_at' => now(),
         'is_confirmed' => 1,
         'user_id' => 1,
         'parent_comment_id' => null,
