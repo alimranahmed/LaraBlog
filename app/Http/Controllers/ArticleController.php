@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ArticleHit;
 use App\Models\Address;
 use App\Models\Article;
 use App\Models\Category;
@@ -40,30 +41,21 @@ class ArticleController extends Controller
             return redirect()->route('home')->with('warningMsg', 'Article not found');
         }
 
-        try {
-            $address = Address::firstOrCreate(['ip' => $clientIP]);
-            $hitLogger = HitLogger::where('article_id', $articleId)->where('address_id', $address->id)->first();
+        event(new ArticleHit($article, $clientIP));
 
-            if (is_null($hitLogger)) {
-                HitLogger::create(['article_id' => $articleId, 'address_id' => $address->id, 'count' => 1]);
-                $article->increment('hit_count');
-            } else {
-                $hitLogger->update(['count' => ++$hitLogger->count]);
-            }
+        $relatedArticles = $this->getRelatedArticles($article);
 
-        } catch (\PDOException $e) {
+        return view('frontend.article', compact('article', 'relatedArticles'));
+    }
 
-            return redirect()->route('home')->with('errorMsg', $this->getMessage($e));
-        }
-
-        $relatedArticles = Article::where('category_id', $article->category->id)
+    private function getRelatedArticles(Article $article)
+    {
+        return Article::where('category_id', $article->category->id)
             ->where('id', '!=', $article->id)
             ->published()
             ->latest()
             ->take(3)
             ->get();
-
-        return view('frontend.article', compact('article', 'relatedArticles'));
     }
 
     public function edit($articleId)

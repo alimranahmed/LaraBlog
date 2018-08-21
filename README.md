@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/alimranahmed/LaraBlog.svg?branch=dev)](https://travis-ci.org/alimranahmed/LaraBlog)
+[![Build Status](https://travis-ci.org/alimranahmed/LaraBlog.svg?branch=master)](https://travis-ci.org/alimranahmed/LaraBlog)
+
 
 # Blog Using Laravel 5
 ### Let's keep it as simple as possible. Configure anything you want
@@ -32,7 +33,7 @@ A full-featured blogging system for personal use. Minimum library used. No front
 3. Bootstrap 3
 
 ### Installation Process
-1. Execute `git clone https://github.com/alimranahmed/Personal-Blog-Using-Laravel5.git` on your terminal to download this project.
+1. Execute `git clone https://github.com/alimranahmed/LaraBlog.git` on your terminal to download this project.
 2. Go to the project root directory and execute `composer install` to install all PHP dependencies of the project
 3. Create a file named as .env and copy the content of .env.example to newly created .env file 
 4. Then execute `php artisan key:generate` on your terminal/cmd to generate environment key
