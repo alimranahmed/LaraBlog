@@ -5,8 +5,6 @@ namespace Tests\Unit;
 use App\Models\Config;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ConfigTest extends TestCase
 {

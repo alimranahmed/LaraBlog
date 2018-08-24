@@ -173,7 +173,6 @@ class CommentController extends Controller
 
                 Mail::to($threadUserEmails)->queue(new NotifyCommentThread($comment));
             }
-
         } catch (\Exception $e) {
             return redirect()->route('get-article', [$comment->article->id])
                 ->with('errorMsg', $this->getMessage($e));

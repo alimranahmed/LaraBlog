@@ -3,7 +3,6 @@
 namespace Tests;
 
 use App\Exceptions\Handler;
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
@@ -12,8 +11,7 @@ abstract class TestCase extends BaseTestCase
 
     public function disableExceptionHandling()
     {
-        app()->bind(Handler::class, new class extends Handler
-        {
+        app()->bind(Handler::class, new class extends Handler {
             public function __construct()
             {
             }

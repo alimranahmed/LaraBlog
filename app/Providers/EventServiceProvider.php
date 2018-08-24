@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use App\Events\ArticleHit;
 use App\Listeners\IncreaseArticleHitCounter;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {

@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        if(env("APP_ENV") == 'local') {
+        if (env("APP_ENV") == 'local') {
             $owner = User::create(
                 [
                     'name' => 'Al- Imran Ahmed',
@@ -60,7 +60,7 @@ class UsersTableSeeder extends Seeder
             $admin->attachRoles([$adminRole]);
             $author->attachRoles([$authorRole]);
             $reader->attachRoles([$readerRole]);
-        }else{
+        } else {
             $owner = User::create(
                 [
                     'name' => 'Al- Imran Ahmed',
