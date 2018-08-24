@@ -35,17 +35,16 @@ class CommentTest extends WebTestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class, 1)
-            ->create(['name' => 'Example User', 'email' => 'example@test.com'])
-            ->first();
+        $this->user = factory(User::class)
+            ->create(['name' => 'Example User', 'email' => 'example@test.com']);
 
-        $this->category = factory(Category::class, 1)->create()->first();
+        $this->category = factory(Category::class)->create();
 
-        $this->article = factory(Article::class, 1)->state('published')->create([
+        $this->article = factory(Article::class)->state('published')->create([
             'heading' => 'Test Heading',
             'category_id' => $this->category->id,
             'user_id' => $this->user->id,
-        ])->first();
+        ]);
     }
 
     public function testStore()
@@ -93,5 +92,38 @@ class CommentTest extends WebTestCase
 
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['name', 'email', 'content']);
+    }
+
+    public function testConfirmComment()
+    {
+        $comment = factory(Comment::class)
+            ->create([
+                'user_id' => $this->user->id,
+                'article_id' => $this->article->id,
+                'is_published' => 0,
+                'is_confirmed' => 0,
+                'token' => 'test-token',
+            ]);
+
+        $this->get("comment/{$comment->id}/confirm/?token={$comment->token}")
+            ->assertRedirect(route('get-article', [$comment->article->id]));
+
+
+        $comment = Comment::find($comment->id);
+
+        $this->assertEquals(1, $comment->is_published);
+        $this->assertEquals(1, $comment->is_confirmed);
+
+        $comment->update([
+            'is_published' => 0,
+            'is_confirmed' => 0,
+            'token' => 'test-token'
+        ]);
+
+        $this->get("comment/{$comment->id}/confirm/?token=invalid-token")
+            ->assertRedirect(route('home'));
+
+        $this->assertEquals(0, $comment->is_published);
+        $this->assertEquals(0, $comment->is_confirmed);
     }
 }

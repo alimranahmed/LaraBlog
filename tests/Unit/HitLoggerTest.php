@@ -22,22 +22,22 @@ class HitLoggerTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class, 1)->create(['email' => 'example@test.com'])->first();
+        $user = factory(User::class)->create(['email' => 'example@test.com']);
 
-        $category = factory(Category::class, 1)->create()->first();
+        $category = factory(Category::class)->create();
 
-        $this->article = factory(Article::class, 1)->create([
+        $this->article = factory(Article::class)->create([
             'user_id' => $user->id,
             'category_id' => $category->id,
-        ])->first();
+        ]);
     }
 
     public function testCountryAttribute()
     {
 
-        $address = factory(Address::class, 1)->create([
+        $address = factory(Address::class)->create([
             'country_name' => 'Bangladesh'
-        ])->first();
+        ]);
 
         $hitLogger = HitLogger::create([
             'article_id' => $this->article->id,
@@ -46,9 +46,9 @@ class HitLoggerTest extends TestCase
 
         $this->assertEquals('Bangladesh', $hitLogger->country);
 
-        $address = $address = factory(Address::class, 1)->create([
+        $address = $address = factory(Address::class)->create([
             'country_name' => null,
-        ])->first();
+        ]);
 
         $hitLogger = HitLogger::create([
             'article_id' => $this->article->id,
@@ -60,9 +60,9 @@ class HitLoggerTest extends TestCase
 
     public function testCityAttribute()
     {
-        $address = factory(Address::class, 1)->create([
+        $address = factory(Address::class)->create([
             'city' => 'Dhaka'
-        ])->first();
+        ]);
 
         $hitLogger = HitLogger::create([
             'article_id' => $this->article->id,
@@ -71,9 +71,9 @@ class HitLoggerTest extends TestCase
 
         $this->assertEquals('Dhaka', $hitLogger->city);
 
-        $address = $address = factory(Address::class, 1)->create([
+        $address = $address = factory(Address::class)->create([
             'city' => null,
-        ])->first();
+        ]);
 
         $hitLogger = HitLogger::create([
             'article_id' => $this->article->id,

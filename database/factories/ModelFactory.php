@@ -32,9 +32,9 @@ $factory->define(App\Models\Article::class, function (Faker $faker) {
         'published_at' => now(),
         'is_published' => 1,
         'is_deleted' => 0,
-        'user_id' => 1,
+        'user_id' => null,
         'language' => $faker->randomElement(['ben', 'eng']),
-        'category_id' => $faker->numberBetween(1, 5),
+        'category_id' => null,
     ];
 });
 
@@ -52,11 +52,11 @@ $factory->state(\App\Models\Article::class, 'unpublished', [
 $factory->define(\App\Models\Comment::class, function (Faker $faker) {
     return [
         'content' => $faker->paragraph,
-        'article_id' => $faker->numberBetween(1, 10),
+        'article_id' => null,
         'is_published' => 1,
         'published_at' => now(),
         'is_confirmed' => 1,
-        'user_id' => 1,
+        'user_id' => null,
         'parent_comment_id' => null,
     ];
 });

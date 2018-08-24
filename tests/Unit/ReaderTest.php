@@ -15,7 +15,7 @@ class ReaderTest extends TestCase
 
     public function testVerifiedScope()
     {
-        $user = factory(User::class)->create()->first();
+        $user = factory(User::class)->create();
 
         Reader::create([
             'user_id' => $user->id,
@@ -27,7 +27,7 @@ class ReaderTest extends TestCase
 
     public function testSubscribedScope()
     {
-        $user = factory(User::class)->create()->first();
+        $user = factory(User::class)->create();
 
         Reader::create([
             'user_id' => $user->id,

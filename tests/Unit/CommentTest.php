@@ -35,19 +35,19 @@ class CommentTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class, 1)->create(['email' => 'example@test.com'])->first();
+        $this->user = factory(User::class)->create(['email' => 'example@test.com']);
 
-        $this->category = factory(Category::class, 1)->create()->first();
+        $this->category = factory(Category::class)->create();
 
-        $this->article = factory(Article::class, 1)->create([
+        $this->article = factory(Article::class)->create([
             'user_id' => $this->user->id,
             'category_id' => $this->category->id,
-        ])->first();
+        ]);
     }
 
     public function testPublishedScope()
     {
-        factory(Comment::class, 1)->create([
+        factory(Comment::class)->create([
             'user_id' => $this->user->id,
             'article_id' => $this->article->id,
             'is_published' => 1
@@ -74,21 +74,21 @@ class CommentTest extends TestCase
 
     public function testCreatedAtHumanAttribute()
     {
-        $comment = factory(Comment::class, 1)->create([
+        $comment = factory(Comment::class)->create([
             'user_id' => $this->user->id,
             'article_id' => $this->article->id,
-        ])->first();
+        ]);
 
         $this->assertEquals('1 second ago', $comment->createdAtHuman);
     }
 
     public function testPublishedAtHumanAttribute()
     {
-        $comment = factory(Comment::class, 1)->create([
+        $comment = factory(Comment::class)->create([
             'user_id' => $this->user->id,
             'article_id' => $this->article->id,
             'published_at' => now(),
-        ])->first();
+        ]);
 
         $this->assertEquals('1 second ago', $comment->publishedAtHuman);
     }

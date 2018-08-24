@@ -21,30 +21,28 @@ class KeywordTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class, 1)->create(['email' => 'example@test.com'])->first();
+        $user = factory(User::class)->create(['email' => 'example@test.com']);
 
-        $category = factory(Category::class, 1)->create()->first();
+        $category = factory(Category::class)->create();
 
-        $this->article = factory(Article::class, 1)->create([
+        $this->article = factory(Article::class)->create([
             'user_id' => $user->id,
             'category_id' => $category->id,
-        ])->first();
+        ]);
     }
 
     public function testCreatedAtHumanAttribute()
     {
-        $keyword = factory(Keyword::class, 1)->create([
+        $keyword = factory(Keyword::class)->create([
             'name' => 'test_keyword',
-        ])->first();
+        ]);
 
         $this->assertEquals('1 second ago', $keyword->createdAtHuman);
     }
 
     public function testGetArticleIds()
     {
-        $keyword = factory(Keyword::class, 1)->create([
-            'name' => 'test_keyword',
-        ]);
+        $keyword = factory(Keyword::class, 2)->create();
 
         $this->article->keywords()->attach($keyword->first()->id);
 

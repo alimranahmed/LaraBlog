@@ -28,24 +28,23 @@ class ArticleTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->user = factory(User::class, 1)->create(['email' => 'example@test.com'])->first();
+        $this->user = factory(User::class)->create(['email' => 'example@test.com']);
 
-        $this->category = factory(Category::class, 1)->create()->first();
+        $this->category = factory(Category::class)->create();
     }
 
     public function testPublishedScope()
     {
-        factory(Article::class, 1)->state('published')->create([
+        factory(Article::class)->state('published')->create([
             'user_id' => $this->user->id,
             'category_id' => $this->category->id,
         ]);
-        $article = Article::published()->first();
-        $this->assertEquals(1, $article->is_published);
+        $this->assertEquals(1, Article::published()->value('is_published'));
     }
 
     public function testNotDeletedScope()
     {
-        factory(Article::class, 1)->create([
+        factory(Article::class)->create([
             'is_deleted' => 0,
             'user_id' => $this->user->id,
             'category_id' => $this->category->id,
@@ -57,42 +56,42 @@ class ArticleTest extends TestCase
 
     public function testPublishedAtHumanAttribute()
     {
-        $article = factory(Article::class, 1)->create([
+        $article = factory(Article::class)->create([
             'published_at' => now(),
             'user_id' => $this->user->id,
             'category_id' => $this->category->id,
-        ])->first();
+        ]);
 
         $this->assertEquals('1 second ago', $article->publishedAtHuman);
     }
 
     public function testCreatedAtHumanAttribute()
     {
-        $article = factory(Article::class, 1)->create([
+        $article = factory(Article::class)->create([
             'user_id' => $this->user->id,
             'category_id' => $this->category->id
-        ])->first();
+        ]);
 
         $this->assertEquals('1 second ago', $article->createdAtHuman);
     }
 
     public function testUpdatedAtHumanAttribute()
     {
-        $article = factory(Article::class, 1)->create([
+        $article = factory(Article::class)->create([
             'user_id' => $this->user->id,
             'category_id' => $this->category->id,
-        ])->first();
+        ]);
 
         $this->assertEquals('1 second ago', $article->updatedAtHuman);
     }
 
     public function testCategoryNameAttribute()
     {
-        $category = factory(Category::class, 1)->create(['name' => 'Test Category'])->first();
-        $article = factory(Article::class, 1)->create([
+        $category = factory(Category::class)->create(['name' => 'Test Category']);
+        $article = factory(Article::class)->create([
             'user_id' => $this->user->id,
             'category_id' => $category->id,
-        ])->first();
+        ]);
 
         $this->assertEquals($category->name, $article->categoryName);
     }
