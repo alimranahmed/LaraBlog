@@ -10,9 +10,6 @@ use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CommentTest extends WebTestCase
 {
@@ -80,7 +77,6 @@ class CommentTest extends WebTestCase
 
         $this->assertEquals(1, $user->reader->notify);
         $this->assertEquals(0, $user->reader->is_verified);
-
     }
 
     public function testStoreValidation()

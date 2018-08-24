@@ -6,12 +6,6 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
 use Faker\Factory;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Http\Response;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ArticleTest extends WebTestCase
 {
@@ -91,6 +85,5 @@ class ArticleTest extends WebTestCase
             ->assertRedirect()
             ->assertDontSee('Unpublished Heading')
             ->assertDontSee('Unpublished content');
-
     }
 }

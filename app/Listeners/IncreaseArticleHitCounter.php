@@ -5,8 +5,6 @@ namespace App\Listeners;
 use App\Events\ArticleHit;
 use App\Models\Address;
 use App\Models\HitLogger;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class IncreaseArticleHitCounter
 {

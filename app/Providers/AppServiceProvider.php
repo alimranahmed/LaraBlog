@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Models\Category;
 use App\Models\Config;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -17,10 +16,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        try{
+        try {
             View::share('navCategories', Category::getNonEmptyOnly());
             View::share('globalConfigs', Config::allFormatted());
-        }catch(\PDOException $e){
+        } catch (\PDOException $e) {
             //TODO handle response
         }
     }

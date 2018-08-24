@@ -41,11 +41,11 @@ class GetLocationByIP extends Command
     {
         $httpClient = new HttpClient();
         $addresses = Address::where('country_name', null)->get();
-        foreach ($addresses as $address){
+        foreach ($addresses as $address) {
             $ip = $address->ip;
             $response = $httpClient->send("http://freegeoip.net/json/$ip");
             $location = json_decode($response->body);
-            if(!empty($location)){
+            if (!empty($location)) {
                 $address->update([
                     'country_code' => $location->country_code,
                     'country_name' => $location->country_name,

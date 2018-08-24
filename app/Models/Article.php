@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -91,7 +90,6 @@ class Article extends Model
                 return collect([]);
             }
             $articleQuery = Article::where('category_id', $category->id);
-
         } elseif (!is_null($keywordName)) {
             $keyword = Keyword::where('name', $keywordName)->first();
             if (is_null($keyword)) {
@@ -99,10 +97,8 @@ class Article extends Model
             }
             $articleIds = $keyword->articles->pluck('id')->toArray();
             $articleQuery = Article::whereIn('id', $articleIds);
-
         } else {
             $articleQuery = Article::published()->notDeleted();
-
         }
 
         $paginateUrl = '';

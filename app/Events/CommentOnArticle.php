@@ -3,12 +3,11 @@
 namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 use Pusher;
 
 class CommentOnArticle implements ShouldBroadcast
@@ -28,10 +27,11 @@ class CommentOnArticle implements ShouldBroadcast
         $this->broadcastToPusher();
     }
 
-    private function broadcastToPusher(){
-        $options = array(
+    private function broadcastToPusher()
+    {
+        $options = [
             'encrypted' => true
-        );
+        ];
         $pusher = new Pusher(
             env('PUSHER_KEY'),
             env('PUSHER_SECRET'),
@@ -53,7 +53,8 @@ class CommentOnArticle implements ShouldBroadcast
         return new PrivateChannel('visitor-activity');
     }
 
-    public function broadcastAs(){
+    public function broadcastAs()
+    {
         return 'comment-on-article';
     }
 }

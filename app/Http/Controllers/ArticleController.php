@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Events\ArticleHit;
+use App\Mail\NotifySubscriberForNewArticle;
 use App\Models\Address;
 use App\Models\Article;
 use App\Models\Category;
-use App\Models\HitLogger;
 use App\Models\Keyword;
 use App\Models\User;
-use App\Mail\NotifySubscriberForNewArticle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;

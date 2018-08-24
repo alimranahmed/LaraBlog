@@ -25,7 +25,6 @@ $factory->define(App\Models\Keyword::class, function (Faker $faker) {
 
 //Article
 $factory->define(App\Models\Article::class, function (Faker $faker) {
-
     return [
         'heading' => $faker->sentence,
         'content' => implode(' ', $faker->paragraphs(15)),
