@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Validation\ValidationException;
 
 class Controller extends BaseController
 {
@@ -13,6 +14,10 @@ class Controller extends BaseController
 
     public function getMessage(\Exception $e, $msg = null)
     {
+        if ($e instanceof ValidationException) {
+            return $e->getMessage();
+        }
+
         if (env('APP_ENV') != 'production') {
             return $this->getLogMsg($e);
         } else {

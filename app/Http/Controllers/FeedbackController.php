@@ -19,8 +19,9 @@ class FeedbackController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, ['email' => 'required', 'name' => 'required', 'content' => 'required']);
         try {
+            $this->validate($request, ['email' => 'required|email', 'name' => 'required', 'content' => 'required']);
+
             $feedback = Feedback::create([
                 'email' => $request->get('email'),
                 'name' => $request->get('name'),

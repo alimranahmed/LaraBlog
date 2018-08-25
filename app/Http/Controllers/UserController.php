@@ -118,9 +118,15 @@ class UserController extends Controller
 
     public function subscribe(Request $request)
     {
-        $clientIP = $_SERVER['REMOTE_ADDR'];
+
+
+        $clientIP = $_SERVER['REMOTE_ADDR'] ?? null;
+
         $newAddress = ['ip' => $clientIP];
+
         try {
+            $this->validate($request,['name' => 'required', 'email' => 'required|email']);
+
             \DB::transaction(function () use ($newAddress, $request, $clientIP) {
                 //Create new address
                 $newAddress = Address::create($newAddress);

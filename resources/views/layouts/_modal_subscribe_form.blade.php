@@ -8,8 +8,8 @@
             <form method="post" action="{{route('subscribe')}}">
                 {{csrf_field()}}
                 <div class="modal-body">
-                    <input type="text" placeholder="Name*" name="name" class="form-control">
-                    <input type="email" placeholder="Email*" name="email" class="form-control margin-top-10">
+                    <input type="text" placeholder="Name*" name="name" class="form-control" required>
+                    <input type="email" placeholder="Email*" name="email" class="form-control margin-top-10" required>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Subscribe</button>
