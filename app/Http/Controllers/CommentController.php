@@ -43,8 +43,10 @@ class CommentController extends Controller
         }
 
         if (!$article->is_comment_enabled) {
-            return response()->json(['errorMsg' => 'Comment is not allowed for this article'],
-                Response::HTTP_FORBIDDEN);
+            return response()->json(
+                ['errorMsg' => 'Comment is not allowed for this article'],
+                Response::HTTP_FORBIDDEN
+            );
         }
 
         $clientIP = $_SERVER['REMOTE_ADDR'] ?? '';

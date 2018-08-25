@@ -12,12 +12,14 @@ class ArticlesTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = \Faker\Factory::create();
-        if (env("APP_ENV") == 'local') {
-            factory(\App\Models\Article::class, 10)->create([
-                'category_id' => $faker->randomElement(\App\Models\Category::all()->pluck('id')),
-                'user_id' => $faker->randomElement(\App\Models\User::all()->pluck('id')),
-            ]);
+        if (env("APP_ENV") != 'production') {
+            $faker = \Faker\Factory::create();
+            foreach (range(0, 10) as $i) {
+                factory(\App\Models\Article::class)->create([
+                    'category_id' => $faker->randomElement(\App\Models\Category::all()->pluck('id')),
+                    'user_id' => $faker->randomElement(\App\Models\User::all()->pluck('id')),
+                ]);
+            }
             $articles = Article::all();
             foreach ($articles as $article) {
                 $article->keywords()->attach($faker->numberBetween(1, 5));
