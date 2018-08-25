@@ -10,6 +10,7 @@ $factory->define(\App\Models\User::class, function (Faker $faker) {
         'username' => 'imran',
         'email' => $faker->email,
         'password' => bcrypt('secret'),
+        'token' => null,
     ];
 });
 

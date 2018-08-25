@@ -118,20 +118,16 @@ class UserController extends Controller
 
     public function subscribe(Request $request)
     {
-
-
         $clientIP = $_SERVER['REMOTE_ADDR'] ?? null;
-
         $newAddress = ['ip' => $clientIP];
 
         try {
-            $this->validate($request,['name' => 'required', 'email' => 'required|email']);
+            $this->validate($request, ['name' => 'required', 'email' => 'required|email']);
 
             \DB::transaction(function () use ($newAddress, $request, $clientIP) {
-                //Create new address
                 $newAddress = Address::create($newAddress);
-                //Create user comment
                 $newUser = User::where('email', $request->get('email'))->first();
+
                 if (is_null($newUser)) {
                     $newUser = $request->only('email', 'name');
                     $newUser['last_ip'] = $clientIP;
@@ -140,7 +136,7 @@ class UserController extends Controller
                     $newUser = User::create($newUser);
                     $newUser->attachRole(Role::where('name', 'reader')->first());
 
-                    $newUser->reader()->create(['notify' => 0]);
+                    $newUser->reader()->create(['notify' => 0, 'is_verified' => 0]);
                     Mail::to($request->get('email'))->queue(new SubscribeConfirmation($newUser));
                 } else {
                     return back()->with('warningMsg', 'You have already subscribed, please contact with admin');
@@ -155,14 +151,17 @@ class UserController extends Controller
 
     public function confirmSubscribe(Request $request, $userId)
     {
-        $user = User::where('id', $userId)
-            ->where('token', $request->get('token'))
-            ->first();
-        if (is_null($user)) {
-            return redirect()->route('home')->with('errorMsg', 'Invalid request');
-        }
-
         try {
+            $this->validate($request, ['token' => 'required']);
+
+            $user = User::where('id', $userId)
+                ->where('token', $request->get('token'))
+                ->first();
+
+            if (is_null($user)) {
+                return redirect()->route('home')->with('errorMsg', 'Invalid request');
+            }
+
             if ($user->isReader()) {
                 $user->reader->update(['is_verified' => 1, 'notify' => 1]);
                 return redirect()->route('home')->with('successMsg', 'Congratulation, your subscription confirmed');
@@ -176,14 +175,17 @@ class UserController extends Controller
 
     public function unSubscribe(Request $request, $userId)
     {
-        $user = User::where('id', $userId)
-            ->where('token', $request->get('token'))
-            ->first();
-        if (is_null($user)) {
-            return redirect()->route('home')->with('errorMsg', 'Invalid request');
-        }
-
         try {
+            $this->validate($request, ['token' => 'required']);
+
+            $user = User::where('id', $userId)
+                ->where('token', $request->get('token'))
+                ->first();
+
+            if (is_null($user)) {
+                return redirect()->route('home')->with('errorMsg', 'Invalid request');
+            }
+
             if ($user->isReader() && $user->reader->notify) {
                 $user->reader->update(['is_verified' => 1, 'notify' => 0]);
                 return redirect()->route('home')->with('successMsg', 'You have un-subscribed confirmed');

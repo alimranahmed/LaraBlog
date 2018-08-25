@@ -148,21 +148,23 @@ class CommentController extends Controller
 
     public function confirmComment(Request $request, $commentId)
     {
-        $comment = Comment::where('id', $commentId)
-            ->where('token', $request->get('token'))
-            ->with('article')
-            ->first();
-
-        if (is_null($comment)) {
-            return redirect()->route('home')->with('errorMsg', 'Invalid request');
-        }
-
-        if ($comment->is_published) {
-            return redirect()->route('get-article', [$comment->article->id])
-                ->with('warningMsg', 'Comment already published');
-        }
-
         try {
+            $this->validate($request, ['token' => 'required']);
+
+            $comment = Comment::where('id', $commentId)
+                ->where('token', $request->get('token'))
+                ->with('article')
+                ->first();
+
+            if (is_null($comment)) {
+                return redirect()->route('home')->with('errorMsg', 'Invalid request');
+            }
+
+            if ($comment->is_published) {
+                return redirect()->route('get-article', [$comment->article->id])
+                    ->with('warningMsg', 'Comment already published');
+            }
+
             $comment->update(['is_published' => 1, 'is_confirmed' => 1]);
             if ($comment->user->isReader()) {
                 $comment->user->reader->update(['is_verified' => 1]);
