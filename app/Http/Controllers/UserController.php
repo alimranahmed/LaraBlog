@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
@@ -35,6 +36,7 @@ class UserController extends Controller
         try {
             User::destroy($userId);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return back()->with('successMsg', 'User deleted');
@@ -57,6 +59,7 @@ class UserController extends Controller
             $newUser = User::create($newUser);
             $newUser->roles()->attach($request->get('role_id'));
         } catch (\Exception $e) {
+            Log::error($this->getLogMsg($e));
             return back()->withInput()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('users')->with('successMsg', 'User created!');
@@ -83,8 +86,8 @@ class UserController extends Controller
                 $user->roles()->detach();
                 $user->roles()->attach($request->get('role_id'));
             }
-            //$user->attachRole(Role::where('name', 'author')->first());
         } catch (\Exception $e) {
+            Log::error($this->getLogMsg($e));
             return back()->with('errorMsg', $e->getMessage());
         }
         return redirect()->route('get-user', ['userId' => $userId])->with('successMsg', 'User updated');
@@ -100,6 +103,7 @@ class UserController extends Controller
         try {
             User::where('id', Auth::user()->id)->update(['password' => Hash::make($newPassword)]);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return back()->with('errorMsg', $this->getMessage($e));
         }
 
@@ -137,6 +141,7 @@ class UserController extends Controller
                 }
             });
         } catch (\Exception $e) {
+            Log::error($this->getLogMsg($e));
             return back()->with('errorMsg', $this->getMessage($e));
         }
         return back()->with('successMsg', 'Thanks, a mail has been to confirm you subscription');
@@ -157,6 +162,7 @@ class UserController extends Controller
                 return redirect()->route('home')->with('successMsg', 'Congratulation, your subscription confirmed');
             }
         } catch (\Exception $e) {
+            Log::error($this->getLogMsg($e));
             return response()->json(['errorMsg' => $this->getMessage($e)]);
         }
         return redirect()->route('home')->with('warningMsg', 'Something went wrong');
@@ -177,6 +183,7 @@ class UserController extends Controller
                 return redirect()->route('home')->with('successMsg', 'You have un-subscribed confirmed');
             }
         } catch (\Exception $e) {
+            Log::error($this->getLogMsg($e));
             return response()->json(['errorMsg' => $this->getMessage($e)]);
         }
         return redirect()->route('home')->with('errorMsg', 'No subscription found');
@@ -188,6 +195,7 @@ class UserController extends Controller
             $user = User::find($userId);
             $user->update(['is_active' => !$user->is_active]);
         } catch (\Exception $e) {
+            Log::error($this->getLogMsg($e));
             return back()->with('errorMsg', $this->getMessage($e));
         }
         return back()->with('successMsg', 'User updated successfully!');

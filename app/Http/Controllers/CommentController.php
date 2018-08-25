@@ -15,6 +15,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
@@ -42,7 +43,8 @@ class CommentController extends Controller
         }
 
         if (!$article->is_comment_enabled) {
-            return response()->json(['errorMsg' => 'Comment is not allowed for this article'], Response::HTTP_FORBIDDEN);
+            return response()->json(['errorMsg' => 'Comment is not allowed for this article'],
+                Response::HTTP_FORBIDDEN);
         }
 
         $clientIP = $_SERVER['REMOTE_ADDR'] ?? '';
@@ -82,6 +84,7 @@ class CommentController extends Controller
             });
             //$this->dispatch(new SendConfirmCommentMail($newComment));
         } catch (\Exception $e) {
+            Log::error($this->getLogMsg($e));
             return response()->json(['errorMsg' => $this->getMessage($e)], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
@@ -92,7 +95,9 @@ class CommentController extends Controller
 
         //event(new CommentOnArticle('New comment posted!'));
         Mail::to($request->get('email'))->queue(new CommentConfirmation($newComment));
-        Mail::to(Config::get('admin_email'))->queue(new NotifyAdmin($newComment, route('get-article', $articleId)));
+
+        Mail::to(Config::get('admin_email'))
+            ->queue(new NotifyAdmin($newComment->content, route('get-article', $articleId)));
 
         return view('frontend._comments', compact('comments', 'article'));
     }
@@ -107,6 +112,7 @@ class CommentController extends Controller
                 'countEdit' => $comment->countEdit + 1,
             ]);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('comments')->with('successMsg', 'Comment updated');
@@ -121,6 +127,7 @@ class CommentController extends Controller
                 'published_at' => new \DateTime(),
             ]);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('comments')->with('successMsg', 'Comment updated');
@@ -133,6 +140,7 @@ class CommentController extends Controller
             Article::where('id', $comment->article_id)->decrement('comment_count');
             Comment::destroy($commentId);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('comments')->with('successMsg', 'Comment deleted');
@@ -174,6 +182,7 @@ class CommentController extends Controller
                 Mail::to($threadUserEmails)->queue(new NotifyCommentThread($comment));
             }
         } catch (\Exception $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->route('get-article', [$comment->article->id])
                 ->with('errorMsg', $this->getMessage($e));
         }

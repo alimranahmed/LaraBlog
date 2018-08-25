@@ -11,6 +11,7 @@ use App\Models\Keyword;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
@@ -93,6 +94,7 @@ class ArticleController extends Controller
                 $article->keywords()->attach($newKeyword->id);
             }
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
 
@@ -132,6 +134,7 @@ class ArticleController extends Controller
                 Mail::to($subscriber->email)->queue(new NotifySubscriberForNewArticle($newArticle, $subscriber));
             }
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
 
@@ -154,6 +157,7 @@ class ArticleController extends Controller
                 'published_at' => new \DateTime(),
             ]);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('admin-articles')->with('successMsg', 'Article updated');
@@ -208,6 +212,7 @@ class ArticleController extends Controller
         try {
             Article::where('id', $articleId)->update(['is_deleted' => 1]);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('admin-articles')->with('successMsg', 'Article deleted');

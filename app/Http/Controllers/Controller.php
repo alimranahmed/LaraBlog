@@ -13,14 +13,15 @@ class Controller extends BaseController
 
     public function getMessage(\Exception $e, $msg = null)
     {
-        if (env('APP_ENV') == 'local') {
-            return $e->getLine() . ': ' . $e->getFile() . ' ' . $e->getMessage();
+        if (env('APP_ENV') != 'production') {
+            return $this->getLogMsg($e);
         } else {
             return is_null($msg) ? 'Oops, operation failed please try again' : $msg;
         }
     }
 
-    public function test()
+    public function getLogMsg(\Exception $e)
     {
+        return $e->getLine() . ': ' . $e->getFile() . ' ' . $e->getMessage();
     }
 }

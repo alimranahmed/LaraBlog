@@ -6,6 +6,7 @@ use App\Http\Requests\KeywordRequest;
 use App\Models\Article;
 use App\Models\Keyword;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class KeywordController extends Controller
 {
@@ -21,6 +22,7 @@ class KeywordController extends Controller
         try {
             Keyword::create($newKeyword);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('keywords')->with('successMsg', 'Keyword added');
@@ -32,6 +34,7 @@ class KeywordController extends Controller
         try {
             $keyword->update(['is_active' => !$keyword->is_active]);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('keywords')->with('successMsg', 'Keyword updated');
@@ -43,6 +46,7 @@ class KeywordController extends Controller
         try {
             Keyword::where('id', $keywordId)->update($updatedKeyword);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('keywords')->with('successMsg', 'Keyword updated');
@@ -54,6 +58,7 @@ class KeywordController extends Controller
             Keyword::find($keywordId)->articles()->detach();
             Keyword::destroy($keywordId);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('keywords')->with('successMsg', 'Keyword deleted');

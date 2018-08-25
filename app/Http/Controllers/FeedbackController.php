@@ -6,6 +6,7 @@ use App\Mail\NotifyAdmin;
 use App\Models\Config;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class FeedbackController extends Controller
@@ -24,11 +25,11 @@ class FeedbackController extends Controller
                 'email' => $request->get('email'),
                 'name' => $request->get('name'),
                 'content' => $request->get('content'),
-                'ip' => $clientIP = $_SERVER['REMOTE_ADDR'],
+                'ip' => $clientIP = $_SERVER['REMOTE_ADDR'] ?? null,
             ]);
-            //Mail::to(Config::get('admin_email'))->queue(new NotifyAdmin($feedback->content, route('login-form')));
-            Mail::to(Config::get('admin_email'))->send(new NotifyAdmin($feedback->content, route('login-form')));
+            Mail::to(Config::get('admin_email'))->queue(new NotifyAdmin($feedback->content, route('login-form')));
         } catch (\Exception $e) {
+            Log::error($this->getLogMsg($e));
             return back()->with('errorMsg', $this->getMessage($e));
         }
         return back()->with('successMsg', 'Thanks for your time to provide feedback');
@@ -40,6 +41,7 @@ class FeedbackController extends Controller
             $feedback = Feedback::find($feedbackId);
             $feedback->update(['is_resolved' => !$feedback->is_resolved]);
         } catch (\Exception $e) {
+            Log::error($this->getLogMsg($e));
             return back()->with('errorMsg', $this->getMessage($e));
         }
         return back()->with('successMsg', 'Feedback updated successfully!');
@@ -51,6 +53,7 @@ class FeedbackController extends Controller
             $feedback = Feedback::find($feedbackId);
             $feedback->update(['is_closed' => 1]);
         } catch (\Exception $e) {
+            Log::error($this->getLogMsg($e));
             return back()->with('errorMsg', $this->getMessage($e));
         }
         return back()->with('successMsg', 'Feedback closed!');

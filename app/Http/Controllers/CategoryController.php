@@ -6,6 +6,7 @@ use App\Http\Requests\CategoryRequest;
 use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -25,6 +26,7 @@ class CategoryController extends Controller
         try {
             Category::where('id', $categoryId)->update($updatedCategory);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->back()->with('successMsg', 'Category updated successfully!');
@@ -36,6 +38,7 @@ class CategoryController extends Controller
         try {
             Category::create($newCategory);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->back()->with('successMsg', 'Category created successfully!');
@@ -47,6 +50,7 @@ class CategoryController extends Controller
         try {
             $category->update(['is_active' => !$category->is_active]);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('categories')->with('successMsg', 'Category updated');
@@ -64,6 +68,7 @@ class CategoryController extends Controller
         try {
             Category::destroy($categoryId);
         } catch (\PDOException $e) {
+            Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->back()->with('successMsg', 'Category deleted');
