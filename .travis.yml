@@ -13,3 +13,4 @@ before_script:
 
 script:
   - vendor/bin/phpunit
+  - vendor/bin/php-cs-fixer fix --dry-run --diff
