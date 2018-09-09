@@ -74,7 +74,6 @@ class ArticleController extends Controller
             ->latest()
             ->take(3)
             ->get();
-
     }
 
     public function edit($articleId)

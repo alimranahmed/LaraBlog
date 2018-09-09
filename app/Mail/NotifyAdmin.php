@@ -18,10 +18,10 @@ class NotifyAdmin extends Mailable
     /**
      * Create a new message instance.
      *
-     * @param string $content
+     * @param $comment
      * @param $url
      */
-    public function __construct(Comment $comment, $url)
+    public function __construct($comment, $url)
     {
         $this->comment = $comment;
         $this->url = $url;

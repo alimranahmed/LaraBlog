@@ -14,7 +14,7 @@ class FeedbackTest extends TestCase
 
     public function testStore()
     {
-        $this->disableExceptionHandling();
+        //$this->disableExceptionHandling();
         Mail::fake();
 
         $data = [
