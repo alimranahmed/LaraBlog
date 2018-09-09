@@ -9,11 +9,14 @@
 //Variables
 @import "variables";
 
-// Bootstrap
 @import "~bootstrap/dist/css/bootstrap.css";
+
+@import "~ladda/dist/ladda.min.css";
+
+@import "~highlightjs/styles/atom-one-dark.css";
+
 //Materialize
 //@import "node_modules/materialize-css/sass/materialize";
 
 @import "customeFrame";
 @import "style";
-@import "hightlight";

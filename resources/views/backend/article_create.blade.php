@@ -94,8 +94,8 @@
 
                 'formatKeyword': function (inputId, displayId) {
 
-                    var keywords = $(inputId).val().split(' ');
-                    var htmlToShow = '';
+                    let keywords = $(inputId).val().split(' ');
+                    let htmlToShow = '';
                     for (var i = 0; i < keywords.length; i++) {
                         htmlToShow += "<span class='label label-info margin-right-5'>" + keywords[i] + "</span>";
                     }

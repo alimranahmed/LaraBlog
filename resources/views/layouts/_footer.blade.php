@@ -4,7 +4,7 @@
             <a href="https://github.com/alimranahmed/LaraBlog" target="_blank">LaraBlog</a>
         </div>
         <div class="col-sm-2 text-center">© {{date('Y').' '.$globalConfigs->copyright_owner}} </div>
-        @if(!Auth::check())
+        @if(!auth()->check())
             <div class="col-sm-1 text-center">
                 <span class="pointer text-info" data-toggle="modal" data-target="#subscribe-form">Subscribe</span>
             </div>
@@ -21,10 +21,7 @@
     @include("layouts._modal_feedback_form")
 </footer>
 </div>
-<script src="{{asset("js/vue.js")}}"></script>
-<script src="{{asset("js/app.js")}}" type="text/javascript"></script>
-<script src="{{asset("js/highlight.js")}}"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+<script src="{{asset("js/app.js")}}" type="application/javascript"></script>
 @yield('inPageJS')
 </body>
 </html>

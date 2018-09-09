@@ -99,7 +99,7 @@ class CommentController extends Controller
         Mail::to($request->get('email'))->queue(new CommentConfirmation($newComment));
 
         Mail::to(Config::get('admin_email'))
-            ->queue(new NotifyAdmin($newComment->content, route('get-article', $articleId)));
+            ->queue(new NotifyAdmin($newComment, route('get-article', $articleId)));
 
         return view('frontend._comments', compact('comments', 'article'));
     }
@@ -167,7 +167,7 @@ class CommentController extends Controller
                     ->with('warningMsg', 'Comment already published');
             }
 
-            $comment->update(['is_published' => 1, 'is_confirmed' => 1]);
+            $comment->update(['is_published' => 1, 'is_confirmed' => 1, 'published_at' => now()]);
             if ($comment->user->isReader()) {
                 $comment->user->reader->update(['is_verified' => 1]);
             }
