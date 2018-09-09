@@ -11,7 +11,7 @@
                 <li role="presentation" class="active">
                     <a href="#editor" aria-controls="home" role="tab" data-toggle="tab">Editor</a>
                 </li>
-                <li role="presentation" v-on:click="updatePreview()">
+                <li role="presentation" onclick="updatePreview()">
                     <a href="#preview" aria-controls="settings" role="tab" data-toggle="tab">Preview</a>
                 </li>
             </ul>
@@ -45,13 +45,14 @@
                         </div>
                         <div class="form-group">
                             <strong>Keywords: </strong><label id="keywords-show"></label>
-                            <input type="text" id="keyword" v-on:keyup="formatKeyword('#keyword', '#keywords-show')"
+                            <input type="text" id="keyword" onkeyup="formatKeyword('#keyword', '#keywords-show')"
                                    class="form-control" name="keywords" placeholder="Keywords"
                                    value="{{implode(' ',$article->keywords->pluck('name')->toArray())}}">
                         </div>
                         <div class="form-group">
                             @foreach(config('fields.lang') as $lang => $fullLang)
-                                <input id="{{'radio-'.$lang}}" type="radio" name="language" value="{{$lang}}" {{$article->language == $lang ? 'checked' : ''}}>
+                                <input id="{{'radio-'.$lang}}" type="radio" name="language"
+                                       value="{{$lang}}" {{$article->language == $lang ? 'checked' : ''}}>
                                 <label for="{{'radio-'.$lang}}">{{$fullLang}}</label>
                             @endforeach
                         </div>
@@ -83,30 +84,19 @@
 @section('inPageJS')
     @parent
     <script>
-        new Vue({
-            el: "#edit-article",
-            data: {
-                'article': {'heading': '', 'content': ''}
-            },
-            methods: {
-                'updatePreview': function () {
-                    $("#article-heading").html($("#heading").val());
-                    $("#article-content").html($("#content").val());
-                },
+        function updatePreview() {
+            $("#article-heading").html($("input[name=heading]").val());
+            $("#article-content").html($("textarea[name=content]").val());
+        }
 
-                'formatKeyword': function (inputId, displayId) {
+        function formatKeyword(inputId, displayId) {
 
-                    var keywords = $(inputId).val().split(' ');
-                    var htmlToShow = '';
-                    for (var i = 0; i < keywords.length; i++) {
-                        htmlToShow += "<span class='label label-info margin-right-5'>" + keywords[i] + "</span>";
-                    }
-                    $(displayId).html(htmlToShow);
-                }
-            },
-            created: function () {
-                this.formatKeyword("#keyword", "#keywords-show");
+            let keywords = $(inputId).val().split(' ');
+            let htmlToShow = '';
+            for (var i = 0; i < keywords.length; i++) {
+                htmlToShow += "<span class='label label-info margin-right-5'>" + keywords[i] + "</span>";
             }
-        });
+            $(displayId).html(htmlToShow);
+        }
     </script>
 @endsection

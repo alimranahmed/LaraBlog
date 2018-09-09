@@ -11,7 +11,7 @@
                 <li role="presentation" class="active">
                     <a href="#editor" aria-controls="home" role="tab" data-toggle="tab">Editor</a>
                 </li>
-                <li role="presentation" v-on:click="updatePreview(article)">
+                <li role="presentation" onclick="updatePreview()">
                     <a href="#preview" aria-controls="settings" role="tab" data-toggle="tab">Preview</a>
                 </li>
             </ul>
@@ -22,7 +22,7 @@
                     <form action="{{route('store-article')}}" method="post">
                         {{csrf_field()}}
                         <div class="form-group">
-                            <input type="text" v-model="article.heading" class="form-control" name="heading"
+                            <input type="text" class="form-control" name="heading"
                                    placeholder="*Heading..." required>
                         </div>
                         <div class="form-group">
@@ -36,7 +36,7 @@
                             Tips for article content: Enclose source inside &lt;pre&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;
                         </div>
                         <div class="form-group">
-                        <textarea name="content" v-model="article.content" class="form-control textarea-indent"
+                        <textarea name="content" class="form-control textarea-indent"
                                   rows="10"
                                   placeholder="*Write here..." required></textarea>
                         </div>
@@ -45,12 +45,13 @@
                         </div>
                         <div class="form-group">
                             <strong>Keywords: </strong><label id="keywords-show"></label>
-                            <input type="text" id="keyword" v-on:keyup="formatKeyword('#keyword', '#keywords-show')"
+                            <input type="text" id="keyword" onkeyup="formatKeyword('#keyword', '#keywords-show')"
                                    class="form-control" name="keywords" placeholder="Keywords" required>
                         </div>
                         <div class="form-group">
                             @foreach(config('fields.lang') as $lang => $fullLang)
-                                <input id="{{'radio-'.$lang}}" type="radio" name="language" value="{{$lang}}" {{$loop->first ? 'checked' : ''}}>
+                                <input id="{{'radio-'.$lang}}" type="radio" name="language"
+                                       value="{{$lang}}" {{$loop->first ? 'checked' : ''}}>
                                 <label for="{{'radio-'.$lang}}">{{$fullLang}}</label>
                             @endforeach
                         </div>
@@ -76,32 +77,25 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('inPageJS')
     @parent
     <script>
-        new Vue({
-            el: "#create-article",
-            data: {
-                'article': {'heading': '', 'content': ''}
-            },
-            methods: {
-                'updatePreview': function (article) {
-                    $("#article-heading").html(article.heading);
-                    $("#article-content").html(article.content);
-                },
+        function updatePreview() {
+            $("#article-heading").html($("input[name=heading]").val());
+            $("#article-content").html($("textarea[name=content]").val());
+        }
 
-                'formatKeyword': function (inputId, displayId) {
+        function formatKeyword(inputId, displayId) {
 
-                    let keywords = $(inputId).val().split(' ');
-                    let htmlToShow = '';
-                    for (var i = 0; i < keywords.length; i++) {
-                        htmlToShow += "<span class='label label-info margin-right-5'>" + keywords[i] + "</span>";
-                    }
-                    $(displayId).html(htmlToShow);
-                }
+            let keywords = $(inputId).val().split(' ');
+            let htmlToShow = '';
+            for (var i = 0; i < keywords.length; i++) {
+                htmlToShow += "<span class='label label-info margin-right-5'>" + keywords[i] + "</span>";
             }
-        });
+            $(displayId).html(htmlToShow);
+        }
     </script>
-@endsection
+@show
