@@ -37,6 +37,8 @@ if (token) {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
+hljs = require('highlightjs/highlight.pack.js');
+
 //load custom js
 require('./navbar-autohide');
 require('./alert-autohide');

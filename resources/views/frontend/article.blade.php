@@ -2,15 +2,34 @@
 @section('content')
     <div id="article">
 
-        <single-article
-                :article="{{ $article }}"
-                {{ $article->canEdit ? ':can_edit=true' : ':can_edit=false' }}
-                :article_edit_url="'{{ route('edit-article', $article->id) }}'"
-                :article_by_category_url="'{{ route('articles-by-category', $article->category->alias) }}'">
-        </single-article>
-
-        <keywords :keywords="{{$article->keywords}}"></keywords>
-
+        <div class="row">
+            <div class="col-sm-12">
+                <h1 class="article-heading text-xlg no-margin-bottom">{{$article->heading}}</h1>
+                <div class="margin-bottom-10">
+                    <span class="text-grey">Written {{$article->createdAtHuman}}</span>
+                    <span class="text-grey">by {{$article->user->name}} on </span>
+                    <a href="{{route('articles-by-category', $article->category->alias)}}">{{$article->category->name}}</a>
+                    @if($article->isEditable)
+                        <a href="{{route('edit-article', $article->id)}}"><span class="fa fa-edit"></span></a>
+                    @endif
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-justify text-md">{!! $article->content !!}</div>
+        </div>
+        <hr class="margin-bottom-10 margin-top-10">
+        <div class="row">
+            <div class="col-sm-1"><strong>Keywords:</strong></div>
+            <div class="col-md-11">
+                @foreach($article->keywords as $keyword)
+                    <a href="{{route('articles-by-keyword', [$keyword->name])}}">
+                        <span class="label label-info">{{$keyword->name}}</span>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+        <hr class="margin-bottom-10 margin-top-10">
         @if(!$relatedArticles->isEmpty())
             <div class="row">
                 <div class="col-sm-12 text-lg">
@@ -49,7 +68,10 @@
     </div>
 @endsection
 
-@section("pageJS")
+@section("inPageJS")
     @parent
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
     @include('frontend._share_script')
-@show
+@endsection

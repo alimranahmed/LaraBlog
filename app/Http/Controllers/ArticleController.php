@@ -58,11 +58,6 @@ class ArticleController extends Controller
 
         $relatedArticles = $this->getRelatedArticles($article);
 
-        $article->keywords = $article->keywords->map(function ($keyword) {
-            $keyword->articleUrl = route('articles-by-keyword', [$keyword->name]);
-            return $keyword;
-        });
-
         return view('frontend.article', compact('article', 'relatedArticles'));
     }
 
