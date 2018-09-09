@@ -30,11 +30,17 @@ class ArticleController extends Controller
             ->published()
             ->notDeleted()
             ->with([
+                'user',
                 'category',
                 'keywords',
                 'comments' => function ($comments) {
                     return $comments->published();
-                }
+                },
+                'comments.user',
+                'comments.replies' => function ($replies) {
+                    return $replies->published();
+                },
+                'comments.replies.user'
             ])->first();
 
         if (is_null($article)) {
@@ -43,7 +49,19 @@ class ArticleController extends Controller
 
         event(new ArticleHit($article, $clientIP));
 
+        $article->isEditable = auth()->check()
+            && (auth()->user()->hasRole([
+                    'owner',
+                    'admin'
+                ])
+                || $article->user->id == auth()->user()->id);
+
         $relatedArticles = $this->getRelatedArticles($article);
+
+        $article->keywords = $article->keywords->map(function ($keyword) {
+            $keyword->articleUrl = route('articles-by-keyword', [$keyword->name]);
+            return $keyword;
+        });
 
         return view('frontend.article', compact('article', 'relatedArticles'));
     }

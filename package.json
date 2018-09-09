@@ -14,14 +14,18 @@
     "bootstrap": "^3.3.7",
     "cross-env": "^5.1",
     "font-awesome": "^4.6.3",
+    "highlightjs": "^9.10.0",
     "jquery": "^3.2",
+    "ladda": "^2.0.1",
     "laravel-mix": "^2.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.5",
     "popper.js": "^1.12",
-    "vue": "^2.5.16",
+    "vue": "^2.5.7",
     "vue-resource": "^1.5.1"
   },
   "dependencies": {
+    "install": "^0.12.1",
+    "npm": "^6.4.1",
     "pusher-js": "^4.2.2"
   }
 }

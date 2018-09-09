@@ -1,18 +1,14 @@
 require('./libraries');
 
-Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('content');
+window.Vue = require('vue');
+
+Vue.component('single-article', require('./components/article/SingleArticle.vue'));
+Vue.component('keywords', require('./components/article/Keywords.vue'));
+Vue.component('comment-form', require('./components/article/CommentForm.vue'));
+Vue.component('comments', require('./components/article/Comments.vue'));
 
 
-
-
-window.Pusher = require('pusher-js');
-
-var pusher = new Pusher('bbadb783c3924ad225f7', {encrypted: true});
-
-// Pusher.logToConsole = true;
-
-var channel = pusher.subscribe('visitor-activity');
-channel.bind('comment', function(data) {
-    console.debug(data);
-    $("#new-comment").show();
+const app = new Vue({
+    el: '#l5_blog'
 });
+
