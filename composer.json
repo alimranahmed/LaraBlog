@@ -9,7 +9,7 @@
         "bugsnag/bugsnag-laravel": "^2.0",
         "filp/whoops": "^2.1",
         "guzzlehttp/guzzle": "^6.2",
-        "laravel/framework": "5.6.*",
+        "laravel/framework": "5.7.*",
         "pusher/pusher-php-server": "^2.6",
         "zizaco/entrust": "5.2.x-dev"
     },
