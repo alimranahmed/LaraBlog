@@ -148,8 +148,11 @@ class ArticleController extends Controller
             }
         } catch (\PDOException $e) {
             Log::error($this->getLogMsg($e));
+            return response()->json(['message' => $this->getMessage($e)]);
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
+
+        return response()->json(['message' => 'Article published successfully']);
 
         return redirect()->route('admin-articles')->with('successMsg', 'Article published successfully!');
     }
