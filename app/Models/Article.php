@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use League\CommonMark\CommonMarkConverter;
 
 class Article extends Model
 {
     protected $guarded = ['id'];
     protected $dates = ['published_at'];
-    protected $appends = ['publishedAtHuman', 'createdAtHuman', 'updatedAtHuman', 'categoryName'];
 
     public function user()
     {
@@ -75,7 +75,13 @@ class Article extends Model
 
     public function getCategoryNameAttribute()
     {
-        return $this->category->name;
+        return optional($this->category)->name;
+    }
+
+    public function getContentAsHtmlAttribute()
+    {
+        $converter = new CommonMarkConverter();
+        echo $converter->convertToHtml($this->content);
     }
 
     public static function getPaginate(Request $request)

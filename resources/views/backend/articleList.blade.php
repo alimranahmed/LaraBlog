@@ -25,7 +25,7 @@
                         <td>
                             <a href="{{route('get-article', [$article->id, make_slug($article->heading)])}}" target="_blank">{{$article->heading}}</a>
                         </td>
-                        <td>{{$article->category->name}}</td>
+                        <td>{{$article->categoryName}}</td>
                         <td class="text-center">{{$article->createdAtHuman}}</td>
                         <td class="text-center">{{$article->language}}</td>
                         <td class="text-center">

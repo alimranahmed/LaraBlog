@@ -20,7 +20,8 @@
                 </label>
                 <button type="submit"
                         class="btn btn-primary pull-right"
-                        id="submit-comment-btn">Comment</button>
+                        id="submit-comment-btn">Comment
+                </button>
             </div>
         </form>
     </div>
@@ -28,6 +29,8 @@
 
 <script>
     import * as Ladda from 'ladda';
+    import {alertError, alertSuccess} from "../../script";
+
     export default {
         props: {
             add_comment_url: String,
@@ -55,11 +58,7 @@
                         //hide comment form
                         $("#comments").html(response.body);
                         $('#comment-form').hide();
-                        //show success alert
-                        let successAlert = $('#success-alert');
-                        successAlert.show();
-                        successAlert.fadeOut(1000 * 10);
-                        $('#success-msg').html('Success! your comment will be published soon');
+                        alertSuccess('Success! you comment will be published soon');
                         //clear form values
                         $('input').val('');
                         $('textarea').val('');
@@ -67,11 +66,7 @@
                     })
                     .catch(function (error) {
                         console.log(error);
-                        //show error alert
-                        let errorAlert = $('#error-alert');
-                        errorAlert.show();
-                        errorAlert.fadeOut(1000 * 10);
-                        $('#error-msg').html(error);
+                        alertError(error);
                         l.stop();
                     });
             }
