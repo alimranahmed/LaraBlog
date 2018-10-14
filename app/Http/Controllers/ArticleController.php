@@ -75,6 +75,7 @@ class ArticleController extends Controller
     public function edit($articleId)
     {
         $article = Article::find($articleId);
+
         if (is_null($article)) {
             return redirect()->route('home')->with('errorMsg', 'Article not found');
         }
@@ -82,6 +83,11 @@ class ArticleController extends Controller
         if ($this->hasArticleAuthorization(Auth::user(), $article)) {
             return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
         }
+
+        $keywords = implode(' ', $article->keywords->pluck('name')->toArray());
+        $article = json_decode(json_encode($article));
+        $article->keywords = $keywords;
+
         $categories = Category::active()->get();
         return view('backend.article_edit', compact('categories', 'article'));
     }
@@ -90,14 +96,14 @@ class ArticleController extends Controller
     {
         $article = Article::find($articleId);
         if (is_null($article)) {
-            return redirect()->route('home')->with('errorMsg', 'Article not found');
+            return response()->json(['errorMsg' => 'Article not found'], Response::HTTP_NOT_FOUND);
         }
 
         if ($this->hasArticleAuthorization(Auth::user(), $article)) {
-            return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
+            return response()->json(['errorMsg' => 'Unauthorized request'], Response::HTTP_UNAUTHORIZED);
         }
         $updatedArticle = $request->only(['heading', 'content', 'category_id', 'language']);
-        $updatedArticle['is_comment_enabled'] = $request->has('is_comment_enabled');
+        $updatedArticle['is_comment_enabled'] = $request->input('is_comment_enabled');
         $keywordsToAttach = array_unique(explode(' ', $request->get('keywords')));
         try {
             $article->update($updatedArticle);
@@ -109,10 +115,11 @@ class ArticleController extends Controller
             }
         } catch (\PDOException $e) {
             Log::error($this->getLogMsg($e));
-            return redirect()->back()->with('errorMsg', $this->getMessage($e));
+            return response()->json(['errorMsg' => $this->getMessage($e)], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return redirect()->route('admin-articles')->with('successMsg', 'Article updated');
+        session()->flash('successMsg', 'Article updated successfully!');
+        return response()->json(['redirect_url' => redirect()->route('admin-articles')->getTargetUrl()]);
     }
 
     public function create()
@@ -126,7 +133,7 @@ class ArticleController extends Controller
         $clientIP = $_SERVER['REMOTE_ADDR'];
 
         $newArticle = $request->only(['heading', 'content', 'category_id', 'language']);
-        $newArticle['is_comment_enabled'] = $request->has('is_comment_enabled');
+        $newArticle['is_comment_enabled'] = $request->input('is_comment_enabled');
         $newAddress = ['ip' => $clientIP];
 
         try {

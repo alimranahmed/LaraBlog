@@ -10,8 +10,8 @@
                     :url="'{{route('store-article')}}'"
                     :languages="{{ assoc2JsonArray(config('fields.lang'))}}"
                     :method="'POST'"
-                    :article="'{}'"
-                    :categories="{{ json_encode($categories) }}"></article-form>
+                    :categories="{{ json_encode($categories) }}">
+            </article-form>
         </div>
     </div>
     </div>
