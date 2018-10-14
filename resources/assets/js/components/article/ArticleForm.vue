@@ -18,9 +18,12 @@
             Tips for keywords: separate your keywords by space. Some popular keywords are:
         </div>
         <div class="form-group">
-            <strong>Keywords: </strong><label id="keywords-show"></label>
+            <strong>Keywords: </strong>
+            <label id="keywords-show">
+                <span class='label label-info margin-right-5'
+                      v-for="keyword in article.keywords.split(' ')">{{keyword}}</span>
+            </label>
             <input type="text" id="keyword"
-                   v-on:keyup="formatKeyword('#keyword', '#keywords-show')"
                    v-model="article.keywords"
                    class="form-control" name="keywords" placeholder="Keywords" required>
         </div>
@@ -48,6 +51,7 @@
 <script>
     import markdownEditor from 'vue-simplemde/src/markdown-editor';
     import * as Ladda from 'ladda';
+    import {alertError} from "../../script";
 
     export default {
         name: "ArticleForm",
@@ -58,6 +62,7 @@
             categories: Array,
             languages: Array,
             url: String,
+            method: String,
         },
         data() {
             return {
@@ -72,48 +77,24 @@
             }
         },
         methods: {
-            formatKeyword(inputId, displayId) {
-
-                let keywords = $(inputId).val().split(' ');
-                let htmlToShow = '';
-                for (var i = 0; i < keywords.length; i++) {
-                    htmlToShow += "<span class='label label-info margin-right-5'>" + keywords[i] + "</span>";
-                }
-                $(displayId).html(htmlToShow);
-            },
             storeArticle(article) {
                 let l = Ladda.create(document.querySelector('#submit-btn'));
                 l.start();
 
-                self = this;
-
-                axios.post(this.url, article)
+                axios.request({
+                    method: this.method,
+                    url: this.url,
+                    data: article
+                })
                     .then(function (response) {
                         console.log(response);
-                        //show success alert
-                        let successAlert = $('#success-alert');
-                        successAlert.show();
-                        successAlert.fadeOut(1000 * 10);
-                        $('#success-msg').html(response.data.message);
-                        //clear form values
-                        self.article = {
-                            heading: '',
-                            category_id: 1,
-                            content: '',
-                            keywords: '',
-                            language: 'ben',
-                            is_comment_enabled: true,
-                        };
                         l.stop();
+                        location.href = response.data.redirect_url;
                     })
                     .catch(function (error) {
-                        console.log(error);
-                        //show error alert
-                        let errorAlert = $('#error-alert');
-                        errorAlert.show();
-                        errorAlert.fadeOut(1000 * 10);
-                        $('#error-msg').html(error.message);
+                        console.log(error.response);
                         l.stop();
+                        alertError(error.response.data.errorMsg);
                     })
             }
         }

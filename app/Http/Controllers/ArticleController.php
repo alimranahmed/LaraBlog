@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Keyword;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -148,13 +149,11 @@ class ArticleController extends Controller
             }
         } catch (\PDOException $e) {
             Log::error($this->getLogMsg($e));
-            return response()->json(['message' => $this->getMessage($e)]);
-            return redirect()->back()->with('errorMsg', $this->getMessage($e));
+            return response()->json(['errorMsg' => $this->getMessage($e)], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return response()->json(['message' => 'Article published successfully']);
-
-        return redirect()->route('admin-articles')->with('successMsg', 'Article published successfully!');
+        session()->flash('successMsg', 'Article published successfully!');
+        return response()->json(['redirect_url' => redirect()->route('admin-articles')->getTargetUrl()]);
     }
 
     public function togglePublish($articleId)
