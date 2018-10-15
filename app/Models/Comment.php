@@ -53,6 +53,6 @@ class Comment extends Model
 
     public function getPublishedAtHumanAttribute()
     {
-        return $this->published_at->diffForHumans();
+        return optional($this->published_at)->diffForHumans();
     }
 }
