@@ -22,7 +22,7 @@
                             @foreach($hitCountByCountries as $hit)
                                 <tr>
                                     <td>{{$count++}}</td>
-                                    <td>{{$hit->country}}</td>
+                                    <td>{{$hit->country ?? 'Unknown'}}</td>
                                     <td>{{$hit->totalHit}}</td>
                                 </tr>
                             @endforeach
