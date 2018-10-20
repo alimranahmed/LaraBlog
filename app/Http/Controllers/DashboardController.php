@@ -23,7 +23,7 @@ class DashboardController extends Controller
         $hitLoggerTable = (new HitLogger())->getTable();
         $addressTable = (new Address())->getTable();
 
-         return DB::table($hitLoggerTable)
+        return DB::table($hitLoggerTable)
             ->join($addressTable, "{$hitLoggerTable}.address_id", '=', "{$addressTable}.id")
             ->selectRaw("$addressTable.country_name as country, count(*) as totalHit")
             ->groupBy("$addressTable.country_name")
