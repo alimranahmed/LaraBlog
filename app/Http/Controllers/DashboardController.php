@@ -29,6 +29,5 @@ class DashboardController extends Controller
             ->groupBy("$addressTable.country_name")
             ->orderBy('totalHit', 'desc')
             ->get();
-
     }
 }
