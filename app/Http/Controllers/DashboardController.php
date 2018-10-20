@@ -13,9 +13,6 @@ class DashboardController extends Controller
     {
         $articleCategories = Article::all()->groupBy('category_name');
 
-
-        //$hitCountByCountries = $this->getHitByCountries();
-
         $hitCountByCountries = $this->getRawHitByCountries();
 
         return view('backend.dashboard', compact('hitCountByCountries', 'articleCategories'));
@@ -30,23 +27,8 @@ class DashboardController extends Controller
             ->join($addressTable, "{$hitLoggerTable}.address_id", '=', "{$addressTable}.id")
             ->selectRaw("$addressTable.country_name as country, count(*) as totalHit")
             ->groupBy("$addressTable.country_name")
-            ->orderBy('totalHit')
+            ->orderBy('totalHit', 'desc')
             ->get();
 
-    }
-
-    private function getHitByCountries(){
-        $hitCountries = HitLogger::all()->groupBy('country');
-
-        $hitCountByCountries = collect([]);
-        foreach ($hitCountries as $country => $hits) {
-            $hitCount = new \stdClass();
-            $hitCount->country = $country;
-            $hitCount->totalHit = $hits->count();
-            $hitCountByCountries->push($hitCount);
-        }
-
-        $hitCountByCountries = $hitCountByCountries->sortByDesc('totalHit');
-        return $hitCountByCountries;
     }
 }
