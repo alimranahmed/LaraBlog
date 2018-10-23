@@ -2,8 +2,6 @@
 
 namespace App\Helpers;
 
-use Illuminate\Auth\Access\Response;
-
 class HttpClient
 {
     public $curlSession;
@@ -38,15 +36,16 @@ class HttpClient
         }
 
         $content = curl_exec($this->curlSession);
-        $response = new Response();
+        $response = new \stdClass();
         $response->body = new \stdClass();
         if (!curl_errno($this->curlSession)) {
             $httpCode = curl_getinfo($this->curlSession, CURLINFO_HTTP_CODE);
-            $response->body = $content;
             $response->statusCode = $httpCode;
             //Utility::saveLog("[HttpClient][send] response status: $httpCode content: ".json_encode($content));
             if ($httpCode != 200) {
                 $response->body->error = $content;
+            }else{
+                $response->body = $content;
             }
         } else {
             $response->body = curl_error($this->curlSession);
