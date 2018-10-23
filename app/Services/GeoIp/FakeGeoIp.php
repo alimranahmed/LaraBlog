@@ -3,10 +3,8 @@
 
 namespace App\Services\GeoIp;
 
-
 class FakeGeoIp extends GeoIp
 {
-
     public function getGeo(string $ip)
     {
         $location = new \stdClass();
