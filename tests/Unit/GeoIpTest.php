@@ -4,8 +4,6 @@ namespace Tests\Unit;
 
 use App\Services\GeoIp\GeoIp;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class GeoIpTest extends TestCase
 {

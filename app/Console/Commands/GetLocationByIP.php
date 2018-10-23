@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Helpers\HttpClient;
 use App\Models\Address;
 use App\Services\GeoIp\GeoIp;
 use Illuminate\Console\Command;

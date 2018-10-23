@@ -3,7 +3,6 @@
 
 namespace App\Services\GeoIp;
 
-
 use GuzzleHttp\Client;
 
 class IpStack extends GeoIp
@@ -17,7 +16,7 @@ class IpStack extends GeoIp
         ]);
     }
 
-    function getGeo(string $ip)
+    public function getGeo(string $ip)
     {
         $response = $this->client->get("$ip?access_key=".config('services.ipstack.API_KEY'));
 

@@ -3,8 +3,7 @@
 
 namespace App\Services\GeoIp;
 
-
 abstract class GeoIp
 {
-    abstract function getGeo(string $ip);
+    abstract public function getGeo(string $ip);
 }
