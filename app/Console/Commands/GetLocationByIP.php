@@ -20,7 +20,7 @@ class GetLocationByIP extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Fetch geo location by ip';
 
     /**
      * Create a new command instance.
@@ -41,10 +41,12 @@ class GetLocationByIP extends Command
     {
         $httpClient = new HttpClient();
         $addresses = Address::where('country_name', null)->get();
-        foreach ($addresses as $address) {
+        $this->info("Fetching location of " . $addresses->count() . " addresses");
+        foreach ($addresses as $index => $address) {
             $ip = $address->ip;
             $response = $httpClient->send("http://freegeoip.net/json/$ip");
             $location = json_decode($response->body);
+            $this->info(($index + 1) . "/" . $addresses->count() . " {$ip} => Country: " . $location->country_name);
             if (!empty($location)) {
                 $address->update([
                     'country_code' => $location->country_code,
@@ -60,5 +62,7 @@ class GetLocationByIP extends Command
                 ]);
             }
         }
+
+        $this->info('Done!');
     }
 }
