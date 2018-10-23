@@ -46,7 +46,9 @@ class GetLocationByIP extends Command
             $ip = $address->ip;
             $response = $httpClient->send("http://freegeoip.net/json/$ip");
             $location = json_decode($response->body);
-            $this->info(($index + 1) . "/" . $addresses->count() . " {$ip} => Country: " . $location->country_name);
+            $this->info(
+                ($index + 1) . "/" . $addresses->count() . " {$ip} => Country: " . ($location->country_name ?? '')
+            );
             if (!empty($location)) {
                 $address->update([
                     'country_code' => $location->country_code,
