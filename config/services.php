@@ -35,4 +35,8 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'ipstack' => [
+        'API_KEY' => env('IPSTACK_API_KEY')
+    ]
+
 ];

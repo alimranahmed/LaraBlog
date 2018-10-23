@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Helpers\HttpClient;
 use App\Models\Address;
+use App\Services\GeoIp\GeoIp;
 use Illuminate\Console\Command;
 
 class GetLocationByIP extends Command
@@ -39,28 +40,32 @@ class GetLocationByIP extends Command
      */
     public function handle()
     {
-        $httpClient = new HttpClient();
+        $geoIp = app(GeoIp::class);
+
         $addresses = Address::where('country_name', null)->get();
+
         $this->info("Fetching location of " . $addresses->count() . " addresses");
+
         foreach ($addresses as $index => $address) {
             $ip = $address->ip;
-            $response = $httpClient->send("http://freegeoip.net/json/$ip");
-            $location = json_decode($response->body);
+            $location = $geoIp->getGeo($ip);
+
             $this->info(
                 ($index + 1) . "/" . $addresses->count() . " {$ip} => Country: " . ($location->country_name ?? '')
             );
+
             if (!empty($location)) {
                 $address->update([
                     'country_code' => $location->country_code,
                     'country_name' => $location->country_name,
                     'region_name' => $location->region_name,
-                    'city' => $location->city,
-                    'zip_code' => $location->zip_code,
-                    'extra' => isset($location->extray) ? $location->extra : '',
-                    'timezone' => $location->time_zone,
-                    'latitude' => $location->latitude,
-                    'longitude' => $location->longitude,
-                    'metro_code' => $location->metro_code,
+                    'city' => $location->city ?? '',
+                    'zip_code' => $location->zip ?? '',
+                    'extra' => $location->extray ?? '',
+                    'timezone' => $location->time_zone ?? '',
+                    'latitude' => $location->latitude ?? '',
+                    'longitude' => $location->longitude ?? '',
+                    'metro_code' => $location->metro_code ?? '',
                 ]);
             }
         }
