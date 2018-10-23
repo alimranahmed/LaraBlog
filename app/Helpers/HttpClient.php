@@ -5,6 +5,7 @@ namespace App\Helpers;
 class HttpClient
 {
     public $curlSession;
+
     public function __construct()
     {
         //$this->curlSession = curl_init();
@@ -37,16 +38,11 @@ class HttpClient
 
         $content = curl_exec($this->curlSession);
         $response = new \stdClass();
-        $response->body = new \stdClass();
         if (!curl_errno($this->curlSession)) {
             $httpCode = curl_getinfo($this->curlSession, CURLINFO_HTTP_CODE);
             $response->statusCode = $httpCode;
             //Utility::saveLog("[HttpClient][send] response status: $httpCode content: ".json_encode($content));
-            if ($httpCode != 200) {
-                $response->body->error = $content;
-            }else{
-                $response->body = $content;
-            }
+            $response->body = $content;
         } else {
             $response->body = curl_error($this->curlSession);
             //Utility::saveLog("[HttpClient][send][FAILED] response ".json_encode($response));
