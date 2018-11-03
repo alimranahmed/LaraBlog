@@ -21,7 +21,7 @@
     @include("layouts._modal_feedback_form")
 </footer>
 </div>
-<script src="{{ mix("js/app.js") }}" type="application/javascript"></script>
+<script src="{{ mix("build/js/app.js") }}" type="application/javascript"></script>
 @yield('inPageJS')
 </body>
 </html>
