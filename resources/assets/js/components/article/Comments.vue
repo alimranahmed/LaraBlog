@@ -105,18 +105,16 @@
             }
         },
         methods: {
-            initiateReplyForm: function (commentID) {
+            initiateReplyForm(commentID) {
                 this.reply.parent_comment_id = commentID;
             },
 
-            addReply: function (reply) {
-                console.log(reply);
-
+            addReply (reply) {
                 let l = Ladda.create(document.querySelector('#reply-submit-btn'));
                 l.start();
 
                 axios.post(this.add_comment_url, reply)
-                    .then(function (response) {
+                    .then( (response) => {
                         console.log(response);
                         //hide comment form
                         $("#comments").html(response.body);
@@ -124,7 +122,7 @@
                         $('body').removeClass('modal-open');
                         $('.modal-backdrop').remove();
                         //show success alert
-                        var successAlert = $('#success-alert');
+                        let successAlert = $('#success-alert');
                         successAlert.show();
                         successAlert.fadeOut(1000 * 10);
                         $('#success-msg').html('Success! your reply will be published soon');
@@ -133,15 +131,14 @@
                         $('textarea').val('');
                         l.stop();
                     })
-                    .catch(function (response) {
-                        console.log(response);
+                    .catch( (response) => {
                         //show error alert
                         var errorAlert = $('#error-alert');
                         errorAlert.show();
                         errorAlert.fadeOut(1000 * 10);
-                        console.debug(response);
                         $('#error-msg').html(response.body.errorMsg);
                     });
+
                 return false;
             }
         }
