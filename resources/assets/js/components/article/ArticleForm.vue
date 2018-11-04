@@ -51,7 +51,7 @@
 <script>
     import markdownEditor from 'vue-simplemde/src/markdown-editor';
     import * as Ladda from 'ladda';
-    import {alertError} from "../../script";
+    import {alertError} from "@/script";
 
     export default {
         name: "ArticleForm",
@@ -93,13 +93,11 @@
                     url: this.url,
                     data: this.article_data
 
-                }).then(function (response) {
-                    console.log(response);
+                }).then( (response) => {
                     l.stop();
                     location.href = response.data.redirect_url;
 
-                }).catch(function (error) {
-                    console.log(error.response);
+                }).catch( (error) => {
                     l.stop();
                     alertError(error.response.data.errorMsg);
                 })
