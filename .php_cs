@@ -15,6 +15,6 @@ return PhpCsFixer\Config::create()
         '@PSR2' => true,
         'array_syntax' => ['syntax' => 'short'],
         'ordered_imports' => ['sortAlgorithm' => 'alpha'],
-        'no_unused_imports' => true,
+        //'no_unused_imports' => true,
     ])
     ->setFinder($finder);
