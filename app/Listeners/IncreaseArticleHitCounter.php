@@ -31,9 +31,7 @@ class IncreaseArticleHitCounter
 
         $address = Address::firstOrCreate(['ip' => $clientIP]);
 
-        $hitLogger = HitLogger::where('article_id', $article->id)
-            ->where('address_id', $address->id)
-            ->first();
+        $hitLogger = HitLogger::where(['article_id' => $article->id, 'address_id' => $address->id])->first();
 
         if (is_null($hitLogger)) {
             HitLogger::create(['article_id' => $article->id, 'address_id' => $address->id, 'count' => 1]);

@@ -12,6 +12,20 @@ class UserTest extends TestCase
 {
     use DatabaseTransactions;
 
+    public function testUserCanLogin()
+    {
+        $user = factory(User::class)->create([
+            'email' => 'random@gmail.com',
+            'password' => bcrypt('123456')
+        ]);
+
+        $this->post(route('login'), [
+            'email' => $user->email,
+            'password' => '123456',
+            '_token' => csrf_token()
+        ])->assertRedirect(route('admin-dashboard'));
+    }
+
     public function testSubscribe()
     {
         Mail::fake();

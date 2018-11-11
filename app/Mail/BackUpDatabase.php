@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 class BackUpDatabase extends Mailable
 {
     use Queueable, SerializesModels;
+
     protected $filePath;
 
     public function __construct($filePath)
