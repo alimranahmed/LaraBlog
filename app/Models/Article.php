@@ -90,6 +90,7 @@ class Article extends Model
 
         $categoryAlias = $request->route('categoryAlias');
         $keywordName = $request->route('keywordName');
+
         if (!is_null($categoryAlias)) {
             $category = Category::where('alias', $categoryAlias)->first();
             if (is_null($category)) {
