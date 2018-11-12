@@ -58,17 +58,17 @@ class Article extends Model
         return $builder->where('is_published', 1);
     }
 
-    public function getPublishedAtHumanAttribute($value)
+    public function getPublishedAtHumanAttribute()
     {
         return $this->published_at->diffForHumans();
     }
 
-    public function getCreatedAtHumanAttribute($value)
+    public function getCreatedAtHumanAttribute()
     {
         return $this->created_at->diffForHumans();
     }
 
-    public function getUpdatedAtHumanAttribute($value)
+    public function getUpdatedAtHumanAttribute()
     {
         return $this->updated_at->diffForHumans();
     }
