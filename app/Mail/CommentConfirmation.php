@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 class CommentConfirmation extends Mailable
 {
     use Queueable, SerializesModels;
+
     /**
      * Create a new message instance.
      *

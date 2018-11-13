@@ -12,6 +12,7 @@ public/storage
 storage/*.key
 vendor
 yarn-error.log
+_ide_helper.php
 *~
 *.swp
 *.swo

@@ -31,9 +31,9 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             return redirect()->route('admin-dashboard');
-        } else {
-            return back()->with('auth_error', 'Invalid credentials')->withInput();
         }
+
+        return back()->with('auth_error', 'Invalid credentials')->withInput();
     }
 
     public function logout()
