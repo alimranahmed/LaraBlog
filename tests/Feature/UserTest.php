@@ -22,7 +22,6 @@ class UserTest extends TestCase
         $this->post(route('login'), [
             'email' => $user->email,
             'password' => '123456',
-            '_token' => csrf_token()
         ])->assertRedirect(route('admin-dashboard'));
     }
 
