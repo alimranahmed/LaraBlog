@@ -114,7 +114,8 @@ class Article extends Model
             $paginateUrl = '?lang=' . $request->lang;
         }
 
-        $articles = $articleQuery->latest()
+        $articles = $articleQuery->with('category', 'keywords', 'user')
+            ->latest()
             ->paginate($perPage)
             ->withPath($paginateUrl);
 

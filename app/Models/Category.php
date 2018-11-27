@@ -33,10 +33,7 @@ class Category extends Model
 
     public static function getNonEmptyOnly()
     {
-        $categories = Category::where('is_active', 1)->get();
-        return $categories->filter(function ($category) {
-            return $category->articles->isNotEmpty();
-        });
+        return Category::whereHas('articles')->active()->get();
     }
 
     public function scopeActive($query)
