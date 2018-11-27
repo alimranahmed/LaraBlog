@@ -3,7 +3,7 @@
  */
 (function ($) {
     $(document).ready(function () {
-        var topNavBar = $("#top-navbar");
+        /*var topNavBar = $("#top-navbar");
         //Show navabar when mouse is at the top of window
         $(function() {
             var mouseY = 0;
@@ -19,6 +19,6 @@
 
                 }
             }, false);
-        });
+        });*/
     });
 }(jQuery));

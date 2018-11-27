@@ -7,20 +7,20 @@
                 </a>
             </div>
             <div class="row margin-top-5">
-                <div class="col-sm-4 no-padding">
-                    @foreach($article->keywords as $keyword)
-                        <a href="{{route('articles-by-keyword', [$keyword->name])}}">
-                            <span class="label label-info">{{$keyword->name}}</span>
-                        </a>
-                    @endforeach
-                </div>
-                <div class="text-right col-sm-8 no-padding">
+                <div class="col-md-8 no-padding">
                     <span class="time">published {{$article->publishedAtHuman}} on</span>
                     <a href="{{route('articles-by-category', $article->category->alias)}}">{{$article->category->name}}</a>
                     <span class="text-grey"> by {{$article->user->name}}</span>
                     <span class="text-grey {{!$article->hit_count ? 'hide':''}}">
                         ({{$article->hit_count}} {{$article->hit_count > 1 ? 'reads' : 'read'}})
                     </span>
+                </div>
+                <div class="text-right col-md-4 no-padding">
+                    @foreach($article->keywords as $keyword)
+                        <a href="{{route('articles-by-keyword', [$keyword->name])}}">
+                            <span class="label label-info">{{$keyword->name}}</span>
+                        </a>
+                    @endforeach
                 </div>
             </div>
         </div>

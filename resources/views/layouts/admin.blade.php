@@ -2,7 +2,7 @@
 @include('layouts._navbar')
 @include('layouts._alert')
 <div class="main-container container-fluid no-padding">
-    <h1 class="text-center border-bottom" id="site-heading">{{$globalConfigs->site_title}}</h1>
+    {{--<h1 class="text-center border-bottom" id="site-heading">{{$globalConfigs->site_title}}</h1>--}}
     @auth
         <aside class="col-sm-2 no-padding sidebar-container">
             @include('layouts._sidebar')
