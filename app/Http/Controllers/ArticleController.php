@@ -48,7 +48,7 @@ class ArticleController extends Controller
             return redirect()->route('home')->with('warningMsg', 'Article not found');
         }
 
-        event(new ArticleHit($article, $clientIP));
+        //event(new ArticleHit($article, $clientIP));
 
         $article->isEditable = auth()->check()
             && (auth()->user()->hasRole([
