@@ -73,5 +73,4 @@
     <script>
         hljs.initHighlightingOnLoad();
     </script>
-    @include('frontend._share_script')
 @endsection
