@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('get-ip-location')->hourly();
+        //$schedule->command('get-ip-location')->hourly();
         $schedule->command('backup:site-data')->weekly();
     }
 
