@@ -18,13 +18,20 @@
         "filp/whoops": "^2.1",
         "guzzlehttp/guzzle": "^6.2",
         "laravel/framework": "5.8.*",
+<<<<<<< HEAD
         "laravel/telescope": "^2.0",
+=======
+>>>>>>> c7c97d3018080912a05f0e0e26c1a6c60695deff
         "league/commonmark": "^0.18.0",
         "pusher/pusher-php-server": "^2.6",
         "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
+<<<<<<< HEAD
+=======
+        "laravel/telescope": "^2.0",
+>>>>>>> c7c97d3018080912a05f0e0e26c1a6c60695deff
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "^7.0",
         "symfony/css-selector": "3.1.*",
