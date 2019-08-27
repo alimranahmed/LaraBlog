@@ -16,10 +16,10 @@ class UsersTableSeeder extends Seeder
         if (env("APP_ENV") == 'local') {
             $owner = User::create(
                 [
-                    'name' => 'Al- Imran Ahmed',
-                    'username' => 'owner',
-                    'password' => \Hash::make('owner'),
-                    'email' => 'owner@gmail.com',
+                    'name' => 'Matt Ruffles-McGhie',
+                    'username' => 'matt',
+                    'password' => \Hash::make('Isobella01'),
+                    'email' => 'rufflesmcghie@gmail.com',
                     'last_ip' => '127.0.0.1',
                 ]
             );
