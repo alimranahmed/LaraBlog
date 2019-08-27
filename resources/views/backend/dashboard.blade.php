@@ -2,7 +2,7 @@
 @section('content')
     <div class="panel panel-default no-margin-bottom">
         <div class="panel-heading">
-            <strong>Welcome to laraBlog's Admin portal!</strong>
+            <strong>Welcome to RMBlog's Admin portal!</strong>
         </div>
         <div class="panel-body">
             {{--Country vs hits--}}
@@ -34,7 +34,7 @@
             <div class="col-sm-4">
                 <div class="panel panel-default no-margin-bottom">
                     <div class="panel-heading">
-                        <strong>Article by Category</strong>
+                        <strong>Articles by Category</strong>
                     </div>
                     <div class="panel-body">
                         <table class="table">
