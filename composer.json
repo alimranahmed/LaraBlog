@@ -18,6 +18,7 @@
         "filp/whoops": "^2.1",
         "guzzlehttp/guzzle": "^6.2",
         "laravel/framework": "5.7.*",
+        "laravel/tinker": "^1.0",
         "league/commonmark": "^0.18.0",
         "pusher/pusher-php-server": "^2.6",
         "zizaco/entrust": "5.2.x-dev"
