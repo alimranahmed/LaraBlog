@@ -20,7 +20,14 @@ class FeedbackController extends Controller
     public function store(Request $request)
     {
         try {
-            $this->validate($request, ['email' => 'required|email', 'name' => 'required', 'content' => 'required']);
+            $this->validate(
+                $request,
+                [
+                    'email' => 'required|email',
+                    'name' => ["required", "not_regex:/(http|ftp|mailto|www\.|\.com)/"],
+                    'content' => ["required", "not_regex:/(http|ftp|mailto|www\.|\.com)/"]
+                ]
+            );
 
             $feedback = Feedback::create([
                 'email' => $request->get('email'),
@@ -28,7 +35,7 @@ class FeedbackController extends Controller
                 'content' => $request->get('content'),
                 'ip' => $clientIP = $_SERVER['REMOTE_ADDR'] ?? null,
             ]);
-            Mail::to(Config::get('admin_email'))->queue(new NotifyAdmin($feedback->content, route('login-form')));
+            Mail::to(Config::get('admin_email'))->queue(new NotifyAdmin($feedback, route('login-form')));
         } catch (\Exception $e) {
             Log::error($this->getLogMsg($e));
             return back()->with('errorMsg', $this->getMessage($e));
