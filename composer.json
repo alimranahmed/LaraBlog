@@ -21,6 +21,7 @@
         "laravel/tinker": "^1.0",
         "league/commonmark": "^0.18.0",
         "pusher/pusher-php-server": "^2.6",
+        "symfony/translation": "4.3.8",
         "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
