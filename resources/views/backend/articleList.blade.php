@@ -4,6 +4,17 @@
         <div class="panel-heading">
             <strong>All Articles</strong>&nbsp;
             <a href="{{route('create-article')}}"><span class="fa fa-plus"></span></a>
+            <form method="get" class="form-inline d-inline text-right">
+                <select name="category" class="form-control margin-left-30">
+                    @foreach($navCategories as $category)
+                        <option value="">All categories</option>
+                        <option value="{{$category->id}}" {{request('category') == $category->id ? 'selected' : ''}}>
+                            {{$category->name}}
+                        </option>
+                    @endforeach
+                </select>
+                <button class="fa fa-search btn btn-success"></button>
+            </form>
         </div>
         <div class="panel-body">
             <table class="table table-hover">
@@ -16,7 +27,6 @@
                     <th>Published</th>
                     <th>Edited</th>
                     <th>Comments</th>
-                    <th>Hits</th>
                     <th>Operations</th>
                 </tr>
                 @foreach($articles as $article)
@@ -32,8 +42,7 @@
                             <span class="{{!$article->is_published?'hide':''}}">{{$article->publishedAtHuman}}</span>
                         </td>
                         <td class="text-center">{{$article->updatedAtHuman}}</td>
-                        <td class="text-center">{{$article->comment_count}}</td>
-                        <td class="text-center">{{$article->hit_count}}</td>
+                        <td class="text-center">{{$article->is_comment_eanabled ? $article->comment_count : 'N/A'}}</td>
                         <td class="text-center">
                             <a href="{{route('edit-article', $article->id)}}">
                                 <span class="fa fa-edit text-primary"></span>
@@ -49,6 +58,7 @@
                     </tr>
                 @endforeach
             </table>
+            {{$articles->links()}}
         </div>
     </div>
 @endsection
