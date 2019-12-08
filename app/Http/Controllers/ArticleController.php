@@ -60,6 +60,9 @@ class ArticleController extends Controller
 
     private function isEditable(Article $article)
     {
+        if (!auth()->check()) {
+            return false;
+        }
         $isAdmin = auth()->user()->hasRole(['owner', 'admin']);
         $isAuthor = $article->user->id == auth()->user()->id;
         return auth()->check() && ($isAdmin || $isAuthor);
