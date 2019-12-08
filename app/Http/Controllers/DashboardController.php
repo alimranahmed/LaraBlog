@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function index()
     {
         $articleCategories = Article::all()->groupBy('category_name');
-        $latestComments = Comment::published()->latest()->noReplies()->take(3)->get();
+        $latestComments = Comment::latest()->take(3)->get();
         $latestFeedbacks = Feedback::where('is_closed', 0)->take(3)->get();
 
         return view('backend.dashboard', compact('', 'articleCategories', 'latestComments', 'latestFeedbacks'));
