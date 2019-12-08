@@ -36,6 +36,7 @@
                         </tr>
                     @endforeach
                 </table>
+                {{$feedbacks->links()}}
             </form>
         </div>
     </div>

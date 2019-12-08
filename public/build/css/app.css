@@ -10096,6 +10096,10 @@ hr {
   display: none;
 }
 
+.d-inline {
+  display: inline;
+}
+
 .pointer {
   cursor: pointer;
 }

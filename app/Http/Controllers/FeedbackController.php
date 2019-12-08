@@ -13,7 +13,7 @@ class FeedbackController extends Controller
 {
     public function index()
     {
-        $feedbacks = Feedback::where('is_closed', 0)->get();
+        $feedbacks = Feedback::where('is_closed', 0)->paginate(config('view.item_per_page'));
         return view('backend.feedbackList', compact('feedbacks'));
     }
 

@@ -52,7 +52,7 @@ Route::group(['middleware' => ['customAuth', 'role:owner|admin|author']], functi
     //dashboard
     Route::get('admin/dashboard', 'DashboardController@index')->name('admin-dashboard');
     //admin articles
-    Route::get('admin/article', 'ArticleController@adminArticle')->name('admin-articles');
+    Route::get('admin/article', 'ArticleController@adminArticles')->name('admin-articles');
     Route::get(
         'admin/article/toggle-publish/{articleID}',
         'ArticleController@togglePublish'

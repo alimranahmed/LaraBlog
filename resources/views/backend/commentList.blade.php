@@ -51,6 +51,7 @@
                     </tr>
                 @endforeach
             </table>
+            {{$comments->links()}}
 
             <!-- Show comment's replies -->
             @foreach($comments as $comment)

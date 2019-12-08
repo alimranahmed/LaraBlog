@@ -25,41 +25,44 @@ class ArticleController extends Controller
 
     public function show($articleId, $articleHeading = '')
     {
-        $clientIP = $_SERVER['REMOTE_ADDR'] ?? '';
-
         $article = Article::where('id', $articleId)
             ->published()
             ->notDeleted()
-            ->with([
-                'user',
-                'category',
-                'keywords',
-                'comments' => function ($comments) {
-                    return $comments->published();
-                },
-                'comments.user',
-                'comments.replies' => function ($replies) {
-                    return $replies->published();
-                },
-                'comments.replies.user'
-            ])->first();
+            ->with(
+                [
+                    'user',
+                    'category',
+                    'keywords',
+                    'comments' => function ($comments) {
+                        return $comments->published();
+                    },
+                    'comments.user',
+                    'comments.replies' => function ($replies) {
+                        return $replies->published();
+                    },
+                    'comments.replies.user'
+                ]
+            )->first();
 
         if (is_null($article)) {
             return redirect()->route('home')->with('warningMsg', 'Article not found');
         }
 
+        //$clientIP = $_SERVER['REMOTE_ADDR'] ?? '';
         //event(new ArticleHit($article, $clientIP));
 
-        $article->isEditable = auth()->check()
-            && (auth()->user()->hasRole([
-                    'owner',
-                    'admin'
-                ])
-                || $article->user->id == auth()->user()->id);
+        $article->isEditable = $this->isEditable($article);
 
         $relatedArticles = $this->getRelatedArticles($article);
 
         return view('frontend.article', compact('article', 'relatedArticles'));
+    }
+
+    private function isEditable(Article $article)
+    {
+        $isAdmin = auth()->user()->hasRole(['owner', 'admin']);
+        $isAuthor = $article->user->id == auth()->user()->id;
+        return auth()->check() && ($isAdmin || $isAuthor);
     }
 
     private function getRelatedArticles(Article $article)
@@ -174,10 +177,12 @@ class ArticleController extends Controller
             return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
         }
         try {
-            $article->update([
-                'is_published' => !$article->is_published,
-                'published_at' => new \DateTime(),
-            ]);
+            $article->update(
+                [
+                    'is_published' => !$article->is_published,
+                    'published_at' => new \DateTime(),
+                ]
+            );
         } catch (\PDOException $e) {
             Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
@@ -209,15 +214,22 @@ class ArticleController extends Controller
         return view('frontend.search_result', compact('searched'));
     }
 
-    public function adminArticle()
+    public function adminArticles()
     {
         $articles = Article::notDeleted()
             ->with('category', 'keywords', 'user')
-            ->latest()
-            ->get();
+            ->latest();
+
         if (Auth::user()->hasRole(['author'])) {
             $articles = $articles->where('user_id', Auth::user()->id);
         }
+
+        if (request()->filled('category')) {
+            $articles = $articles->where('category_id', request('category'));
+        }
+
+        $articles = $articles->paginate(config('view.item_per_page'));
+
         return view('backend.articleList', compact('articles'));
     }
 
