@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "install": "^0.12.1",
-    "npm": "^6.4.1",
+    "npm": "^6.13.4",
     "pusher-js": "^4.2.2",
     "vue-simplemde": "^0.4.8"
   }
