@@ -41,7 +41,7 @@ A full-featured blogging system for personal use. Minimum library used. No front
 5. Then create a Database for this project and edit the .env file to authorized this project on your database. 
 6. Execute `php artisan migrate:refresh --seed` terminal on your terminal.
 7. Now you are ready to go, If you don't want to create any virtual host for this project then execute
-  `php artisan server`
+  `php artisan serve`
 8. Now visit the url shown on your terminal, something like `localhost:8000`. Its running!
 
 ### Screen shots
