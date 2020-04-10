@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Category extends Model
 {
@@ -31,7 +32,7 @@ class Category extends Model
         return $carbonDate->diffForHumans();
     }
 
-    public static function getNonEmptyOnly()
+    public static function getNonEmptyOnly(): Collection
     {
         return Category::whereHas('articles')->active()->get();
     }
