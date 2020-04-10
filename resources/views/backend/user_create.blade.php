@@ -8,10 +8,10 @@
             <form action="{{route('store-user')}}" class="margin-top-15" method="post">
                 {{csrf_field()}}
                 <div class="form-group {{$errors->has('role_id') ? "has-error" : ""}}">
-                    <select name="role_id" class="form-control">
+                    <select name="role" class="form-control">
                         <option value="">Select User Role*</option>
                         @foreach($roles as $role)
-                            <option value="{{$role->id}}">{{$role->display_name}}</option>
+                            <option value="{{$role->name}}">{{ucfirst($role->name)}}</option>
                         @endforeach
                     </select>
                 </div>

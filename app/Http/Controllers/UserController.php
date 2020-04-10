@@ -6,13 +6,13 @@ use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UserRequest;
 use App\Mail\SubscribeConfirmation;
 use App\Models\Address;
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -57,7 +57,7 @@ class UserController extends Controller
             $newAddress = Address::create($newAddress);
             $newAddress['address_id'] = $newAddress->id;
             $newUser = User::create($newUser);
-            $newUser->roles()->attach($request->get('role_id'));
+            $newUser->assignRole($request->get('role'));
         } catch (\Exception $e) {
             Log::error($this->getLogMsg($e));
             return back()->withInput()->with('errorMsg', $this->getMessage($e));
@@ -82,9 +82,8 @@ class UserController extends Controller
             }
             $user = User::where('id', $userId)->first();
             $user->update($newUser);
-            if ($request->has('role_id')) {
-                $user->roles()->detach();
-                $user->roles()->attach($request->get('role_id'));
+            if ($request->has('role')) {
+                $user->syncRoles(Role::where('name', $request->get('role'))->get());
             }
         } catch (\Exception $e) {
             Log::error($this->getLogMsg($e));
