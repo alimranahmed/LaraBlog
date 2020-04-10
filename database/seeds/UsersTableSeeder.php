@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -56,10 +56,10 @@ class UsersTableSeeder extends Seeder
             $adminRole = Role::where('name', 'admin')->first();
             $authorRole = Role::where('name', 'author')->first();
             $readerRole = Role::where('name', 'reader')->first();
-            $owner->attachRoles([$ownerRole]);
-            $admin->attachRoles([$adminRole]);
-            $author->attachRoles([$authorRole]);
-            $reader->attachRoles([$readerRole]);
+            $owner->assignRole([$ownerRole]);
+            $admin->assignRole([$adminRole]);
+            $author->assignRole([$authorRole]);
+            $reader->assignRole([$readerRole]);
         } else {
             $owner = User::create(
                 [

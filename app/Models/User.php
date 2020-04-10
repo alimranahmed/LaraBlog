@@ -5,12 +5,12 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use Notifiable;
-    use EntrustUserTrait;
+    use HasRoles;
 
     protected $guarded = ['id'];
     protected $appends = ['createdAtHuman'];

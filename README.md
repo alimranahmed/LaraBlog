@@ -2,7 +2,7 @@
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
 
-# Blog Using Laravel 5
+# Blog Using Laravel 6
 ### Let's keep it as simple as possible. Configure anything you want
 A full-featured blogging system for personal use. Minimum library used. No frontend theme and anything heavy or unnecessary library used.  
  

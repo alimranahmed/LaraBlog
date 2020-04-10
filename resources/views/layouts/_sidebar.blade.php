@@ -13,7 +13,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="sidebar">
             <ul class="nav navbar-nav">
-                @role(['owner', 'admin', 'author'])
+                @hasanyrole('owner|admin|author')
                     <li class="{{Request::is('admin/dashboard*') ? "active":""}}">
                         <a href="{{route('admin-dashboard')}}">
                             <i class="fa fa-dashboard"></i>
@@ -34,7 +34,7 @@
                         </a>
                     </li>
                 @endrole
-                @role(['owner','admin'])
+                @hasanyrole('owner|admin')
                     <li class="{{Request::is('admin/category*') ? "active":""}}">
                         <a href="{{route('categories')}}">
                             <span class="fa fa-share-alt"></span>
@@ -59,7 +59,7 @@
                                 <span class="hidden-sm">User Feedback</span>
                             </a>
                         </li>
-                @endrole
+                @endhasanyrole
                 @role('owner')
                     <li class="{{Request::is('admin/config*') ? "active":""}}">
                         <a href="{{route('configs')}}">
