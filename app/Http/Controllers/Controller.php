@@ -12,7 +12,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function getMessage(\Exception $e, $msg = null) {
+    public function getMessage(\Exception $e, $msg = null)
+    {
         if ($e instanceof ValidationException)
             return $e->getMessage();
 
@@ -22,7 +23,8 @@ class Controller extends BaseController
         return $this->getLogMsg($e);
     }
 
-    public function getLogMsg(\Exception $e) {
+    public function getLogMsg(\Exception $e)
+    {
         return $e->getLine() . ': ' . $e->getFile() . ' ' . $e->getMessage();
     }
 }

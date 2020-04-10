@@ -13,7 +13,8 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::with([
-            'articles' => function ($articles) {
+            'articles' => function ($articles)
+            {
                 return $articles->notDeleted();
             }
         ])->get();
