@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -167,7 +167,8 @@ return [
          * Package Service Providers...
          */
 
-        //
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -178,10 +179,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        //customer added providers
-        Zizaco\Entrust\EntrustServiceProvider::class,
-        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
     ],
 
     /*
