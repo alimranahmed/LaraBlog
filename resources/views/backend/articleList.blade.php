@@ -6,8 +6,8 @@
             <a href="{{route('create-article')}}"><span class="fa fa-plus"></span></a>
             <form method="get" class="form-inline d-inline text-right">
                 <select name="category" class="form-control margin-left-30">
+                    <option value="">All categories</option>
                     @foreach($navCategories as $category)
-                        <option value="">All categories</option>
                         <option value="{{$category->id}}" {{request('category') == $category->id ? 'selected' : ''}}>
                             {{$category->name}}
                         </option>
@@ -33,7 +33,8 @@
                     <tr>
                         <td>{{$article->id}}</td>
                         <td>
-                            <a href="{{route('get-article', [$article->id, make_slug($article->heading)])}}" target="_blank">{{$article->heading}}</a>
+                            <a href="{{route('get-article', [$article->id, make_slug($article->heading)])}}"
+                               target="_blank">{{$article->heading}}</a>
                         </td>
                         <td>{{$article->categoryName}}</td>
                         <td class="text-center">{{$article->createdAtHuman}}</td>
@@ -48,7 +49,9 @@
                                 <span class="fa fa-edit text-primary"></span>
                             </a>&nbsp;
                             <a href="{{route('toggle-article-publish', $article->id)}}">
-                                <strong class="fa fa-lg {{$article->is_published ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}" title="Toggle publish"></strong>
+                                <strong
+                                    class="fa fa-lg {{$article->is_published ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"
+                                    title="Toggle publish"></strong>
                             </a>&nbsp;
                             <a href="{{route('delete-article', $article->id)}}"
                                onclick="return confirm('Are you sure to delete?')">
