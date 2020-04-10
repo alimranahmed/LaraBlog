@@ -8,14 +8,12 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index(Request $request)
-    {
-        if (Auth::check()) {
-            $dashboard = new DashboardController();
-            return $dashboard->index();
-        } else {
+    public function index(Request $request) {
+        if (!Auth::check()) {
             $articles = Article::getPaginate($request);
             return view('frontend.articles', compact('articles'));
         }
+        $dashboard = new DashboardController();
+        return $dashboard->index();
     }
 }

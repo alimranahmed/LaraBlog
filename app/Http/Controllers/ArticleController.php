@@ -17,14 +17,12 @@ use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $articles = Article::getPaginate($request);
         return view('frontend.articles', compact('articles'));
     }
 
-    public function show($articleId, $articleHeading = '')
-    {
+    public function show($articleId) {
         $article = Article::where('id', $articleId)
             ->published()
             ->notDeleted()
@@ -58,8 +56,7 @@ class ArticleController extends Controller
         return view('frontend.article', compact('article', 'relatedArticles'));
     }
 
-    private function isEditable(Article $article)
-    {
+    private function isEditable(Article $article) {
         if (!auth()->check()) {
             return false;
         }
@@ -68,8 +65,7 @@ class ArticleController extends Controller
         return auth()->check() && ($isAdmin || $isAuthor);
     }
 
-    private function getRelatedArticles(Article $article)
-    {
+    private function getRelatedArticles(Article $article) {
         return Article::where('category_id', $article->category->id)
             ->where('id', '!=', $article->id)
             ->published()
@@ -78,8 +74,7 @@ class ArticleController extends Controller
             ->get();
     }
 
-    public function edit($articleId)
-    {
+    public function edit($articleId) {
         $article = Article::find($articleId);
 
         if (is_null($article)) {
@@ -98,8 +93,7 @@ class ArticleController extends Controller
         return view('backend.article_edit', compact('categories', 'article'));
     }
 
-    public function update(Request $request, $articleId)
-    {
+    public function update(Request $request, $articleId) {
         $article = Article::find($articleId);
         if (is_null($article)) {
             return response()->json(['errorMsg' => 'Article not found'], Response::HTTP_NOT_FOUND);
@@ -128,14 +122,12 @@ class ArticleController extends Controller
         return response()->json(['redirect_url' => redirect()->route('admin-articles')->getTargetUrl()]);
     }
 
-    public function create()
-    {
+    public function create() {
         $categories = Category::where('is_active', 1)->get();
         return view('backend.article_create', compact('categories'));
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $clientIP = $_SERVER['REMOTE_ADDR'];
 
         $newArticle = $request->only(['heading', 'content', 'category_id', 'language']);
@@ -169,8 +161,7 @@ class ArticleController extends Controller
         return response()->json(['redirect_url' => redirect()->route('admin-articles')->getTargetUrl()]);
     }
 
-    public function togglePublish($articleId)
-    {
+    public function togglePublish($articleId) {
         $article = Article::find($articleId);
         if (is_null($article)) {
             return redirect()->route('home')->with('errorMsg', 'Article not found');
@@ -193,8 +184,7 @@ class ArticleController extends Controller
         return redirect()->route('admin-articles')->with('successMsg', 'Article updated');
     }
 
-    public function search(Request $request)
-    {
+    public function search(Request $request) {
         $this->validate($request, ['query_string' => 'required']);
 
         $queryString = $request->get('query_string');
@@ -217,8 +207,7 @@ class ArticleController extends Controller
         return view('frontend.search_result', compact('searched'));
     }
 
-    public function adminArticles()
-    {
+    public function adminArticles() {
         $articles = Article::notDeleted()
             ->with('category', 'keywords', 'user')
             ->latest();
@@ -236,8 +225,7 @@ class ArticleController extends Controller
         return view('backend.articleList', compact('articles'));
     }
 
-    public function destroy($articleId)
-    {
+    public function destroy($articleId) {
         $article = Article::find($articleId);
         if (is_null($article)) {
             return redirect()->route('home')->with('errorMsg', 'Article not found');
@@ -255,8 +243,7 @@ class ArticleController extends Controller
         return redirect()->route('admin-articles')->with('successMsg', 'Article deleted');
     }
 
-    private function hasArticleAuthorization($user, $article)
-    {
+    private function hasArticleAuthorization($user, $article) {
         return $user->hasRole(['author']) && $article->user_id != $user->id;
     }
 }

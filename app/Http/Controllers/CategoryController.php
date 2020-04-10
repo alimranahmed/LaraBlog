@@ -56,10 +56,9 @@ class CategoryController extends Controller
         return redirect()->route('categories')->with('successMsg', 'Category updated');
     }
 
-    public function getArticles(Request $request, $categoryAlias)
+    public function getArticles(Request $request)
     {
         $articles = Article::getPaginate($request);
-
         return view('frontend.articles', compact('articles'));
     }
 

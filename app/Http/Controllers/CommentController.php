@@ -20,26 +20,20 @@ use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
-    public function index()
-    {
+    public function index() {
+        $comments = Comment::query();
         if (Auth::user()->hasRole('author')) {
             $authorsArticleIDs = Article::where('user_id', Auth::user()->id)->pluck('id');
-            $comments = Comment::whereIn('article_id', $authorsArticleIDs)
-                ->with('article', 'user', 'replies')
-                ->latest()
-                ->noReplies()
-                ->paginate(config('view.item_per_page'));
-        } else {
-            $comments = Comment::with('article', 'user', 'replies')
-                ->latest()
-                ->noReplies()
-                ->paginate(config('view.item_per_page'));
+            $comments = $comments->whereIn('article_id', $authorsArticleIDs);
         }
+        $comments = $comments->with('article', 'user', 'replies')
+            ->latest()
+            ->noReplies()
+            ->paginate(config('view.item_per_page'));
         return view('backend.commentList', compact('comments'));
     }
 
-    public function store(CommentRequest $request, $articleId)
-    {
+    public function store(CommentRequest $request, $articleId) {
         $article = Article::find($articleId);
         if (is_null($article)) {
             return response()->json(['errorMsg' => 'Article not found'], Response::HTTP_NOT_FOUND);
@@ -111,8 +105,7 @@ class CommentController extends Controller
         return view('frontend._comments', compact('comments', 'article'));
     }
 
-    public function update(Request $request, $commentId)
-    {
+    public function update(Request $request, $commentId) {
         $comment = Comment::find($commentId);
         try {
             $comment->update(
@@ -129,8 +122,7 @@ class CommentController extends Controller
         return redirect()->route('comments')->with('successMsg', 'Comment updated');
     }
 
-    public function togglePublish($commentId)
-    {
+    public function togglePublish($commentId) {
         $comment = Comment::find($commentId);
         try {
             $comment->update(
@@ -146,8 +138,7 @@ class CommentController extends Controller
         return redirect()->route('comments')->with('successMsg', 'Comment updated');
     }
 
-    public function destroy($commentId)
-    {
+    public function destroy($commentId) {
         try {
             $comment = Comment::find($commentId);
             Article::where('id', $comment->article_id)->decrement('comment_count');
@@ -159,8 +150,7 @@ class CommentController extends Controller
         return redirect()->route('comments')->with('successMsg', 'Comment deleted');
     }
 
-    public function confirmComment(Request $request, $commentId)
-    {
+    public function confirmComment(Request $request, $commentId) {
         try {
             $this->validate($request, ['token' => 'required']);
 
