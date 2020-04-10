@@ -9,10 +9,11 @@
                 <input type="hidden" name="_method" value="PUT">
                 {{csrf_field()}}
                 <div class="form-group {{$errors->has('role_id') ? "has-error" : ""}}">
-                    <select name="role_id" class="form-control">
+                    <select name="role" class="form-control">
                         <option value="" readonly="true">Select User Role*</option>
                         @foreach($roles as $role)
-                            <option value="{{$role->id}}" {{!$user->roles->isEmpty() && $user->roles->first()->id == $role->id ? 'selected' : ''}}>{{$role->display_name}}</option>
+                            <option value="{{$role->name}}" {{!$user->roles->isEmpty() && $user->roles->first()->name ==
+                            $role->name ? 'selected' : ''}}>{{ucfirst($role->name)}}</option>
                         @endforeach
                     </select>
                 </div>

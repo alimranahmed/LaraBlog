@@ -228,7 +228,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         //custom added
-        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
     ],
 

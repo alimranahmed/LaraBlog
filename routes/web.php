@@ -1,13 +1,6 @@
 <?php
 
-/*
-|---------------------------------------------------------------------------------
-| Route collection for WEB
-|---------------------------------------------------------------------------------
-| Here is the route collection for public facing website
-| No authentication required
-|
-*/
+use Illuminate\Support\Facades\Route;
 
 //Home
 Route::get('/', 'HomeController@index')->name('home');
