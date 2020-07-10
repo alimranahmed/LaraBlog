@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 text-justify text-md">{!! $article->contentAsHtml !!}</div>
+            <div class="col-sm-12 text-md">{!! $article->contentAsHtml !!}</div>
         </div>
         <hr class="margin-bottom-10 margin-top-10">
         <div class="row">
