@@ -34,6 +34,7 @@ Route::get('admin/logout', 'AuthController@logout')->name('logout');
 
 //--------------------------------New Design----------------------------------
 Route::view('new', 'frontend.articles.index');
+Route::view('new/article/{articleId}/{articleHeading?}', 'frontend.articles.show');
 
 /*
 |---------------------------------------------------------------------------------

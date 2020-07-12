@@ -1,4 +1,4 @@
-<?php include_once "_header.php" ?>
+@include('layouts.frontend._header')
 <div>
     <h1 class="font-semibold sm:text-xl md:text-2xl mb-1 leading-tight">
         Exploring the good things of Laravel through my journey with web frameworks! This will be interesting.
@@ -63,7 +63,7 @@
         litchi trees!
     </div>
     <div class="mb-3">
-        <?php include '_tags.php' ?>
+        @include('frontend.articles._tag')
     </div>
 </div>
 
@@ -78,7 +78,7 @@
 <!--</div>-->
 
 <div>
-    <?php include '_comment_form.php' ?>
+    @include('frontend.articles._comment_form')
 </div>
 
 <div class="my-3">
@@ -86,8 +86,8 @@
         Comments
     </h2>
     <?php foreach (range(1, 3) as $i): ?>
-        <?php include '_comment.php' ?>
+        @include('frontend.articles._comment')
     <?php endforeach; ?>
 </div>
 
-<?php include_once "_footer.php" ?>
+@include('layouts.frontend._footer')
