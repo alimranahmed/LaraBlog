@@ -32,6 +32,9 @@ Route::get('admin/login', 'AuthController@showLoginForm')->name('login-form');
 Route::post('admin/login', 'AuthController@login')->name('login');
 Route::get('admin/logout', 'AuthController@logout')->name('logout');
 
+//--------------------------------New Design----------------------------------
+Route::view('new', 'frontend.articles.index');
+
 /*
 |---------------------------------------------------------------------------------
 | Route collection for OWNER, ADMIN and AUTHOR
