@@ -17,7 +17,7 @@
         </button>
     </div>
     <div>
-        <a href="#" class="uppercase hover:underline">Articles</a>
+        <a href="{{route('articles')}}" class="uppercase hover:underline">Articles</a>
         <a href="#" class="uppercase hover:underline ml-4">About</a>
     </div>
 </div>
@@ -66,7 +66,7 @@
             </button>
         </div>
         <div class="mt-4">
-            <a href="#" class="uppercase hover:underline">Articles</a>
+            <a href="{{route('articles')}}" class="uppercase hover:underline">Articles</a>
         </div>
         <div class="my-4">
             <a href="#" class="uppercase hover:underline">About</a>

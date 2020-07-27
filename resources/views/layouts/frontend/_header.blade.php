@@ -9,7 +9,12 @@
 
     <link rel="stylesheet" href="{{asset('css/prism.css')}}"/>
 
-    <title>Write Tale</title>
+    <link rel="shortcut icon" type="image/png" href="{{asset('img/favicon.png')}}"/>
+
+    <title>{{isset($article) ? $article->heading : $globalConfigs->site_title}}</title>
+
+    @include('layouts._google_analytics')
+
 </head>
 <body class="bg-gray-100">
 <div class="border-b border-blue-200 mb-3">
