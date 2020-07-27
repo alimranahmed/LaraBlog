@@ -22,7 +22,7 @@
 
 
         <!--      Tags-->
-        @include('frontend.articles._tag', ['article' => $article])
+        @include('frontend.tailwindcss.articles._tag', ['article' => $article])
 
     </div>
 </div>

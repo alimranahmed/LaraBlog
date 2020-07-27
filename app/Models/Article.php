@@ -86,7 +86,7 @@ class Article extends Model
 
     public static function getPaginate(Request $request)
     {
-        $perPage = config('view.item_per_page');
+        $perPage = config('blog.item_per_page');
 
         $categoryAlias = $request->route('categoryAlias');
         $keywordName = $request->route('keywordName');

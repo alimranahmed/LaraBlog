@@ -28,12 +28,12 @@ class CommentController extends Controller
                 ->with('article', 'user', 'replies')
                 ->latest()
                 ->noReplies()
-                ->paginate(config('view.item_per_page'));
+                ->paginate(config('blog.item_per_page'));
         } else {
             $comments = Comment::with('article', 'user', 'replies')
                 ->latest()
                 ->noReplies()
-                ->paginate(config('view.item_per_page'));
+                ->paginate(config('blog.item_per_page'));
         }
         return view('backend.commentList', compact('comments'));
     }

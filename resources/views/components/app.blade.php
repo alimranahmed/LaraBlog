@@ -1,3 +1,3 @@
-@include('layouts.frontend._header')
+@include('frontend.tailwindcss.layouts._header')
 {{$slot}}
-@include('layouts.frontend._footer')
+@include('frontend.tailwindcss.layouts._footer')

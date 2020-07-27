@@ -20,7 +20,7 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         $articles = Article::getPaginate($request);
-        return view('frontend.articles.index', compact('articles'));
+        return view("{$this->frontView}.articles.index", compact('articles'));
     }
 
     public function show($articleId, $articleHeading = '')
@@ -207,7 +207,7 @@ class ArticleController extends Controller
             ->where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
             ->latest()
-            ->paginate(config('view.item_per_page'));
+            ->paginate(config('blog.item_per_page'));
 
         $articles->setPath(url("search/?query_string=$queryString"));
 
@@ -231,7 +231,7 @@ class ArticleController extends Controller
             $articles = $articles->where('category_id', request('category'));
         }
 
-        $articles = $articles->paginate(config('view.item_per_page'));
+        $articles = $articles->paginate(config('blog.item_per_page'));
 
         return view('backend.articleList', compact('articles'));
     }
