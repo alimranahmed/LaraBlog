@@ -11,7 +11,6 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        //factory(\App\Models\Category::class, 5)->create();
 
         $categories[] = [
             'name' => 'Object Oriented Programming',
