@@ -41,7 +41,7 @@
             <hr>
             <div class="row">
                 <div class="col-sm-12" id="related-articles">
-                    @include('frontend._article_list', ['articles' => $relatedArticles])
+                    @include('frontend.bootstrap.articles._article_list', ['articles' => $relatedArticles])
                 </div>
             </div>
         @endif
@@ -62,7 +62,7 @@
             <hr class="margin-bottom-15 margin-top-10">
 
             <section id="comments" class="margin-bottom-15">
-                @include('frontend._comments', ['article' => $article, 'comments' => $article->comments->where('parent_comment_id', null)])
+                @include('frontend.bootstrap.articles._comments', ['article' => $article, 'comments' => $article->comments->where('parent_comment_id', null)])
             </section>
         @endif
     </div>

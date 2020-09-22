@@ -55,7 +55,7 @@ class ArticleController extends Controller
 
         $relatedArticles = $this->getRelatedArticles($article);
 
-        return view('frontend.article', compact('article', 'relatedArticles'));
+        return view("{$this->frontView}.articles.show", compact('article', 'relatedArticles'));
     }
 
     private function isEditable(Article $article)
@@ -214,7 +214,7 @@ class ArticleController extends Controller
         $searched = new \stdClass();
         $searched->articles = $articles;
         $searched->query = $queryString;
-        return view('frontend.search_result', compact('searched'));
+        return view("{$this->frontView}.articles.search_result", compact('searched'));
     }
 
     public function adminArticles()
