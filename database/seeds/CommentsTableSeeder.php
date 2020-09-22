@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Comment;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class CommentsTableSeeder extends Seeder
 {
@@ -15,9 +17,9 @@ class CommentsTableSeeder extends Seeder
 
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         if (env("APP_ENV") == 'local') {
-            factory(\App\Models\Comment::class, 30)->create([
-                'article_id' => $faker->randomElement(\App\Models\Article::all()->pluck('id')),
-                'user_id' => $faker->randomElement(\App\Models\User::all()->pluck('id')),
+            Comment::factory()->create([
+                'article_id' => $faker->randomElement(\App\Models\Article::all()->pluck('id')->toArray()),
+                'user_id' => $faker->randomElement(\App\Models\User::all()->pluck('id')->toArray()),
             ]);
         }
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
