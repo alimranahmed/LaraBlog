@@ -65,7 +65,7 @@ class UsersTableSeeder extends Seeder
                 [
                     'name' => 'Al- Imran Ahmed',
                     'username' => 'al_imran_ahmed',
-                    'password' => \Hash::make('owner'),
+                    'password' => bcrypt('owner'),
                     'email' => 'al.imran.cse@gmail.com',
                     'last_ip' => '127.0.0.1',
                 ]

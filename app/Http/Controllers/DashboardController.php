@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $latestComments = Comment::latest()->take(3)->get();
         $latestFeedbacks = Feedback::where('is_closed', 0)->take(3)->get();
 
-        return view('backend.dashboard', compact('', 'articleCategories', 'latestComments', 'latestFeedbacks'));
+        return view('backend.dashboard', compact('articleCategories', 'latestComments', 'latestFeedbacks'));
     }
 
     //This method is not being used now, but can be usable in future
