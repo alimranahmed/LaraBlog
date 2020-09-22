@@ -28,15 +28,15 @@ class CommentTest extends TestCase
      */
     protected $article;
 
-    protected function setUp()
+    protected function setUp():void
     {
         parent::setUp();
 
-        $this->user = factory(User::class)->create(['email' => 'example@test.com']);
+        $this->user = User::factory()->create(['email' => 'example@test.com']);
 
-        $this->category = factory(Category::class)->create();
+        $this->category = Category::factory()->create();
 
-        $this->article = factory(Article::class)->create([
+        $this->article = Article::factory()->create([
             'user_id' => $this->user->id,
             'category_id' => $this->category->id,
         ]);
@@ -44,7 +44,7 @@ class CommentTest extends TestCase
 
     public function testPublishedScope()
     {
-        factory(Comment::class)->create([
+        Comment::factory()->create([
             'user_id' => $this->user->id,
             'article_id' => $this->article->id,
             'is_published' => 1
@@ -57,7 +57,7 @@ class CommentTest extends TestCase
 
     public function testNoRepliesTest()
     {
-        factory(Comment::class, 1)->create([
+        Comment::factory()->create([
             'user_id' => $this->user->id,
             'article_id' => $this->article->id,
             'is_published' => 1,
@@ -71,7 +71,7 @@ class CommentTest extends TestCase
 
     public function testCreatedAtHumanAttribute()
     {
-        $comment = factory(Comment::class)->create([
+        $comment = Comment::factory()->create([
             'user_id' => $this->user->id,
             'article_id' => $this->article->id,
         ]);
@@ -81,7 +81,7 @@ class CommentTest extends TestCase
 
     public function testPublishedAtHumanAttribute()
     {
-        $comment = factory(Comment::class)->create([
+        $comment = Comment::factory()->create([
             'user_id' => $this->user->id,
             'article_id' => $this->article->id,
             'published_at' => now(),

@@ -28,16 +28,16 @@ class CommentTest extends WebTestCase
      */
     protected $article;
 
-    public function setUp()
+    public function setUp():void
     {
         parent::setUp();
 
-        $this->user = factory(User::class)
+        $this->user = User::factory()
             ->create(['name' => 'Example User', 'email' => 'example@test.com']);
 
-        $this->category = factory(Category::class)->create();
+        $this->category = Category::factory()->create();
 
-        $this->article = factory(Article::class)->state('published')->create([
+        $this->article = Article::factory()->published()->create([
             'heading' => 'Test Heading',
             'category_id' => $this->category->id,
             'user_id' => $this->user->id,
@@ -92,7 +92,7 @@ class CommentTest extends WebTestCase
 
     public function testConfirmComment()
     {
-        $comment = factory(Comment::class)
+        $comment = Comment::factory()
             ->create([
                 'user_id' => $this->user->id,
                 'article_id' => $this->article->id,
