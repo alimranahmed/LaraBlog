@@ -1,8 +1,7 @@
-[![Build Status](https://travis-ci.org/alimranahmed/LaraBlog.svg?branch=master)](https://travis-ci.org/alimranahmed/LaraBlog)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
 
-# Blog Using Laravel 7
+# Blog Using Laravel 8
 ### Let's keep it as simple as possible. Configure anything you want
 A full-featured blogging system for personal use. Minimum library used. No frontend theme and anything heavy or unnecessary library used.  
  
@@ -27,11 +26,6 @@ A full-featured blogging system for personal use. Minimum library used. No front
   * Can subscribe to be notified for new article
   * Can search for article with
   * Can navigate article based on categories
-
-### Technologies Used: 
-1. Laravel 5.7
-2. VueJS 2
-3. Bootstrap 3
 
 ### Installation Process
 1. Execute `git clone https://github.com/alimranahmed/LaraBlog.git` on your terminal to download this project.

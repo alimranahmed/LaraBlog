@@ -12,7 +12,7 @@ class KeywordsTableSeeder extends Seeder
     public function run()
     {
         if (env("APP_ENV") != 'production') {
-            factory(\App\Models\Keyword::class, 5)->create();
+            \App\Models\Keyword::factory()->count(5)->create();
         }
     }
 }

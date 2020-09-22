@@ -12,6 +12,6 @@ mix.webpackConfig({
     },
 });
 
-if (mix.inProduction()){
+if (mix.inProduction()) {
     mix.version();
 }
