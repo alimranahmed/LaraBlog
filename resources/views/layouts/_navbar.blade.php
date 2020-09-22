@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{route('home')}}">{{$globalConfigs->site_name}}</a>
+            <a class="navbar-brand" href="{{route('home')}}">{{optional($globalConfigs)->site_name}}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -23,7 +23,8 @@
                        aria-expanded="false">Categories <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         @foreach($navCategories as $category)
-                            <li><a href="{{route('articles-by-category', $category->alias)}}">{{$category->name}}</a></li>
+                            <li><a href="{{route('articles-by-category', $category->alias)}}">{{$category->name}}</a>
+                            </li>
                         @endforeach
                     </ul>
                 </li>
@@ -54,7 +55,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title">Change Password</h4>
             </div>
             <form action="{{route('change-password')}}" method="post">
@@ -71,7 +73,8 @@
                     </div>
                     <div class="form-group">
                         <label>Confirm New Password</label>
-                        <input type="password" class="form-control" name="confirm_new_password" id="#confirm-new-password">
+                        <input type="password" class="form-control" name="confirm_new_password"
+                               id="#confirm-new-password">
                     </div>
                 </div>
                 <div class="modal-footer">

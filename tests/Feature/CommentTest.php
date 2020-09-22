@@ -7,6 +7,7 @@ use App\Mail\NotifyAdmin;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Config;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
@@ -47,6 +48,8 @@ class CommentTest extends WebTestCase
     public function testStore()
     {
         Mail::fake();
+
+        Config::create(['name' => 'admin_email', 'value' => 'imran@example.com']);
 
         $content = 'test comment';
         $email = 'test@example.com';

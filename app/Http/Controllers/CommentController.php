@@ -70,7 +70,7 @@ class CommentController extends Controller
                     if (is_null($newUser)) {
                         $newUser = $request->only('email');
                         $newUser = User::create($newUser);
-                        $newUser->attachRole(Role::where('name', 'reader')->first());
+                        $newUser->assignRole(Role::where('name', 'reader')->first());
 
                         $newUser->reader()->create(
                             [
@@ -108,7 +108,7 @@ class CommentController extends Controller
         Mail::to(Config::get('admin_email'))
             ->queue(new NotifyAdmin($newComment, route('get-article', $articleId)));
 
-        return view('frontend._comments', compact('comments', 'article'));
+        return view("$this->frontView.articles._comments", compact('comments', 'article'));
     }
 
     public function update(Request $request, $commentId)

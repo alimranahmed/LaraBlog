@@ -71,7 +71,7 @@ class UsersTableSeeder extends Seeder
                 ]
             );
             $ownerRole = Role::where('name', 'owner')->first();
-            $owner->attachRoles([$ownerRole]);
+            $owner->assignRoles([$ownerRole]);
         }
     }
 }

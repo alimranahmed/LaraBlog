@@ -133,7 +133,7 @@ class UserController extends Controller
                     $newUser['address_id'] = $newAddress->id;
                     $newUser['token'] = Hash::make($request->get('email'));
                     $newUser = User::create($newUser);
-                    $newUser->attachRole(Role::where('name', 'reader')->first());
+                    $newUser->assignRole(Role::where('name', 'reader')->first());
 
                     $newUser->reader()->create(['notify' => 0, 'is_verified' => 0]);
                     Mail::to($request->get('email'))->queue(new SubscribeConfirmation($newUser));
