@@ -19,7 +19,7 @@ class ArticleTest extends WebTestCase
      */
     protected $category;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

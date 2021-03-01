@@ -15,7 +15,7 @@ class KeywordTest extends TestCase
 
     protected $article;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -43,7 +43,6 @@ class KeywordTest extends TestCase
         $keyword = factory(Keyword::class, 2)->create();
 
         $this->article->keywords()->attach($keyword->first()->id);
-
 
 
         $this->assertSame([$this->article->id], Keyword::getArticleIDs($keyword));
