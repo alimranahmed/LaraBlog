@@ -3,7 +3,6 @@
 
 namespace App\Http\View\Composer;
 
-
 use App\Models\Category;
 use Illuminate\View\View;
 

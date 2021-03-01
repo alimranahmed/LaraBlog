@@ -144,7 +144,6 @@ class UserController extends Controller
             }
 
             DB::commit();
-
         } catch (\Exception $e) {
             Log::error($this->getLogMsg($e));
             return back()->with('errorMsg', $this->getMessage($e));

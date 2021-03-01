@@ -3,7 +3,6 @@
 
 namespace App\Http\View\Composer;
 
-
 use App\Models\Config;
 use Illuminate\View\View;
 

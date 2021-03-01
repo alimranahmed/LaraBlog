@@ -13,7 +13,6 @@ class ReaderTest extends TestCase
 
     public function testVerifiedScope()
     {
-
         $user =  User::factory()->create();
 
         Reader::create([

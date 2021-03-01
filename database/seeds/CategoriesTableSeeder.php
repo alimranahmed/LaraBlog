@@ -11,7 +11,6 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-
         $categories[] = [
             'name' => 'Object Oriented Programming',
             'alias' => 'oop',

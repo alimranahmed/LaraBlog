@@ -74,7 +74,6 @@ class CommentController extends Controller
                 $newUser->assignRole(Role::where('name', 'reader')->first());
 
                 $newUser->reader()->create(['notify' => $request->has('notify'),]);
-
             } elseif ($newUser->isReader()) {
                 $newUser->reader->update(['notify' => $request->has('notify')]);
             }
