@@ -20,7 +20,7 @@ class HitLoggerTest extends TestCase
     {
         parent::setUp();
 
-        $user = factory(User::class)->create(['email' => 'example@test.com']);
+        $user =  User::factory()->create(['email' => 'example@test.com']);
 
         $category = factory(Category::class)->create();
 

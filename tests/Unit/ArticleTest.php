@@ -25,7 +25,7 @@ class ArticleTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->user = factory(User::class)->create(['email' => 'example@test.com']);
+        $this->user = User::factory()->create(['email' => 'example@test.com']);
 
         $this->category = factory(Category::class)->create();
     }

@@ -32,7 +32,7 @@ class CommentTest extends WebTestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class)
+        $this->user =  User::factory()
             ->create(['name' => 'Example User', 'email' => 'example@test.com']);
 
         $this->category = factory(Category::class)->create();

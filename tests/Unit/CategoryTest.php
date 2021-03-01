@@ -27,7 +27,7 @@ class CategoryTest extends TestCase
 
     public function testNonEmptyOnly()
     {
-        $user = factory(User::class)->create(['email' => 'example@test.com']);
+        $user =  User::factory()->create(['email' => 'example@test.com']);
         $category = factory(Category::class)->create();
         factory(Article::class)->create(['category_id' => $category->id, 'user_id' => $user->id]);
 

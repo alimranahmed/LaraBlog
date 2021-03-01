@@ -23,9 +23,8 @@ class ArticleTest extends WebTestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class, 1)
-            ->create(['name' => 'Example User', 'email' => 'example@test.com'])
-            ->first();
+        $this->user =  User::factory()
+            ->create(['name' => 'Example User', 'email' => 'example@test.com']);
 
         $this->category = factory(Category::class, 1)->create()->first();
     }
