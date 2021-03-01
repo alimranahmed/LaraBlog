@@ -28,11 +28,11 @@ class CommentTest extends WebTestCase
      */
     protected $article;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
-        $this->user = factory(User::class)
+        $this->user =  User::factory()
             ->create(['name' => 'Example User', 'email' => 'example@test.com']);
 
         $this->category = factory(Category::class)->create();

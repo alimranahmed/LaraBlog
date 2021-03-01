@@ -14,7 +14,7 @@ class UserTest extends TestCase
 
     public function testUserCanLogin()
     {
-        $user = factory(User::class)->create([
+        $user =  User::factory()->create([
             'email' => 'random@gmail.com',
             'password' => bcrypt('123456')
         ]);
@@ -48,7 +48,7 @@ class UserTest extends TestCase
 
     public function testUnsubscribe()
     {
-        $user = factory(User::class)->create(['token' => 'test-token']);
+        $user =  User::factory()->create(['token' => 'test-token']);
         $user->reader()->create(['notify' => 0, 'is_verified' => 0]);
 
         $this->get("confirm-subscription/{$user->id}/?token=test-token")
@@ -60,7 +60,7 @@ class UserTest extends TestCase
 
     public function testConfirmSubscription()
     {
-        $user = factory(User::class)->create(['token' => 'test-token']);
+        $user =  User::factory()->create(['token' => 'test-token']);
         $user->reader()->create(['notify' => 1, 'is_verified' => 0]);
 
         $this->get("un-subscribe/{$user->id}/?token=test-token")

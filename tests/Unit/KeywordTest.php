@@ -15,11 +15,11 @@ class KeywordTest extends TestCase
 
     protected $article;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
-        $user = factory(User::class)->create(['email' => 'example@test.com']);
+        $user =  User::factory()->create(['email' => 'example@test.com']);
 
         $category = factory(Category::class)->create();
 
@@ -43,7 +43,6 @@ class KeywordTest extends TestCase
         $keyword = factory(Keyword::class, 2)->create();
 
         $this->article->keywords()->attach($keyword->first()->id);
-
 
 
         $this->assertSame([$this->article->id], Keyword::getArticleIDs($keyword));
