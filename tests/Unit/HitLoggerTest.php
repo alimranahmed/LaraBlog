@@ -22,9 +22,9 @@ class HitLoggerTest extends TestCase
 
         $user =  User::factory()->create(['email' => 'example@test.com']);
 
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
-        $this->article = factory(Article::class)->create([
+        $this->article = Article::factory()->create([
             'user_id' => $user->id,
             'category_id' => $category->id,
         ]);
@@ -32,7 +32,7 @@ class HitLoggerTest extends TestCase
 
     public function testCountryAttribute()
     {
-        $address = factory(Address::class)->create([
+        $address = Address::factory()->create([
             'country_name' => 'Bangladesh'
         ]);
 
@@ -43,7 +43,7 @@ class HitLoggerTest extends TestCase
 
         $this->assertEquals('Bangladesh', $hitLogger->country);
 
-        $address = $address = factory(Address::class)->create([
+        $address = $address = Address::factory()->create([
             'country_name' => null,
         ]);
 
@@ -57,7 +57,7 @@ class HitLoggerTest extends TestCase
 
     public function testCityAttribute()
     {
-        $address = factory(Address::class)->create([
+        $address = Address::factory()->create([
             'city' => 'Dhaka'
         ]);
 
@@ -68,7 +68,7 @@ class HitLoggerTest extends TestCase
 
         $this->assertEquals('Dhaka', $hitLogger->city);
 
-        $address = $address = factory(Address::class)->create([
+        $address = $address = Address::factory()->create([
             'city' => null,
         ]);
 

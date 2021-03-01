@@ -27,12 +27,12 @@ class ArticleTest extends TestCase
         parent::setUp();
         $this->user = User::factory()->create(['email' => 'example@test.com']);
 
-        $this->category = factory(Category::class)->create();
+        $this->category = Category::factory()->create();
     }
 
     public function testPublishedScope()
     {
-        factory(Article::class)->state('published')->create([
+        Article::factory()->published()->create([
             'user_id' => $this->user->id,
             'category_id' => $this->category->id,
         ]);
@@ -41,7 +41,7 @@ class ArticleTest extends TestCase
 
     public function testNotDeletedScope()
     {
-        factory(Article::class)->create([
+        Article::factory()->create([
             'is_deleted' => 0,
             'user_id' => $this->user->id,
             'category_id' => $this->category->id,
@@ -53,7 +53,7 @@ class ArticleTest extends TestCase
 
     public function testPublishedAtHumanAttribute()
     {
-        $article = factory(Article::class)->create([
+        $article = Article::factory()->create([
             'published_at' => now(),
             'user_id' => $this->user->id,
             'category_id' => $this->category->id,
@@ -64,7 +64,7 @@ class ArticleTest extends TestCase
 
     public function testCreatedAtHumanAttribute()
     {
-        $article = factory(Article::class)->create([
+        $article = Article::factory()->create([
             'user_id' => $this->user->id,
             'category_id' => $this->category->id
         ]);
@@ -74,7 +74,7 @@ class ArticleTest extends TestCase
 
     public function testUpdatedAtHumanAttribute()
     {
-        $article = factory(Article::class)->create([
+        $article = Article::factory()->create([
             'user_id' => $this->user->id,
             'category_id' => $this->category->id,
         ]);
@@ -84,8 +84,8 @@ class ArticleTest extends TestCase
 
     public function testCategoryNameAttribute()
     {
-        $category = factory(Category::class)->create(['name' => 'Test Category']);
-        $article = factory(Article::class)->create([
+        $category = Category::factory()->create(['name' => 'Test Category']);
+        $article = Article::factory()->create([
             'user_id' => $this->user->id,
             'category_id' => $category->id,
         ]);

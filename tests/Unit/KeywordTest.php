@@ -21,9 +21,9 @@ class KeywordTest extends TestCase
 
         $user =  User::factory()->create(['email' => 'example@test.com']);
 
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
 
-        $this->article = factory(Article::class)->create([
+        $this->article = Article::factory()->create([
             'user_id' => $user->id,
             'category_id' => $category->id,
         ]);
@@ -31,7 +31,7 @@ class KeywordTest extends TestCase
 
     public function testCreatedAtHumanAttribute()
     {
-        $keyword = factory(Keyword::class)->create([
+        $keyword = Keyword::factory()->create([
             'name' => 'test_keyword',
         ]);
 
@@ -40,7 +40,7 @@ class KeywordTest extends TestCase
 
     public function testGetArticleIds()
     {
-        $keyword = factory(Keyword::class, 2)->create();
+        $keyword = Keyword::factory()->count(2)->create();
 
         $this->article->keywords()->attach($keyword->first()->id);
 
