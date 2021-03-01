@@ -23,22 +23,22 @@ class ArticleTest extends WebTestCase
     {
         parent::setUp();
 
-        $this->user =  User::factory()
+        $this->user = User::factory()
             ->create(['name' => 'Example User', 'email' => 'example@test.com']);
 
-        $this->category = factory(Category::class, 1)->create()->first();
+        $this->category = Category::factory()->create();
     }
 
     public function testIndex()
     {
-        factory(Article::class, 1)->state('published')->create([
+        Article::factory()->published()->create([
             'heading' => 'Test Heading',
             'category_id' => $this->category->id,
             'user_id' => $this->user->id,
         ]);
 
 
-        factory(Article::class, 1)->state('unpublished')->create([
+        Article::factory()->unpublished()->create([
             'heading' => 'Unpublished Heading',
             'category_id' => $this->category->id,
             'user_id' => $this->user->id,
@@ -55,7 +55,7 @@ class ArticleTest extends WebTestCase
 
     public function testShowPublished()
     {
-        $article = factory(Article::class, 1)->state('published')->create([
+        $article = Article::factory()->published()->create([
             'heading' => 'Test Heading',
             'content' => 'Test content',
             'category_id' => $this->category->id,
@@ -68,12 +68,12 @@ class ArticleTest extends WebTestCase
 
     public function testHideShowUnpublished()
     {
-        $article = factory(Article::class, 1)->state('unpublished')->create([
+        $article = Article::factory()->unpublished()->create([
             'heading' => 'Unpublished Heading',
             'content' => 'Unpublished content',
             'category_id' => $this->category->id,
             'user_id' => $this->user->id,
-        ])->first();
+        ]);
 
         $this->get("article/{$article->id}/")
             ->assertRedirect()

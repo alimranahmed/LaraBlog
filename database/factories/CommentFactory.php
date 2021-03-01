@@ -31,4 +31,20 @@ class CommentFactory extends Factory
             'parent_comment_id' => null,
         ];
     }
+
+    public function published()
+    {
+        return $this->state([
+            'is_published' => 1,
+            'published_at' => now(),
+        ]);
+    }
+
+    public function unpublished()
+    {
+        return $this->state([
+            'is_published' => 0,
+            'published_at' => null,
+        ]);
+    }
 }

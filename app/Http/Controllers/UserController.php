@@ -9,6 +9,7 @@ use App\Models\Address;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -123,24 +124,24 @@ class UserController extends Controller
         try {
             $this->validate($request, ['name' => 'required', 'email' => 'required|email']);
 
-            \DB::transaction(function () use ($newAddress, $request, $clientIP) {
-                $newAddress = Address::create($newAddress);
-                $newUser = User::where('email', $request->get('email'))->first();
+            DB::beginTransaction();
+            $newAddress = Address::create($newAddress);
+            $newUser = User::where('email', $request->get('email'))->first();
 
-                if (is_null($newUser)) {
-                    $newUser = $request->only('email', 'name');
-                    $newUser['last_ip'] = $clientIP;
-                    $newUser['address_id'] = $newAddress->id;
-                    $newUser['token'] = Hash::make($request->get('email'));
-                    $newUser = User::create($newUser);
-                    $newUser->attachRole(Role::where('name', 'reader')->first());
+            if (is_null($newUser)) {
+                $newUser = $request->only('email', 'name');
+                $newUser['last_ip'] = $clientIP;
+                $newUser['address_id'] = $newAddress->id;
+                $newUser['token'] = Hash::make($request->get('email'));
+                $newUser = User::create($newUser);
+                $newUser->assignRole(Role::where('name', 'reader')->first());
 
-                    $newUser->reader()->create(['notify' => 0, 'is_verified' => 0]);
-                    Mail::to($request->get('email'))->queue(new SubscribeConfirmation($newUser));
-                } else {
-                    return back()->with('warningMsg', 'You have already subscribed, please contact with admin');
-                }
-            });
+                $newUser->reader()->create(['notify' => 0, 'is_verified' => 0]);
+                Mail::to($request->get('email'))->queue(new SubscribeConfirmation($newUser));
+            } else {
+                return back()->with('warningMsg', 'You have already subscribed, please contact with admin');
+            }
+            DB::commit();
         } catch (\Exception $e) {
             Log::error($this->getLogMsg($e));
             return back()->with('errorMsg', $this->getMessage($e));

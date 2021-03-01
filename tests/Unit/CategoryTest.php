@@ -14,13 +14,13 @@ class CategoryTest extends TestCase
 
     public function testCreatedAtAttribute()
     {
-        $category = factory(Category::class)->create();
+        $category = Category::factory()->create();
         $this->assertEquals('1 second ago', $category->createdAtHuman);
     }
 
     public function testActiveScope()
     {
-        factory(Category::class)->create(['is_active' => 1]);
+        Category::factory()->create(['is_active' => 1]);
         $category = Category::active()->first();
         $this->assertEquals(1, $category->is_active);
     }
@@ -28,8 +28,8 @@ class CategoryTest extends TestCase
     public function testNonEmptyOnly()
     {
         $user =  User::factory()->create(['email' => 'example@test.com']);
-        $category = factory(Category::class)->create();
-        factory(Article::class)->create(['category_id' => $category->id, 'user_id' => $user->id]);
+        $category = Category::factory()->create();
+        Article::factory()->create(['category_id' => $category->id, 'user_id' => $user->id]);
 
         $this->assertTrue(Category::getNonEmptyOnly()->first()->articles->isNotEmpty());
     }
