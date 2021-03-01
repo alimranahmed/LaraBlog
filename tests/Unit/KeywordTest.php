@@ -45,6 +45,6 @@ class KeywordTest extends TestCase
         $this->article->keywords()->attach($keyword->first()->id);
 
 
-        $this->assertSame([''.$this->article->id], Keyword::getArticleIDs($keyword));
+        $this->assertSame([$this->article->id], Keyword::getArticleIDs($keyword));
     }
 }

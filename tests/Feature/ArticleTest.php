@@ -19,15 +19,14 @@ class ArticleTest extends WebTestCase
      */
     protected $category;
 
-    public function setUp():void
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->user = User::factory()
-            ->create(['name' => 'Example User', 'email' => 'example@test.com'])
-            ->first();
+            ->create(['name' => 'Example User', 'email' => 'example@test.com']);
 
-        $this->category = Category::factory()->create()->first();
+        $this->category = Category::factory()->create();
     }
 
     public function testIndex()
@@ -74,7 +73,7 @@ class ArticleTest extends WebTestCase
             'content' => 'Unpublished content',
             'category_id' => $this->category->id,
             'user_id' => $this->user->id,
-        ])->first();
+        ]);
 
         $this->get("article/{$article->id}/")
             ->assertRedirect()

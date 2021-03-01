@@ -16,7 +16,7 @@ class HitLoggerTest extends TestCase
 
     protected $article;
 
-    protected function setUp():void
+    protected function setUp(): void
     {
         parent::setUp();
 

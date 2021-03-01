@@ -14,6 +14,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
@@ -56,41 +58,37 @@ class CommentController extends Controller
         $newComment = $request->only('content', 'parent_comment_id');
         $newAddress = ['ip' => $clientIP];
         try {
-            \DB::transaction(
-                function () use (&$newComment, $newAddress, $articleId, $request, $clientIP) {
-                    //Create new address
-                    $newAddress = Address::create($newAddress);
-                    //Create new comment
-                    $newComment['address_id'] = $newAddress->id;
-                    $newComment['article_id'] = $articleId;
-                    $newComment['token'] = \Hash::make($newComment['content']);
-                    $newComment['is_published'] = 0;
+            DB::beginTransaction();
+            //Create new address
+            $newAddress = Address::create($newAddress);
+            //Create new comment
+            $newComment['address_id'] = $newAddress->id;
+            $newComment['article_id'] = $articleId;
+            $newComment['token'] = \Hash::make($newComment['content']);
+            $newComment['is_published'] = 0;
 
-                    $newUser = User::where('email', $request->get('email'))->first();
-                    if (is_null($newUser)) {
-                        $newUser = $request->only('email');
-                        $newUser = User::create($newUser);
-                        $newUser->assignRole(Role::where('name', 'reader')->first());
+            $newUser = User::where('email', $request->get('email'))->first();
+            if (is_null($newUser)) {
+                $newUser = $request->only('email');
+                $newUser = User::create($newUser);
+                $newUser->assignRole(Role::where('name', 'reader')->first());
 
-                        $newUser->reader()->create(
-                            [
-                                'notify' => $request->has('notify'),
-                            ]
-                        );
-                    } elseif ($newUser->isReader()) {
-                        $newUser->reader->update(['notify' => $request->has('notify')]);
-                    }
-                    if ($request->has('name')) {
-                        $newUser->name = $request->get('name');
-                    }
-                    $newUser->last_ip = $clientIP;
-                    $newUser->token = \Hash::make($newComment['content']);
-                    $newUser->save();
-                    $newComment['user_id'] = $newUser->id;
-                    $newComment = Comment::create($newComment);
-                    Article::where('id', $articleId)->increment('comment_count');
-                }
-            );
+                $newUser->reader()->create(['notify' => $request->has('notify'),]);
+
+            } elseif ($newUser->isReader()) {
+                $newUser->reader->update(['notify' => $request->has('notify')]);
+            }
+            if ($request->has('name')) {
+                $newUser->name = $request->get('name');
+            }
+            $newUser->last_ip = $clientIP;
+            $newUser->token = Hash::make($newComment['content']);
+            $newUser->save();
+            $newComment['user_id'] = $newUser->id;
+            $newComment = Comment::create($newComment);
+            Article::where('id', $articleId)->increment('comment_count');
+
+            DB::commit();
             //$this->dispatch(new SendConfirmCommentMail($newComment));
         } catch (\Exception $e) {
             Log::error($this->getLogMsg($e));
