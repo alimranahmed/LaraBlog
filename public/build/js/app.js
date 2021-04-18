@@ -93209,14 +93209,9 @@ function alertSuccess(message) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-__webpack_require__(/*! /Users/imran/Projects/Personal/PHP/LaraBlog/resources/assets/js/app.js */"./resources/assets/js/app.js");
-__webpack_require__(/*! /Users/imran/Projects/Personal/PHP/LaraBlog/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
-module.exports = __webpack_require__(/*! /Users/imran/Projects/Personal/PHP/LaraBlog/resources/assets/sass/frontend.scss */"./resources/assets/sass/frontend.scss");
-=======
 __webpack_require__(/*! /Users/al_imran/Projects/personal/LaraBlog/resources/assets/js/app.js */"./resources/assets/js/app.js");
-module.exports = __webpack_require__(/*! /Users/al_imran/Projects/personal/LaraBlog/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
->>>>>>> develop
+__webpack_require__(/*! /Users/al_imran/Projects/personal/LaraBlog/resources/assets/sass/app.scss */"./resources/assets/sass/app.scss");
+module.exports = __webpack_require__(/*! /Users/al_imran/Projects/personal/LaraBlog/resources/assets/sass/frontend.scss */"./resources/assets/sass/frontend.scss");
 
 
 /***/ }),
