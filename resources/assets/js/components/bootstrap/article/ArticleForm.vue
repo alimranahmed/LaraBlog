@@ -107,5 +107,5 @@
 </script>
 
 <style scoped>
-    @import '~simplemde/dist/simplemde.min.css';
+    @import '../../../../../../node_modules/simplemde/dist/simplemde.min.css';
 </style>
