@@ -1,4 +1,5 @@
 @include('frontend.tailwindcss.layouts._header')
+
 <div>
     <h1 class="font-semibold sm:text-xl md:text-2xl mb-1 leading-tight">
         {{$article->heading}}
@@ -15,7 +16,7 @@
         {!! $article->contentAsHtml !!}
     </div>
     <div class="mb-3">
-        @include('frontend.tailwindcss.articles._tag')
+        <x-article.tags :keywords="$article->keywords"></x-article.tags>
     </div>
 </div>
 
@@ -29,24 +30,13 @@
             </a>
         </h2>
         @foreach($relatedArticles as $relatedArticle)
-            @include('frontend.tailwindcss.articles._list_card', ['article' => $relatedArticle])
+            <x-article :article="$relatedArticle"></x-article>
         @endforeach
     </div>
 @endif
 
 @if($article->is_comment_enabled)
-    <div>
-        @include('frontend.tailwindcss.articles._comment_form')
-    </div>
+    <x-article.comments :article="$article"></x-article.comments>
 @endif
-
-<div class="my-3">
-    <h2 class="border-b border-blue-300 text-xl md:text-2xl font-bold">
-        Comments
-    </h2>
-    @foreach($article->comments->where('parent_comment_id', null) as $comment)
-        @include('frontend.tailwindcss.articles._comment', ['article' => $article, 'comment' => $comment])
-    @endforeach
-</div>
 
 @include('frontend.tailwindcss.layouts._footer')
