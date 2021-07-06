@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Article;
 use App\Models\Article;
 use App\Models\Comment;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -45,7 +44,7 @@ class Comments extends Component
             'article_id' => $this->article->id,
             'content' => $content = $this->comment['content'],
             'token' => \Hash::make($this->comment['content']),
-            'is_published' => true,
+            'is_published' => false,
             'user_id' => $this->updateOrCreateUser()->id,
         ]);
 

@@ -14,7 +14,7 @@
     <div class="md:flex justify-between items-center">
 
         <div class="text-gray-600 text-xs md:text-sm">
-            Published {{$article->publishedAtHuman}} on
+            Published {{$article->published_at->format('M d, Y')}}, on
             <a href="{{route('articles-by-category', $article->category->alias)}}"
                class="text-blue-400 hover:text-blue-700 focus:outline-none focus:text-blue-700">
                 {{$article->category->name}}

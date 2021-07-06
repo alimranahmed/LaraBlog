@@ -34,7 +34,8 @@
             <input type="checkbox"
                    wire:model.defer="comment.notify"
                    name="comment.notify"
-                   aria-label="Notify me about new article"> Notify me about new article
+                   id="comment.notify"
+                   aria-label="Notify me about new article"> <label for="comment.notify">Notify me about new article</label>
         </div>
         <button type="submit"
             class="rounded-full border border-blue-200 bg-blue-400 px-3 focus:outline-none up">
