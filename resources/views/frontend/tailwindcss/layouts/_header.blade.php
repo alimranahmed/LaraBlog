@@ -15,6 +15,8 @@
 
     @include('layouts._google_analytics')
 
+    @livewireStyles
+
 </head>
 <body class="bg-gray-100">
 <div class="border-b border-blue-200 mb-3">

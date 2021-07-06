@@ -3,5 +3,6 @@
     <?php echo '&copy; ' . (new DateTime())->format('Y') . ' Al Imran Ahmed' ?>
 </div>
 <script src="{{asset('js/prism.js')}}" defer></script>
+@livewireScripts
 </body>
 </html>
