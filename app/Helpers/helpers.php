@@ -16,3 +16,8 @@ function assoc2JsonArray(array $associativeArray): string
     }
     return json_encode($arrayElements);
 }
+
+function exceptionLine(Exception $e): string
+{
+    return $e->getLine() . ': ' . $e->getFile() . ' ' . $e->getMessage();
+}

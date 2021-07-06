@@ -20,7 +20,7 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         $articles = Article::getPaginate($request);
-        return view("{$this->frontView}.articles.index", compact('articles'));
+        return view("frontend.articles.index", compact('articles'));
     }
 
     public function show($articleId, $articleHeading = '')
@@ -28,21 +28,8 @@ class ArticleController extends Controller
         $article = Article::where('id', $articleId)
             ->published()
             ->notDeleted()
-            ->with(
-                [
-                    'user',
-                    'category',
-                    'keywords',
-                    'comments' => function ($comments) {
-                        return $comments->published();
-                    },
-                    'comments.user',
-                    'comments.replies' => function ($replies) {
-                        return $replies->published();
-                    },
-                    'comments.replies.user'
-                ]
-            )->first();
+            ->with(['user', 'category', 'keywords',])
+            ->first();
 
         if (is_null($article)) {
             return redirect()->route('home')->with('warningMsg', 'Article not found');
@@ -55,7 +42,7 @@ class ArticleController extends Controller
 
         $relatedArticles = $this->getRelatedArticles($article);
 
-        return view("{$this->frontView}.articles.show", compact('article', 'relatedArticles'));
+        return view("frontend.articles.show", compact('article', 'relatedArticles'));
     }
 
     private function isEditable(Article $article)
@@ -214,7 +201,7 @@ class ArticleController extends Controller
         $searched = new \stdClass();
         $searched->articles = $articles;
         $searched->query = $queryString;
-        return view("{$this->frontView}.articles.search_result", compact('searched'));
+        return view("frontend.articles.search_result", compact('searched'));
     }
 
     public function adminArticles()

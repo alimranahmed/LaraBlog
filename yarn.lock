@@ -1024,6 +1024,18 @@
   optionalDependencies:
     prettier "^1.18.2"
 
+"@vue/reactivity@^3.0.2":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@vue/reactivity/-/reactivity-3.1.4.tgz#d926ed46fb0d48582ccf8665b062d37b5d35ba99"
+  integrity sha512-YDlgii2Cr9yAoKVZFzgY4j0mYlVT73986X3e5SPp6ifqckSEoFSUWXZK2Tb53TB/9qO29BEEbspnKD3m3wAwkA==
+  dependencies:
+    "@vue/shared" "3.1.4"
+
+"@vue/shared@3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.1.4.tgz#c14c461ec42ea2c1556e86f60b0354341d91adc3"
+  integrity sha512-6O45kZAmkLvzGLToBxEz4lR2W6kXohCtebV2UxjH9GXjd8X9AhEn68FN9eNanFtWNzvgw1hqd6HkPRVQalqf7Q==
+
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.9.0.tgz#bd850604b4042459a5a41cd7d338cbed695ed964"
@@ -1298,6 +1310,13 @@ alphanum-sort@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
+
+alpinejs@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-3.2.1.tgz#d620d1ca121ae2bf22242c2dd427c04d826e5e2b"
+  integrity sha512-MYYGUmVHNWN27TvgAtUCYXZlfsXoVCrLQT3a0Ak6CQKqf1TCHfQKxmhzJWscW5kPcLlOK2aYmWbV2H+XyfN2FQ==
+  dependencies:
+    "@vue/reactivity" "^3.0.2"
 
 ansi-align@^2.0.0:
   version "2.0.0"

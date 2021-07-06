@@ -90,7 +90,7 @@ class CommentController extends Controller
             DB::commit();
             //$this->dispatch(new SendConfirmCommentMail($newComment));
         } catch (\Exception $e) {
-            Log::error($this->getLogMsg($e));
+            Log::error(exceptionLine($e));
             return response()->json(['errorMsg' => $this->getMessage($e)], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 

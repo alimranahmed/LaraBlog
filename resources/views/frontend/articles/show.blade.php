@@ -1,4 +1,4 @@
-@include('frontend.tailwindcss.layouts._header')
+@include('frontend.layouts._header')
 
 <div>
     <h1 class="font-semibold sm:text-xl md:text-2xl mb-1 leading-tight">
@@ -36,7 +36,7 @@
 @endif
 
 @if($article->is_comment_enabled)
-    <x-article.comments :article="$article"></x-article.comments>
+    <livewire:article.comments :article="$article"/>
 @endif
 
-@include('frontend.tailwindcss.layouts._footer')
+@include('frontend.layouts._footer')
