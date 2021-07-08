@@ -3,16 +3,24 @@
     <div>
         <?php echo '&copy; ' . (new DateTime())->format('Y') . ' Al Imran Ahmed' ?>
     </div>
-    <div>
-        <span>Follow Me: </span>
-        <a href="{{route('articles')}}">B</a>
-        <a href="https://github.com/alimranahmed" target="_blank">G</a>
-        <a href="https://twitter.com/al_imran_cse" target="_blank">T</a>
-        <a href="https://www.linkedin.com/in/alimrancse/" target="_blank">L</a>
-        <a href="https://www.youtube.com/channel/UC14rfvux_ri5gC4l9AeV1UA" target="_blank">Y</a>
+
+    <div class="flex">
+        <a href="https://github.com/alimranahmed" target="_blank" class="mx-3">
+            <x-uni-github-alt-thin />
+        </a>
+        <a href="https://twitter.com/al_imran_cse" target="_blank" class="mr-3">
+            <x-uni-twitter-alt-thin class="text-blue-700"/>
+        </a>
+        <a href="https://www.linkedin.com/in/alimrancse/" target="_blank" class="mr-3">
+            <x-uni-linkedin-alt-thin class="text-blue-900"/>
+        </a>
+        <a href="https://www.youtube.com/channel/UC14rfvux_ri5gC4l9AeV1UA" target="_blank">
+            <x-uni-youtube-thin class="text-red-700"/>
+        </a>
     </div>
+
     <div>
-        <a href="{{route('contact')}}">Contact Me</a>
+        <a href="{{route('contact')}}">Contact</a>
     </div>
 </div>
 
