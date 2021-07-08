@@ -30,82 +30,14 @@ class CommentController extends Controller
                 ->with('article', 'user', 'replies')
                 ->latest()
                 ->noReplies()
-                ->paginate(config('view.item_per_page'));
+                ->paginate(config('blog.item_per_page'));
         } else {
             $comments = Comment::with('article', 'user', 'replies')
                 ->latest()
                 ->noReplies()
-                ->paginate(config('view.item_per_page'));
+                ->paginate(config('blog.item_per_page'));
         }
         return view('backend.commentList', compact('comments'));
-    }
-
-    public function store(CommentRequest $request, $articleId)
-    {
-        $article = Article::find($articleId);
-        if (is_null($article)) {
-            return response()->json(['errorMsg' => 'Article not found'], Response::HTTP_NOT_FOUND);
-        }
-
-        if (!$article->is_comment_enabled) {
-            return response()->json(
-                ['errorMsg' => 'Comment is not allowed for this article'],
-                Response::HTTP_FORBIDDEN
-            );
-        }
-
-        $clientIP = $_SERVER['REMOTE_ADDR'] ?? '';
-        $newComment = $request->only('content', 'parent_comment_id');
-        $newAddress = ['ip' => $clientIP];
-        try {
-            DB::beginTransaction();
-            //Create new address
-            $newAddress = Address::create($newAddress);
-            //Create new comment
-            $newComment['address_id'] = $newAddress->id;
-            $newComment['article_id'] = $articleId;
-            $newComment['token'] = \Hash::make($newComment['content']);
-            $newComment['is_published'] = 0;
-
-            $newUser = User::where('email', $request->get('email'))->first();
-            if (is_null($newUser)) {
-                $newUser = $request->only('email');
-                $newUser = User::create($newUser);
-                $newUser->assignRole(Role::where('name', 'reader')->first());
-
-                $newUser->reader()->create(['notify' => $request->has('notify'),]);
-            } elseif ($newUser->isReader()) {
-                $newUser->reader->update(['notify' => $request->has('notify')]);
-            }
-            if ($request->has('name')) {
-                $newUser->name = $request->get('name');
-            }
-            $newUser->last_ip = $clientIP;
-            $newUser->token = Hash::make($newComment['content']);
-            $newUser->save();
-            $newComment['user_id'] = $newUser->id;
-            $newComment = Comment::create($newComment);
-            Article::where('id', $articleId)->increment('comment_count');
-
-            DB::commit();
-            //$this->dispatch(new SendConfirmCommentMail($newComment));
-        } catch (\Exception $e) {
-            Log::error($this->getLogMsg($e));
-            return response()->json(['errorMsg' => $this->getMessage($e)], Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-
-        $comments = Comment::where('article_id', $articleId)
-            ->published()
-            ->noReplies()
-            ->get();
-
-        //event(new CommentOnArticle('New comment posted!'));
-        Mail::to($request->get('email'))->queue(new CommentConfirmation($newComment));
-
-        Mail::to(Config::get('admin_email'))
-            ->queue(new NotifyAdmin($newComment, route('get-article', $articleId)));
-
-        return view('frontend._comments', compact('comments', 'article'));
     }
 
     public function update(Request $request, $commentId)

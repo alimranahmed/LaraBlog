@@ -60,7 +60,7 @@ class CategoryController extends Controller
     {
         $articles = Article::getPaginate($request);
 
-        return view('frontend.articles', compact('articles'));
+        return view("frontend.articles.index", compact('articles'));
     }
 
     public function destroy($categoryId)

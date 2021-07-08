@@ -29,10 +29,6 @@ class CreateUsersTable extends Migration
             $table->integer('is_active')->unsigned()->default(1);
             $table->dateTime('last_active')->nullable();
             $table->string('last_ip', 200)->nullable();
-            $table->integer('address_id')->unsigned()->nullable();
-            $table->foreign('address_id')
-                ->references('id')
-                ->on('addresses');
             $table->string('token')->nullable();
             $table->rememberToken();
             $table->timestamps();

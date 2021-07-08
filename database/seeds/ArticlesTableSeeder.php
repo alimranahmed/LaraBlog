@@ -12,7 +12,7 @@ class ArticlesTableSeeder extends Seeder
      */
     public function run()
     {
-        if (env("APP_ENV") != 'production') {
+        if (app()->environment() != 'production') {
             $faker = \Faker\Factory::create();
             foreach (range(0, 10) as $i) {
                 Article::factory()->create([

@@ -20,13 +20,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
-
-        try {
-            View::share('navCategories', Category::getNonEmptyOnly());
-            View::share('globalConfigs', Config::allFormatted());
-        } catch (\PDOException $e) {
-            //TODO handle response
-        }
     }
 
     /**

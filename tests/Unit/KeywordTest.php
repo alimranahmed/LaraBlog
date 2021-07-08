@@ -19,7 +19,7 @@ class KeywordTest extends TestCase
     {
         parent::setUp();
 
-        $user =  User::factory()->create(['email' => 'example@test.com']);
+        $user = User::factory()->create(['email' => 'example@test.com']);
 
         $category = Category::factory()->create();
 

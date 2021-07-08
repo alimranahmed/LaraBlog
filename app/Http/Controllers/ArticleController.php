@@ -20,7 +20,7 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         $articles = Article::getPaginate($request);
-        return view('frontend.articles', compact('articles'));
+        return view("frontend.articles.index", compact('articles'));
     }
 
     public function show($articleId, $articleHeading = '')
@@ -28,21 +28,8 @@ class ArticleController extends Controller
         $article = Article::where('id', $articleId)
             ->published()
             ->notDeleted()
-            ->with(
-                [
-                    'user',
-                    'category',
-                    'keywords',
-                    'comments' => function ($comments) {
-                        return $comments->published();
-                    },
-                    'comments.user',
-                    'comments.replies' => function ($replies) {
-                        return $replies->published();
-                    },
-                    'comments.replies.user'
-                ]
-            )->first();
+            ->with(['user', 'category', 'keywords',])
+            ->first();
 
         if (is_null($article)) {
             return redirect()->route('home')->with('warningMsg', 'Article not found');
@@ -55,7 +42,7 @@ class ArticleController extends Controller
 
         $relatedArticles = $this->getRelatedArticles($article);
 
-        return view('frontend.article', compact('article', 'relatedArticles'));
+        return view("frontend.articles.show", compact('article', 'relatedArticles'));
     }
 
     private function isEditable(Article $article)
@@ -207,14 +194,14 @@ class ArticleController extends Controller
             ->where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
             ->latest()
-            ->paginate(config('view.item_per_page'));
+            ->paginate(config('blog.item_per_page'));
 
         $articles->setPath(url("search/?query_string=$queryString"));
 
         $searched = new \stdClass();
         $searched->articles = $articles;
         $searched->query = $queryString;
-        return view('frontend.search_result', compact('searched'));
+        return view("frontend.articles.search_result", compact('searched'));
     }
 
     public function adminArticles()
@@ -231,7 +218,7 @@ class ArticleController extends Controller
             $articles = $articles->where('category_id', request('category'));
         }
 
-        $articles = $articles->paginate(config('view.item_per_page'));
+        $articles = $articles->paginate(config('blog.item_per_page'));
 
         return view('backend.articleList', compact('articles'));
     }

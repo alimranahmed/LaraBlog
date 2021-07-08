@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Mail\NotifyAdmin;
+use App\Models\Config;
 use App\Models\Feedback;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Mail;
@@ -14,8 +15,8 @@ class FeedbackTest extends TestCase
 
     public function testStore()
     {
-        //$this->disableExceptionHandling();
         Mail::fake();
+        Config::create(['name' => 'admin_email', 'value' => 'imran@example.com']);
 
         $data = [
             'name' => 'Test User',

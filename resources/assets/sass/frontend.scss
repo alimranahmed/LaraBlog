@@ -1,0 +1,9 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+code{
+    @apply bg-red-100 text-red-800 rounded-lg px-1 py-1
+}

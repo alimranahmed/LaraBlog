@@ -12,6 +12,14 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    protected $frontView;
+
+    public function __construct()
+    {
+        $frontendDesign = config('blog.frontend_design');
+        $this->frontView = "frontend.{$frontendDesign}";
+    }
+
     public function getMessage(\Exception $e, $msg = null)
     {
         if ($e instanceof ValidationException) {

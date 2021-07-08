@@ -4,22 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UserRequest;
-use App\Mail\SubscribeConfirmation;
 use App\Models\Address;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('roles')->paginate(config('view.item_per_page'));
+        $users = User::with('roles')->paginate(config('blog.item_per_page'));
         return view('backend.userList', compact('users'));
     }
 
@@ -114,87 +110,6 @@ class UserController extends Controller
     {
         $user = Auth::user();
         return view('backend.userDetails', compact('user'));
-    }
-
-    public function subscribe(Request $request)
-    {
-        $clientIP = $_SERVER['REMOTE_ADDR'] ?? null;
-        $newAddress = ['ip' => $clientIP];
-
-        try {
-            $this->validate($request, ['name' => 'required', 'email' => 'required|email']);
-
-            DB::beginTransaction();
-            $newAddress = Address::create($newAddress);
-            $newUser = User::where('email', $request->get('email'))->first();
-
-            if (is_null($newUser)) {
-                $newUser = $request->only('email', 'name');
-                $newUser['last_ip'] = $clientIP;
-                $newUser['address_id'] = $newAddress->id;
-                $newUser['token'] = Hash::make($request->get('email'));
-                $newUser = User::create($newUser);
-                $newUser->assignRole(Role::where('name', 'reader')->first());
-
-                $newUser->reader()->create(['notify' => 0, 'is_verified' => 0]);
-                Mail::to($request->get('email'))->queue(new SubscribeConfirmation($newUser));
-            } else {
-                return back()->with('warningMsg', 'You have already subscribed, please contact with admin');
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            Log::error($this->getLogMsg($e));
-            return back()->with('errorMsg', $this->getMessage($e));
-        }
-        return back()->with('successMsg', 'Thanks, a mail has been to confirm you subscription');
-    }
-
-    public function confirmSubscribe(Request $request, $userId)
-    {
-        try {
-            $this->validate($request, ['token' => 'required']);
-
-            $user = User::where('id', $userId)
-                ->where('token', $request->get('token'))
-                ->first();
-
-            if (is_null($user)) {
-                return redirect()->route('home')->with('errorMsg', 'Invalid request');
-            }
-
-            if ($user->isReader()) {
-                $user->reader->update(['is_verified' => 1, 'notify' => 1]);
-                return redirect()->route('home')->with('successMsg', 'Congratulation, your subscription confirmed');
-            }
-        } catch (\Exception $e) {
-            Log::error($this->getLogMsg($e));
-            return response()->json(['errorMsg' => $this->getMessage($e)]);
-        }
-        return redirect()->route('home')->with('warningMsg', 'Something went wrong');
-    }
-
-    public function unSubscribe(Request $request, $userId)
-    {
-        try {
-            $this->validate($request, ['token' => 'required']);
-
-            $user = User::where('id', $userId)
-                ->where('token', $request->get('token'))
-                ->first();
-
-            if (is_null($user)) {
-                return redirect()->route('home')->with('errorMsg', 'Invalid request');
-            }
-
-            if ($user->isReader() && $user->reader->notify) {
-                $user->reader->update(['is_verified' => 1, 'notify' => 0]);
-                return redirect()->route('home')->with('successMsg', 'You have un-subscribed confirmed');
-            }
-        } catch (\Exception $e) {
-            Log::error($this->getLogMsg($e));
-            return response()->json(['errorMsg' => $this->getMessage($e)]);
-        }
-        return redirect()->route('home')->with('errorMsg', 'No subscription found');
     }
 
     public function toggleActive($userId)
