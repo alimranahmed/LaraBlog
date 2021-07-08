@@ -27,10 +27,6 @@ class CreateArticlesTable extends Migration
             $table->integer('hit_count')->unsigned()->default(0);
             $table->integer('comment_count')->unsigned()->default(0);
             $table->integer('vote')->unsigned()->default(0);
-            $table->integer('address_id')->unsigned()->nullable();
-            $table->foreign('address_id')
-                ->references('id')
-                ->on('addresses');
             $table->integer('category_id')->unsigned()->nullable();
             $table->foreign('category_id')
                 ->references('id')

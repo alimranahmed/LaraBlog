@@ -1,4 +1,5 @@
 @props(['article'])
+
 <form wire:submit.prevent="add">
     @csrf
     <textarea placeholder="Comment"
@@ -35,10 +36,11 @@
                    wire:model.defer="comment.notify"
                    name="comment.notify"
                    id="comment.notify"
-                   aria-label="Notify me about new article"> <label for="comment.notify">Notify me about new article</label>
+                   aria-label="Notify me about new article"> <label for="comment.notify">Notify me about new
+                article</label>
         </div>
         <button type="submit"
-            class="rounded-full border border-blue-200 bg-blue-400 px-3 focus:outline-none up">
+                class="rounded-full border border-blue-200 bg-blue-400 px-3 focus:outline-none up">
             Comment
         </button>
     </div>

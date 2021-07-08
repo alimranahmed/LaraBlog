@@ -10,7 +10,7 @@ Route::get('subscription/confirm', 'SubscriptionController@confirm')->name('subs
 Route::get('unsubscribe', 'SubscriptionController@unsubscribe')->name('unsubscribe');
 
 //feedback
-Route::post('feedback', 'FeedbackController@store')->name('add-feedback');
+Route::view('contact', 'frontend.contact.create')->name('contact');
 
 //Article
 Route::get('article', 'ArticleController@index')->name('articles');

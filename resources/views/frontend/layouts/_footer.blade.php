@@ -12,7 +12,7 @@
         <a href="https://www.youtube.com/channel/UC14rfvux_ri5gC4l9AeV1UA" target="_blank">Y</a>
     </div>
     <div>
-        <a href="#">Contact Me</a>
+        <a href="{{route('contact')}}">Contact Me</a>
     </div>
 </div>
 

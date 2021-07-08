@@ -1,6 +1,9 @@
 <div x-data="{show_form: false}">
     <div x-show="show_form" x-transition>
         <x-article.comment.form :article="$article"></x-article.comment.form>
+        @if($isSubmitted)
+            <div class="text-lg text-green-600">Comment submitted successfully!</div>
+        @endif
     </div>
 
     <div class="my-3">

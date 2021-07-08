@@ -26,11 +26,6 @@ class CreateCommentsTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->integer('address_id')->unsigned()->nullable();
-            $table->foreign('address_id')
-                ->references('id')
-                ->on('addresses')
-                ->onDelete('cascade');
             $table->integer('parent_comment_id')->unsigned()->nullable();
             $table->foreign('parent_comment_id')
                 ->references('id')

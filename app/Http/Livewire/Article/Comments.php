@@ -21,6 +21,8 @@ class Comments extends Component
 
     public $comment;
 
+    public $isSubmitted = false;
+
     public $rules = [
         'comment.content' => 'required',
         'comment.name' => 'required',
@@ -55,6 +57,7 @@ class Comments extends Component
         $this->article->increment('comment_count');
 
         DB::commit();
+
         Mail::to($this->comment['email'])->queue(new CommentConfirmation($newComment));
 
         Mail::to(Config::get('admin_email'))
@@ -62,8 +65,7 @@ class Comments extends Component
 
         $this->comment = null;
         $this->comments = $this->getComments();
-
-        $this->emit('success', 'Comment submitted successfully!');
+        $this->isSubmitted = true;
     }
 
     private function getComments()
