@@ -2,11 +2,15 @@
 
 namespace App\Http\Livewire\Article;
 
+use App\Mail\CommentConfirmation;
+use App\Mail\NotifyAdmin;
 use App\Models\Article;
 use App\Models\Comment;
+use App\Models\Config;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class Comments extends Component
@@ -40,10 +44,10 @@ class Comments extends Component
 
         DB::beginTransaction();
 
-        Comment::create([
+        $newComment = Comment::create([
             'article_id' => $this->article->id,
-            'content' => $content = $this->comment['content'],
-            'token' => \Hash::make($this->comment['content']),
+            'content' => $this->comment['content'],
+            'token' => Hash::make($this->comment['content']),
             'is_published' => false,
             'user_id' => $this->updateOrCreateUser()->id,
         ]);
@@ -51,7 +55,10 @@ class Comments extends Component
         $this->article->increment('comment_count');
 
         DB::commit();
-        //$this->dispatch(new SendConfirmCommentMail($newComment));
+        Mail::to($this->comment['email'])->queue(new CommentConfirmation($newComment));
+
+        Mail::to(Config::get('admin_email'))
+            ->queue(new NotifyAdmin($newComment, route('get-article', $this->article->id)));
 
         $this->comment = null;
         $this->comments = $this->getComments();
