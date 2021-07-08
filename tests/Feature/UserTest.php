@@ -63,7 +63,7 @@ class UserTest extends TestCase
         $user = User::factory()->create(['token' => 'test-token']);
         $user->reader()->create(['notify' => 1, 'is_verified' => 0]);
 
-        $this->get("un-subscribe/{$user->id}/?token=test-token")
+        $this->get("unsubscribe/{$user->id}/?token=test-token")
             ->assertRedirect();
 
         $this->assertEquals(0, $user->reader->notify);

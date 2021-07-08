@@ -1,4 +1,4 @@
-<div class="mt-3 border border-indigo-300 p-5 rounded flex justify-center">
+<div class="mt-10 border border-indigo-300 p-5 rounded flex justify-center">
     @if($isSubscribed)
         <div class="text-green-700">
             Thanks! You have subscribed successfully.

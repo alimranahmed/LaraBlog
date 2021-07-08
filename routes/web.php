@@ -6,9 +6,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')->name('home');
 
 //Subscribe
-Route::post('subscribe', 'UserController@subscribe')->name('subscribe');
-Route::get('confirm-subscription/{userId}', 'UserController@confirmSubscribe')->name('confirm-subscribe');
-Route::get('un-subscribe/{userId}', 'UserController@unSubscribe')->name('un-subscribe');
+Route::get('subscription/confirm', 'SubscriptionController@confirm')->name('subscription.confirm');
+Route::get('unsubscribe', 'SubscriptionController@unsubscribe')->name('unsubscribe');
 
 //feedback
 Route::post('feedback', 'FeedbackController@store')->name('add-feedback');

@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Mail\SubscribeConfirmation;
 use App\Models\Subscriber;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
@@ -25,19 +27,21 @@ class Subscribe extends Component
     {
         $this->validate();
 
-        Subscriber::firstOrCreate(
+        $subscriber = Subscriber::firstOrCreate(
             ['email' => $this->email],
-            ['unsubscribable_token' => $this->generateUnsubscribableToken()]
+            ['token' => $this->generateUniqueToken()]
         );
+
+        Mail::to($this->email)->queue(new SubscribeConfirmation($subscriber));
 
         $this->isSubscribed = true;
     }
 
-    private function generateUnsubscribableToken(): string
+    private function generateUniqueToken(): string
     {
         do {
             $token = Str::random();
-        } while (Subscriber::where('unsubscribable_token', $token)->exists());
+        } while (Subscriber::where('token', $token)->exists());
 
         return $token;
     }

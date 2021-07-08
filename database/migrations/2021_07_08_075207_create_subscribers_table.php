@@ -17,7 +17,8 @@ class CreateSubscribersTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('email')->unique();
-            $table->string('unsubscribable_token')->unique();
+            $table->dateTime('verified_at')->nullable();
+            $table->string('token')->unique();
             $table->dateTime('unsubscribed_at')->nullable();
             $table->timestamps();
         });
