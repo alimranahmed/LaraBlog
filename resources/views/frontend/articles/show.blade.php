@@ -39,4 +39,6 @@
     <livewire:article.comments :article="$article"/>
 @endif
 
+<livewire:subscribe/>
+
 @include('frontend.layouts._footer')

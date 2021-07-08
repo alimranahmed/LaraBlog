@@ -8,4 +8,6 @@
 
     {{method_exists($articles, 'links') ? $articles->links() : ''}}
 
+    <livewire:subscribe/>
+
 </x-app>
