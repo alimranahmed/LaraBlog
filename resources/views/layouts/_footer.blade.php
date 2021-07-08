@@ -17,8 +17,6 @@
         @endif
     </div>
 
-    @include("layouts._modal_subscribe_form")
-    @include("layouts._modal_feedback_form")
 </footer>
 </div>
 <script src="{{ mix("build/js/app.js") }}" type="application/javascript"></script>
