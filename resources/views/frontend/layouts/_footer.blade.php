@@ -1,10 +1,10 @@
 </div>
-<div class="mt-4 p-4 border-t border-blue-200 flex justify-between">
+<div class="mt-4 p-4 border-t border-blue-200 md:flex md:justify-between text-center">
     <div>
         <?php echo '&copy; ' . (new DateTime())->format('Y') . ' Al Imran Ahmed' ?>
     </div>
 
-    <div class="flex">
+    <div class="flex justify-center my-3 md:my-0">
         <a href="https://github.com/alimranahmed" target="_blank" class="mx-3">
             <x-uni-github-alt-thin />
         </a>
