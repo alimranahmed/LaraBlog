@@ -23,7 +23,7 @@
     </div>
 
     <div>
-        <a href="{{route('contact')}}">Contact</a>
+        <a href="{{route('contact')}}" class="border-b border-dotted border-indigo-600">Contact</a>
     </div>
 </div>
 
