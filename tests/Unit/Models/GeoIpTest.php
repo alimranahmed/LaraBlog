@@ -1,10 +1,11 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Models;
 
 use App\Services\GeoIp\FakeGeoIp;
 use App\Services\GeoIp\GeoIp;
 use Tests\TestCase;
+use function app;
 
 class GeoIpTest extends TestCase
 {

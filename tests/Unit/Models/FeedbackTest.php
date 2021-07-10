@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Models;
 
 use App\Models\Feedback;
 use Illuminate\Foundation\Testing\DatabaseTransactions;

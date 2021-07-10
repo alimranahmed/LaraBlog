@@ -1,21 +1,17 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Livewire;
 
 use App\Http\Livewire\ContactForm;
 use App\Mail\NotifyAdmin;
 use App\Models\Config;
-use App\Models\Feedback;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-class FeedbackTest extends TestCase
+class ContactFormTest extends TestCase
 {
-    use DatabaseTransactions;
-
-    public function testStore()
+    public function testSubmit()
     {
         Mail::fake();
         Config::create(['name' => 'admin_email', 'value' => 'imran@example.com']);

@@ -6,19 +6,17 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\Config;
 use App\Models\User;
-use Faker\Factory;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Str;
+use Tests\TestCase;
 
-class ArticleTest extends WebTestCase
+class ArticleTest extends TestCase
 {
-    /**
-     * @var User
-     */
+    use DatabaseTransactions;
+
     protected $user;
 
-    /**
-     * @var Category
-     */
+
     protected $category;
 
     public function setUp(): void
