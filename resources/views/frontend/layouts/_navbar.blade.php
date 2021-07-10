@@ -58,18 +58,21 @@
     </div>
 
     <div class="sm-navs hidden">
-        <div class="mt-4 flex">
-            <input class="rounded-l-full border-l border-t border-b border-blue-200 outline-none px-2 bg-gray-100
-    focus:bg-white w-full appearance-none">
-            <button
-                class="px-2 text-blue-800 focus:outline-none rounded-r-full border-r border-t border-b border-blue-200">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
-                    <path class="heroicon-ui" fill="currentColor"
-                          d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6
+        <form action="{{route("search-article")}}">
+            <div class="mt-4 flex">
+                <input name="query_string"
+                       required
+                       class="rounded-l-full border-l border-t border-b border-blue-200 outline-none px-2 bg-gray-100 focus:bg-white w-full appearance-none">
+                <button type="submit"
+                    class="px-2 text-blue-800 focus:outline-none rounded-r-full border-r border-t border-b border-blue-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+                        <path class="heroicon-ui" fill="currentColor"
+                              d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6
          6 0 1 0 0-12 6 6 0 0 0 0 12z"/>
-                </svg>
-            </button>
-        </div>
+                    </svg>
+                </button>
+            </div>
+        </form>
         <div class="mt-4">
             <a href="{{route('articles')}}" class="uppercase hover:underline">Blog</a>
         </div>

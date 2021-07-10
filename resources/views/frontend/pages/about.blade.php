@@ -30,7 +30,7 @@
         </section>
 
         <section class="mt-5 md:mt-0">
-            <h2>Current Interested</h2>
+            <h2>Current Interests</h2>
             <ul class="">
                 <li>- Building SaaS</li>
                 <li>- Machine Learning</li>
