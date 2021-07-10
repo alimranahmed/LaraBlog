@@ -9,6 +9,7 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\Keyword;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -185,14 +186,16 @@ class ArticleController extends Controller
         $this->validate($request, ['query_string' => 'required']);
 
         $queryString = $request->get('query_string');
-        $keywords = Keyword::where('name', 'LIKE', "%$queryString%")->where('is_active', 1)->get();
-        $articleIDsByKeywords = Keyword::getArticleIDs($keywords);
 
         $articles = Article::published()
             ->notDeleted()
-            ->whereIn('id', $articleIDsByKeywords)
             ->where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
+            ->orWhereHas('keywords', function (Builder $keywords) use ($queryString) {
+                return $keywords->where('name', 'LIKE', "%$queryString%")
+                    ->where('is_active', 1);
+            })
+            ->with('category', 'keywords', 'user')
             ->latest()
             ->paginate(config('blog.item_per_page'));
 
@@ -201,6 +204,7 @@ class ArticleController extends Controller
         $searched = new \stdClass();
         $searched->articles = $articles;
         $searched->query = $queryString;
+
         return view("frontend.articles.search_result", compact('searched'));
     }
 

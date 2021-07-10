@@ -7,7 +7,9 @@
     <form action="{{route("search-article")}}">
         <div class="flex">
             <input class="rounded-l-full border-l border-t border-b border-blue-200 outline-none px-2 bg-gray-100
-    focus:bg-white w-full appearance-none" name="query_string">
+    focus:bg-white w-full appearance-none"
+                   required
+                   name="query_string">
             <button
                 class="px-2 text-blue-800 focus:outline-none rounded-r-full border-r border-t border-b border-blue-200">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
