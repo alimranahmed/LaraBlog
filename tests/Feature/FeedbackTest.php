@@ -2,11 +2,13 @@
 
 namespace Tests\Feature;
 
+use App\Http\Livewire\ContactForm;
 use App\Mail\NotifyAdmin;
 use App\Models\Config;
 use App\Models\Feedback;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Mail;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class FeedbackTest extends TestCase
@@ -18,21 +20,13 @@ class FeedbackTest extends TestCase
         Mail::fake();
         Config::create(['name' => 'admin_email', 'value' => 'imran@example.com']);
 
-        $data = [
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'content' => 'Test feedback',
-        ];
+        Livewire::test(ContactForm::class)
+            ->set('name', $name = 'Test User')
+            ->set('email', $email = 'test@example.com')
+            ->set('content', $content = 'Test feedback')
+            ->call('submit');
 
-        $this->post('feedback', $data)
-            ->assertRedirect();
-
-        $feedback = Feedback::where('email', $data['email'])->first();
-
-        $this->assertNotNull($feedback);
-
-        $this->assertEquals($data['name'], $feedback->name);
-        $this->assertEquals($data['content'], $feedback->content);
+        $this->assertDatabaseHas('feedbacks', compact('name', 'email', 'content'));
 
         Mail::assertQueued(NotifyAdmin::class);
     }

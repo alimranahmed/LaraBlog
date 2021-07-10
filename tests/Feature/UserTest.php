@@ -2,10 +2,15 @@
 
 namespace Tests\Feature;
 
+use App\Http\Livewire\Subscribe;
 use App\Mail\SubscribeConfirmation;
+use App\Models\Subscriber;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Livewire\Livewire;
+use PharIo\Manifest\Email;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -33,40 +38,34 @@ class UserTest extends TestCase
             'name' => 'Al Imran Ahmed',
             'email' => 'imran@gmail.com',
         ];
-        $this->post('subscribe', $data)
-            ->assertRedirect();
 
-        $user = User::whereEmail($data['email'])->first();
+        Livewire::test(Subscribe::class)
+            ->set('email', $email = 'imran@gmail.com')
+            ->call('subscribe');
 
-        $this->assertNotNull($user);
-        $this->assertNotNull($user->reader);
-        $this->assertEquals(0, $user->reader->notify);
-        $this->assertEquals(0, $user->reader->is_verified);
+        $this->assertDatabaseHas('subscribers', [
+            'email' => $email,
+            'unsubscribed_at' => null,
+        ]);
 
         Mail::assertQueued(SubscribeConfirmation::class);
     }
 
     public function testUnsubscribe()
     {
-        $user = User::factory()->create(['token' => 'test-token']);
-        $user->reader()->create(['notify' => 0, 'is_verified' => 0]);
+        $subscriber = Subscriber::factory()->create(['unsubscribed_at' => null,]);
 
-        $this->get("confirm-subscription/{$user->id}/?token=test-token")
-            ->assertRedirect();
+        $this->get("unsubscribe?token={$subscriber->token}")->assertRedirect();
 
-        $this->assertEquals(1, $user->reader->notify);
-        $this->assertEquals(1, $user->reader->is_verified);
+        $this->assertNotNull($subscriber->fresh()->unsubscribed_at);
     }
 
     public function testConfirmSubscription()
     {
-        $user = User::factory()->create(['token' => 'test-token']);
-        $user->reader()->create(['notify' => 1, 'is_verified' => 0]);
+        $subscriber = Subscriber::factory()->create();
 
-        $this->get("unsubscribe/{$user->id}/?token=test-token")
-            ->assertRedirect();
+        $this->get("subscription/confirm?token={$subscriber->token}")->assertRedirect();
 
-        $this->assertEquals(0, $user->reader->notify);
-        $this->assertEquals(1, $user->reader->is_verified);
+        $this->assertNull($subscriber->fresh()->unsubscribed_at);
     }
 }

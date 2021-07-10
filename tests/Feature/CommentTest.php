@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Livewire\Article\Comments;
 use App\Mail\CommentConfirmation;
 use App\Mail\NotifyAdmin;
 use App\Models\Article;
@@ -11,6 +12,8 @@ use App\Models\Config;
 use App\Models\User;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
+use Livewire\Livewire;
+use Spatie\Permission\Models\Role;
 
 class CommentTest extends WebTestCase
 {
@@ -33,6 +36,8 @@ class CommentTest extends WebTestCase
     {
         parent::setUp();
 
+        Role::create(['name' => 'reader']);
+
         $this->user =  User::factory()
             ->create(['name' => 'Example User', 'email' => 'example@test.com']);
 
@@ -51,23 +56,15 @@ class CommentTest extends WebTestCase
 
         Config::create(['name' => 'admin_email', 'value' => 'imran@example.com']);
 
-        $content = 'test comment';
-        $email = 'test@example.com';
-        $name = 'Imran Ahmed';
-        $data = [
-            'name' => $name,
-            'email' => $email,
-            'content' => $content,
-            'notify' => 1,
-        ];
-
-        $headers = ['Accept' => 'application/json'];
-
-        $this->post("comment/{$this->article->id}", $data, $headers)->assertOk();
+        Livewire::test(Comments::class, ['article' => $this->article])
+            ->set('comment.content', $content = 'test comment')
+            ->set('comment.email', $email = 'test@example.com')
+            ->set('comment.name', $name = 'Al Imran Ahmed')
+            ->set('comment.notify', 1)
+            ->call('add');
 
         Mail::assertQueued(CommentConfirmation::class);
         Mail::assertQueued(NotifyAdmin::class);
-
 
         $comment = Comment::where('article_id', $this->article->id)->where('content', $content)->first();
         $this->assertNotNull($comment);
@@ -84,13 +81,11 @@ class CommentTest extends WebTestCase
 
     public function testStoreValidation()
     {
-        $data = [];
-        $headers = ['Accept' => 'application/json'];
-
-        $response = $this->post("comment/{$this->article->id}", $data, $headers);
-
-        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors(['name', 'email', 'content']);
+        Livewire::test(Comments::class, ['article' => $this->article])
+            ->call('add')
+            ->assertHasErrors('comment.name')
+            ->assertHasErrors('comment.email')
+            ->assertHasErrors('comment.content');
     }
 
     public function testConfirmComment()

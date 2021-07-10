@@ -7,6 +7,12 @@ use Tests\TestCase;
 
 class PageTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Config::create(['name' => 'site_title', 'value' => 'Site title']);
+    }
+
     public function testHomePage()
     {
         $this->get('/')
