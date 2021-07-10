@@ -19,6 +19,7 @@
         "ext-pdo": "*",
         "blade-ui-kit/blade-icons": "^1.1",
         "bugsnag/bugsnag-laravel": "^2.0",
+        "codeat3/blade-teeny-icons": "^1.2",
         "codeat3/blade-unicons": "^1.3",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
