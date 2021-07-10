@@ -21248,6 +21248,21 @@ code {
   padding-bottom: 0.25rem;
 }
 
+h1 {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+h3, h2 {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+h4, h5, h6 {
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

@@ -26,7 +26,10 @@ Route::get('comment/{commentId}/confirm', 'CommentController@confirmComment')->n
 //Category
 Route::get('category/{categoryId}', 'CategoryController@show')->name('get-category');
 
+Route::view('pages/about', 'frontend.pages.about')->name('page.about');
+
 //Admin auth
 Route::get('admin/login', 'AuthController@showLoginForm')->name('login-form');
 Route::post('admin/login', 'AuthController@login')->name('login');
 Route::get('admin/logout', 'AuthController@logout')->name('logout');
+

@@ -22,7 +22,7 @@
     </form>
     <div>
         <a href="{{route('articles')}}" class="uppercase hover:underline">Blog</a>
-        <a href="#" class="uppercase hover:underline ml-4">About</a>
+        <a href="{{route('page.about')}}" class="uppercase hover:underline ml-4">About</a>
     </div>
 </div>
 
@@ -74,7 +74,7 @@
             <a href="{{route('articles')}}" class="uppercase hover:underline">Blog</a>
         </div>
         <div class="my-4">
-            <a href="#" class="uppercase hover:underline">About</a>
+            <a href="{{route('page.about')}}" class="uppercase hover:underline">About</a>
         </div>
     </div>
 </div>
