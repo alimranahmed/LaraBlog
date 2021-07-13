@@ -13,7 +13,6 @@ use Tests\TestCase;
 
 class CommentTest extends TestCase
 {
-
     protected $user;
 
     protected $category;

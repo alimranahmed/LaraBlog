@@ -6,8 +6,8 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\TestCase;
 use function now;
+use Tests\TestCase;
 
 class ArticleTest extends TestCase
 {

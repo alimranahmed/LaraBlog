@@ -10,5 +10,4 @@ class Subscriber extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-
 }

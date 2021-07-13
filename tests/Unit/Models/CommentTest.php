@@ -7,8 +7,8 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Tests\TestCase;
 use function now;
+use Tests\TestCase;
 
 class CommentTest extends TestCase
 {
