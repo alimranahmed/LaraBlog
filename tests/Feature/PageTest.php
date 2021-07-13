@@ -17,7 +17,7 @@ class PageTest extends TestCase
     {
         $this->get('/')
             ->assertOk()
-            ->assertSee(Config::get('site_name'));
+            ->assertSee(Config::get('site_title'));
     }
 
     public function testLoginPage()
