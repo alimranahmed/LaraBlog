@@ -10,7 +10,7 @@ class PageTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        Config::updateOrCreate(['name' => 'site_title', 'value' => 'Site title']);
+        Config::updateOrCreate(['name' => 'site_title'], ['value' => 'Site title']);
     }
 
     public function testHomePage()
