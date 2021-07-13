@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\Article\Comments;
+use App\Http\Livewire\Frontend\Article\Comments;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Comment;
@@ -24,7 +24,7 @@ class CommentTest extends TestCase
     {
         parent::setUp();
 
-        Role::create(['name' => 'reader']);
+        Role::findOrCreate('reader');
 
         $this->user =  User::factory()
             ->create(['name' => 'Example User', 'email' => 'example@test.com']);

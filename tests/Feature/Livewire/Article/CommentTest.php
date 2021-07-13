@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire\Article;
 
-use App\Http\Livewire\Article\Comments;
+use App\Http\Livewire\Frontend\Article\Comments;
 use App\Mail\CommentConfirmation;
 use App\Mail\NotifyAdmin;
 use App\Models\Article;

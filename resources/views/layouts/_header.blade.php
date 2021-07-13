@@ -11,7 +11,6 @@
     <!-- CSS -->
     <link href="{{ mix("build/css/app.css") }}" rel="stylesheet" type="text/css">
 
-    @include('layouts._google_analytics')
 </head>
 <body>
 <div id="l5_blog">

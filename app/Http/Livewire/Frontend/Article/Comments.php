@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Article;
+namespace App\Http\Livewire\Frontend\Article;
 
 use App\Mail\CommentConfirmation;
 use App\Mail\NotifyAdmin;
@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
+use function route;
+use function view;
 
 class Comments extends Component
 {
@@ -37,7 +39,7 @@ class Comments extends Component
 
     public function render()
     {
-        return view('livewire.article.comments');
+        return view('livewire.frontend.article.comments');
     }
 
     public function add()

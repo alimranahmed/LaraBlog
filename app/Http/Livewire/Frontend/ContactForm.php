@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Frontend;
 
 use App\Mail\NotifyAdmin;
 use App\Models\Config;
 use App\Models\Feedback;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
+use function route;
+use function view;
 
 class ContactForm extends Component
 {
@@ -24,7 +26,7 @@ class ContactForm extends Component
 
     public function render()
     {
-        return view('livewire.contact-form');
+        return view('livewire.frontend.contact-form');
     }
 
     public function submit()

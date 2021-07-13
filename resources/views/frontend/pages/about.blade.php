@@ -1,4 +1,4 @@
-<x-app>
+<x-frontend>
     <div class="md:flex mt-10 pb-3 border-b">
         <div class="w-1/2 md:w-1/3 text-center m-auto">
             <img src="{{asset('img/user.png')}}"
@@ -11,7 +11,7 @@
             <section class="text-gray-600">
                 An experienced web artisan who loves building challenging web application.
             </section>
-            <x-social-links class="mt-3"/>
+            <x-frontend.social-links class="mt-3"/>
         </div>
     </div>
     <div class="md:flex justify-between mt-5 md:mt-20">
@@ -39,4 +39,4 @@
             </ul>
         </section>
     </div>
-</x-app>
+</x-frontend>

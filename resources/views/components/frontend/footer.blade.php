@@ -4,7 +4,7 @@
         <?php echo '&copy; ' . (new DateTime())->format('Y') . ' Al Imran Ahmed' ?>
     </div>
 
-    <x-social-links class="justify-center my-3 md:my-0"/>
+    <x-frontend.social-links class="justify-center my-3 md:my-0"/>
 
     <div>
         <a href="{{route('contact')}}" class="border-b border-dotted border-indigo-600">Contact</a>

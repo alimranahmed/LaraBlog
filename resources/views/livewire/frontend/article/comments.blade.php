@@ -1,6 +1,6 @@
 <div x-data="{show_form: false}">
     <div x-show="show_form" x-transition>
-        <x-article.comment.form :article="$article"></x-article.comment.form>
+        <x-frontend.article.comment.form :article="$article"/>
         @if($isSubmitted)
             <div class="text-lg text-green-600">Comment submitted successfully!</div>
         @endif
@@ -16,9 +16,9 @@
         </div>
 
         @foreach($comments as $comment)
-            <x-article.comment :comment="$comment"></x-article.comment>
+            <x-frontend.article.comment :comment="$comment"></x-frontend.article.comment>
             @foreach($comment->replies as $reply)
-                <x-article.reply :reply="$reply"></x-article.reply>
+                <x-frontend.article.reply :reply="$reply"/>
             @endforeach
         @endforeach
     </div>

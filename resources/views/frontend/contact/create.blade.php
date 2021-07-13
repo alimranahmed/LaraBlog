@@ -1,3 +1,3 @@
-<x-app>
-    <livewire:contact-form/>
-</x-app>
+<x-frontend>
+    <livewire:frontend.contact-form/>
+</x-frontend>

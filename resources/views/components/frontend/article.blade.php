@@ -22,6 +22,6 @@
             <span class="whitespace-no-wrap">by <span class="text-gray-800">{{$article->user->name}}</span></span>
         </div>
 
-        <x-article.tags :keywords="$article->keywords"></x-article.tags>
+        <x-frontend.article.tags :keywords="$article->keywords"/>
     </div>
 </div>

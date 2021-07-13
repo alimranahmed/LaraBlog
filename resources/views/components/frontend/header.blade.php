@@ -13,7 +13,7 @@
 
     <title>{{isset($article) ? $article->heading : $globalConfigs->site_title}}</title>
 
-    @include('layouts._google_analytics')
+    <x-frontend.google-analytics/>
 
     @livewireStyles
 
@@ -21,10 +21,8 @@
 <body class="bg-gray-100">
 <div class="border-b border-blue-200 mb-3">
 
-    <div class="mx-6 sm:mx-20 md:mx-32 lg:mx-56
-          px-1 sm:px-10 md:px-16 lg:px-16 xl:px-32">
-
-        @include('frontend.layouts._navbar')
+    <div class="mx-6 sm:mx-20 md:mx-32 lg:mx-56 px-1 sm:px-10 md:px-16 lg:px-16 xl:px-32">
+        <x-frontend.navbar/>
     </div>
 
 </div>

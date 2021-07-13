@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Frontend;
 
 use App\Mail\SubscribeConfirmation;
 use App\Models\Subscriber;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use function view;
 
 class Subscribe extends Component
 {
@@ -20,7 +21,7 @@ class Subscribe extends Component
 
     public function render()
     {
-        return view('livewire.subscribe');
+        return view('livewire.frontend.subscribe');
     }
 
     public function subscribe()
