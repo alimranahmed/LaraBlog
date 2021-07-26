@@ -1,5 +1,7 @@
 <?php
 
+Route::view('admin/', 'backend.test');
+
 Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () {
     //profile
     Route::get('admin/profile', 'UserController@profile')->name('user-profile');

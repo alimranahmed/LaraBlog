@@ -28,7 +28,6 @@
                         <td>
                             <span>{{$comment->user->name}}</span>
                             <span>{{' ('.$comment->user->email.')'}}</span>
-                            <span>{{isset($comment->address->country_name) ? '('.$comment->address->city.', '.$comment->address->country_name.')' : ''}}</span>
                         </td>
                         <td class="text-center">{{$comment->createdAtHuman}}</td>
                         <td>
@@ -81,7 +80,6 @@
                                                 <td>
                                                     <span>{{$reply->user->name}}</span>
                                                     <span>{{' ('.$reply->user->email.')'}}</span>
-                                                    <span>{{isset($reply->address->country_name) ? '('.$reply->address->city.', '.$reply->address->country_name.')' : ''}}</span>
                                                 </td>
                                                 <td class="text-center">{{$reply->createdAtHuman}}</td>
                                                 <td class="text-center">
