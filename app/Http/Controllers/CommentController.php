@@ -2,23 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CommentRequest;
-use App\Mail\CommentConfirmation;
-use App\Mail\NotifyAdmin;
 use App\Mail\NotifyCommentThread;
-use App\Models\Address;
 use App\Models\Article;
 use App\Models\Comment;
-use App\Models\Config;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Spatie\Permission\Models\Role;
 
 class CommentController extends Controller
 {
@@ -55,7 +46,7 @@ class CommentController extends Controller
             Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
-        return redirect()->route('comments')->with('successMsg', 'Comment updated');
+        return redirect()->route('backend.comment.index')->with('successMsg', 'Comment updated');
     }
 
     public function togglePublish($commentId)
@@ -72,7 +63,7 @@ class CommentController extends Controller
             Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
-        return redirect()->route('comments')->with('successMsg', 'Comment updated');
+        return redirect()->route('backend.comment.index')->with('successMsg', 'Comment updated');
     }
 
     public function destroy($commentId)
@@ -85,7 +76,7 @@ class CommentController extends Controller
             Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
-        return redirect()->route('comments')->with('successMsg', 'Comment deleted');
+        return redirect()->route('backend.comment.index')->with('successMsg', 'Comment deleted');
     }
 
     public function confirmComment(Request $request, $commentId)

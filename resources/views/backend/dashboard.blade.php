@@ -28,7 +28,7 @@
                 </tr>
               @endforeach
             </table>
-            <a href="{{route('comments')}}">View all</a>
+            <a href="{{route('backend.comment.index')}}">View all</a>
           </div>
         </div>
       </div>

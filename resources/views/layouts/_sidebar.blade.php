@@ -27,7 +27,7 @@
                         </a>
                     </li>
                     <li class="{{Request::is('admin/comment*') ? "active":""}}">
-                        <a href="{{route('comments')}}">
+                        <a href="{{route('backend.comment.index')}}">
                             <span class="fa fa-comment-o"></span>
                             <span class="hidden-sm">Comments</span>
                             <span class="badge bg-danger" style="display: none;" id="new-comment">New</span>

@@ -4,11 +4,12 @@
 @php
     $menus = [
         'Articles' => route('admin-articles'),
-        'Comments' => route('comments'),
+        'Comments' => route('backend.comment.index'),
+        'Users' => route('users'),
         'Categories' => route('categories'),
         'Keywords' => route('keywords'),
         'Feedback' => route('feedbacks'),
-        'Subscriber' => '#',
+        'Subscribers' => '#',
         ];
 @endphp
 
@@ -17,11 +18,11 @@
         $isActive = $menu == 'Articles';
     @endphp
     <a href="{{$url}}" @class([
-    'px-3 py-2 rounded-md font-medium',
-    'text-sm' => !$isMobile,
-    'text-base block' => $isMobile,
-    'bg-gray-900 text-white' => $isActive,
-    'text-gray-300 hover:bg-gray-700 hover:text-white' => !$isActive,
+        'px-3 py-2 rounded-md font-medium',
+        'text-sm' => !$isMobile,
+        'text-base block' => $isMobile,
+        'bg-gray-900 text-white' => $isActive,
+        'text-gray-300 hover:bg-gray-700 hover:text-white' => !$isActive,
     ])>
 
     {{$menu}}

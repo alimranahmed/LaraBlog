@@ -19,7 +19,9 @@
 
 <x-backend.navbar/>
 
-{{$slot}}
+<div class="sm:px-6 lg:px-8 py-3">
+    {{$slot}}
+</div>
 
 @livewireScripts
 <script src="{{ mix("build/js/app.js") }}"></script>

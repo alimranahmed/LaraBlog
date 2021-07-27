@@ -1,150 +1,59 @@
-@extends('layouts.admin')
-@section('content')
-    <div class="panel panel-default no-margin-bottom">
-        <div class="panel-heading">
-            <strong>All Comments</strong>
-        </div>
-        <div class="panel-body">
-            <table class="table table-hover" id="commentList">
-                <tr class="text-center">
-                    <th>ID</th>
-                    <th>Comment</th>
-                    <th>By</th>
-                    <th>Commented</th>
-                    <th>Article</th>
-                    <th>Operations</th>
-                </tr>
-                @foreach($comments as $comment)
-                    <tr>
-                        <td>{{$comment->id}}</td>
-                        <td>
-                            @if( !$comment->replies->isEmpty())
-                                <span class="text-primary pointer" data-toggle="modal"
-                                      data-target="#comment-reply-{{$comment->id}}">{{$comment->content}}</span>
-                            @else
-                                {{$comment->content}}
-                            @endif
-                        </td>
-                        <td>
-                            <span>{{$comment->user->name}}</span>
-                            <span>{{' ('.$comment->user->email.')'}}</span>
-                        </td>
-                        <td class="text-center">{{$comment->createdAtHuman}}</td>
-                        <td>
-                            <a href="{{route('get-article', $comment->article->id)}}" target="_blank"
-                               title="{{$comment->article->heading}}">{{substr($comment->article->heading, 0, 20)}}
-                                ...</a>
-                        </td>
-                        <td class="text-center">
-                            <span class="fa fa-edit text-primary pointer"
-                                  v-on:click="showCommentForm({{$comment}})"></span>&nbsp;
-                            <a href="{{route('toggle-comment-publish', $comment->id)}}">
-                                <strong class="fa fa-lg {{$comment->is_published ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"
-                                        title="Toggle publish"></strong>
-                            </a>&nbsp;
-                            <a href="{{route('delete-comment', $comment->id)}}"
-                               onclick="return confirm('Are you sure to delete?')">
-                                <span class="fa fa-trash text-danger"></span>
-                            </a>
-                        </td>
-                    </tr>
-                @endforeach
-            </table>
-            {{$comments->links()}}
-
-            <!-- Show comment's replies -->
+<x-backend>
+    <x-backend.table>
+        <x-slot name="head">
+            <tr>
+                <x-backend.table.th>Comment</x-backend.table.th>
+                <x-backend.table.th>By</x-backend.table.th>
+                <x-backend.table.th>Article</x-backend.table.th>
+                <x-backend.table.th>Status</x-backend.table.th>
+                <x-backend.table.th></x-backend.table.th>
+            </tr>
+        </x-slot>
+        <x-slot name="body">
             @foreach($comments as $comment)
-                @if(!$comment->replies->isEmpty())
-                    <div class="modal fade" id="comment-reply-{{$comment->id}}" tabindex="-1" role="dialog"
-                         aria-labelledby="myModalLabel">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                                aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Replies</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <table class="table table-hover" id="reply-list">
-                                        <tr class="text-center">
-                                            <th>ID</th>
-                                            <th>Comment</th>
-                                            <th>By</th>
-                                            <th>Commented</th>
-                                            <th>Operations</th>
-                                        </tr>
-                                        @foreach($comment->replies as $reply)
-                                            <tr>
-                                                <td>{{$reply->id}}</td>
-                                                <td>{{$reply->content}}</td>
-                                                <td>
-                                                    <span>{{$reply->user->name}}</span>
-                                                    <span>{{' ('.$reply->user->email.')'}}</span>
-                                                </td>
-                                                <td class="text-center">{{$reply->createdAtHuman}}</td>
-                                                <td class="text-center">
-                                                    <a href="{{route('toggle-comment-publish', $reply->id)}}">
-                                                        <strong class="fa fa-lg {{$reply->is_published ? 'fa-toggle-on text-success' : 'fa-toggle-off text-grey'}}"
-                                                                title="Toggle publish"></strong>
-                                                    </a>&nbsp;
-                                                    <a href="{{route('delete-comment', $reply->id)}}"
-                                                       onclick="return confirm('Are you sure to delete?')">
-                                                        <span class="fa fa-trash text-danger"></span>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            @endif
-        @endforeach
-        <!-- Edit comment -->
-            <div class="modal fade" id="comment-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Edit Comment</h4>
-                        </div>
-                        <form id="comment-form" method="POST">
-                            <div class="modal-body">
-                                {{csrf_field()}}
-                                <input type="hidden" name="_method" value="PUT">
-                                <div class="form-group">
-                                    <label>Content</label>
-                                    <textarea name="content" placeholder="Content" id="content"
-                                              class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
+                <tr>
+                    <x-backend.table.td :wrap="true">
+                        {{mb_substr($comment->content, 0, 70)}}
+                        {{mb_strlen($comment->content)  > 70 ? '...' : '' }}<br>
+                        <span class="text-gray-600">{{$comment->createdAtHuman}}</span>
+                    </x-backend.table.td>
+                    <x-backend.table.td>
+                        <span>{{$comment->user->name}}</span><br>
+                        <span class="text-gray-600">{{$comment->user->email}}</span>
+                    </x-backend.table.td>
+                    <x-backend.table.td :wrap="true">
+                        <a href="{{route('get-article', $comment->article->id)}}" target="_blank">
+                            {{mb_substr($comment->article->heading, 0, 70)}}
+                            {{mb_strlen($comment->article->heading)  > 70 ? '...' : '' }}<br>
+                        </a>
+                    </x-backend.table.td>
+                    <x-backend.table.td>
+                        @if($comment->is_published)
+                            <span
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                Published
+                            </span>
+                        @else
+                            <span
+                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                Not Published
+                            </span>
+                        @endif
+                    </x-backend.table.td>
+                    <x-backend.table.td>
+                        <a href="#" class="text-indigo-700">Edit</a>
+                        <a href="{{route('backend.comment.delete', $comment->id)}}" class="text-red-700"
+                           onclick="return confirm('Are you sure to delete?')">
+                            Delete
+                        </a>
+                    </x-backend.table.td>
+                </tr>
+            @endforeach
+        </x-slot>
+    </x-backend.table>
 
-@section('inPageJS')
-    @parent
-    <script>
-        new Vue({
-            el: "#commentList",
-            data: {},
-            methods: {
-                showCommentForm: function (comment) {
-                    $("#content").val(comment.content);
-                    $("#comment-form").attr("action", "comment/" + comment.id);
-                    $("#comment-modal").modal("show");
-                }
-            }
-        });
-    </script>
-@endsection
+    <div class="pt-3">
+        {{$comments->links()}}
+    </div>
+
+</x-backend>
