@@ -21,8 +21,6 @@ Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () 
 
     //Admin comments
     Route::get('comment', [CommentController::class, 'index'])->name('backend.comment.index');
-    Route::get('comment/{commentId}/delete', [CommentController::class, 'destroy'])->name('backend.comment.delete');
-    Route::get('comment/toggle-publish/{commentId}', [CommentController::class, 'togglePublish'])->name('comment.publish.toggle');
     Route::put('comment/{commentId}', [CommentController::class, 'edit'])->name('comment.edit');
     Route::put('comment/{commentId}', [CommentController::class, 'update'])->name('comment.update');
 

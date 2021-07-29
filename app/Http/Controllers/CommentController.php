@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Mail\NotifyCommentThread;
-use App\Models\Article;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
@@ -15,20 +13,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-        if (Auth::user()->hasRole('author')) {
-            $authorsArticleIDs = Article::where('user_id', Auth::user()->id)->pluck('id');
-            $comments = Comment::whereIn('article_id', $authorsArticleIDs)
-                ->with('article', 'user', 'replies')
-                ->latest()
-                ->noReplies()
-                ->paginate(config('blog.item_per_page'));
-        } else {
-            $comments = Comment::with('article', 'user', 'replies')
-                ->latest()
-                ->noReplies()
-                ->paginate(config('blog.item_per_page'));
-        }
-        return view('backend.commentList', compact('comments'));
+        return view('backend.comments.index');
     }
 
     public function update(Request $request, $commentId)
@@ -47,36 +32,6 @@ class CommentController extends Controller
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
         return redirect()->route('backend.comment.index')->with('successMsg', 'Comment updated');
-    }
-
-    public function togglePublish($commentId)
-    {
-        $comment = Comment::find($commentId);
-        try {
-            $comment->update(
-                [
-                    'is_published' => !$comment->is_published,
-                    'published_at' => new \DateTime(),
-                ]
-            );
-        } catch (\PDOException $e) {
-            Log::error($this->getLogMsg($e));
-            return redirect()->back()->with('errorMsg', $this->getMessage($e));
-        }
-        return redirect()->route('backend.comment.index')->with('successMsg', 'Comment updated');
-    }
-
-    public function destroy($commentId)
-    {
-        try {
-            $comment = Comment::find($commentId);
-            Article::where('id', $comment->article_id)->decrement('comment_count');
-            Comment::destroy($commentId);
-        } catch (\PDOException $e) {
-            Log::error($this->getLogMsg($e));
-            return redirect()->back()->with('errorMsg', $this->getMessage($e));
-        }
-        return redirect()->route('backend.comment.index')->with('successMsg', 'Comment deleted');
     }
 
     public function confirmComment(Request $request, $commentId)
@@ -102,6 +57,7 @@ class CommentController extends Controller
             if ($comment->user->isReader()) {
                 $comment->user->reader->update(['is_verified' => 1]);
             }
+
             //notify all user of the comment thread about the new comment except him person who replied
             if ($comment->parent_comment_id) {
                 $threadUserIDs = Comment::where('parent_comment_id', $comment->parent_comment_id)

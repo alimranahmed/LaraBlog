@@ -9,19 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
+    use CanFormatDates;
 
     protected $guarded = ['id'];
     protected $dates = ['published_at'];
-    protected $appends = ['createdAtHuman', 'publishedAtHuman'];
 
     public function article()
     {
         return $this->belongsTo(Article::class);
-    }
-
-    public function address()
-    {
-        return $this->belongsTo(Address::class);
     }
 
     public function user()

@@ -14,7 +14,7 @@
     <div class="justify-between items-center">
 
         <div class="text-gray-600 text-xs md:text-sm w-full md:w-2/3">
-            {{$article->published_at->format('M d, Y')}}, on
+            {{$article->published_date_formatted}}, on
             <a href="{{route('articles-by-category', $article->category->alias)}}"
                class="text-blue-400 hover:text-blue-700 focus:outline-none focus:text-blue-700">
                 {{$article->category->name}}
