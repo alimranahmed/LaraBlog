@@ -21,8 +21,8 @@ Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () 
 
     //Admin comments
     Route::get('comment', [CommentController::class, 'index'])->name('backend.comment.index');
-    Route::put('comment/{commentId}', [CommentController::class, 'edit'])->name('comment.edit');
-    Route::put('comment/{commentId}', [CommentController::class, 'update'])->name('comment.update');
+    Route::get('comment/{comment}/edit', [CommentController::class, 'edit'])->name('backend.comment.edit');
+    Route::get('comment/{comment}', [CommentController::class, 'show'])->name('backend.comment.show');
 
     //Admin feedback
     Route::get('feedback', 'FeedbackController@index')->name('feedbacks');

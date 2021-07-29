@@ -16,22 +16,14 @@ class CommentController extends Controller
         return view('backend.comments.index');
     }
 
-    public function update(Request $request, $commentId)
+    public function edit(Comment $comment)
     {
-        $comment = Comment::find($commentId);
-        try {
-            $comment->update(
-                [
-                    'content' => $request->get('content'),
-                    'originalContent' => $comment->countEdit == 0 ? $comment->content : $comment->originalContent,
-                    'countEdit' => $comment->countEdit + 1,
-                ]
-            );
-        } catch (\PDOException $e) {
-            Log::error($this->getLogMsg($e));
-            return redirect()->back()->with('errorMsg', $this->getMessage($e));
-        }
-        return redirect()->route('backend.comment.index')->with('successMsg', 'Comment updated');
+        return view('backend.comments.edit', compact('comment'));
+    }
+
+    public function show(Comment $comment)
+    {
+        return view('backend.comments.show', compact('comment'));
     }
 
     public function confirmComment(Request $request, $commentId)

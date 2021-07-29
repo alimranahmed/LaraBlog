@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\ArticleHit;
 use App\Mail\NotifySubscriberForNewArticle;
-use App\Models\Address;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Keyword;
@@ -131,8 +129,6 @@ class ArticleController extends Controller
         $newAddress = ['ip' => $clientIP];
 
         try {
-            //Create new address
-            $newAddress = Address::create($newAddress);
             //Create new article
             $newArticle['address_id'] = $newAddress->id;
             $newArticle['published_at'] = new \DateTime();

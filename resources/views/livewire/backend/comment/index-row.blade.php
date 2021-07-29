@@ -36,7 +36,7 @@
         @endif
     </x-backend.table.td>
     <x-backend.table.td>
-        <a href="#" class="text-indigo-700">Edit</a>
+        <a href="{{route('backend.comment.edit', $comment->id)}}" class="text-indigo-700">Edit</a>
         <span onclick="confirm('Are you sure to delete?') || event.stopImmediatePropagation()"
            wire:click="destroy({{$comment}})"
            class="cursor-pointer text-red-700">

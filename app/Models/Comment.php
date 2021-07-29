@@ -43,14 +43,4 @@ class Comment extends Model
     {
         return $builder->where('parent_comment_id', null);
     }
-
-    public function getCreatedAtHumanAttribute()
-    {
-        return $this->created_at->diffForHumans();
-    }
-
-    public function getPublishedAtHumanAttribute()
-    {
-        return optional($this->published_at)->diffForHumans();
-    }
 }
