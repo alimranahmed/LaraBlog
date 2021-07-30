@@ -1,7 +1,9 @@
 <tr wire:loading.class="opacity-25">
     <x-backend.table.td :wrap="true">
-        {{mb_substr($comment->content, 0, 70)}}
-        {{mb_strlen($comment->content)  > 70 ? '...' : '' }}<br>
+        <a href="{{route('backend.comment.show', $comment->id)}}" class="hover:underline">
+            {{mb_substr($comment->content, 0, 70)}}
+            {{mb_strlen($comment->content)  > 70 ? '...' : '' }}
+        </a><br>
         @if($comment->published_date_time_formatted)
             <span class="text-gray-600">{{$comment->published_date_time_formatted}}</span><br>
         @endif
@@ -17,7 +19,7 @@
         <span class="text-gray-600">{{$comment->user->email}}</span>
     </x-backend.table.td>
     <x-backend.table.td :wrap="true">
-        <a href="{{route('get-article', $comment->article->id)}}" target="_blank">
+        <a href="{{route('get-article', $comment->article->id)}}" target="_blank" class="hover:underline">
             {{mb_substr($comment->article->heading, 0, 70)}}
             {{mb_strlen($comment->article->heading)  > 70 ? '...' : '' }}<br>
         </a>
@@ -36,10 +38,10 @@
         @endif
     </x-backend.table.td>
     <x-backend.table.td>
-        <a href="{{route('backend.comment.edit', $comment->id)}}" class="text-indigo-700">Edit</a>
+        <a href="{{route('backend.comment.edit', $comment->id)}}" class="text-indigo-700 hover:underline">Edit</a>
         <span onclick="confirm('Are you sure to delete?') || event.stopImmediatePropagation()"
-           wire:click="destroy({{$comment}})"
-           class="cursor-pointer text-red-700">
+              wire:click="destroy({{$comment}})"
+              class="cursor-pointer text-red-700 hover:underline">
             Delete
         </span>
     </x-backend.table.td>

@@ -36,7 +36,7 @@ class Edit extends Component
             'original_content' => $comment->count_edit ? $comment->original_content : $comment->content,
             'count_edit' => $comment->count_edit + 1,
         ]);
-        
-        return redirect()->to(route('backend.comment.show', $comment->id));
+
+        return redirect()->to(route('backend.comment.show', $comment->parent_comment_id ?? $comment->id));
     }
 }

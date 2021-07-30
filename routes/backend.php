@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\CommentController;
 
-Route::view('', 'backend.test');
-
 Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () {
     //profile
     Route::get('profile', 'UserController@profile')->name('user-profile');

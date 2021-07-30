@@ -1,3 +1,3 @@
 <x-backend>
-    <pre>{{json_encode($comment, JSON_PRETTY_PRINT)}}</pre>
+    <livewire:backend.comment.show :comment="$comment"/>
 </x-backend>
