@@ -41,7 +41,7 @@
         <a href="{{route('backend.comment.edit', $comment->id)}}" class="text-indigo-700 hover:underline">Edit</a>
         <span onclick="confirm('Are you sure to delete?') || event.stopImmediatePropagation()"
               wire:click="destroy({{$comment}})"
-              class="cursor-pointer text-red-700 hover:underline">
+              class="ml-1 cursor-pointer text-red-700 hover:underline">
             Delete
         </span>
     </x-backend.table.td>

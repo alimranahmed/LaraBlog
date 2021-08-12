@@ -78,7 +78,7 @@
                 <tr>
                   <td>{{$categoryName}}</td>
                   <td>
-                    <a href="{{route('admin-articles', ['category' => $articles->first()->category_id])}}">
+                    <a href="{{route('backend.article.index', ['category' => $articles->first()->category_id])}}">
                       {{count($articles)}}
                     </a>
                   </td>

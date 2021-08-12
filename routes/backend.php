@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\ArticleController;
 use App\Http\Controllers\CommentController;
 
 Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () {
@@ -7,11 +8,9 @@ Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () 
     Route::get('profile', 'UserController@profile')->name('user-profile');
     //dashboard
     Route::get('dashboard', 'DashboardController@index')->name('admin-dashboard');
+
     //admin articles
-    Route::get('article', 'ArticleController@adminArticles')->name('admin-articles');
-    Route::get('article/toggle-publish/{articleID}', 'ArticleController@togglePublish')
-        ->name('toggle-article-publish');
-    Route::get('article/{articleId}/delete', 'ArticleController@destroy')->name('delete-article');
+    Route::get('article', [ArticleController::class, 'index'])->name('backend.article.index');
     Route::get('article/create', 'ArticleController@create')->name('create-article');
     Route::post('article', 'ArticleController@store')->name('store-article');
     Route::get('article/{articleId}/edit', 'ArticleController@edit')->name('edit-article');

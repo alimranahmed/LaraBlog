@@ -62,6 +62,11 @@ class Article extends Model
         echo $converter->convertToHtml($this->content);
     }
 
+    public function hasAuthorization(User $user)
+    {
+        return $user->hasRole(['author']) && $this->user_id != $user->id;
+    }
+
     public static function getPaginate(Request $request)
     {
         $perPage = config('blog.item_per_page');

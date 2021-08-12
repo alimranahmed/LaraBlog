@@ -21,7 +21,7 @@
                         </a>
                     </li>
                     <li class="{{Request::is('admin/article*') ? "active":""}}">
-                        <a href="{{route('admin-articles')}}">
+                        <a href="{{route('backend.article.index')}}">
                             <i class="fa fa-file-text"></i>
                             <span class="hidden-sm">Articles</span>
                         </a>

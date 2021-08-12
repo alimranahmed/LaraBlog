@@ -34,9 +34,6 @@ class ArticleController extends Controller
             return redirect()->route('home')->with('warningMsg', 'Article not found');
         }
 
-        //$clientIP = $_SERVER['REMOTE_ADDR'] ?? '';
-        //event(new ArticleHit($article, $clientIP));
-
         $article->isEditable = $this->isEditable($article);
 
         $relatedArticles = $this->getRelatedArticles($article);
@@ -72,7 +69,7 @@ class ArticleController extends Controller
             return redirect()->route('home')->with('errorMsg', 'Article not found');
         }
 
-        if ($this->hasArticleAuthorization(Auth::user(), $article)) {
+        if ($article->hasAuthorization(Auth::user())) {
             return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
         }
 
@@ -91,7 +88,7 @@ class ArticleController extends Controller
             return response()->json(['errorMsg' => 'Article not found'], Response::HTTP_NOT_FOUND);
         }
 
-        if ($this->hasArticleAuthorization(Auth::user(), $article)) {
+        if ($article->hasAuthorization(Auth::user())) {
             return response()->json(['errorMsg' => 'Unauthorized request'], Response::HTTP_UNAUTHORIZED);
         }
         $updatedArticle = $request->only(['heading', 'content', 'category_id', 'language']);
@@ -153,30 +150,6 @@ class ArticleController extends Controller
         return response()->json(['redirect_url' => redirect()->route('admin-articles')->getTargetUrl()]);
     }
 
-    public function togglePublish($articleId)
-    {
-        $article = Article::find($articleId);
-        if (is_null($article)) {
-            return redirect()->route('home')->with('errorMsg', 'Article not found');
-        }
-
-        if ($this->hasArticleAuthorization(Auth::user(), $article)) {
-            return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
-        }
-        try {
-            $article->update(
-                [
-                    'is_published' => !$article->is_published,
-                    'published_at' => new \DateTime(),
-                ]
-            );
-        } catch (\PDOException $e) {
-            Log::error($this->getLogMsg($e));
-            return redirect()->back()->with('errorMsg', $this->getMessage($e));
-        }
-        return redirect()->route('admin-articles')->with('successMsg', 'Article updated');
-    }
-
     public function search(Request $request)
     {
         $this->validate($request, ['query_string' => 'required']);
@@ -202,48 +175,5 @@ class ArticleController extends Controller
         $searched->query = $queryString;
 
         return view("frontend.articles.search_result", compact('searched'));
-    }
-
-    public function adminArticles()
-    {
-        $articles = Article::notDeleted()
-            ->with('category', 'keywords', 'user')
-            ->latest();
-
-        if (Auth::user()->hasRole(['author'])) {
-            $articles = $articles->where('user_id', Auth::user()->id);
-        }
-
-        if (request()->filled('category')) {
-            $articles = $articles->where('category_id', request('category'));
-        }
-
-        $articles = $articles->paginate(config('blog.item_per_page'));
-
-        return view('backend.articleList', compact('articles'));
-    }
-
-    public function destroy($articleId)
-    {
-        $article = Article::find($articleId);
-        if (is_null($article)) {
-            return redirect()->route('home')->with('errorMsg', 'Article not found');
-        }
-
-        if ($this->hasArticleAuthorization(Auth::user(), $article)) {
-            return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
-        }
-        try {
-            Article::where('id', $articleId)->update(['is_deleted' => 1]);
-        } catch (\PDOException $e) {
-            Log::error($this->getLogMsg($e));
-            return redirect()->back()->with('errorMsg', $this->getMessage($e));
-        }
-        return redirect()->route('admin-articles')->with('successMsg', 'Article deleted');
-    }
-
-    private function hasArticleAuthorization($user, $article)
-    {
-        return $user->hasRole(['author']) && $article->user_id != $user->id;
     }
 }

@@ -3,7 +3,7 @@
 
 @php
     $menus = [
-        'Articles' => route('admin-articles'),
+        'Articles' => route('backend.article.index'),
         'Comments' => route('backend.comment.index'),
         'Users' => route('users'),
         'Categories' => route('categories'),
