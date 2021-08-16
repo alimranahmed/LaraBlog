@@ -12,7 +12,7 @@
             </select>
         </form>
 
-        <a href="{{route('create-article')}}" class="border border-indigo-300 rounded px-2">+ Add New</a>
+        <a href="{{route('backend.article.create')}}" class="border border-indigo-300 rounded px-2">+ Add New</a>
     </section>
 
     <section wire:loading.class="opacity-50">

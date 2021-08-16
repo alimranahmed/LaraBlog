@@ -10,9 +10,11 @@ use Illuminate\Support\Collection;
 class Category extends Model
 {
     use HasFactory;
-    
+    use CanFormatDates;
+
     protected $guarded = ['id'];
-    protected $appends = ['createdAtHuman'];
+
+    protected $appends = ['createdAtHumanDiff'];
 
     public function articles()
     {
@@ -27,12 +29,6 @@ class Category extends Model
     public function children()
     {
         return $this->belongsTo(Category::class, 'parent_category_id');
-    }
-
-    public function getCreatedAtHumanAttribute()
-    {
-        $carbonDate = new Carbon($this->updated_at);
-        return $carbonDate->diffForHumans();
     }
 
     public static function getNonEmptyOnly(): Collection

@@ -11,7 +11,7 @@ Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () 
 
     //admin articles
     Route::get('article', [ArticleController::class, 'index'])->name('backend.article.index');
-    Route::get('article/create', 'ArticleController@create')->name('create-article');
+    Route::get('article/create', [ArticleController::class, 'create'])->name('backend.article.create');
     Route::post('article', 'ArticleController@store')->name('store-article');
     Route::get('article/{articleId}/edit', 'ArticleController@edit')->name('edit-article');
     Route::put('article/{articleId}', 'ArticleController@update')->name('update-article');
