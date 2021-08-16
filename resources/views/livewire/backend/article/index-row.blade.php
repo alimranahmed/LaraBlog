@@ -35,7 +35,7 @@
         @endif
     </x-backend.table.td>
     <x-backend.table.td>
-        <a href="{{route('edit-article', $article->id)}}" class="text-indigo-700 hover:underline">
+        <a href="{{route('backend.article.edit', $article->id)}}" class="text-indigo-700 hover:underline">
             Edit
         </a>
         <a wire:click="destroy" class="ml-1 text-red-700 hover:underline cursor-pointer"

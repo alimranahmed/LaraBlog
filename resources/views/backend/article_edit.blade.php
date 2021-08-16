@@ -7,7 +7,7 @@
         </div>
         <div class="panel-body" id="edit-article">
             <article-form
-                    :url="'{{ route('update-article', $article->id) }}'"
+                    :url="'{{ route('backend.article.edit', $article->id) }}'"
                     :languages="{{ assoc2JsonArray(config('fields.lang'))}}"
                     :method="'PUT'"
                     :article="{{ json_encode($article) }}"

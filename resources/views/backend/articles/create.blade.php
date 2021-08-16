@@ -1,3 +1,3 @@
 <x-backend>
-    <livewire:backend.article.create/>
+    <livewire:backend.article.form/>
 </x-backend>
