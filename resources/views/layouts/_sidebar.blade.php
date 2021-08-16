@@ -36,7 +36,7 @@
                 @endrole
                 @hasanyrole('owner|admin')
                     <li class="{{Request::is('admin/category*') ? "active":""}}">
-                        <a href="{{route('categories')}}">
+                        <a href="{{route('backend.category.index')}}">
                             <span class="fa fa-share-alt"></span>
                             <span class="hidden-sm">Categories</span>
                         </a>

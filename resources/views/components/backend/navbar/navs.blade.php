@@ -6,7 +6,7 @@
         'Articles' => route('backend.article.index'),
         'Comments' => route('backend.comment.index'),
         'Users' => route('users'),
-        'Categories' => route('categories'),
+        'Categories' => route('backend.category.index'),
         'Keywords' => route('keywords'),
         'Feedback' => route('feedbacks'),
         'Subscribers' => '#',

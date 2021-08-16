@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\ArticleController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 
 Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () {
@@ -28,7 +29,8 @@ Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () 
 
 Route::group(['middleware' => ['auth', 'role:owner|admin']], function () {
     //admin category
-    Route::get('category', 'CategoryController@index')->name('categories');
+    Route::get('category', [CategoryController::class, 'index'])->name('backend.category.index');
+
     Route::get('category/toggle-active/{categoryId}', 'CategoryController@toggleActive')
         ->name('toggle-category-active');
     Route::put('category/{categoryId}', 'CategoryController@update')->name('update-category');

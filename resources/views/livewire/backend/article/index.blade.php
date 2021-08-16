@@ -1,4 +1,4 @@
-<div class="panel panel-default no-margin-bottom">
+<div>
     <section class="flex justify-between mb-3 px-1">
         <form>
             <select name="category" wire:model.lazy="category" aria-label="Category"

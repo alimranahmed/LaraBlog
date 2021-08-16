@@ -12,12 +12,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::with([
-            'articles' => function ($articles) {
-                return $articles->notDeleted();
-            }
-        ])->get();
-        return view('backend.categoryList', compact('categories'));
+        return view('backend.categories.index');
     }
 
     public function update(CategoryRequest $request, $categoryId)
@@ -53,7 +48,7 @@ class CategoryController extends Controller
             Log::error($this->getLogMsg($e));
             return redirect()->back()->with('errorMsg', $this->getMessage($e));
         }
-        return redirect()->route('categories')->with('successMsg', 'Category updated');
+        return redirect()->route('backend.category.index')->with('successMsg', 'Category updated');
     }
 
     public function getArticles(Request $request, $categoryAlias)
