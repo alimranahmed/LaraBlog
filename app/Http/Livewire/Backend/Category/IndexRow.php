@@ -3,11 +3,16 @@
 namespace App\Http\Livewire\Backend\Category;
 
 use App\Models\Category;
+use Illuminate\Support\Arr;
 use Livewire\Component;
 
 class IndexRow extends Component
 {
     public $category;
+
+    public $categoryData;
+
+    public $editing = false;
 
     public function mount(Category $category)
     {
@@ -29,5 +34,24 @@ class IndexRow extends Component
     {
         $category->delete();
         $this->emitUp('categoryDeleted');
+    }
+
+    public function startEditing()
+    {
+        $this->editing = true;
+        $this->categoryData = $this->category->toArray();
+    }
+
+    public function update()
+    {
+        $data = $this->validate(['categoryData.name' => 'required', 'categoryData.alias' => 'required']);
+
+        $data = Arr::get($data, 'categoryData');
+
+        $this->category->update($data);
+
+        $this->editing = false;
+
+        $this->category->refresh();
     }
 }

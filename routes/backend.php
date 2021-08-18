@@ -31,12 +31,6 @@ Route::group(['middleware' => ['auth', 'role:owner|admin']], function () {
     //admin category
     Route::get('category', [CategoryController::class, 'index'])->name('backend.category.index');
 
-    Route::get('category/toggle-active/{categoryId}', 'CategoryController@toggleActive')
-        ->name('toggle-category-active');
-    Route::put('category/{categoryId}', 'CategoryController@update')->name('update-category');
-    Route::post('category', 'CategoryController@store')->name('add-category');
-    Route::get('category/{categoryId}/delete', 'CategoryController@destroy')->name('delete-category');
-
     //Admin users
     Route::get('user', 'UserController@index')->name('users');
     Route::get('user/{userId}/show', 'UserController@show')->name('get-user');

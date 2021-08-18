@@ -1,4 +1,6 @@
 <div>
+    <x-backend.form.button wire:click="startAdding" class="mb-3">Add New Category</x-backend.form.button>
+
     <x-backend.table>
         <x-slot name="head">
             <tr>
@@ -10,8 +12,27 @@
             </tr>
         </x-slot>
         <x-slot name="body">
+
+            @if($adding)
+                <form>
+                    <tr>
+                        <td class="px-2 py-1" colspan="2">
+                            <x-backend.form.input type="text" wire:model.defer="category.name" name="category.name"
+                                                  class="w-full" placeholder="Name"/>
+                        </td>
+                        <td class="px-2 py-1" colspan="2">
+                            <x-backend.form.input type="text" wire:model.defer="category.alias" name="category.alias"
+                                                  class="w-full" placeholder="Alias"/>
+                        </td>
+                        <td class="px-2 py-1" wire:click="store">
+                            <x-backend.form.button>Add</x-backend.form.button>
+                        </td>
+                    </tr>
+                </form>
+            @endif
+
             @foreach($categories as $category)
-                <livewire:backend.category.index-row :category="$category->id"/>
+                <livewire:backend.category.index-row :category="$category->id" wire:key="{{$category->id}}"/>
             @endforeach
         </x-slot>
     </x-backend.table>
