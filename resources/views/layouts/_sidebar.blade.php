@@ -42,7 +42,7 @@
                         </a>
                     </li>
                     <li class="{{Request::is('admin/keyword*') ? "active":""}}">
-                        <a href="{{route('keywords')}}">
+                        <a href="{{route('backend.keyword.index')}}">
                             <span class="fa fa-file"></span>
                             <span class="hidden-sm">Keywords</span>
                         </a>

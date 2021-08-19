@@ -2,22 +2,30 @@
 
     @if($editing)
         <form>
-            <td class="px-2 py-1" colspan="2">
+            <td class="px-6 py-4">
                 <x-backend.form.input type="text" wire:model.defer="categoryData.name" name="category.name"
                                       class="w-full"/>
             </td>
-            <td class="px-2 py-1" colspan="2">
+            <td class="px-6 py-4" colspan="2">
                 <x-backend.form.input type="text" wire:model.defer="categoryData.alias" name="category.alias"
                                       class="w-full"/>
             </td>
-            <td class="px-2 py-1" wire:click="update">
+            <td class="px-6 py-4" wire:click="update">
                 <x-backend.form.button>Save</x-backend.form.button>
             </td>
         </form>
     @else
-        <x-backend.table.td>{{$category->name}}</x-backend.table.td>
+        @php
+            $articleCount = $category->articles->count();
+        @endphp
+
+        <x-backend.table.td>
+            {{$category->name}}<br>
+            <a href="{{route('backend.article.index', ['category' => $category->id])}}" class="text-indigo-500">
+                {{$articleCount <=0 ? 'No article' : $articleCount.' '.\Illuminate\Support\Str::plural('article', $articleCount)}}
+            </a>
+        </x-backend.table.td>
         <x-backend.table.td>{{$category->alias}}</x-backend.table.td>
-        <x-backend.table.td>{{$category->articles->count()}}</x-backend.table.td>
         <x-backend.table.td>
             @if($category->is_active)
                 <span wire:click="toggleActive"

@@ -5,7 +5,7 @@
             <strong>All Feedbacks</strong>
         </div>
         <div class="panel-body">
-            <form action="{{route('add-keyword')}}" method="post">
+            <form action="{{route('backend.keyword.index')}}" method="post">
                 {{csrf_field()}}
                 <table class="table table-hover" id="keywordList">
                     <tr class="text-center">

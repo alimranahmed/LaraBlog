@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\KeywordController;
 
 Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () {
     //profile
@@ -43,12 +44,7 @@ Route::group(['middleware' => ['auth', 'role:owner|admin']], function () {
     Route::get('user/toggle-active/{userId}', 'UserController@toggleActive')->name('toggle-user-active');
 
     //Admin keywords
-    Route::post('keyword', 'KeywordController@store')->name('add-keyword');
-    Route::get('keyword', 'KeywordController@index')->name('keywords');
-    Route::get('keyword/toggle-active/{keywordId}', 'KeywordController@toggleActive')
-        ->name('toggle-keyword-active');
-    Route::put('keyword/{keywordId}', 'KeywordController@update')->name('update-keyword');
-    Route::get('keyword/{keywordId}/delete', 'KeywordController@destroy')->name('delete-keyword');
+    Route::get('keyword', [KeywordController::class, 'index'])->name('backend.keyword.index');
 });
 
 Route::group(['middleware' => ['auth', 'role:owner']], function () {

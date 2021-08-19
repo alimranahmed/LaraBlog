@@ -6,7 +6,6 @@
             <tr>
                 <x-backend.table.th>Name</x-backend.table.th>
                 <x-backend.table.th>Alias</x-backend.table.th>
-                <x-backend.table.th>Articles</x-backend.table.th>
                 <x-backend.table.th>Status</x-backend.table.th>
                 <x-backend.table.th></x-backend.table.th>
             </tr>
@@ -16,15 +15,15 @@
             @if($adding)
                 <form>
                     <tr>
-                        <td class="px-2 py-1" colspan="2">
+                        <td class="px-6 py-4">
                             <x-backend.form.input type="text" wire:model.defer="category.name" name="category.name"
                                                   class="w-full" placeholder="Name"/>
                         </td>
-                        <td class="px-2 py-1" colspan="2">
+                        <td class="px-6 py-4" colspan="2">
                             <x-backend.form.input type="text" wire:model.defer="category.alias" name="category.alias"
                                                   class="w-full" placeholder="Alias"/>
                         </td>
-                        <td class="px-2 py-1" wire:click="store">
+                        <td class="px-6 py-4" wire:click="store">
                             <x-backend.form.button>Add</x-backend.form.button>
                         </td>
                     </tr>
