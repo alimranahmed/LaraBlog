@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\KeywordController;
 
 Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () {
@@ -22,10 +23,7 @@ Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () 
     Route::get('comment/{comment}', [CommentController::class, 'show'])->name('backend.comment.show');
 
     //Admin feedback
-    Route::get('feedback', 'FeedbackController@index')->name('feedbacks');
-    Route::get('feedback/toggle-resolved/{feedbackId}', 'FeedbackController@toggleResolved')
-        ->name('toggle-feedback-resolved');
-    Route::get('feedback/close/{feedbackId}', 'FeedbackController@close')->name('close-feedback');
+    Route::get('feedback', [FeedbackController::class, 'index'])->name('feedbacks');
 });
 
 Route::group(['middleware' => ['auth', 'role:owner|admin']], function () {
