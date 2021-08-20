@@ -56,7 +56,7 @@
                 </tr>
               @endforeach
             </table>
-            <a href="{{route('feedbacks')}}">View all</a>
+            <a href="{{route('backend.feedback.index')}}">View all</a>
           </div>
         </div>
       </div>

@@ -54,7 +54,7 @@
                         </a>
                     </li>
                         <li class="{{Request::is('admin/feedback*') ? "active":""}}">
-                            <a href="{{route('feedbacks')}}">
+                            <a href="{{route('backend.feedback.index')}}">
                                 <span class="fa fa-hand-peace-o"></span>
                                 <span class="hidden-sm">User Feedback</span>
                             </a>

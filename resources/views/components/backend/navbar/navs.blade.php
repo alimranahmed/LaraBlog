@@ -8,15 +8,16 @@
         'Users' => route('users'),
         'Categories' => route('backend.category.index'),
         'Keywords' => route('backend.keyword.index'),
-        'Feedback' => route('feedbacks'),
-        'Subscribers' => '#',
+        'Feedback' => route('backend.feedback.index'),
+        'Subscribers' => route('backend.subscriber.index'),
         ];
 @endphp
 
 @foreach($menus as $menu => $url)
     @php
-        $isActive = $menu == 'Articles';
+        $isActive = request()->url() == $url;
     @endphp
+
     <a href="{{$url}}" @class([
         'px-3 py-2 rounded-md font-medium',
         'text-sm' => !$isMobile,
@@ -25,7 +26,7 @@
         'text-gray-300 hover:bg-gray-700 hover:text-white' => !$isActive,
     ])>
 
-    {{$menu}}
+        {{$menu}}
 
     </a>
 

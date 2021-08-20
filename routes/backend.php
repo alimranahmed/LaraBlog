@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\ArticleController;
+use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedbackController;
@@ -22,12 +23,12 @@ Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () 
     Route::get('comment/{comment}/edit', [CommentController::class, 'edit'])->name('backend.comment.edit');
     Route::get('comment/{comment}', [CommentController::class, 'show'])->name('backend.comment.show');
 
-    //Admin feedback
-    Route::get('feedback', [FeedbackController::class, 'index'])->name('feedbacks');
+    Route::get('feedback', [FeedbackController::class, 'index'])->name('backend.feedback.index');
+
+    Route::get('subscriber', [SubscriberController::class, 'index'])->name('backend.subscriber.index');
 });
 
 Route::group(['middleware' => ['auth', 'role:owner|admin']], function () {
-    //admin category
     Route::get('category', [CategoryController::class, 'index'])->name('backend.category.index');
 
     //Admin users
@@ -41,7 +42,6 @@ Route::group(['middleware' => ['auth', 'role:owner|admin']], function () {
     Route::put('user/{userId}/update', 'UserController@update')->name('update-user');
     Route::get('user/toggle-active/{userId}', 'UserController@toggleActive')->name('toggle-user-active');
 
-    //Admin keywords
     Route::get('keyword', [KeywordController::class, 'index'])->name('backend.keyword.index');
 });
 
