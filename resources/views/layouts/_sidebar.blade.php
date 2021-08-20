@@ -62,7 +62,7 @@
                 @endhasanyrole
                 @role('owner')
                     <li class="{{Request::is('admin/config*') ? "active":""}}">
-                        <a href="{{route('configs')}}">
+                        <a href="{{route('backend.config.index')}}">
                             <span class="fa fa-gear"></span>
                             <span class="hidden-sm">Configurations</span>
                         </a>

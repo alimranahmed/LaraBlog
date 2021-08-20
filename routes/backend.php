@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\ArticleController;
 use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\KeywordController;
 
@@ -47,6 +48,5 @@ Route::group(['middleware' => ['auth', 'role:owner|admin']], function () {
 
 Route::group(['middleware' => ['auth', 'role:owner']], function () {
     //admin config
-    Route::get('config', 'ConfigController@index')->name('configs');
-    Route::put('config/{configId}', 'ConfigController@update')->name('update-config');
+    Route::get('config', [ConfigController::class, 'index'])->name('backend.config.index');
 });
