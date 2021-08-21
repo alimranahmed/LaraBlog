@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\UserRequest;
-use App\Models\Address;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,28 +14,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('roles')->paginate(config('blog.item_per_page'));
-        return view('backend.userList', compact('users'));
-    }
-
-    public function show($userId)
-    {
-        $user = User::find($userId);
-        return view('backend.userDetails', compact('user'));
-    }
-
-    public function destroy($userId)
-    {
-        if (Auth::user()->id == $userId) {
-            return back()->with('errorMsg', 'You cannot delete yourself');
-        }
-        try {
-            User::destroy($userId);
-        } catch (\PDOException $e) {
-            Log::error($this->getLogMsg($e));
-            return redirect()->back()->with('errorMsg', $this->getMessage($e));
-        }
-        return back()->with('successMsg', 'User deleted');
+        return view('backend.users.index');
     }
 
     public function create()
@@ -49,10 +27,7 @@ class UserController extends Controller
     {
         $newUser = $request->only('title', 'name', 'username', 'email', 'website');
         $newUser['password'] = Hash::make($request->get('password'));
-        $newAddress = $request->only('city', 'country_name');
         try {
-            $newAddress = Address::create($newAddress);
-            $newAddress['address_id'] = $newAddress->id;
             $newUser = User::create($newUser);
             $newUser->assignRole($request->get('role'));
         } catch (\Exception $e) {
@@ -109,7 +84,7 @@ class UserController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        return view('backend.userDetails', compact('user'));
+        return view('backend.users.show', compact('user'));
     }
 
     public function toggleActive($userId)

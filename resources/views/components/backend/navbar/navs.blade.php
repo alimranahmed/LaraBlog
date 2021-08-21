@@ -5,7 +5,7 @@
     $menus = [
         'Articles' => route('backend.article.index'),
         'Comments' => route('backend.comment.index'),
-        'Users' => route('users'),
+        'Users' => route('backend.user.index'),
         'Categories' => route('backend.category.index'),
         'Keywords' => route('backend.keyword.index'),
         'Feedback' => route('backend.feedback.index'),

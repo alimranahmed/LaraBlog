@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,9 +14,9 @@ class User extends Authenticatable
     use HasFactory;
     use HasRoles;
     use Notifiable;
+    use CanFormatDates;
 
     protected $guarded = ['id'];
-    protected $appends = ['createdAtHuman'];
 
     public function articles()
     {
@@ -40,12 +41,6 @@ class User extends Authenticatable
     public function scopeActive(Builder $builder)
     {
         return $builder->where('is_active', 1);
-    }
-
-    public function getCreatedAtHumanAttribute()
-    {
-        $carbonDate = new Carbon($this->created_at);
-        return $carbonDate->diffForHumans();
     }
 
     public static function getSubscribedUsers()

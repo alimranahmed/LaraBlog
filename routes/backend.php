@@ -7,6 +7,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\KeywordController;
+use App\Http\Controllers\UserController;
 
 Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () {
     //profile
@@ -33,13 +34,11 @@ Route::group(['middleware' => ['auth', 'role:owner|admin']], function () {
     Route::get('category', [CategoryController::class, 'index'])->name('backend.category.index');
 
     //Admin users
-    Route::get('user', 'UserController@index')->name('users');
-    Route::get('user/{userId}/show', 'UserController@show')->name('get-user');
-    Route::get('user/{userId}/delete', 'UserController@destroy')->name('delete-user');
+    Route::get('user', [UserController::class, 'index'])->name('backend.user.index');
     Route::put('user/change-password', 'UserController@changePassword')->name('change-password');
     Route::get('user/create', 'UserController@create')->name('create-user');
     Route::post('user/create', 'UserController@store')->name('store-user');
-    Route::get('user/{userId}/edit', 'UserController@edit')->name('edit-user');
+    Route::get('user/{userId}/edit', [UserController::class, 'edit'])->name('backend.user.edit');
     Route::put('user/{userId}/update', 'UserController@update')->name('update-user');
     Route::get('user/toggle-active/{userId}', 'UserController@toggleActive')->name('toggle-user-active');
 
