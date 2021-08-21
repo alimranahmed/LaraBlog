@@ -3,8 +3,6 @@
 namespace App\Http\Livewire\Backend\User;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,7 +12,7 @@ class Index extends Component
 
     public function render()
     {
-        $users = User::with('roles')->paginate(config('blog.item_per_page'));
+        $users = User::with('roles')->latest()->paginate(config('blog.item_per_page'));
 
         return view('livewire.backend.user.index', compact('users'));
     }

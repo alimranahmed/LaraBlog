@@ -20,28 +20,12 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::where('name', '!=', 'owner')->get();
-        return view('backend.user_create', compact('roles'));
+        return view('backend.users.create', compact('roles'));
     }
 
-    public function store(UserRequest $request)
+    public function edit(User $user)
     {
-        $newUser = $request->only('title', 'name', 'username', 'email', 'website');
-        $newUser['password'] = Hash::make($request->get('password'));
-        try {
-            $newUser = User::create($newUser);
-            $newUser->assignRole($request->get('role'));
-        } catch (\Exception $e) {
-            Log::error($this->getLogMsg($e));
-            return back()->withInput()->with('errorMsg', $this->getMessage($e));
-        }
-        return redirect()->route('users')->with('successMsg', 'User created!');
-    }
-
-    public function edit($userId)
-    {
-        $roles = Role::all();
-        $user = User::findOrFail($userId);
-        return view('backend.user_edit', compact('roles', 'user'));
+        return view('backend.users.edit', compact('user'));
     }
 
     public function update(UserRequest $request, $userId)
@@ -85,17 +69,5 @@ class UserController extends Controller
     {
         $user = Auth::user();
         return view('backend.users.show', compact('user'));
-    }
-
-    public function toggleActive($userId)
-    {
-        try {
-            $user = User::find($userId);
-            $user->update(['is_active' => !$user->is_active]);
-        } catch (\Exception $e) {
-            Log::error($this->getLogMsg($e));
-            return back()->with('errorMsg', $this->getMessage($e));
-        }
-        return back()->with('successMsg', 'User updated successfully!');
     }
 }

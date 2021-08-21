@@ -1,6 +1,8 @@
 <div>
     <div class="mb-3">
-        <x-backend.form.button>Add New User</x-backend.form.button>
+        <a href="{{route('backend.user.create')}}">
+            <x-backend.form.button>Add New User</x-backend.form.button>
+        </a>
     </div>
 
     <x-backend.table>
@@ -61,7 +63,8 @@
                         @endif
                     </x-backend.table.td>
                     <x-backend.table.td>
-                        <a href="{{route('backend.user.edit', $user->id)}}" class="text-indigo-700 hover:underline">Edit</a>
+                        <a href="{{route('backend.user.edit', $user->id)}}"
+                           class="text-indigo-700 hover:underline">Edit</a>
                         <span wire:click="delete({{$user->id}})"
                               onclick="confirm('You are deleting this user') || event.stopImmediatePropagation()"
                               class="cursor-pointer text-red-700 hover:underline">Delete</span>
