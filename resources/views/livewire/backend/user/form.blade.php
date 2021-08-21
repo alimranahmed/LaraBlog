@@ -11,6 +11,8 @@
 
         <div class="mt-3">
             <x-backend.form.input wire:model.defer="user.name" name="user.name" placeholder="Name*"/>
+        </div>
+        <div class="mt-3">
             <x-backend.form.input wire:model.defer="user.username" name="user.username" placeholder="Username"/>
         </div>
         <div class="mt-3">
