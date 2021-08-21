@@ -21,7 +21,7 @@ class Form extends Component
 
     public $editingUser;
 
-    public function mount(User $user)
+    public function mount(?User $user)
     {
         $this->editingUser = $user;
         $this->user = $user;
@@ -45,7 +45,7 @@ class Form extends Component
             $personalData['password'] = bcrypt($personalData['password']);
         }
 
-        if ($this->editingUser) {
+        if ($this->editingUser->id) {
             $this->editingUser->update($personalData);
             $this->editingUser->roles()->detach();
             $this->editingUser->assignRole($personalData['role']);

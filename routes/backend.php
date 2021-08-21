@@ -11,7 +11,7 @@ use App\Http\Controllers\UserController;
 
 Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () {
     //profile
-    Route::get('profile', 'UserController@profile')->name('user-profile');
+    Route::get('profile', [UserController::class, 'profile'])->name('user-profile');
     //dashboard
     Route::get('dashboard', 'DashboardController@index')->name('admin-dashboard');
 
@@ -35,12 +35,9 @@ Route::group(['middleware' => ['auth', 'role:owner|admin']], function () {
 
     //Admin users
     Route::get('user', [UserController::class, 'index'])->name('backend.user.index');
-    Route::put('user/change-password', 'UserController@changePassword')->name('change-password');
+    Route::put('user/change-password', 'UserController@changePassword')->name('backend.user.password.change');
     Route::get('user/create', [UserController::class, 'create'])->name('backend.user.create');
-    Route::post('user/create', 'UserController@store')->name('store-user');
     Route::get('user/{user}/edit', [UserController::class, 'edit'])->name('backend.user.edit');
-    Route::put('user/{userId}/update', 'UserController@update')->name('update-user');
-    Route::get('user/toggle-active/{userId}', 'UserController@toggleActive')->name('toggle-user-active');
 
     Route::get('keyword', [KeywordController::class, 'index'])->name('backend.keyword.index');
 });

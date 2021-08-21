@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
-use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -26,26 +25,6 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return view('backend.users.edit', compact('user'));
-    }
-
-    public function update(UserRequest $request, $userId)
-    {
-        $newUser = $request->only('name', 'username', 'email');
-        $newUser['is_active'] = $request->has('is_active');
-        try {
-            if ($request->has('password')) {
-                $newUser['password'] = \Hash::make($request->get('password'));
-            }
-            $user = User::where('id', $userId)->first();
-            $user->update($newUser);
-            if ($request->has('role')) {
-                $user->syncRoles(Role::where('name', $request->get('role'))->get());
-            }
-        } catch (\Exception $e) {
-            Log::error($this->getLogMsg($e));
-            return back()->with('errorMsg', $e->getMessage());
-        }
-        return redirect()->route('get-user', ['userId' => $userId])->with('successMsg', 'User updated');
     }
 
     public function changePassword(ChangePasswordRequest $request)
