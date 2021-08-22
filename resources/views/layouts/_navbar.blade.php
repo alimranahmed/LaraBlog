@@ -59,7 +59,7 @@
                 </button>
                 <h4 class="modal-title">Change Password</h4>
             </div>
-            <form action="{{route('change-password')}}" method="post">
+            <form action="{{route('backend.user.password.change')}}" method="post">
                 {{csrf_field()}}
                 <input type="hidden" name="_method" value="PUT">
                 <div class="modal-body">

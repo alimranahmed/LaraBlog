@@ -21,13 +21,13 @@
                         </a>
                     </li>
                     <li class="{{Request::is('admin/article*') ? "active":""}}">
-                        <a href="{{route('admin-articles')}}">
+                        <a href="{{route('backend.article.index')}}">
                             <i class="fa fa-file-text"></i>
                             <span class="hidden-sm">Articles</span>
                         </a>
                     </li>
                     <li class="{{Request::is('admin/comment*') ? "active":""}}">
-                        <a href="{{route('comments')}}">
+                        <a href="{{route('backend.comment.index')}}">
                             <span class="fa fa-comment-o"></span>
                             <span class="hidden-sm">Comments</span>
                             <span class="badge bg-danger" style="display: none;" id="new-comment">New</span>
@@ -36,25 +36,25 @@
                 @endrole
                 @hasanyrole('owner|admin')
                     <li class="{{Request::is('admin/category*') ? "active":""}}">
-                        <a href="{{route('categories')}}">
+                        <a href="{{route('backend.category.index')}}">
                             <span class="fa fa-share-alt"></span>
                             <span class="hidden-sm">Categories</span>
                         </a>
                     </li>
                     <li class="{{Request::is('admin/keyword*') ? "active":""}}">
-                        <a href="{{route('keywords')}}">
+                        <a href="{{route('backend.keyword.index')}}">
                             <span class="fa fa-file"></span>
                             <span class="hidden-sm">Keywords</span>
                         </a>
                     </li>
                     <li class="{{Request::is('admin/user*') ? "active":""}}">
-                        <a href="{{route('users')}}">
+                        <a href="{{route('backend.user.index')}}">
                             <span class="fa fa-user"></span>
                             <span class="hidden-sm">Users</span>
                         </a>
                     </li>
                         <li class="{{Request::is('admin/feedback*') ? "active":""}}">
-                            <a href="{{route('feedbacks')}}">
+                            <a href="{{route('backend.feedback.index')}}">
                                 <span class="fa fa-hand-peace-o"></span>
                                 <span class="hidden-sm">User Feedback</span>
                             </a>
@@ -62,7 +62,7 @@
                 @endhasanyrole
                 @role('owner')
                     <li class="{{Request::is('admin/config*') ? "active":""}}">
-                        <a href="{{route('configs')}}">
+                        <a href="{{route('backend.config.index')}}">
                             <span class="fa fa-gear"></span>
                             <span class="hidden-sm">Configurations</span>
                         </a>

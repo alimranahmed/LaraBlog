@@ -33,8 +33,8 @@ class CreateCommentsTable extends Migration
                 ->onDelete('cascade');
             $table->integer('is_published')->unsigned()->default(1);
             $table->dateTime('published_at')->nullable();
-            $table->integer('countEdit')->unsigned()->default(0);
-            $table->text('originalContent')->nullable();
+            $table->integer('count_edit')->unsigned()->default(0);
+            $table->text('original_content')->nullable();
             $table->integer('is_confirmed')->unsigned()->default(0);
             $table->string('token')->nullable();
             $table->timestamps();

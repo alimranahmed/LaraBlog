@@ -10,17 +10,13 @@ use Illuminate\Support\Facades\DB;
 class Keyword extends Model
 {
     use HasFactory;
+    use CanFormatDates;
 
     protected $guarded = ['id'];
 
     public function articles()
     {
         return $this->belongsToMany(Article::class, 'article_keyword');
-    }
-
-    public function getCreatedAtHumanAttribute()
-    {
-        return $this->created_at->diffForHumans();
     }
 
     /**

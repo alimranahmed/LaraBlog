@@ -11,6 +11,7 @@ use League\CommonMark\CommonMarkConverter;
 class Article extends Model
 {
     use HasFactory;
+    use CanFormatDates;
 
     protected $guarded = ['id'];
     protected $dates = ['published_at'];
@@ -30,12 +31,6 @@ class Article extends Model
         return $this->belongsTo(Category::class);
     }
 
-    //Written from the address
-    public function address()
-    {
-        return $this->belongsTo(Address::class);
-    }
-
     public function images()
     {
         return $this->belongsToMany(Image::class, 'article_image');
@@ -44,11 +39,6 @@ class Article extends Model
     public function keywords()
     {
         return $this->belongsToMany(Keyword::class, 'article_keyword');
-    }
-
-    public function hits()
-    {
-        return $this->hasMany(HitLogger::class);
     }
 
     public function scopeNotDeleted(Builder $builder)
@@ -61,21 +51,6 @@ class Article extends Model
         return $builder->where('is_published', 1);
     }
 
-    public function getPublishedAtHumanAttribute()
-    {
-        return $this->published_at->diffForHumans();
-    }
-
-    public function getCreatedAtHumanAttribute()
-    {
-        return $this->created_at->diffForHumans();
-    }
-
-    public function getUpdatedAtHumanAttribute()
-    {
-        return $this->updated_at->diffForHumans();
-    }
-
     public function getCategoryNameAttribute()
     {
         return optional($this->category)->name;
@@ -85,6 +60,11 @@ class Article extends Model
     {
         $converter = new CommonMarkConverter();
         echo $converter->convertToHtml($this->content);
+    }
+
+    public function hasAuthorization(User $user)
+    {
+        return $user->hasRole(['author']) && $this->user_id != $user->id;
     }
 
     public static function getPaginate(Request $request)
