@@ -9,5 +9,5 @@
         <a href="{{route('get-article', [$article->id])}}">Read More</a>
     </div><br><br><br>
 
-    <a href="{{route('un-subscribe', ['userId' => $user->id, 'token' => $user->token])}}" style="color: grey;">Unsubscribe</a>
+    <a href="{{route('unsubscribe', ['userId' => $user->id, 'token' => $user->token])}}" style="color: grey;">Unsubscribe</a>
 @endsection

@@ -7,11 +7,10 @@
     <meta id="token" name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" type="image/png" href="{{asset('img/favicon.png')}}"/>
 
-    <title>{{isset($article) ? $article->heading : $globalConfigs->site_title}}</title>
+    <title>{{isset($article) ? $article->heading : optional($globalConfigs)->site_title}}</title>
     <!-- CSS -->
     <link href="{{ mix("build/css/app.css") }}" rel="stylesheet" type="text/css">
 
-    @include('layouts._google_analytics')
 </head>
 <body>
 <div id="l5_blog">

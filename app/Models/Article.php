@@ -11,6 +11,7 @@ use League\CommonMark\CommonMarkConverter;
 class Article extends Model
 {
     use HasFactory;
+    use CanFormatDates;
 
     protected $guarded = ['id'];
     protected $dates = ['published_at'];
@@ -30,12 +31,6 @@ class Article extends Model
         return $this->belongsTo(Category::class);
     }
 
-    //Written from the address
-    public function address()
-    {
-        return $this->belongsTo(Address::class);
-    }
-
     public function images()
     {
         return $this->belongsToMany(Image::class, 'article_image');
@@ -46,11 +41,6 @@ class Article extends Model
         return $this->belongsToMany(Keyword::class, 'article_keyword');
     }
 
-    public function hits()
-    {
-        return $this->hasMany(HitLogger::class);
-    }
-
     public function scopeNotDeleted(Builder $builder)
     {
         return $builder->where('is_deleted', 0);
@@ -59,21 +49,6 @@ class Article extends Model
     public function scopePublished(Builder $builder)
     {
         return $builder->where('is_published', 1);
-    }
-
-    public function getPublishedAtHumanAttribute()
-    {
-        return $this->published_at->diffForHumans();
-    }
-
-    public function getCreatedAtHumanAttribute()
-    {
-        return $this->created_at->diffForHumans();
-    }
-
-    public function getUpdatedAtHumanAttribute()
-    {
-        return $this->updated_at->diffForHumans();
     }
 
     public function getCategoryNameAttribute()
@@ -87,9 +62,14 @@ class Article extends Model
         echo $converter->convertToHtml($this->content);
     }
 
+    public function hasAuthorization(User $user)
+    {
+        return $user->hasRole(['author']) && $this->user_id != $user->id;
+    }
+
     public static function getPaginate(Request $request)
     {
-        $perPage = config('view.item_per_page');
+        $perPage = config('blog.item_per_page');
 
         $categoryAlias = $request->route('categoryAlias');
         $keywordName = $request->route('keywordName');
@@ -117,11 +97,9 @@ class Article extends Model
             $paginateUrl = '?lang=' . $request->lang;
         }
 
-        $articles = $articleQuery->with('category', 'keywords', 'user')
+        return $articleQuery->with('category', 'keywords', 'user')
             ->latest()
             ->paginate($perPage)
             ->withPath($paginateUrl);
-
-        return $articles;
     }
 }

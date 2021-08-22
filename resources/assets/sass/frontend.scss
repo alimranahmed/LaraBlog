@@ -1,0 +1,22 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+code{
+    @apply bg-red-100 text-red-800 rounded-lg px-1 py-1
+}
+
+h1{
+    @apply font-semibold text-2xl
+}
+
+
+h3, h2{
+    @apply font-semibold text-xl
+}
+
+h4, h5, h6{
+    @apply font-semibold text-lg
+}

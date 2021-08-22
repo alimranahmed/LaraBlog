@@ -1,7 +1,7 @@
 $(document).delegate('.textarea-indent', 'keydown', function(e) {
     var keyCode = e.keyCode || e.which;
 
-    if (keyCode == 9) {
+    if (keyCode === 9) {
         e.preventDefault();
         var start = $(this).get(0).selectionStart;
         var end = $(this).get(0).selectionEnd;

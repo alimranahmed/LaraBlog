@@ -9,19 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
+    use CanFormatDates;
 
     protected $guarded = ['id'];
     protected $dates = ['published_at'];
-    protected $appends = ['createdAtHuman', 'publishedAtHuman'];
 
     public function article()
     {
         return $this->belongsTo(Article::class);
-    }
-
-    public function address()
-    {
-        return $this->belongsTo(Address::class);
     }
 
     public function user()
@@ -47,15 +42,5 @@ class Comment extends Model
     public function scopeNoReplies(Builder $builder)
     {
         return $builder->where('parent_comment_id', null);
-    }
-
-    public function getCreatedAtHumanAttribute()
-    {
-        return $this->created_at->diffForHumans();
-    }
-
-    public function getPublishedAtHumanAttribute()
-    {
-        return optional($this->published_at)->diffForHumans();
     }
 }

@@ -4,24 +4,26 @@ namespace Tests\Feature;
 
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Config;
 use App\Models\User;
-use Faker\Factory;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Str;
+use Tests\TestCase;
 
-class ArticleTest extends WebTestCase
+class ArticleTest extends TestCase
 {
-    /**
-     * @var User
-     */
+    use DatabaseTransactions;
+
     protected $user;
 
-    /**
-     * @var Category
-     */
+
     protected $category;
 
     public function setUp(): void
     {
         parent::setUp();
+
+        Config::create(['name' => 'site_title', 'value' => Str::random()]);
 
         $this->user = User::factory()
             ->create(['name' => 'Example User', 'email' => 'example@test.com']);
@@ -31,12 +33,11 @@ class ArticleTest extends WebTestCase
 
     public function testIndex()
     {
-        Article::factory()->published()->create([
+        $article = Article::factory()->published()->create([
             'heading' => 'Test Heading',
             'category_id' => $this->category->id,
             'user_id' => $this->user->id,
         ]);
-
 
         Article::factory()->unpublished()->create([
             'heading' => 'Unpublished Heading',
@@ -46,9 +47,9 @@ class ArticleTest extends WebTestCase
 
         $this->get('article')
             ->assertOk()
-            ->assertSee('Test Heading')
-            ->assertSee("published 1 second ago")
-            ->assertSee("by {$this->user->name}")
+            ->assertSee($article->heading)
+            ->assertSee($article->published_at->format('M d, Y'))
+            ->assertSee("{$article->user->name}")
             ->assertSee("{$this->category->name}")
             ->assertDontSee('Unpublished Heading');
     }
