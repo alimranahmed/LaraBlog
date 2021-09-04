@@ -1,22 +1,22 @@
+@tailwind base;
 
-//Google fonts
-//@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-//@import url(http://fonts.googleapis.com/icon?family=Material+Icons);
+@tailwind components;
 
-//Font-Awesome fonts
-@import "~font-awesome/scss/font-awesome";
+@tailwind utilities;
 
-//Variables
-@import "variables";
+code{
+    @apply bg-red-100 text-red-800 rounded-lg px-1 py-1
+}
 
-@import "~bootstrap/dist/css/bootstrap.css";
+h1{
+    @apply font-semibold text-2xl
+}
 
-@import "~ladda/dist/ladda.min.css";
 
-@import "~highlightjs/styles/atom-one-dark.css";
+h3, h2{
+    @apply font-semibold text-xl
+}
 
-//Materialize
-//@import "node_modules/materialize-css/sass/materialize";
-
-@import "customeFrame";
-@import "style";
+h4, h5, h6{
+    @apply font-semibold text-lg
+}

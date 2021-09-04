@@ -1,17 +1,16 @@
-require('./libraries');
+// import Echo from 'laravel-echo'
+
+// window.Pusher = require('pusher-js');
+
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: process.env.MIX_PUSHER_APP_KEY,
+//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+//     forceTLS: true
+// });
 
 import Alpine from 'alpinejs'
-window.Alpine = Alpine
-Alpine.start()
 
-window.Vue = require('vue');
-
-//Bootstrap
-Vue.component('comment-form', require('./components/bootstrap/article/CommentForm.vue').default);
-Vue.component('comments', require('./components/bootstrap/article/Comments.vue').default);
-Vue.component('article-form', require('./components/bootstrap/article/ArticleForm.vue').default);
-
-const app = new Vue({
-    el: '#l5_blog'
-});
+window.Alpine = Alpine;
+Alpine.start();
 
