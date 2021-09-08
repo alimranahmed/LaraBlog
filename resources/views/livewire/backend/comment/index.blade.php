@@ -10,9 +10,11 @@
             </tr>
         </x-slot>
         <x-slot name="body">
-            @foreach($comments as $comment)
+            @forelse($comments as $comment)
                 <livewire:backend.comment.index-row :comment="$comment" wire:key="{{$comment->id}}"/>
-            @endforeach
+            @empty
+                <x-backend.table.td class="text-center text-gray-500" colspan="100">No comment found</x-backend.table.td>
+            @endforelse
         </x-slot>
     </x-backend.table>
 

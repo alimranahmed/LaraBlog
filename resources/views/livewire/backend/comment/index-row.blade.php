@@ -11,7 +11,9 @@
             @php
                 $totalReplies = $comment->replies->count();
             @endphp
-            {{$totalReplies < 1 ? 'No reply' : $totalReplies.' '.\Illuminate\Support\Str::plural('reply', $totalReplies)}}
+            <a href="{{route('backend.comment.show', $comment->id)}}">
+                {{$totalReplies < 1 ? 'No reply' : $totalReplies.' '.\Illuminate\Support\Str::plural('reply', $totalReplies)}}
+            </a>
         </span>
     </x-backend.table.td>
     <x-backend.table.td>
