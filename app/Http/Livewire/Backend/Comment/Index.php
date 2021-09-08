@@ -13,6 +13,12 @@ class Index extends Component
 {
     use WithPagination;
 
+    public $article = '';
+
+    protected $queryString = [
+        'article' => ['except' => ''],
+    ];
+
     protected $listeners = ['commentDeleted' => '$refresh'];
 
     public function render()
@@ -23,17 +29,20 @@ class Index extends Component
 
     private function getComments(): LengthAwarePaginator
     {
+        $commentQuery = Comment::with('article', 'user', 'replies')
+            ->latest()
+            ->noReplies();
+
         if (auth()->user()->hasRole('author')) {
             $authorsArticleIDs = Article::where('user_id', Auth::user()->id)->pluck('id');
-            return Comment::whereIn('article_id', $authorsArticleIDs)
-                ->with('article', 'user', 'replies')
-                ->latest()
-                ->noReplies()
-                ->paginate(config('blog.item_per_page'));
+
+            $commentQuery->whereIn('article_id', $authorsArticleIDs);
         }
-        return Comment::with('article', 'user', 'replies')
-            ->latest()
-            ->noReplies()
-            ->paginate(config('blog.item_per_page'));
+
+        if ($this->article) {
+            $commentQuery->where('article_id', $this->article);
+        }
+
+        return $commentQuery->paginate(config('blog.item_per_page'));
     }
 }

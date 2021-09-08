@@ -2,7 +2,7 @@
     <x-backend.table.td :wrap="true">
         <article>
             <a href="{{route('get-article', [$article->id, make_slug($article->heading)])}}"
-               target="_blank">
+               class="hover:underline" target="_blank">
                 {{$article->heading}}
             </a>
         </article>
@@ -14,7 +14,9 @@
             in {{ucfirst($article->language)}}
         </section>
         <section class="text-indigo-500">
-            {{$article->comment_count < 1 ? 'No comment' : $article->comment_count.' '.\Illuminate\Support\Str::plural('comment', $article->comment_count)}}
+            <a href="{{route('backend.comment.index', ['article' => $article->id])}}">
+                {{$article->comment_count < 1 ? 'No comment' : $article->comment_count.' '.\Illuminate\Support\Str::plural('comment', $article->comment_count)}}
+            </a>
         </section>
     </x-backend.table.td>
     <x-backend.table.td class="text-center">
