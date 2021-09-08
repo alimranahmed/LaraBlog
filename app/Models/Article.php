@@ -67,6 +67,17 @@ class Article extends Model
         return $user->hasRole(['author']) && $this->user_id != $user->id;
     }
 
+    public function scopeSearch(Builder $builder, $query = '')
+    {
+        if ($query) {
+            return $builder->where(function (Builder $builder) use($query) {
+                return $builder->where('heading', 'like', "%{$query}%")
+                    ->orWhere('content', 'content', "%{$query}%");
+            });
+        }
+        return $builder;
+    }
+
     public static function getPaginate(Request $request)
     {
         $perPage = config('blog.item_per_page');
