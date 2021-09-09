@@ -24,11 +24,8 @@
 
             <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
 
-                <a class="flex-shrink-0 flex items-center" href="#">
-                    <img class="h-8 w-auto"
-                         src="{{asset('img/logo.png')}}" alt="Workflow">
-
-                    <span class="ml-2 hidden lg:block w-auto text-gray-300 hover:text-white">Al Imran Ahmed</span>
+                <a class="flex-shrink-0 flex items-center" href="{{route('home')}}">
+                    <span class="hidden lg:block w-auto text-gray-300 hover:text-white">Dashboard</span>
                 </a>
 
                 <!-- Desktop Menu-->
