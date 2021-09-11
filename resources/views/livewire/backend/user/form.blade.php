@@ -1,5 +1,5 @@
-<div>
-    <form wire:submit.prevent="submit">
+<div class="flex justify-center">
+    <form wire:submit.prevent="submit" class="w-full md:w-1/4 px-3">
         <div>
             <x-backend.form.select wire:model.defer="user.role" name="user.role">
                 <option value="">Select role*</option>
@@ -10,14 +10,13 @@
         </div>
 
         <div class="mt-3">
-            <x-backend.form.input wire:model.defer="user.name" name="user.name" placeholder="Name*"/>
+            <x-backend.form.input wire:model.defer="user.name" name="user.name" placeholder="Name*" class="w-full"/>
         </div>
         <div class="mt-3">
-            <x-backend.form.input wire:model.defer="user.username" name="user.username" placeholder="Username"/>
+            <x-backend.form.input wire:model.defer="user.username" name="user.username" placeholder="Username" class="w-full"/>
         </div>
         <div class="mt-3">
-            <x-backend.form.input wire:model.defer="user.email" name="user.email" placeholder="Email*"/>
-            <x-backend.form.input type="password" wire:model.defer="user.password" name="user.password" placeholder="Password"/>
+            <x-backend.form.input wire:model.defer="user.email" name="user.email" placeholder="Email*" class="w-full"/>
         </div>
         <div class="mt-3">
             <x-backend.form.button>Save</x-backend.form.button>
