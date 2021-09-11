@@ -37,10 +37,10 @@ A full-featured blogging system for personal use. No frontend theme and anything
 ### Screen shots
 
 ##### Home page
-![home_page](https://user-images.githubusercontent.com/7629427/132961667-d30aa00e-da49-4e5c-9bb6-9db9f048ee50.png)
+![home_page](https://user-images.githubusercontent.com/7629427/132961669-34f4161a-05e9-4fd6-aa32-d2b2f04134ab.png)
 
 ##### Single article view
-![article_page](https://user-images.githubusercontent.com/7629427/132961669-34f4161a-05e9-4fd6-aa32-d2b2f04134ab.png)
+![article_page](https://user-images.githubusercontent.com/7629427/132961667-d30aa00e-da49-4e5c-9bb6-9db9f048ee50.png)
 
 ### Contribution 
 **Anyone is always welcome to contribute on the project. If you want to work with:**
