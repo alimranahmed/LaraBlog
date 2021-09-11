@@ -3,23 +3,19 @@
 
 # Blog Using Laravel 8
 ### Let's keep it as simple as possible. Configure anything you want
-A full-featured blogging system for personal use. Minimum library used. No frontend theme and anything heavy or unnecessary library used.  
+A full-featured blogging system for personal use. No frontend theme and anything heavy or unnecessary library used.
+
+### Technologies used
+1. Laravel
+2. Livewire
+3. TailwindCSS
  
 ### There are four several types of users with several permissions
-1. Admin
+1. Admin/Owner
   * Can manage articles and comments of other users
   * Can manage categories 
   * Can manage keywords
   * Can manage other users except Owner
-  
-2. Owner
-  * Can do anything that can be done by admin
-  * Create admin user
-  * Change system configuration variables
-  
-3. Author
-  * Can write article and can manage his own article
-  * Can manage comments on his own article
   
 4. Reader
   * Can read and comment on article providing his email address. 
@@ -41,13 +37,10 @@ A full-featured blogging system for personal use. Minimum library used. No front
 ### Screen shots
 
 ##### Home page
-![home_page](https://cloud.githubusercontent.com/assets/7629427/26286312/ecbaaeb8-3e83-11e7-8cd2-9f049ff7e04c.png)
+![home_page](https://user-images.githubusercontent.com/7629427/132961667-d30aa00e-da49-4e5c-9bb6-9db9f048ee50.png)
 
 ##### Single article view
-![article_page](https://cloud.githubusercontent.com/assets/7629427/26286311/e5a98770-3e83-11e7-95e2-f6a60fff8051.png)
-
-##### Admin panel view
-![configurations](https://cloud.githubusercontent.com/assets/7629427/26286313/f3499924-3e83-11e7-9418-99903a4ef136.png)
+![article_page](https://user-images.githubusercontent.com/7629427/132961669-34f4161a-05e9-4fd6-aa32-d2b2f04134ab.png)
 
 ### Contribution 
 **Anyone is always welcome to contribute on the project. If you want to work with:**
@@ -55,9 +48,6 @@ A full-featured blogging system for personal use. Minimum library used. No front
 2. After fixing any issue or adding any new feature just send a pull request
 3. I will be happy to add your code for the betterment of this project. 
 Thanks.
-
-##### Note
-If you cloned the project little bit earlier and after pulling the newer changes it's not working now, please execute the `composer update` command in the CLI when you are the root directory of the project. Beside, don't forge to cross match your `.env` file version with newly pulled `.env.example` file.
 
 ##### License
 [MIT](https://opensource.org/licenses/MIT)
