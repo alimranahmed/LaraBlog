@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth', 'role:owner|admin']], function () {
 
     //Admin users
     Route::get('user', [UserController::class, 'index'])->name('backend.user.index');
-    Route::put('user/change-password', 'UserController@changePassword')->name('backend.user.password.change');
+    Route::get('user/password/edit', [UserController::class, 'editPassword'])->name('backend.user.password.edit');
     Route::get('user/create', [UserController::class, 'create'])->name('backend.user.create');
     Route::get('user/{user}/edit', [UserController::class, 'edit'])->name('backend.user.edit');
 

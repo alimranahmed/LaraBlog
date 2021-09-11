@@ -15,7 +15,6 @@ class Form extends Component
         'user.name' => 'required',
         'user.username' => '',
         'user.email' => 'required|email',
-        'user.password' => '',
         'user.role' => 'required'
     ];
 
@@ -25,7 +24,6 @@ class Form extends Component
     {
         $this->editingUser = $user;
         $this->user = $user;
-        unset($this->user->password);
         $this->user->role = $this->user->roles()->value('id');
     }
 
@@ -40,10 +38,6 @@ class Form extends Component
         $data = $this->validate();
 
         $personalData = Arr::get($data, 'user');
-
-        if (isset($personalData['password']) || !empty($personalData['password'])) {
-            $personalData['password'] = bcrypt($personalData['password']);
-        }
 
         if ($this->editingUser->id) {
             $this->editingUser->update($personalData);

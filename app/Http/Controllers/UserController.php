@@ -27,21 +27,9 @@ class UserController extends Controller
         return view('backend.users.edit', compact('user'));
     }
 
-    public function changePassword(ChangePasswordRequest $request)
+    public function editPassword()
     {
-        $newPassword = $request->get('new_password');
-
-        if (!Hash::check($request->get('old_password'), Auth::user()->password)) {
-            return back()->with('errorMsg', 'Unauthorized request');
-        }
-        try {
-            User::where('id', Auth::user()->id)->update(['password' => Hash::make($newPassword)]);
-        } catch (\PDOException $e) {
-            Log::error($this->getLogMsg($e));
-            return back()->with('errorMsg', $this->getMessage($e));
-        }
-
-        return back()->with('successMsg', 'Password changed');
+        return view('backend.users.edit_password');
     }
 
     public function profile()
