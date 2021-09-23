@@ -12,16 +12,16 @@ A full-featured blogging system for personal use. No frontend theme and anything
  
 ### There are four several types of users with several permissions
 1. Admin/Owner
-  * Can manage articles and comments of other users
-  * Can manage categories 
-  * Can manage keywords
-  * Can manage other users except Owner
+  * Can manage articles and comments of other users.
+  * Can manage categories.
+  * Can manage keywords.
+  * Can manage other users except Owner.
   
 4. Reader
-  * Can read and comment on article providing his email address. 
-  * Can subscribe to be notified for new article
-  * Can search for article with
-  * Can navigate article based on categories
+  * Can read and comment on article providing his email address.
+  * Can subscribe to be notified for new articles.
+  * Can search for articles.
+  * Can navigate articles based on categories.
 
 ### Installation Process
 1. Execute `git clone https://github.com/alimranahmed/LaraBlog.git` on your terminal to download this project.
@@ -32,7 +32,7 @@ A full-featured blogging system for personal use. No frontend theme and anything
 6. Execute `php artisan migrate:refresh --seed` terminal on your terminal.
 7. Now you are ready to go, If you don't want to create any virtual host for this project then execute
   `php artisan serve`
-8. Now visit the url shown on your terminal, something like `localhost:8000`. Its running!
+8. Now visit the url shown on your terminal, something like `localhost:8000`. It's running!
 
 ### Screen shots
 
@@ -44,9 +44,9 @@ A full-featured blogging system for personal use. No frontend theme and anything
 
 ### Contribution 
 **Anyone is always welcome to contribute on the project. If you want to work with:**
-1. Just create and issue(even if you want to fix the issue). 
-2. After fixing any issue or adding any new feature just send a pull request
-3. I will be happy to add your code for the betterment of this project. 
+1. Just create an issue(even if you want to fix the issue). 
+2. After fixing any issue or adding any new feature just send a pull request.
+3. I will be happy to add your code in order to enhance this project. 
 Thanks.
 
 ##### License
