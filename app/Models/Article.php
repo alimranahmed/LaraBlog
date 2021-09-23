@@ -70,7 +70,7 @@ class Article extends Model
     public function scopeSearch(Builder $builder, $query = '')
     {
         if ($query) {
-            return $builder->where(function (Builder $builder) use($query) {
+            return $builder->where(function (Builder $builder) use ($query) {
                 return $builder->where('heading', 'like', "%{$query}%")
                     ->orWhere('content', 'content', "%{$query}%");
             });
