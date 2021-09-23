@@ -7,7 +7,6 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use function now;
 use Tests\TestCase;
 
 class CommentTest extends TestCase
@@ -68,26 +67,5 @@ class CommentTest extends TestCase
         $comment = Comment::noReplies()->first();
 
         $this->assertNull($comment->parentComment);
-    }
-
-    public function testCreatedAtHumanAttribute()
-    {
-        $comment = Comment::factory()->create([
-            'user_id' => $this->user->id,
-            'article_id' => $this->article->id,
-        ]);
-
-        $this->assertEquals('1 second ago', $comment->createdAtHuman);
-    }
-
-    public function testPublishedAtHumanAttribute()
-    {
-        $comment = Comment::factory()->create([
-            'user_id' => $this->user->id,
-            'article_id' => $this->article->id,
-            'published_at' => now(),
-        ]);
-
-        $this->assertEquals('1 second ago', $comment->publishedAtHuman);
     }
 }

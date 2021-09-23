@@ -12,12 +12,6 @@ class CategoryTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function testCreatedAtAttribute()
-    {
-        $category = Category::factory()->create();
-        $this->assertEquals('1 second ago', $category->createdAtHuman);
-    }
-
     public function testActiveScope()
     {
         Category::factory()->create(['is_active' => 1]);

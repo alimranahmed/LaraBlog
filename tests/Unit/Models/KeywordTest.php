@@ -29,15 +29,6 @@ class KeywordTest extends TestCase
         ]);
     }
 
-    public function testCreatedAtHumanAttribute()
-    {
-        $keyword = Keyword::factory()->create([
-            'name' => 'test_keyword',
-        ]);
-
-        $this->assertEquals('1 second ago', $keyword->createdAtHuman);
-    }
-
     public function testGetArticleIds()
     {
         $keyword = Keyword::factory()->count(2)->create();

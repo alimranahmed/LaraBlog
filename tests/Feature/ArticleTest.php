@@ -61,10 +61,10 @@ class ArticleTest extends TestCase
             'content' => 'Test content',
             'category_id' => $this->category->id,
             'user_id' => $this->user->id,
-        ])->first();
+            'is_deleted' => 0,
+        ]);
 
-        $this->get("article/{$article->id}/")
-            ->assertOk();
+        $this->get("article/{$article->id}/")->assertOk();
     }
 
     public function testHideShowUnpublished()

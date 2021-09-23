@@ -6,7 +6,6 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use function now;
 use Tests\TestCase;
 
 class ArticleTest extends TestCase
@@ -50,37 +49,6 @@ class ArticleTest extends TestCase
 
         $article = Article::notDeleted()->first();
         $this->assertEquals(0, $article->is_deleted);
-    }
-
-    public function testPublishedAtHumanAttribute()
-    {
-        $article = Article::factory()->create([
-            'published_at' => now(),
-            'user_id' => $this->user->id,
-            'category_id' => $this->category->id,
-        ]);
-
-        $this->assertEquals('1 second ago', $article->publishedAtHuman);
-    }
-
-    public function testCreatedAtHumanAttribute()
-    {
-        $article = Article::factory()->create([
-            'user_id' => $this->user->id,
-            'category_id' => $this->category->id
-        ]);
-
-        $this->assertEquals('1 second ago', $article->createdAtHuman);
-    }
-
-    public function testUpdatedAtHumanAttribute()
-    {
-        $article = Article::factory()->create([
-            'user_id' => $this->user->id,
-            'category_id' => $this->category->id,
-        ]);
-
-        $this->assertEquals('1 second ago', $article->updatedAtHuman);
     }
 
     public function testCategoryNameAttribute()
