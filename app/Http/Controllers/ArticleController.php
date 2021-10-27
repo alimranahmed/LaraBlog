@@ -10,7 +10,7 @@ class ArticleController extends Controller
 {
     public function index(Request $request)
     {
-        $articles = Article::getPaginate($request);
+        $articles = Article::getPaginated($request);
         return view("frontend.articles.index", compact('articles'));
     }
 
