@@ -17,7 +17,7 @@ class CategoryController extends Controller
 
     public function getArticles(Request $request, $categoryAlias)
     {
-        $articles = Article::getPaginate($request);
+        $articles = Article::getPaginated($request);
 
         return view("frontend.articles.index", compact('articles'));
     }

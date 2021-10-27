@@ -26,6 +26,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
+        "laravelium/sitemap": "^8.0",
         "league/commonmark": "^1.5",
         "livewire/livewire": "^2.5",
         "spatie/laravel-permission": "^3.17"
