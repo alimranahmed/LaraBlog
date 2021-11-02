@@ -30,7 +30,6 @@ class Form extends Component
 
     public function mount(?Article $article = null)
     {
-
         if ($article->id) {
             $this->originalArticle = $article;
             $this->article = $article->toArray();
@@ -38,7 +37,6 @@ class Form extends Component
         }
 
         $this->method = $article->id ? 'put' : 'post';
-
     }
 
     public function render()

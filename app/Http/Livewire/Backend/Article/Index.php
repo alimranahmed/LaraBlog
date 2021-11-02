@@ -47,7 +47,7 @@ class Index extends Component
             });
         }
 
-        if($this->query){
+        if ($this->query) {
             $articles = $articles->search($this->query);
         }
 

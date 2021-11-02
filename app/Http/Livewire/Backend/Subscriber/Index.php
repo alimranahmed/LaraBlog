@@ -9,7 +9,7 @@ class Index extends Component
 {
     public function render()
     {
-        $subscribers = Subscriber::paginate();
+        $subscribers = Subscriber::latest()->paginate();
         return view('livewire.backend.subscriber.index', compact('subscribers'));
     }
 }

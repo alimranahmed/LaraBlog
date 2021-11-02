@@ -19,7 +19,7 @@
             </a>
         </section>
     </x-backend.table.td>
-    <x-backend.table.td class="text-center">
+    <x-backend.table.td>
         @if($article->is_published)
             <span wire:click="togglePublish"
                   class="cursor-pointer px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">

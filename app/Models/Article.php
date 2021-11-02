@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use League\CommonMark\CommonMarkConverter;
 
 class Article extends Model
@@ -70,7 +71,7 @@ class Article extends Model
     public function scopeSearch(Builder $builder, $query = '')
     {
         if ($query) {
-            return $builder->where(function (Builder $builder) use($query) {
+            return $builder->where(function (Builder $builder) use ($query) {
                 return $builder->where('heading', 'like', "%{$query}%")
                     ->orWhere('content', 'content', "%{$query}%");
             });
@@ -78,23 +79,23 @@ class Article extends Model
         return $builder;
     }
 
-    public static function getPaginate(Request $request)
+    public static function getPaginated(?Request $request = null): LengthAwarePaginator
     {
         $perPage = config('blog.item_per_page');
 
-        $categoryAlias = $request->route('categoryAlias');
-        $keywordName = $request->route('keywordName');
+        $categoryAlias = optional($request)->route('categoryAlias');
+        $keywordName = optional($request)->route('keywordName');
 
         if (!is_null($categoryAlias)) {
             $category = Category::where('alias', $categoryAlias)->first();
             if (is_null($category)) {
-                return collect([]);
+                return new LengthAwarePaginator(collect([]), 0, $perPage);
             }
             $articleQuery = Article::where('category_id', $category->id);
         } elseif (!is_null($keywordName)) {
             $keyword = Keyword::where('name', $keywordName)->first();
             if (is_null($keyword)) {
-                return collect([]);
+                return new LengthAwarePaginator(collect([]), 0, $perPage);
             }
             $articleIds = $keyword->articles->pluck('id')->toArray();
             $articleQuery = Article::whereIn('id', $articleIds);
@@ -103,7 +104,7 @@ class Article extends Model
         }
 
         $paginateUrl = '';
-        if ($request->has('lang')) {
+        if (optional($request)->has('lang')) {
             $articleQuery = $articleQuery->where('language', $request->lang);
             $paginateUrl = '?lang=' . $request->lang;
         }
