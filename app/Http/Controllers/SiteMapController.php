@@ -16,7 +16,7 @@ class SiteMapController extends Controller
         }
 
         $paginatedArticles = Article::getPaginated();
-        $latestArticleAt = $paginatedArticles->first()->created_at;
+        $latestArticleAt = $paginatedArticles->first()->created_at ?? Carbon::now()->toDateString();
 
         $sitemap->addSitemap('articles');
 
