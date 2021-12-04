@@ -1,4 +1,4 @@
-<div x-data="{show_form: false}">
+<div x-data="{show_form: true}">
     <div x-show="show_form" x-transition>
         <x-frontend.article.comment.form :article="$article"/>
         @if($isSubmitted)

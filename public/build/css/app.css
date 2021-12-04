@@ -21647,8 +21647,16 @@ code {
   border-radius: 0.5rem;
   padding-left: 0.25rem;
   padding-right: 0.25rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  border-width: 1px;
+  --border-opacity: 1;
+  border-color: #fed7d7;
+  border-color: rgba(254, 215, 215, var(--border-opacity));
+  white-space: nowrap;
+}
+
+pre code {
+  border-width: 0;
+  padding: 0;
 }
 
 h1 {
