@@ -1,4 +1,4 @@
-<x-frontend>
+<x-frontend :title="$article->heading">
     <div>
         <h1 class="font-semibold sm:text-xl md:text-2xl mb-1 leading-tight">
             {{$article->heading}}

@@ -40,8 +40,8 @@
                 article</label>
         </div>
         <button type="submit"
-                class="rounded-full border border-blue-200 bg-blue-400 px-3 focus:outline-none up">
-            Comment
+                class="rounded-full border border-blue-200 bg-blue-400 px-3 focus:outline-none up whitespace-no-wrap">
+            Submit Comment
         </button>
     </div>
 </form>

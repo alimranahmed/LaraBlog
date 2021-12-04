@@ -5,9 +5,12 @@
 @tailwind utilities;
 
 code{
-    @apply bg-red-100 text-red-800 rounded-lg px-1 py-1
+    @apply bg-red-100 text-red-800 rounded-lg px-1 border border-red-200 whitespace-no-wrap
 }
 
+pre code{
+    @apply border-0 p-0
+}
 h1{
     @apply font-semibold text-2xl
 }
