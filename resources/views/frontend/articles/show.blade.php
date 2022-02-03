@@ -11,7 +11,7 @@
             </a>
             <span class="whitespace-no-wrap">by <span class="text-gray-800">{{$article->user->name}}</span></span>
         </div>
-        <div class="text-sm md:text-lg leading-relaxed">
+        <div class="text-sm md:text-lg leading-relaxed article-content">
             {!! $article->contentAsHtml !!}
         </div>
         <div class="mb-3">
