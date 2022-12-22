@@ -24,12 +24,12 @@
 <body class="bg-gray-100">
 <div class="border-b border-blue-200 mb-3">
 
-    <div class="mx-6 sm:mx-20 md:mx-32 lg:mx-56 px-1 sm:px-10 md:px-16 lg:px-16 xl:px-32">
+    <div class="max-w-4xl md:max-w-7xl mx-auto px-5 lg:px-0">
         <x-frontend.navbar/>
     </div>
 
 </div>
 
 
-<div class="mx-6 sm:mx-20 md:mx-32 lg:mx-56 px-1 sm:px-10 md:px-16 lg:px-16 xl:px-32 min-h-screen">
+<div class="max-w-4xl md:max-w-7xl mx-auto px-5 lg:px-0 min-h-screen">
 
