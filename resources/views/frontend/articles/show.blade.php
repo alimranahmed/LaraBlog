@@ -14,9 +14,11 @@
         <div class="text-sm md:text-lg leading-relaxed article-content">
             {!! $article->contentAsHtml !!}
         </div>
-        <div class="mb-3">
-            <x-frontend.article.tags :keywords="$article->keywords"></x-frontend.article.tags>
-        </div>
+        @if(!$article->keywords->isEmpty())
+            <div class="mb-3">
+                <x-frontend.article.tags :keywords="$article->keywords"></x-frontend.article.tags>
+            </div>
+        @endif
     </div>
 
     @if(!$relatedArticles->isEmpty())
