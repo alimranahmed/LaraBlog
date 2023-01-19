@@ -11,7 +11,7 @@
             </a>
             <span class="whitespace-no-wrap">by <span class="text-gray-800">{{$article->user->name}}</span></span>
         </div>
-        <div class="text-sm md:text-lg leading-relaxed text-gray-700 article-content">
+        <div class="text-sm md:text-lg leading-relaxed text-gray-800 article-content">
             {!! $article->contentAsHtml !!}
         </div>
         @if(!$article->keywords->isEmpty())
