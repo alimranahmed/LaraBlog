@@ -1,17 +1,17 @@
 <x-frontend :title="$article->heading">
     <div>
-        <h1 class="font-semibold sm:text-xl md:text-2xl mb-1 leading-tight">
+        <h1 class="sm:text-xl md:text-2xl mb-1 leading-tight">
             {{$article->heading}}
         </h1>
         <div class="text-gray-600 text-xs md:text-sm mb-3">
-            Published {{$article->createdAtHuman}} on
+            Published {{$article->published_date_formatted}} on
             <a href="{{route('articles-by-category', $article->category->alias)}}"
-               class="text-blue-400 hover:text-blue-700 focus:outline-none focus:text-blue-700">
+               class="hover:text-blue-700 focus:outline-none focus:text-blue-700">
                 {{$article->category->name}}
             </a>
-            <span class="whitespace-no-wrap">by <span class="text-gray-800">{{$article->user->name}}</span></span>
+            <span class="whitespace-nowrap">by <span class="text-gray-800">{{$article->user->name}}</span></span>
         </div>
-        <div class="text-sm md:text-lg leading-relaxed text-gray-800 article-content">
+        <div class="text-sm leading-relaxed md:text-lg md:leading-loose text-slate-800 article-content">
             {!! $article->contentAsHtml !!}
         </div>
         @if(!$article->keywords->isEmpty())
@@ -23,7 +23,7 @@
 
     @if(!$relatedArticles->isEmpty())
         <div class="mb-3">
-            <h2 class="border-b border-blue-300 text-xl md:text-2xl font-bold">
+            <h2 class="border-b border-blue-300 text-xl md:text-2xl font-medium">
                 More articles on
                 <a href="{{route('articles-by-category', ['categoryAlias' => $article->category->alias])}}"
                    class="text-blue-400 hover:text-blue-700 focus:outline-none focus:text-blue-700">

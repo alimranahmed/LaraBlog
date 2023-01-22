@@ -6,7 +6,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{asset('build/css/app.css')}}">
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link rel="stylesheet" href="{{asset('css/prism.css')}}"/>
 
@@ -21,15 +22,15 @@
     @livewireStyles
 
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-50">
 <div class="border-b border-blue-200 mb-3">
 
-    <div class="max-w-4xl md:max-w-7xl mx-auto px-5 lg:px-0">
+    <div class="max-w-2xl md:max-w-4xl mx-auto px-5 lg:px-0">
         <x-frontend.navbar/>
     </div>
 
 </div>
 
 
-<div class="max-w-4xl md:max-w-7xl mx-auto px-5 lg:px-0 min-h-screen">
+<div class="max-w-2xl md:max-w-4xl mx-auto px-5 lg:px-0 min-h-screen">
 

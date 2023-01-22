@@ -5,7 +5,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{asset('build/css/app.css')}}">
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link rel="stylesheet" href="{{asset('css/prism.css')}}"/>
 
@@ -24,7 +25,6 @@
 </div>
 
 @livewireScripts
-<script src="{{ mix("build/js/app.js") }}"></script>
 <script src="{{asset('js/prism.js')}}" defer></script>
 </body>
 </html>

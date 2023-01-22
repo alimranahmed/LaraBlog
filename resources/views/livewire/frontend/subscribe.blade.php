@@ -13,9 +13,9 @@
                    aria-label="Email"
                    placeholder="Your email">
             <button type="submit" class="px-3 py-1 mt-3 md:mt-0 rounded bg-green-600 text-white hover:bg-green-700">
-                Stay in touch
+                Subscribe
             </button>
-            <div class="text-gray-500">No noise, unsubscribe anytime!</div>
+            <div class="text-gray-400">No noise, unsubscribe anytime!</div>
         </form>
     @endif
 </div>
