@@ -12,6 +12,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             return redirect()->route('admin-dashboard');
         }
+
         return view('backend.auth');
     }
 
@@ -21,7 +22,7 @@ class AuthController extends Controller
             $request,
             [
                 'email' => 'required|email',
-                'password' => 'required|min:4'
+                'password' => 'required|min:4',
             ]
         );
 
@@ -39,6 +40,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
+
         return redirect()->route('login-form');
     }
 }

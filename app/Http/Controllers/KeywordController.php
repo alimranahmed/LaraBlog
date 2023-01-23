@@ -11,6 +11,7 @@ class KeywordController extends Controller
     public function index()
     {
         $keywords = Keyword::with('articles')->get();
+
         return view('backend.keywords.index', compact('keywords'));
     }
 
@@ -18,6 +19,6 @@ class KeywordController extends Controller
     {
         $articles = Article::getPaginated($request);
 
-        return view("frontend.articles.index", compact('articles'));
+        return view('frontend.articles.index', compact('articles'));
     }
 }

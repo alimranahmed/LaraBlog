@@ -16,7 +16,8 @@ class NotifyCommentThread extends Mailable
 
     /**
      * NotifyCommentThread constructor.
-     * @param Comment $comment
+     *
+     * @param  Comment  $comment
      */
     public function __construct(Comment $comment)
     {

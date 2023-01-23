@@ -28,7 +28,7 @@ class Comments extends Component
     public $rules = [
         'comment.content' => 'required',
         'comment.name' => 'required',
-        'comment.email' => 'email|required'
+        'comment.email' => 'email|required',
     ];
 
     public function mount(Article $article)
@@ -89,9 +89,9 @@ class Comments extends Component
         if (is_null($user)) {
             $user = User::create(['email' => $this->comment['email']]);
             $user->assignRole('reader');
-            $user->reader()->create(['notify' => isset($this->comment['notify']),]);
+            $user->reader()->create(['notify' => isset($this->comment['notify'])]);
         } elseif ($user->isReader()) {
-            $user->reader->update(['notify' => isset($this->comment['notify']),]);
+            $user->reader->update(['notify' => isset($this->comment['notify'])]);
         }
 
         $user->update([
@@ -99,6 +99,7 @@ class Comments extends Component
             'last_ip' => $_SERVER['REMOTE_ADDR'] ?? '',
             'token' => Hash::make($this->comment['content']),
         ]);
+
         return $user;
     }
 }

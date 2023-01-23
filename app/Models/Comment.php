@@ -12,6 +12,7 @@ class Comment extends Model
     use CanFormatDates;
 
     protected $guarded = ['id'];
+
     protected $dates = ['published_at'];
 
     public function article()

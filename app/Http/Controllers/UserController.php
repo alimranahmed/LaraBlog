@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ChangePasswordRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -19,6 +16,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::where('name', '!=', 'owner')->get();
+
         return view('backend.users.create', compact('roles'));
     }
 
@@ -35,6 +33,7 @@ class UserController extends Controller
     public function profile()
     {
         $user = Auth::user();
+
         return view('backend.users.show', compact('user'));
     }
 }

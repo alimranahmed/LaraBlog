@@ -25,7 +25,7 @@ class Form extends Component
         'article.category_id' => 'required',
         'article.content' => 'required',
         'article.language' => 'required',
-        'article.is_comment_enabled' => 'boolean'
+        'article.is_comment_enabled' => 'boolean',
     ];
 
     public function mount(?Article $article = null)

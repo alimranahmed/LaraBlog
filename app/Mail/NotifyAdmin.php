@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\Comment;
 use App\Models\Config;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -13,6 +12,7 @@ class NotifyAdmin extends Mailable
     use Queueable, SerializesModels;
 
     public $comment;
+
     public $url;
 
     /**

@@ -24,6 +24,7 @@ class Index extends Component
     public function render()
     {
         $comments = $this->getComments();
+
         return view('livewire.backend.comment.index', compact('comments'));
     }
 

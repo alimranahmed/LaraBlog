@@ -43,17 +43,17 @@ class GetLocationByIP extends Command
 
         $addresses = Address::where('country_name', null)->get();
 
-        $this->info("Fetching location of " . $addresses->count() . " addresses");
+        $this->info('Fetching location of '.$addresses->count().' addresses');
 
         foreach ($addresses as $index => $address) {
             $ip = $address->ip;
             $location = $geoIp->getGeo($ip);
 
             $this->info(
-                ($index + 1) . "/" . $addresses->count() . " {$ip} => Country: " . ($location->country_name ?? '')
+                ($index + 1).'/'.$addresses->count()." {$ip} => Country: ".($location->country_name ?? '')
             );
 
-            if (!empty($location)) {
+            if (! empty($location)) {
                 $address->update([
                     'country_code' => $location->country_code,
                     'country_name' => $location->country_name,

@@ -66,9 +66,11 @@ class CommentController extends Controller
             }
         } catch (\Exception $e) {
             Log::error($this->getLogMsg($e));
+
             return redirect()->route('get-article', [$comment->article->id])
                 ->with('errorMsg', $this->getMessage($e));
         }
+
         return redirect()->route('get-article', [$comment->article->id])
             ->with('successMsg', 'Comment confirmed successfully!');
     }

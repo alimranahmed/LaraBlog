@@ -26,7 +26,7 @@ class IndexRow extends Component
 
     public function toggleActive()
     {
-        $this->category->update(['is_active' => !$this->category->is_active]);
+        $this->category->update(['is_active' => ! $this->category->is_active]);
         $this->category->refresh();
     }
 

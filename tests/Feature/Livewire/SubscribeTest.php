@@ -4,7 +4,6 @@ namespace Tests\Feature\Livewire;
 
 use App\Http\Livewire\Frontend\Subscribe;
 use App\Mail\SubscribeConfirmation;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Livewire;
 use Tests\TestCase;

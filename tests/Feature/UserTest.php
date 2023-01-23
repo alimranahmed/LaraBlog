@@ -11,7 +11,7 @@ class UserTest extends TestCase
     {
         $user = User::factory()->create([
             'email' => 'random@gmail.com',
-            'password' => bcrypt('123456')
+            'password' => bcrypt('123456'),
         ]);
 
         $this->post(route('login'), [

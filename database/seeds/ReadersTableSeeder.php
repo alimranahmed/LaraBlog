@@ -15,13 +15,13 @@ class ReadersTableSeeder extends Seeder
         Reader::create(
             [
                 'is_verified' => 1,
-                'notify' => 1
+                'notify' => 1,
             ]
         );
         Reader::create(
             [
                 'is_verified' => 0,
-                'notify' => 0
+                'notify' => 0,
             ]
         );
     }

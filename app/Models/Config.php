@@ -14,6 +14,7 @@ class Config extends Model
         if (is_null($config)) {
             return null;
         }
+
         return $config->value;
     }
 
@@ -24,6 +25,7 @@ class Config extends Model
         foreach ($dbConfigs as $config) {
             $configs->{$config->name} = $config->value;
         }
+
         return $configs;
     }
 }

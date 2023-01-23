@@ -20,5 +20,5 @@ return [
         'keyword-create' => ['admin'],
         'keyword-edit' => ['admin'],
         'keyword-delete' => ['admin'],
-    ]
+    ],
 ];

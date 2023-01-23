@@ -16,7 +16,6 @@ class ArticleTest extends TestCase
 
     protected $user;
 
-
     protected $category;
 
     public function setUp(): void

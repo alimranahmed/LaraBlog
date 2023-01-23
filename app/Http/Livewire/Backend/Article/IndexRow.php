@@ -3,8 +3,6 @@
 namespace App\Http\Livewire\Backend\Article;
 
 use App\Models\Article;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class IndexRow extends Component
@@ -24,7 +22,7 @@ class IndexRow extends Component
     public function togglePublish()
     {
         $this->article->update([
-            'is_published' => !$this->article->is_published,
+            'is_published' => ! $this->article->is_published,
             'published_at' => now(),
         ]);
 

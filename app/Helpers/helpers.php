@@ -14,10 +14,11 @@ function assoc2JsonArray(array $associativeArray): string
             'value' => $value,
         ];
     }
+
     return json_encode($arrayElements);
 }
 
 function exceptionLine(Exception $e): string
 {
-    return $e->getLine() . ': ' . $e->getFile() . ' ' . $e->getMessage();
+    return $e->getLine().': '.$e->getFile().' '.$e->getMessage();
 }

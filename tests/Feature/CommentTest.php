@@ -25,7 +25,7 @@ class CommentTest extends TestCase
 
         Role::findOrCreate('reader');
 
-        $this->user =  User::factory()
+        $this->user = User::factory()
             ->create(['name' => 'Example User', 'email' => 'example@test.com']);
 
         $this->category = Category::factory()->create();
@@ -60,7 +60,6 @@ class CommentTest extends TestCase
         $this->get("comment/{$comment->id}/confirm/?token={$comment->token}")
             ->assertRedirect(route('get-article', [$comment->article->id]));
 
-
         $comment = Comment::find($comment->id);
 
         $this->assertEquals(1, $comment->is_published);
@@ -69,7 +68,7 @@ class CommentTest extends TestCase
         $comment->update([
             'is_published' => 0,
             'is_confirmed' => 0,
-            'token' => 'test-token'
+            'token' => 'test-token',
         ]);
 
         $this->get("comment/{$comment->id}/confirm/?token=invalid-token")

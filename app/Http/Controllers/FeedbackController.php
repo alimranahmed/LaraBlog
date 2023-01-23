@@ -19,8 +19,8 @@ class FeedbackController extends Controller
     {
         $data = $request->validate([
             'email' => 'required|email',
-            'name' => ["required", "not_regex:/(http|ftp|mailto|www\.|\.com)/"],
-            'content' => ["required", "not_regex:/(http|ftp|mailto|www\.|\.com)/"]
+            'name' => ['required', "not_regex:/(http|ftp|mailto|www\.|\.com)/"],
+            'content' => ['required', "not_regex:/(http|ftp|mailto|www\.|\.com)/"],
         ]);
 
         $data['ip'] = $_SERVER['REMOTE_ADDR'];

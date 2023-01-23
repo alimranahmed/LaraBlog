@@ -30,7 +30,7 @@ class CommentOnArticle implements ShouldBroadcast
     private function broadcastToPusher()
     {
         $options = [
-            'encrypted' => true
+            'encrypted' => true,
         ];
         $pusher = new Pusher(
             env('PUSHER_KEY'),

@@ -33,6 +33,7 @@ class SubscriptionController extends Controller
         }
 
         $subscriber->update(['unsubscribed_at' => now()]);
+
         return redirect()->route('home')->with('successMsg', 'You have unsubscribed');
     }
 }

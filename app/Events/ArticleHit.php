@@ -22,8 +22,8 @@ class ArticleHit
     /**
      * Create a new event instance.
      *
-     * @param Article $article
-     * @param string $clientIP
+     * @param  Article  $article
+     * @param  string  $clientIP
      */
     public function __construct(Article $article, string $clientIP)
     {

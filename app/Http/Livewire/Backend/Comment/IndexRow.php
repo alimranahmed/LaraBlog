@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Backend\Comment;
 
 use App\Models\Article;
 use App\Models\Comment;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class IndexRow extends Component
@@ -24,7 +23,7 @@ class IndexRow extends Component
     public function togglePublish()
     {
         $this->comment->update([
-            'is_published' => !$this->comment->is_published,
+            'is_published' => ! $this->comment->is_published,
             'published_at' => now(),
         ]);
 

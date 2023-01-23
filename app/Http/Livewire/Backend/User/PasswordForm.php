@@ -11,7 +11,9 @@ use Livewire\Component;
 class PasswordForm extends Component
 {
     public $old_password;
+
     public $new_password;
+
     public $confirm_new_password;
 
     public $rules = [
@@ -29,7 +31,7 @@ class PasswordForm extends Component
     {
         $this->validate();
 
-        if (!Hash::check($this->old_password, Auth::user()->password)) {
+        if (! Hash::check($this->old_password, Auth::user()->password)) {
             throw ValidationException::withMessages(['old_password' => 'Incorrect password']);
         }
 

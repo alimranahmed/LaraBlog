@@ -16,6 +16,6 @@ class CategoryController extends Controller
     {
         $articles = Article::getPaginated($request);
 
-        return view("frontend.articles.index", compact('articles'));
+        return view('frontend.articles.index', compact('articles'));
     }
 }

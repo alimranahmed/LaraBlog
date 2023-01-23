@@ -20,7 +20,7 @@ class Keyword extends Model
     }
 
     /**
-     * @param Collection $keywords
+     * @param  Collection  $keywords
      * @return array
      */
     public static function getArticleIDs(Collection $keywords)
@@ -29,6 +29,7 @@ class Keyword extends Model
             ->select('article_id', 'keyword_id')
             ->whereIn('keyword_id', $keywords->pluck('id')->toArray())
             ->get();
+
         return $articleKeywords->pluck('article_id')->toArray();
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -35,7 +34,7 @@ class User extends Authenticatable
 
     public function isReader()
     {
-        return !is_null($this->reader);
+        return ! is_null($this->reader);
     }
 
     public function scopeActive(Builder $builder)
@@ -48,6 +47,7 @@ class User extends Authenticatable
         $subscribedReadersIds = Reader::subscribed()
             ->verified()
             ->pluck('user_id');
+
         return self::whereIn('id', $subscribedReadersIds)->get();
     }
 }

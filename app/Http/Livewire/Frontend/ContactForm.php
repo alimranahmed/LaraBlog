@@ -15,13 +15,15 @@ class ContactForm extends Component
     public $isSubmitted = false;
 
     public $name;
+
     public $email;
+
     public $content;
 
     public $rules = [
-        'name' => ["required", 'max:255', "not_regex:/(http|ftp|mailto|www\.|\.com)/"],
-        'email' => "email|required|max:255",
-        'content' => ["required", 'max:1500', "not_regex:/(http|ftp|mailto|www\.|\.com)/"],
+        'name' => ['required', 'max:255', "not_regex:/(http|ftp|mailto|www\.|\.com)/"],
+        'email' => 'email|required|max:255',
+        'content' => ['required', 'max:1500', "not_regex:/(http|ftp|mailto|www\.|\.com)/"],
     ];
 
     public function render()

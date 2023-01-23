@@ -35,6 +35,6 @@ class Controller extends BaseController
 
     public function getLogMsg(\Exception $e)
     {
-        return $e->getLine() . ': ' . $e->getFile() . ' ' . $e->getMessage();
+        return $e->getLine().': '.$e->getFile().' '.$e->getMessage();
     }
 }

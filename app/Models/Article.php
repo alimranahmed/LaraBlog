@@ -7,10 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\ConverterInterface;
-use League\CommonMark\Environment\Environment;
-use Torchlight\Commonmark\V2\TorchlightExtension;
 
 class Article extends Model
 {
@@ -18,6 +15,7 @@ class Article extends Model
     use CanFormatDates;
 
     protected $guarded = ['id'];
+
     protected $dates = ['published_at'];
 
     public function user()
@@ -79,6 +77,7 @@ class Article extends Model
                     ->orWhere('content', 'content', "%{$query}%");
             });
         }
+
         return $builder;
     }
 
@@ -89,13 +88,13 @@ class Article extends Model
         $categoryAlias = optional($request)->route('categoryAlias');
         $keywordName = optional($request)->route('keywordName');
 
-        if (!is_null($categoryAlias)) {
+        if (! is_null($categoryAlias)) {
             $category = Category::where('alias', $categoryAlias)->first();
             if (is_null($category)) {
                 return new LengthAwarePaginator(collect([]), 0, $perPage);
             }
             $articleQuery = Article::where('category_id', $category->id);
-        } elseif (!is_null($keywordName)) {
+        } elseif (! is_null($keywordName)) {
             $keyword = Keyword::where('name', $keywordName)->first();
             if (is_null($keyword)) {
                 return new LengthAwarePaginator(collect([]), 0, $perPage);
@@ -109,7 +108,7 @@ class Article extends Model
         $paginateUrl = '';
         if (optional($request)->has('lang')) {
             $articleQuery = $articleQuery->where('language', $request->lang);
-            $paginateUrl = '?lang=' . $request->lang;
+            $paginateUrl = '?lang='.$request->lang;
         }
 
         return $articleQuery->with('category', 'keywords', 'user')

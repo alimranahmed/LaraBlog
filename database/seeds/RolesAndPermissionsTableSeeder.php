@@ -22,7 +22,7 @@ class RolesAndPermissionsTableSeeder extends Seeder
         $roles = [];
         $sl = 0;
         $getRoles = config('acl.roles');
-        if (empty($getRoles) || !is_array($getRoles)) {
+        if (empty($getRoles) || ! is_array($getRoles)) {
             return true;
         }
         foreach ($getRoles as $key => $role) {
@@ -33,6 +33,7 @@ class RolesAndPermissionsTableSeeder extends Seeder
             $roles[$sl]['guard_name'] = 'web';
             $sl++;
         }
+
         return \Spatie\Permission\Models\Role::insert($roles);
     }
 
@@ -43,7 +44,7 @@ class RolesAndPermissionsTableSeeder extends Seeder
         $permissions = [];
         $getPermissions = config('acl.permissions');
         $sl = 0;
-        if (empty($getPermissions) || !is_array($getPermissions)) {
+        if (empty($getPermissions) || ! is_array($getPermissions)) {
             return true;
         }
         foreach ($getPermissions as $permission => $roles) {
@@ -54,6 +55,7 @@ class RolesAndPermissionsTableSeeder extends Seeder
             $permissions[$sl]['guard_name'] = 'web';
             $sl++;
         }
+
         return \Spatie\Permission\Models\Permission::insert($permissions);
     }
 

@@ -39,7 +39,6 @@ class ConfigTest extends TestCase
             $this->expectExceptionMessage('Undefined property: stdClass::$test_name1');
         }
 
-
         $config = Config::allFormatted(0);
 
         $this->assertEquals($value1, $config->$name1);

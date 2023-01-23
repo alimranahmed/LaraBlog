@@ -15,7 +15,7 @@ class Form extends Component
         'user.name' => 'required',
         'user.username' => '',
         'user.email' => 'required|email',
-        'user.role' => 'required'
+        'user.role' => 'required',
     ];
 
     public $editingUser;
@@ -30,6 +30,7 @@ class Form extends Component
     public function render()
     {
         $roles = Role::all();
+
         return view('livewire.backend.user.form', compact('roles'));
     }
 

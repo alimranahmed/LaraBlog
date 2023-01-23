@@ -47,13 +47,12 @@ class CommentTest extends TestCase
         Comment::factory()->create([
             'user_id' => $this->user->id,
             'article_id' => $this->article->id,
-            'is_published' => 1
+            'is_published' => 1,
         ]);
 
         $comment = Comment::published()->first();
         $this->assertEquals(1, $comment->is_published);
     }
-
 
     public function testNoRepliesTest()
     {

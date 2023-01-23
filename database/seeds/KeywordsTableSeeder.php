@@ -11,7 +11,7 @@ class KeywordsTableSeeder extends Seeder
      */
     public function run()
     {
-        if (env("APP_ENV") != 'production') {
+        if (env('APP_ENV') != 'production') {
             \App\Models\Keyword::factory()->count(5)->create();
         }
     }

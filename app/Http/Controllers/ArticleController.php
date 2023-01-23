@@ -11,7 +11,8 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         $articles = Article::getPaginated($request);
-        return view("frontend.articles.index", compact('articles'));
+
+        return view('frontend.articles.index', compact('articles'));
     }
 
     public function show($articleId, $articleHeading = '')
@@ -19,7 +20,7 @@ class ArticleController extends Controller
         $article = Article::where('id', $articleId)
             ->published()
             ->notDeleted()
-            ->with(['user', 'category', 'keywords',])
+            ->with(['user', 'category', 'keywords'])
             ->first();
 
         if (is_null($article)) {
@@ -30,16 +31,17 @@ class ArticleController extends Controller
 
         $relatedArticles = $this->getRelatedArticles($article);
 
-        return view("frontend.articles.show", compact('article', 'relatedArticles'));
+        return view('frontend.articles.show', compact('article', 'relatedArticles'));
     }
 
     private function isEditable(Article $article)
     {
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             return false;
         }
         $isAdmin = auth()->user()->hasRole(['owner', 'admin']);
         $isAuthor = $article->user->id == auth()->user()->id;
+
         return auth()->check() && ($isAdmin || $isAuthor);
     }
 
@@ -77,6 +79,6 @@ class ArticleController extends Controller
         $searched->articles = $articles;
         $searched->query = $queryString;
 
-        return view("frontend.articles.search_result", compact('searched'));
+        return view('frontend.articles.search_result', compact('searched'));
     }
 }

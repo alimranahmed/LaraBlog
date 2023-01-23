@@ -35,7 +35,7 @@ class NotifySubscriberForNewArticle extends Mailable
     public function build()
     {
         return $this->from(Config::get('admin_email'), Config::get('site_name'))
-            ->subject("New article Published")
+            ->subject('New article Published')
             ->view('emails.notify_new_article');
     }
 }

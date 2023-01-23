@@ -10,7 +10,7 @@ class Edit extends Component
 {
     public $rules = [
         'comment.content' => 'string|required',
-        'comment.is_published' => 'boolean'
+        'comment.is_published' => 'boolean',
     ];
 
     public $comment;

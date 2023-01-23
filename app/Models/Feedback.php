@@ -9,5 +9,6 @@ class Feedback extends Model
     use CanFormatDates;
 
     protected $table = 'feedbacks';
+
     protected $guarded = ['id'];
 }

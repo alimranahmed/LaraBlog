@@ -9,7 +9,7 @@ class SubscriptionTest extends TestCase
 {
     public function testUnsubscribe()
     {
-        $subscriber = Subscriber::factory()->create(['unsubscribed_at' => null,]);
+        $subscriber = Subscriber::factory()->create(['unsubscribed_at' => null]);
 
         $this->get("unsubscribe?token={$subscriber->token}")->assertRedirect();
 

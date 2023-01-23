@@ -19,7 +19,7 @@ class Index extends Component
 
     public function toggleActive(User $user)
     {
-        $user->update(['is_active' => !$user->is_active]);
+        $user->update(['is_active' => ! $user->is_active]);
     }
 
     public function delete(User $user)

@@ -9,8 +9,6 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Config;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Livewire;
 use Spatie\Permission\Models\Role;

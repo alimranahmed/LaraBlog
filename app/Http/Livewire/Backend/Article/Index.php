@@ -10,7 +10,9 @@ use Livewire\Component;
 class Index extends Component
 {
     public $category = '';
+
     public $query = '';
+
     public $keyword = '';
 
     protected $queryString = [
@@ -24,6 +26,7 @@ class Index extends Component
     public function render()
     {
         $articles = $this->getArticles();
+
         return view('livewire.backend.article.index', compact('articles'));
     }
 
