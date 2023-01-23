@@ -68,6 +68,9 @@ class Form extends Component
         $keywordsToAttach = array_unique(explode(' ', Arr::get($this->article, 'keywords')));
 
         foreach ($keywordsToAttach as $keywordToAttach) {
+            if (empty($keywordToAttach)) {
+                continue;
+            }
             $newKeyword = Keyword::firstOrCreate(['name' => $keywordToAttach]);
             $newArticle->keywords()->attach($newKeyword->id);
         }

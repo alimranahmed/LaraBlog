@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
@@ -20,7 +21,9 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        if ($article->hasAuthorization(Auth::user())) {
+        /** @var User $user */
+        $user = Auth::user();
+        if ($article->hasAuthorization($user)) {
             return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
         }
 

@@ -25,7 +25,7 @@
             <x-backend.form.textarea class="w-full" required
                                      name="article.content"
                                      wire:model.defer="article.content"
-                                     aria-label="Content" rows="12"
+                                     aria-label="Content" rows="35"
                                      placeholder="*Content"></x-backend.form.textarea>
         </div>
 

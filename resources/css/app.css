@@ -11,20 +11,20 @@ p code {
 }
 
 pre code {
-    @apply border-0 p-0;
+    @apply border-0 p-0 leading-normal;
 }
 
 h1 {
-    @apply font-medium text-2xl leading-loose;
+    @apply font-medium text-2xl leading-relaxed;
 }
 
 
 h3, h2 {
-    @apply font-medium text-xl leading-loose;
+    @apply font-medium text-xl leading-relaxed;
 }
 
 h4, h5, h6 {
-    @apply font-medium text-lg leading-loose;
+    @apply font-medium text-lg leading-relaxed;
 }
 
 .article-content blockquote {
