@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
     {
         //$schedule->command('get-ip-location')->hourly();
         $schedule->command('backup:site-data')->weekly();
+        $schedule->command('sitemap:generate')->weekly();
     }
 
     /**

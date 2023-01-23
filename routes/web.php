@@ -6,14 +6,11 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KeywordController;
-use App\Http\Controllers\SiteMapController;
 use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 //Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-//Route::get('sitemap.xml', SiteMapController::class);
 
 //Subscribe
 Route::get('subscription/confirm', [SubscriptionController::class, 'confirm'])->name('subscription.confirm');
