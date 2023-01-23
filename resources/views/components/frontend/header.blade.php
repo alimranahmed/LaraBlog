@@ -9,7 +9,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <link rel="stylesheet" href="{{asset('css/prism.css')}}"/>
+{{--    <link rel="stylesheet" href="{{asset('css/prism.css')}}"/>--}}
 
     <link rel="shortcut icon" type="image/png" href="{{asset('img/favicon.png')}}"/>
 

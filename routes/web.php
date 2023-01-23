@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 //Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('sitemap.xml', SiteMapController::class);
+//Route::get('sitemap.xml', SiteMapController::class);
 
 //Subscribe
 Route::get('subscription/confirm', [SubscriptionController::class, 'confirm'])->name('subscription.confirm');

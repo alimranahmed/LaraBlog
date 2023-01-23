@@ -6,8 +6,8 @@ body {
     font-family: Whitney SSm A,Whitney SSm B,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
 }
 
-code {
-    @apply bg-red-100 text-red-800 rounded-lg px-1 border border-red-200 whitespace-nowrap;
+p code {
+    @apply bg-indigo-50 text-indigo-500 rounded-lg px-1 border border-indigo-100 whitespace-nowrap;
 }
 
 pre code {
@@ -15,16 +15,16 @@ pre code {
 }
 
 h1 {
-    @apply font-medium text-2xl;
+    @apply font-medium text-2xl leading-loose;
 }
 
 
 h3, h2 {
-    @apply font-medium text-xl;
+    @apply font-medium text-xl leading-loose;
 }
 
 h4, h5, h6 {
-    @apply font-medium text-lg;
+    @apply font-medium text-lg leading-loose;
 }
 
 .article-content blockquote {
@@ -33,5 +33,40 @@ h4, h5, h6 {
 
 .article-content a {
     @apply text-blue-400;
+}
 
+/*
+ Margin and rounding are personal preferences,
+ overflow-x-auto is recommended.
+*/
+pre {
+    @apply my-4 rounded overflow-x-auto;
+    background-color: #fff;
+    --theme-selection-background: #e2e5e9;
+}
+
+/*
+ Add some vertical padding and expand the width
+ to fill its container. The horizontal padding
+ comes at the line level so that background
+ colors extend edge to edge.
+*/
+pre code.torchlight {
+    @apply block py-4 min-w-max;
+}
+
+/*
+ Horizontal line padding.
+*/
+pre code.torchlight .line {
+    @apply px-4;
+}
+
+/*
+ Push the code away from the line numbers and
+ summary caret indicators.
+*/
+pre code.torchlight .line-number,
+pre code.torchlight .summary-caret {
+    @apply mr-4;
 }

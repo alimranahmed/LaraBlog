@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\ConverterInterface;
+use League\CommonMark\Environment\Environment;
+use Torchlight\Commonmark\V2\TorchlightExtension;
 
 class Article extends Model
 {
@@ -59,8 +62,8 @@ class Article extends Model
 
     public function getContentAsHtmlAttribute()
     {
-        $converter = new CommonMarkConverter();
-        echo $converter->convertToHtml($this->content);
+        $converter = app(ConverterInterface::class);
+        echo $converter->convert($this->content);
     }
 
     public function hasAuthorization(User $user)

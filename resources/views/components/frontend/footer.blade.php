@@ -13,7 +13,7 @@
 </div>
 
 @livewireScripts
-<script src="{{ asset('js/prism.js') }}" defer></script>
+{{--<script src="{{ asset('js/prism.js') }}" defer></script>--}}
 
 </body>
 </html>
