@@ -3,15 +3,8 @@
 @tailwind utilities;
 
 body {
-    font-family: Whitney SSm A,Whitney SSm B,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
-}
-
-p code {
-    @apply bg-indigo-50 text-indigo-500 rounded-lg px-1 border border-indigo-100 whitespace-nowrap;
-}
-
-pre code {
-    @apply border-0 p-0 leading-normal;
+    font-family: Whitney SSm A, Whitney SSm B, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    @apply text-slate-800
 }
 
 h1 {
@@ -27,12 +20,29 @@ h4, h5, h6 {
     @apply font-medium text-lg leading-relaxed;
 }
 
+p code {
+    @apply bg-indigo-50 text-indigo-500 rounded-lg px-1 border border-indigo-100 whitespace-nowrap;
+}
+
+pre code {
+    @apply border-0 p-0 leading-normal;
+}
+
 .article-content blockquote {
     @apply p-4 italic border-l-4 border-gray-400 text-gray-600;
 }
 
 .article-content a {
     @apply text-blue-400;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4,
+.article-content h5,
+.article-content h6 {
+    @apply mt-7 mb-2;
 }
 
 /*
