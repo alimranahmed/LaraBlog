@@ -9,7 +9,7 @@
         w-full rounded-lg
         text-justify text-sm md:text-base
         border border-blue-200 block appearance-none leading-normal
-        bg-gray-100
+        bg-slate
         focus:outline-none focus:bg-white focus:border-blue-300"></textarea>
     <div class="flex mt-4">
         <input placeholder="Name" aria-label="Name"
@@ -18,7 +18,7 @@
         w-full rounded-lg
         text-justify text-sm md:text-base
         border border-blue-200 block appearance-none leading-normal
-        bg-gray-100
+        bg-slate
         focus:outline-none focus:bg-white focus:border-blue-300">
         <input placeholder="Email"
                wire:model.defer="comment.email"
@@ -27,9 +27,10 @@
         w-full rounded-lg
         text-justify text-sm md:text-base
         border border-blue-200 block appearance-none leading-normal
-        bg-gray-100
+        bg-slate
         focus:outline-none focus:bg-white focus:border-blue-300">
     </div>
+
     <div class="flex justify-between pt-4">
         <div>
             <input type="checkbox"
@@ -40,7 +41,7 @@
                 article</label>
         </div>
         <button type="submit"
-                class="rounded-full border border-blue-200 bg-blue-400 px-3 focus:outline-none up whitespace-no-wrap">
+                class="rounded-lg border border-blue-200 bg-blue-300 hover:bg-blue-400 px-3 py-1 focus:outline-none up whitespace-nowrap">
             Submit Comment
         </button>
     </div>

@@ -23,6 +23,12 @@
                         </label>
                     </div>
                     <x-backend.form.button>Login</x-backend.form.button>
+                    <div class="mt-5">
+                        <a href="{{route('home')}}"
+                           class="text-slate-700 underline decoration-dotted hover:decoration-solid hover:text-blue-500">
+                            Go to Home
+                        </a>
+                    </div>
                 </form>
             </div>
         </div>

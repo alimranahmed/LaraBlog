@@ -8,9 +8,8 @@ body {
 }
 
 h1 {
-    @apply font-medium text-2xl leading-relaxed;
+    @apply font-semibold text-2xl leading-relaxed;
 }
-
 
 h3, h2 {
     @apply font-medium text-xl leading-relaxed;
@@ -18,6 +17,10 @@ h3, h2 {
 
 h4, h5, h6 {
     @apply font-medium text-lg leading-relaxed;
+}
+
+strong {
+    @apply text-slate-600 font-semibold;
 }
 
 p code {
@@ -28,21 +31,33 @@ pre code {
     @apply border-0 p-0 leading-normal;
 }
 
-.article-content blockquote {
-    @apply p-4 italic border-l-4 border-gray-400 text-gray-600;
-}
-
-.article-content a {
-    @apply text-blue-400;
-}
-
 .article-content h1,
 .article-content h2,
 .article-content h3,
 .article-content h4,
 .article-content h5,
 .article-content h6 {
-    @apply mt-7 mb-2;
+    @apply mt-7 mb-2 text-fuchsia-800 font-semibold;
+}
+
+.article-content ol {
+    @apply pl-10 list-decimal list-inside;
+}
+
+.article-content ul {
+   @apply pl-10 list-disc list-inside;
+}
+
+.article-content p {
+    @apply mb-3
+}
+
+.article-content blockquote {
+    @apply p-4 my-3 italic border-l-4 border-slate-400 text-slate-500;
+}
+
+.article-content a {
+    @apply text-blue-400;
 }
 
 /*

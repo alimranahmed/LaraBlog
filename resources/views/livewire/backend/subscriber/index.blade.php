@@ -3,7 +3,7 @@
         @foreach($subscribers as $subscriber)
             <div class="rounded border border-indigo-300 pl-2">
 
-                <div class="overflow-x-scroll">{{$subscriber->email}}</div>
+                <div class="overflow-x-auto">{{$subscriber->email}}</div>
 
                 @if($subscriber->verified_at)
                     <div
