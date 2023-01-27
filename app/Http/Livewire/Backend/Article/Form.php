@@ -7,9 +7,11 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\Keyword;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Form extends Component
@@ -22,6 +24,7 @@ class Form extends Component
 
     public $rules = [
         'article.heading' => 'required',
+        'article.slug' => 'required',
         'article.category_id' => 'required',
         'article.content' => 'required',
         'article.language' => 'required',
@@ -39,9 +42,12 @@ class Form extends Component
         $this->method = $article->id ? 'put' : 'post';
     }
 
-    public function render()
+    public function render(): View
     {
-        $categories = Category::active()->get();
+        if(Arr::get($this->article, 'heading')) {
+            $this->article['slug'] = Str::slug(Arr::get($this->article, 'heading'), '-', Arr::get($this->article, 'language'));
+        }
+        $categories = Category::query()->active()->get();
 
         return view('livewire.backend.article.form', compact('categories'));
     }

@@ -1,7 +1,7 @@
 <tr wire:loading.class="opacity-25">
     <x-backend.table.td :wrap="true">
         <article>
-            <a href="{{route('get-article', [$article->id, make_slug($article->heading)])}}"
+            <a href="{{route('get-article', $article->slug)}}"
                class="hover:underline" target="_blank">
                 {{$article->heading}}
             </a>

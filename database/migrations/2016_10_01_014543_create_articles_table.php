@@ -31,7 +31,7 @@ class CreateArticlesTable extends Migration
             $table->foreign('category_id')
                 ->references('id')
                 ->on('categories');
-            $table->string('language')->default('ben');
+            $table->string('language')->default('en');
             $table->timestamps();
         });
     }

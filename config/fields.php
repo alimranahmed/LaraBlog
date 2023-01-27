@@ -2,7 +2,7 @@
 
 return [
     'lang' => [
-        'ben' => 'বাংলা',
-        'eng' => 'English',
+        'bn' => 'বাংলা',
+        'en' => 'English',
     ],
 ];

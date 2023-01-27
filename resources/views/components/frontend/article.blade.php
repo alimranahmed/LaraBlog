@@ -4,7 +4,7 @@
 
     <!--    Heading-->
     <h2 class="xs:text-md sm:text-xl md:text-2xl leading-tight mb-2">
-        <a href="{{route('get-article', [$article->id, make_slug($article->heading)])}}"
+        <a href="{{route('get-article', $article->slug)}}"
            class="text-slate-700 hover:text-gray-900 focus:outline-none focus:text-gray-900">
             {{$article->heading}}
         </a>

@@ -1,13 +1,34 @@
 <div>
     <form wire:submit.prevent="submit">
         <div class="mb-3">
+            <x-backend.form.select required
+                                   name="category"
+                                   wire:model="article.language" aria-label="*Language">
+                <option value="">*Select Language</option>
+                @foreach(config('fields.lang') as $key => $language)
+                    <option value="{{$key}}">{{$language}}</option>
+                @endforeach
+            </x-backend.form.select>
+        </div>
+
+        <div class="mb-3">
             <x-backend.form.input type="text" name="heading"
                                   required
                                   class="w-full"
                                   name="article.heading"
-                                  wire:model.defer="article.heading"
+                                  wire:model.debounce.500ms="article.heading"
                                   aria-label="Heading"
                                   placeholder="*Heading..."/>
+        </div>
+
+        <div class="mb-3">
+            <x-backend.form.input type="text" name="slug"
+                                  required
+                                  class="w-full"
+                                  name="article.slug"
+                                  wire:model.defer="article.slug"
+                                  aria-label="slug"
+                                  placeholder="*Slug..."/>
         </div>
 
         <div class="mb-3">
@@ -35,17 +56,6 @@
                                   name="article.keywords"
                                   wire:model.defer="article.keywords"
                                   placeholder="Keywords" aria-label="Keywords"/>
-        </div>
-
-        <div class="mb-3">
-            <x-backend.form.select required
-                name="category"
-                wire:model.defer="article.language" aria-label="*Language">
-                <option value="">*Select Language</option>
-                @foreach(config('fields.lang') as $key => $language)
-                    <option value="{{$key}}">{{$language}}</option>
-                @endforeach
-            </x-backend.form.select>
         </div>
 
         <div class="mb-3">

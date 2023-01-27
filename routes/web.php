@@ -21,7 +21,8 @@ Route::view('contact', 'frontend.contact.create')->name('contact');
 
 //Article
 Route::get('article', [ArticleController::class, 'index'])->name('articles');
-Route::get('article/{articleId}/{articleHeading?}', [ArticleController::class, 'show'])->name('get-article');
+Route::get('article/{slug}', [ArticleController::class, 'show'])->name('get-article');
+Route::get('article/{articleId}/{articleHeading?}', [ArticleController::class, 'showById'])->name('get-article-by-id');
 Route::get('category/article/{categoryAlias}', [CategoryController::class, 'getArticles'])->name('articles-by-category');
 Route::get('keyword/article/{keywordName}', [KeywordController::class, 'getArticles'])->name('articles-by-keyword');
 Route::get('search', [ArticleController::class, 'search'])->name('search-article');

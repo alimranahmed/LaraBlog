@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -15,9 +18,10 @@ class ArticleController extends Controller
         return view('frontend.articles.index', compact('articles'));
     }
 
-    public function show($articleId, $articleHeading = '')
+    public function show(string $slug)
     {
-        $article = Article::where('id', $articleId)
+        $article = Article::query()
+            ->where('slug', $slug)
             ->published()
             ->notDeleted()
             ->with(['user', 'category', 'keywords'])
@@ -27,27 +31,33 @@ class ArticleController extends Controller
             return redirect()->route('home')->with('warning', 'Article not found');
         }
 
-        $article->isEditable = $this->isEditable($article);
+        $relatedArticles = $this->getRelatedArticles($article);
+
+        return view('frontend.articles.show', compact('article', 'relatedArticles'));
+    }
+
+    public function showById($articleId, $articleHeading = ''): Factory|View|RedirectResponse
+    {
+        $article = Article::query()
+            ->where('id', $articleId)
+            ->published()
+            ->notDeleted()
+            ->with(['user', 'category', 'keywords'])
+            ->first();
+
+        if (is_null($article)) {
+            return redirect()->route('home')->with('warning', 'Article not found');
+        }
 
         $relatedArticles = $this->getRelatedArticles($article);
 
         return view('frontend.articles.show', compact('article', 'relatedArticles'));
     }
 
-    private function isEditable(Article $article)
-    {
-        if (! auth()->check()) {
-            return false;
-        }
-        $isAdmin = auth()->user()->hasRole(['owner', 'admin']);
-        $isAuthor = $article->user->id == auth()->user()->id;
-
-        return auth()->check() && ($isAdmin || $isAuthor);
-    }
-
     private function getRelatedArticles(Article $article)
     {
-        return Article::where('category_id', $article->category->id)
+        return Article::query()
+            ->where('category_id', $article->category->id)
             ->where('id', '!=', $article->id)
             ->published()
             ->latest()
@@ -55,13 +65,17 @@ class ArticleController extends Controller
             ->get();
     }
 
-    public function search(Request $request)
+    /**
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function search(Request $request): View
     {
         $this->validate($request, ['query_string' => 'required']);
 
         $queryString = $request->get('query_string');
 
-        $articles = Article::published()
+        $articles = Article::query()
+            ->published()
             ->notDeleted()
             ->where('heading', 'LIKE', "%$queryString%")
             ->orWhere('content', 'LIKE', "%$queryString%")
