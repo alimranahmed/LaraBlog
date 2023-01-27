@@ -20,11 +20,11 @@ h4, h5, h6 {
 }
 
 strong {
-    @apply text-slate-600 font-semibold;
+    @apply text-indigo-900 font-medium;
 }
 
 p code {
-    @apply bg-indigo-50 text-indigo-500 rounded-lg px-1 border border-indigo-100 whitespace-nowrap;
+    @apply bg-indigo-50 text-zinc-700 rounded-lg px-1 border whitespace-nowrap;
 }
 
 pre code {
@@ -37,7 +37,7 @@ pre code {
 .article-content h4,
 .article-content h5,
 .article-content h6 {
-    @apply mt-7 mb-2 text-fuchsia-800 font-semibold;
+    @apply mt-7 mb-2 text-fuchsia-900 font-semibold;
 }
 
 .article-content ol {
