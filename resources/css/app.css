@@ -23,7 +23,15 @@ strong {
     @apply text-indigo-900 font-medium;
 }
 
-p code {
+li{
+    @apply my-2;
+}
+
+li::marker {
+    @apply text-slate-400;
+}
+
+p code, li code {
     @apply bg-indigo-50 text-zinc-700 rounded-lg px-1 border whitespace-nowrap;
 }
 
