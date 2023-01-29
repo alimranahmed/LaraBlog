@@ -7,9 +7,12 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    @isset($article)
+    @if(isset($article))
         <x-frontend.twitter-card-meta :article="$article"/>
-    @endisset
+        <meta name="description" content="{{mb_substr($article->content, 0, 152)}}..." />
+    @else
+        <meta name="description" content="Technical Blog of Al Imran Ahmed. He writes about Technology and Programming mostly related to PHP, Laravel, Python, Machine Learning" />
+    @endif
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
