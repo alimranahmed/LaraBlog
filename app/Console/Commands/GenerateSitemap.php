@@ -46,7 +46,7 @@ class GenerateSitemap extends Command
 
         // add every article to the sitemap
         foreach ($paginatedArticles as $article) {
-            $sitemap->add(route('get-article', [$article->id, make_slug($article->heading)]));
+            $sitemap->add(route('get-article', $article->slug));
 //        ->setLastModificationDate($article->created_at)
 //        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
 //        ->setPriority(0.9);
