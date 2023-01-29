@@ -11,7 +11,7 @@
         <x-frontend.twitter-card-meta :article="$article"/>
         <meta name="description" content="{{mb_substr($article->content, 0, 152)}}..." />
     @else
-        <meta name="description" content="Technical Blog of Al Imran Ahmed. He writes about Technology and Programming mostly related to PHP, Laravel, Python, Machine Learning" />
+        <meta name="description" content="Technical Blog of Al Imran Ahmed. He writes about Programming mostly related to PHP, Laravel, Javascript, Python, Machine Learning etc." />
     @endif
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
