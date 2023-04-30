@@ -63,7 +63,7 @@ class ArticleTest extends TestCase
             'is_deleted' => 0,
         ]);
 
-        $this->get("article/{$article->id}/")->assertOk();
+        $this->get("article/{$article->slug}/")->assertOk();
     }
 
     public function testHideShowUnpublished()
