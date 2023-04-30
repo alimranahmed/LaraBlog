@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Article;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ArticleFactory extends Factory
 {
@@ -14,26 +15,22 @@ class ArticleFactory extends Factory
      */
     protected $model = Article::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
+    public function definition(): array
     {
         return [
-            'heading' => $this->faker->sentence,
+            'heading' => $heading = $this->faker->sentence,
             'content' => implode(' ', $this->faker->paragraphs(15)),
             'published_at' => now(),
             'is_published' => 1,
             'is_deleted' => 0,
             'user_id' => null,
-            'language' => $this->faker->randomElement(['ben', 'eng']),
+            'language' => $language = $this->faker->randomElement(['ben', 'eng']),
+            'slug' => Str::slug($heading, '-', $language),
             'category_id' => null,
         ];
     }
 
-    public function published()
+    public function published(): ArticleFactory
     {
         return $this->state([
             'is_published' => 1,
@@ -41,7 +38,7 @@ class ArticleFactory extends Factory
         ]);
     }
 
-    public function unpublished()
+    public function unpublished(): ArticleFactory
     {
         return $this->state([
             'is_published' => 0,
