@@ -2,9 +2,9 @@ name: Build and Test
 
 on:
   push:
-    branches: [ develop, master ]
+    branches: [ develop, main ]
   pull_request:
-    branches: [ develop, master ]
+    branches: [ develop, main ]
 
 jobs:
 
@@ -73,4 +73,4 @@ jobs:
           DB_PASSWORD: password
         run: |
           vendor/bin/phpunit --verbose
-          vendor/bin/php-cs-fixer fix --dry-run --diff
+          vendor/bin/pint

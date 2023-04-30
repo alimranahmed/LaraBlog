@@ -16,7 +16,6 @@ class GenerateSitemap extends Command
 
     public function handle()
     {
-
         $paginatedArticles = Article::getPaginated();
         $latestArticleAt = $paginatedArticles->first()->created_at ?? Carbon::now()->toDateString();
 

@@ -44,7 +44,7 @@ class Form extends Component
 
     public function render(): View
     {
-        if(Arr::get($this->article, 'heading')) {
+        if (Arr::get($this->article, 'heading')) {
             $this->article['slug'] = Str::slug(Arr::get($this->article, 'heading'), '-', Arr::get($this->article, 'language'));
         }
         $categories = Category::query()->active()->get();
