@@ -6,12 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateReadersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+    public function up(): void
     {
         Schema::create('readers', function (Blueprint $table) {
             $table->increments('id');
@@ -27,12 +22,7 @@ class CreateReadersTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('readers');
     }
