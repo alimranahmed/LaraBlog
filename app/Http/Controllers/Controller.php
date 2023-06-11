@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Validation\ValidationException;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use AuthorizesRequests, ValidatesRequests;
 
-    protected $frontView;
+    protected string $frontView;
 
     public function __construct()
     {
         $frontendDesign = config('blog.frontend_design');
-        $this->frontView = "frontend.{$frontendDesign}";
+        $this->frontView = "frontend.$frontendDesign";
     }
 
-    public function getMessage(\Exception $e, $msg = null)
+    public function getMessage(Exception $e, $msg = null)
     {
         if ($e instanceof ValidationException) {
             return $e->getMessage();
@@ -33,7 +33,7 @@ class Controller extends BaseController
         }
     }
 
-    public function getLogMsg(\Exception $e)
+    public function getLogMsg(Exception $e): string
     {
         return $e->getLine().': '.$e->getFile().' '.$e->getMessage();
     }

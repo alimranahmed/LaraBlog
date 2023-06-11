@@ -15,6 +15,11 @@ class User extends Authenticatable
     use Notifiable;
     use CanFormatDates;
 
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
     protected $guarded = ['id'];
 
     public function articles()
