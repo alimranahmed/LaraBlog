@@ -72,5 +72,5 @@ jobs:
           DB_USERNAME: root
           DB_PASSWORD: password
         run: |
-          vendor/bin/phpunit --verbose
+          vendor/bin/phpunit
           vendor/bin/pint
