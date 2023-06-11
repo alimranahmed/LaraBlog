@@ -30,10 +30,6 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'ipstack' => [
-        'API_KEY' => env('IPSTACK_API_KEY'),
-    ],
-
     'google' => [
         'analytics_tracking_id' => env('GOOGLE_ANALYTICS_TRACKING_ID'),
     ],

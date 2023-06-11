@@ -167,7 +167,6 @@ return [
          * Package Service Providers...
          */
 
-        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
 
         /*
@@ -228,8 +227,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
-        //custom added
-        'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
     ],
 
 ];
