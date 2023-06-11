@@ -9,10 +9,8 @@ class CommentsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $faker = Faker\Factory::create();
 
@@ -23,6 +21,7 @@ class CommentsTableSeeder extends Seeder
                     'article_id' => $article->id,
                     'user_id' => $faker->randomElement(\App\Models\User::all()->pluck('id')->toArray()),
                 ]);
+                $article->update(['comment_count' => 3]);
             }
         }
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
