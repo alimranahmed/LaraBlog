@@ -24,38 +24,38 @@ class GenerateSitemap extends Command
         $sitemap->add(Url::create('article'));
 
         $sitemap->add(route('home'));
-//            ->setLastModificationDate($latestArticleAt)
-//            ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
-//            ->setPriority(1.0);
+        //            ->setLastModificationDate($latestArticleAt)
+        //            ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+        //            ->setPriority(1.0);
 
         $sitemap->add(route('articles'));
-//        ->setLastModificationDate($latestArticleAt)
-//        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
-//        ->setPriority(1.0);
+        //        ->setLastModificationDate($latestArticleAt)
+        //        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+        //        ->setPriority(1.0);
 
         $sitemap->add(route('page.about'));
-//            ->setLastModificationDate($latestArticleAt)
-//            ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
-//            ->setPriority(1.0);
+        //            ->setLastModificationDate($latestArticleAt)
+        //            ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+        //            ->setPriority(1.0);
 
         $sitemap->add(route('contact'));
-//        ->setLastModificationDate($latestArticleAt)
-//        ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
-//        ->setPriority(1.0);
+        //        ->setLastModificationDate($latestArticleAt)
+        //        ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+        //        ->setPriority(1.0);
 
         // add every article to the sitemap
         foreach ($paginatedArticles as $article) {
             $sitemap->add(route('get-article', $article->slug));
-//        ->setLastModificationDate($article->created_at)
-//        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
-//        ->setPriority(0.9);
+            //        ->setLastModificationDate($article->created_at)
+            //        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+            //        ->setPriority(0.9);
         }
 
         foreach (range(1, $paginatedArticles->lastPage()) as $page) {
             $sitemap->add(route('articles', compact('page')));
-//        ->setLastModificationDate($latestArticleAt)
-//        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
-//        ->setPriority(0.8);
+            //        ->setLastModificationDate($latestArticleAt)
+            //        ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
+            //        ->setPriority(0.8);
         }
 
         $sitemap->writeToFile(public_path('sitemap.xml'));

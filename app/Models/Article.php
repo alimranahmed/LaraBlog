@@ -16,7 +16,7 @@ class Article extends Model
 
     protected $guarded = ['id'];
 
-    protected $dates = ['published_at'];
+    protected $casts = ['published_at' => 'datetime'];
 
     public function user()
     {

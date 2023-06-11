@@ -20,7 +20,6 @@ class Keyword extends Model
     }
 
     /**
-     * @param  Collection  $keywords
      * @return array
      */
     public static function getArticleIDs(Collection $keywords)
