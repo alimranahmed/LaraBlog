@@ -1,14 +1,14 @@
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
 
-# Blog Using Laravel 8
+# Blog Using Laravel 10
 ### Let's keep it as simple as possible. Configure anything you want
 A full-featured blogging system for personal use. No frontend theme and anything heavy or unnecessary library used.
 
 ### Technologies used
-1. Laravel
-2. Livewire
-3. TailwindCSS
+1. [Laravel](https://laravel.com/)
+2. [Livewire](https://laravel-livewire.com/)
+3. [TailwindCSS](https://tailwindcss.com/)
  
 ### There are four several types of users with several permissions
 1. Admin/Owner
@@ -17,7 +17,7 @@ A full-featured blogging system for personal use. No frontend theme and anything
   * Can manage keywords.
   * Can manage other users except Owner.
   
-4. Reader
+2. Reader
   * Can read and comment on article providing his email address.
   * Can subscribe to be notified for new articles.
   * Can search for articles.
@@ -34,7 +34,7 @@ A full-featured blogging system for personal use. No frontend theme and anything
   `php artisan serve`
 8. Now visit the url shown on your terminal, something like `localhost:8000`. It's running!
 
-### Screen shots
+### Screenshots
 
 ##### Home page
 ![home_page](https://user-images.githubusercontent.com/7629427/132961669-34f4161a-05e9-4fd6-aa32-d2b2f04134ab.png)
