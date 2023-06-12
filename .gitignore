@@ -8,7 +8,6 @@ Homestead.yaml
 /node_modules
 npm-debug.log
 public/storage
-/public/build
 /public/hot
 public/mix-manifest.json
 storage/*.key
