@@ -36,6 +36,13 @@ A full-featured blogging system for personal use. No frontend theme and anything
   `php artisan serve`
 8. Now visit the url shown on your terminal, something like `localhost:8000`. It's running!
 
+
+**Note:** After migration and seeding, to login as admin/owner using the following credentials:
+```
+Email: owner@gmail.com
+Password: owner
+```
+
 ### Screenshots
 
 ##### Home page
