@@ -24,6 +24,7 @@
         "laravel/framework": "^v10.10",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^2.5",
+        "sentry/sentry-laravel": "^3.4",
         "spatie/laravel-permission": "^5.6",
         "spatie/laravel-sitemap": "^6.2",
         "torchlight/torchlight-commonmark": "^0.5.5"
