@@ -6,9 +6,10 @@
 A full-featured blogging system for personal use. No frontend theme and anything heavy or unnecessary library used.
 
 ### Technologies used
-1. [Laravel](https://laravel.com/)
-2. [Livewire](https://laravel-livewire.com/)
-3. [TailwindCSS](https://tailwindcss.com/)
+1. [TailwindCSS](https://tailwindcss.com/)
+2. [Alpine.js](https://alpinejs.dev/)
+3. [Laravel](https://laravel.com/)
+4. [Livewire](https://laravel-livewire.com/)
  
 ### There are four several types of users with several permissions
 1. Admin/Owner
