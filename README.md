@@ -13,6 +13,7 @@ A full-featured blogging system for personal use. No frontend theme and anything
  
 ### There are four several types of users with several permissions
 1. Admin/Owner
+  * Can be accessed in `<url>/admin/login`
   * Can manage articles and comments of other users.
   * Can manage categories.
   * Can manage keywords.
