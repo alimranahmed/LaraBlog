@@ -26,7 +26,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('*', CategoriesComposer::class);
-        View::composer('*', GlobalConfigComposer::class);
+        //View::composer(['components/backend'], CategoriesComposer::class);
+        View::composer(['components/backend', 'components/frontend'], GlobalConfigComposer::class);
     }
 }

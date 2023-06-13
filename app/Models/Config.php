@@ -3,28 +3,28 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use stdClass;
 
+/**
+ * @property string $name
+ * @property string $value
+ */
 class Config extends Model
 {
     protected $guarded = ['id'];
 
-    public static function get($name)
+    public static function get($name): ?string
     {
-        $config = self::where('name', $name)->first();
-        if (is_null($config)) {
-            return null;
-        }
-
-        return $config->value;
+        return self::query()->where('name', $name)->value('value');
     }
 
-    public static function allFormatted($isActive = 1)
+    public static function allFormatted($isActive = 1): stdClass
     {
-        $configs = new \stdClass();
-        $dbConfigs = self::where('is_active', $isActive)->get();
-        foreach ($dbConfigs as $config) {
-            $configs->{$config->name} = $config->value;
-        }
+        $configs = new stdClass();
+
+        $dbConfigs = self::query()->where('is_active', $isActive)->get();
+
+        $dbConfigs->each(fn (self $config) => $configs->{$config->name} = $config->value);
 
         return $configs;
     }

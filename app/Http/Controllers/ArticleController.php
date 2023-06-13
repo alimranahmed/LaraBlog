@@ -3,28 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class ArticleController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $articles = Article::getPaginated($request);
 
         return view('frontend.articles.index', compact('articles'));
     }
 
-    public function show(string $slug)
+    public function show(string $slug): View|RedirectResponse
     {
         $article = Article::query()
+            ->with(['user', 'category', 'keywords'])
             ->where('slug', $slug)
             ->published()
             ->notDeleted()
-            ->with(['user', 'category', 'keywords'])
             ->first();
 
         if (is_null($article)) {
@@ -36,7 +36,7 @@ class ArticleController extends Controller
         return view('frontend.articles.show', compact('article', 'relatedArticles'));
     }
 
-    public function showById($articleId, $articleHeading = ''): Factory|View|RedirectResponse
+    public function showById($articleId, $articleHeading = ''): View|RedirectResponse
     {
         $article = Article::query()
             ->where('id', $articleId)
@@ -54,9 +54,10 @@ class ArticleController extends Controller
         return view('frontend.articles.show', compact('article', 'relatedArticles'));
     }
 
-    private function getRelatedArticles(Article $article)
+    private function getRelatedArticles(Article $article): Collection
     {
         return Article::query()
+            ->with(['user', 'category', 'keywords'])
             ->where('category_id', $article->category->id)
             ->where('id', '!=', $article->id)
             ->published()
