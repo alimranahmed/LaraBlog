@@ -11,22 +11,18 @@ class ViewServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         //
     }
 
     /**
      * Bootstrap services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
-        //View::composer(['components/backend'], CategoriesComposer::class);
-        View::composer(['components/backend', 'components/frontend'], GlobalConfigComposer::class);
+        View::composer(['livewire/backend/*'], CategoriesComposer::class);
+        View::composer(['components/backend', 'components/frontend', 'emails/*'], GlobalConfigComposer::class);
     }
 }
