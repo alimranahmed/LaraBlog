@@ -19,15 +19,14 @@
         "ext-pdo": "*",
         "codeat3/blade-teeny-icons": "^1.8",
         "codeat3/blade-unicons": "^1.5",
-        "graham-campbell/markdown": "^15.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^v10.10",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^2.5",
         "sentry/sentry-laravel": "^3.4",
+        "spatie/laravel-markdown": "^2.3",
         "spatie/laravel-permission": "^5.6",
-        "spatie/laravel-sitemap": "^6.2",
-        "torchlight/torchlight-commonmark": "^0.5.5"
+        "spatie/laravel-sitemap": "^6.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

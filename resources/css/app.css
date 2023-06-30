@@ -74,32 +74,19 @@ pre code {
 */
 pre {
     @apply my-4 rounded overflow-x-auto;
-    background-color: #fff;
-    --theme-selection-background: #e2e5e9;
 }
 
 /*
  Add some vertical padding and expand the width
- to fill its container. The horizontal padding
- comes at the line level so that background
- colors extend edge to edge.
+ to fill its container.
 */
-pre code.torchlight {
-    @apply block py-4 min-w-max;
+pre.shiki code {
+    @apply block pt-5 min-w-max;
 }
 
 /*
  Horizontal line padding.
 */
-pre code.torchlight .line {
+pre.shiki code .line {
     @apply px-4;
-}
-
-/*
- Push the code away from the line numbers and
- summary caret indicators.
-*/
-pre code.torchlight .line-number,
-pre code.torchlight .summary-caret {
-    @apply mr-4;
 }
