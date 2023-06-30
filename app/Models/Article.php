@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use League\CommonMark\ConverterInterface;
 
 class Article extends Model
 {
@@ -18,37 +21,39 @@ class Article extends Model
 
     protected $casts = ['published_at' => 'datetime'];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function comments()
+    public function comments(): HasMany
     {
-        return $this->hasMany(Comment::class)->with('user')->orderBy('id');
+        return $this->hasMany(Comment::class)
+            ->with('user')
+            ->orderBy('id');
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function images()
+    public function images(): BelongsToMany
     {
         return $this->belongsToMany(Image::class, 'article_image');
     }
 
-    public function keywords()
+    public function keywords(): BelongsToMany
     {
         return $this->belongsToMany(Keyword::class, 'article_keyword');
     }
 
-    public function scopeNotDeleted(Builder $builder)
+    public function scopeNotDeleted(Builder $builder): Builder
     {
         return $builder->where('is_deleted', 0);
     }
 
-    public function scopePublished(Builder $builder)
+    public function scopePublished(Builder $builder): Builder
     {
         return $builder->where('is_published', 1);
     }
@@ -58,13 +63,7 @@ class Article extends Model
         return optional($this->category)->name;
     }
 
-    public function getContentAsHtmlAttribute()
-    {
-        $converter = app(ConverterInterface::class);
-        echo $converter->convert($this->content);
-    }
-
-    public function hasAuthorization(User $user)
+    public function hasAuthorization(User $user): bool
     {
         return $user->hasRole(['author']) && $this->user_id != $user->id;
     }
@@ -89,20 +88,20 @@ class Article extends Model
         $keywordName = optional($request)->route('keywordName');
 
         if (! is_null($categoryAlias)) {
-            $category = Category::where('alias', $categoryAlias)->first();
+            $category = Category::query()->where('alias', $categoryAlias)->first();
             if (is_null($category)) {
-                return new LengthAwarePaginator(collect([]), 0, $perPage);
+                return new LengthAwarePaginator(collect(), 0, $perPage);
             }
-            $articleQuery = Article::where('category_id', $category->id);
+            $articleQuery = Article::query()->where('category_id', $category->id);
         } elseif (! is_null($keywordName)) {
-            $keyword = Keyword::where('name', $keywordName)->first();
+            $keyword = Keyword::query()->where('name', $keywordName)->first();
             if (is_null($keyword)) {
-                return new LengthAwarePaginator(collect([]), 0, $perPage);
+                return new LengthAwarePaginator(collect(), 0, $perPage);
             }
             $articleIds = $keyword->articles->pluck('id')->toArray();
-            $articleQuery = Article::whereIn('id', $articleIds);
+            $articleQuery = Article::query()->whereIn('id', $articleIds);
         } else {
-            $articleQuery = Article::published()->notDeleted();
+            $articleQuery = Article::query()->published()->notDeleted();
         }
 
         $paginateUrl = '';

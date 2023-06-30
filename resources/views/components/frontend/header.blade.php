@@ -32,12 +32,12 @@
 <body class="bg-gray-50">
 <div class="border-b border-blue-200 mb-3">
 
-    <div class="max-w-2xl md:max-w-4xl mx-auto px-5 lg:px-0">
+    <div class="max-w-2xl mx-auto px-5 lg:px-0">
         <x-frontend.navbar/>
     </div>
 
 </div>
 
 
-<div class="max-w-2xl md:max-w-4xl mx-auto px-5 lg:px-0 min-h-screen">
+<div class="max-w-2xl mx-auto px-5 lg:px-0 min-h-screen">
 
