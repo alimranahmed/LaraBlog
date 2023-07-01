@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use GrahamCampbell\Markdown\Facades\Markdown;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +11,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Spatie\LaravelMarkdown\MarkdownRenderer;
 
+/**
+ * @property string $category
+ * @property int $user_id
+ * @property string $content
+ */
 class Article extends Model
 {
     use HasFactory;
@@ -58,9 +64,20 @@ class Article extends Model
         return $builder->where('is_published', 1);
     }
 
-    public function getCategoryNameAttribute()
+    public function categoryName()
     {
-        return optional($this->category)->name;
+        return Attribute::make(
+            get: fn () => optional($this->category)->name
+        );
+    }
+
+    public function htmlContent(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => app(MarkdownRenderer::class)
+                ->disableHighlighting()
+                ->toHtml($this->content)
+        );
     }
 
     public function hasAuthorization(User $user): bool
@@ -72,8 +89,8 @@ class Article extends Model
     {
         if ($query) {
             return $builder->where(function (Builder $builder) use ($query) {
-                return $builder->where('heading', 'like', "%{$query}%")
-                    ->orWhere('content', 'content', "%{$query}%");
+                return $builder->where('heading', 'like', "%$query%")
+                    ->orWhere('content', 'content', "%$query%");
             });
         }
 

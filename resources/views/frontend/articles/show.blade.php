@@ -12,7 +12,7 @@
             <span class="whitespace-nowrap">by <span class="text-slate-800">{{$article->user->name}}</span></span>
         </div>
         <div class="text-sm leading-relaxed md:text-lg article-content">
-            <x-markdown theme="material-theme">{!! $article->content !!}</x-markdown>
+            {!! $article->htmlContent !!}
         </div>
         @if(!$article->keywords->isEmpty())
             <div class="my-3">
@@ -41,5 +41,7 @@
     @endif
 
     <livewire:frontend.subscribe/>
+
+    <x-code-highlighter-script/>
 
 </x-frontend>
