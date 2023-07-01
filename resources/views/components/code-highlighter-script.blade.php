@@ -9,16 +9,22 @@
     shiki
         .getHighlighter({
             theme: 'material-theme',
-            langs: ['js', 'php', 'python', 'shell', 'go', 'java'],
+            langs: ['js', 'php', 'python', 'shell', 'go', 'java', 'yml'],
         })
         .then(highlighter => {
             const codeBlocks = document.querySelectorAll("pre code");
             codeBlocks.forEach((codeBlock) => {
                 const language = codeBlock.className.split("-")[1];
-                codeBlock.innerHTML = highlighter.codeToHtml(
-                    htmlDecode(codeBlock.innerHTML),
-                    {lang: language}
-                )
+                try {
+                    codeBlock.innerHTML = highlighter.codeToHtml(
+                        htmlDecode(codeBlock.innerHTML),
+                        {lang: language}
+                    )
+                } catch (e) {
+                    // this try catch is required because
+                    // If highlighting one language is failed, instead of stopping
+                    // the next language should still be highlighted
+                }
             })
         })
 </script>
