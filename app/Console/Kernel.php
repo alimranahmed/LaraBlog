@@ -13,8 +13,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         //$schedule->command('get-ip-location')->hourly();
-        $schedule->command('backup:site-data')->weekly();
+
+        $schedule->command('php artisan backup:run --only-db')->weekly();
+        $schedule->command('backup:clean')->weekly();
+
         $schedule->command('sitemap:generate')->weekly();
+
         $schedule->command('telescope:prune')->daily();
     }
 

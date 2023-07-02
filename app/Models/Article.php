@@ -64,7 +64,7 @@ class Article extends Model
         return $builder->where('is_published', 1);
     }
 
-    public function categoryName()
+    public function categoryName(): Attribute
     {
         return Attribute::make(
             get: fn () => optional($this->category)->name
