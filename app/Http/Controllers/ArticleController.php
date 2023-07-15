@@ -18,7 +18,7 @@ class ArticleController extends Controller
         return view('frontend.articles.index', compact('articles'));
     }
 
-    public function show(string $slug): View|RedirectResponse
+    public function show(string $slug): mixed
     {
         $article = Article::query()
             ->with(['user', 'category', 'keywords'])

@@ -17,6 +17,9 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  * @property string $category
  * @property int $user_id
  * @property string $content
+ * @property array $meta
+ * @property string $id
+ * @property \Illuminate\Support\Collection $keywords
  */
 class Article extends Model
 {
@@ -25,7 +28,7 @@ class Article extends Model
 
     protected $guarded = ['id'];
 
-    protected $casts = ['published_at' => 'datetime'];
+    protected $casts = ['published_at' => 'datetime', 'meta' => 'json'];
 
     public function user(): BelongsTo
     {
@@ -85,7 +88,7 @@ class Article extends Model
         return $user->hasRole(['author']) && $this->user_id != $user->id;
     }
 
-    public function scopeSearch(Builder $builder, $query = '')
+    public function scopeSearch(Builder $builder, $query = ''): Builder
     {
         if ($query) {
             return $builder->where(function (Builder $builder) use ($query) {

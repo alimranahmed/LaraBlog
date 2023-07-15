@@ -15,10 +15,10 @@ class GoogleDrive
     public static function loadStorageDriver(string $driverName = 'google'): void
     {
         try {
-            Storage::extend($driverName, function($app, $config) {
+            Storage::extend($driverName, function ($app, $config) {
                 $options = [];
 
-                if (!empty($config['teamDriveId'] ?? null)) {
+                if (! empty($config['teamDriveId'] ?? null)) {
                     $options['teamDriveId'] = $config['teamDriveId'];
                 }
 
@@ -33,7 +33,7 @@ class GoogleDrive
 
                 return new FilesystemAdapter($driver, $adapter);
             });
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             // your exception handling logic
         }
     }
