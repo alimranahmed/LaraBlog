@@ -65,8 +65,8 @@ return [
             'dump' => [
                 'excludeTables' => [
                     'telescope_entries',
-                    'telescope_entries_tags'
-                ]
+                    'telescope_entries_tags',
+                ],
             ],
         ],
 
