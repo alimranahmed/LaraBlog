@@ -16,22 +16,24 @@ use Livewire\Component;
 
 class Form extends Component
 {
-    public $originalArticle;
+    public Article $originalArticle;
 
-    public $article;
+    public mixed $article;
 
-    public $method;
+    public string $method;
 
-    public $rules = [
+    public array $rules = [
         'article.heading' => 'required',
         'article.slug' => 'required',
         'article.category_id' => 'required',
         'article.content' => 'required',
         'article.language' => 'required',
         'article.is_comment_enabled' => 'boolean',
+        'article.meta.description' => 'nullable|string',
+        'article.meta.image_url' => 'nullable|url',
     ];
 
-    public function mount(?Article $article = null)
+    public function mount(?Article $article = null): void
     {
         if ($article->id) {
             $this->originalArticle = $article;
@@ -52,7 +54,7 @@ class Form extends Component
         return view('livewire.backend.article.form', compact('categories'));
     }
 
-    public function submit()
+    public function submit(): void
     {
         $data = Arr::get($this->validate(), 'article');
 
@@ -63,12 +65,13 @@ class Form extends Component
         }
     }
 
-    protected function store(array $newArticle)
+    protected function store(array $articleData): void
     {
         //Create new article
-        $newArticle['published_at'] = now();
-        $newArticle['user_id'] = Auth::id();
-        $newArticle = Article::create($newArticle);
+        $articleData['published_at'] = now();
+        $articleData['user_id'] = Auth::id();
+        /** @var Article $newArticle */
+        $newArticle = Article::query()->create($articleData);
 
         //add keywords
         $keywordsToAttach = array_unique(explode(' ', Arr::get($this->article, 'keywords')));
@@ -77,7 +80,8 @@ class Form extends Component
             if (empty($keywordToAttach)) {
                 continue;
             }
-            $newKeyword = Keyword::firstOrCreate(['name' => $keywordToAttach]);
+            /** @var Keyword $newKeyword */
+            $newKeyword = Keyword::query()->firstOrCreate(['name' => $keywordToAttach]);
             $newArticle->keywords()->attach($newKeyword->id);
         }
 
@@ -90,7 +94,7 @@ class Form extends Component
         redirect()->to(route('backend.article.index'));
     }
 
-    protected function update(array $updateData)
+    protected function update(array $updateData): void
     {
         $this->originalArticle->update($updateData);
 
@@ -99,7 +103,8 @@ class Form extends Component
         $keywordsToAttach = array_unique(explode(' ', Arr::get($this->article, 'keywords')));
 
         foreach ($keywordsToAttach as $keywordToAttach) {
-            $newKeyword = Keyword::firstOrCreate(['name' => $keywordToAttach]);
+            /** @var Keyword $newKeyword */
+            $newKeyword = Keyword::query()->firstOrCreate(['name' => $keywordToAttach]);
             $this->originalArticle->keywords()->attach($newKeyword->id);
         }
 
