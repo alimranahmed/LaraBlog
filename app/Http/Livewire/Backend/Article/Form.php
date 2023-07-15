@@ -18,7 +18,7 @@ class Form extends Component
 {
     public Article $originalArticle;
 
-    public mixed $article;
+    public $article;
 
     public string $method;
 
