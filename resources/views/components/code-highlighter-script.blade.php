@@ -9,7 +9,7 @@
     shiki
         .getHighlighter({
             theme: 'material-theme',
-            langs: ['js', 'php', 'python', 'shell', 'go', 'java', 'yml'],
+            langs: ['js', 'php', 'python', 'shell', 'go', 'java', 'yml', 'xml', 'bash', 'json'],
         })
         .then(highlighter => {
             const codeBlocks = document.querySelectorAll("pre code");

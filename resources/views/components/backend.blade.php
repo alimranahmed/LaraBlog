@@ -7,9 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <link rel="stylesheet" href="{{asset('css/prism.css')}}"/>
-
+    
     <link rel="shortcut icon" type="image/png" href="{{asset('img/favicon.png')}}"/>
 
     <title>{{$globalConfigs->site_title}}</title>
