@@ -43,13 +43,8 @@ Email: owner@gmail.com
 Password: owner
 ```
 
-### Screenshots
-
-##### Home page
-![home_page](https://user-images.githubusercontent.com/7629427/132961669-34f4161a-05e9-4fd6-aa32-d2b2f04134ab.png)
-
-##### Single article view
-![article_page](https://user-images.githubusercontent.com/7629427/132961667-d30aa00e-da49-4e5c-9bb6-9db9f048ee50.png)
+### Sample Blog
+1. [https://imranic.com](https://imranic.com)
 
 ### Contribution 
 **Anyone is always welcome to contribute on the project. If you want to work with:**
