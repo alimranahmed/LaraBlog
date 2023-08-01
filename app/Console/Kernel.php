@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     {
         //$schedule->command('get-ip-location')->hourly();
 
-        $schedule->command('php artisan backup:run --only-db')->monthly();
+        $schedule->command('backup:run', ['--only-db'])->monthly();
 
         $schedule->command('sitemap:generate')->weekly();
 
