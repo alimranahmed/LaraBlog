@@ -22,7 +22,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^v10.10",
         "laravel/tinker": "^2.8",
-        "livewire/livewire": "^2.5",
+        "livewire/livewire": "^3.0",
         "masbug/flysystem-google-drive-ext": "^2.2",
         "sentry/sentry-laravel": "^3.4",
         "spatie/laravel-backup": "^8.1",
