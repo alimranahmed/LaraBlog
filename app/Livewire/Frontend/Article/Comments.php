@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Frontend\Article;
+namespace App\Livewire\Frontend\Article;
 
 use App\Mail\CommentConfirmation;
 use App\Mail\NotifyAdmin;
@@ -8,6 +8,8 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Models\Config;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -17,27 +19,27 @@ use function view;
 
 class Comments extends Component
 {
-    public $article;
+    public Article $article;
 
-    public $comments;
+    public Collection $comments;
 
-    public $comment;
+    public array $comment = [];
 
-    public $isSubmitted = false;
+    public bool $isSubmitted = false;
 
-    public $rules = [
+    public array $rules = [
         'comment.content' => 'required',
         'comment.name' => 'required',
         'comment.email' => 'email|required',
     ];
 
-    public function mount(Article $article)
+    public function mount(Article $article): void
     {
         $this->article = $article;
         $this->comments = $this->getComments();
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.frontend.article.comments');
     }
@@ -48,7 +50,7 @@ class Comments extends Component
 
         DB::beginTransaction();
 
-        $newComment = Comment::create([
+        $newComment = Comment::query()->create([
             'article_id' => $this->article->id,
             'content' => $this->comment['content'],
             'token' => Hash::make($this->comment['content']),
@@ -65,7 +67,7 @@ class Comments extends Component
         Mail::to(Config::get('admin_email'))
             ->queue(new NotifyAdmin($newComment, route('get-article', $this->article->id)));
 
-        $this->comment = null;
+        $this->reset('comment');
         $this->comments = $this->getComments();
         $this->isSubmitted = true;
     }
@@ -84,10 +86,11 @@ class Comments extends Component
 
     private function updateOrCreateUser(): User
     {
-        $user = User::where('email', $this->comment['email'])->first();
+        /** @var User $user */
+        $user = User::query()->where('email', $this->comment['email'])->first();
 
         if (is_null($user)) {
-            $user = User::create(['email' => $this->comment['email']]);
+            $user = User::query()->create(['email' => $this->comment['email']]);
             $user->assignRole('reader');
             $user->reader()->create(['notify' => isset($this->comment['notify'])]);
         } elseif ($user->isReader()) {

@@ -1,30 +1,27 @@
 <?php
 
-namespace App\Http\Livewire\Frontend;
+namespace App\Livewire\Frontend;
 
 use App\Mail\SubscribeConfirmation;
 use App\Models\Subscriber;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Livewire\Component;
+
 use function view;
 
 class Subscribe extends Component
 {
-    public $email;
+    public string $email = '';
 
-    public $isSubscribed = false;
+    public bool $isSubscribed = false;
 
-    public $rules = [
+    public array $rules = [
         'email' => 'required|email|max:255',
     ];
 
-    public function render()
-    {
-        return view('livewire.frontend.subscribe');
-    }
-
-    public function subscribe()
+    public function subscribe(): void
     {
         $this->validate();
 
@@ -42,8 +39,13 @@ class Subscribe extends Component
     {
         do {
             $token = Str::random();
-        } while (Subscriber::where('token', $token)->exists());
+        } while (Subscriber::query()->where('token', $token)->exists());
 
         return $token;
+    }
+
+    public function render(): View
+    {
+        return view('livewire.frontend.subscribe');
     }
 }

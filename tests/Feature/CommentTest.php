@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\Frontend\Article\Comments;
+use App\Livewire\Frontend\Article\Comments;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Comment;

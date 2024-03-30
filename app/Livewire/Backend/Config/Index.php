@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Backend\Config;
+namespace App\Livewire\Backend\Config;
 
 use App\Models\Config;
 use Illuminate\Support\Arr;

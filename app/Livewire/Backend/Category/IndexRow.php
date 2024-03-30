@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Backend\Category;
+namespace App\Livewire\Backend\Category;
 
 use App\Models\Category;
 use Illuminate\Support\Arr;

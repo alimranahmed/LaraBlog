@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Frontend;
+namespace App\Livewire\Frontend;
 
 use App\Mail\NotifyAdmin;
 use App\Models\Config;
 use App\Models\Feedback;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use function route;
@@ -12,30 +13,25 @@ use function view;
 
 class ContactForm extends Component
 {
-    public $isSubmitted = false;
+    public bool $isSubmitted = false;
 
-    public $name;
+    public string $name = '';
 
-    public $email;
+    public string $email = '';
 
-    public $content;
+    public string $content = '';
 
-    public $rules = [
+    public array $rules = [
         'name' => ['required', 'max:255', "not_regex:/(http|ftp|mailto|www\.|\.com)/"],
         'email' => 'email|required|max:255',
         'content' => ['required', 'max:1500', "not_regex:/(http|ftp|mailto|www\.|\.com)/"],
     ];
 
-    public function render()
-    {
-        return view('livewire.frontend.contact-form');
-    }
-
-    public function submit()
+    public function submit(): void
     {
         $this->validate();
 
-        $feedback = Feedback::create([
+        $feedback = Feedback::query()->create([
             'email' => $this->email,
             'name' => $this->name,
             'content' => $this->content,
@@ -45,5 +41,10 @@ class ContactForm extends Component
         Mail::to(Config::get('admin_email'))->queue(new NotifyAdmin($feedback, route('login-form')));
 
         $this->isSubmitted = true;
+    }
+
+    public function render(): View
+    {
+        return view('livewire.frontend.contact-form');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Backend\Article;
+namespace App\Livewire\Backend\Article;
 
 use App\Models\Article;
 use Illuminate\Database\Eloquent\Builder;

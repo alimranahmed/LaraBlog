@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Backend\Feedback;
+namespace App\Livewire\Backend\Feedback;
 
 use App\Models\Feedback;
 use Livewire\Component;

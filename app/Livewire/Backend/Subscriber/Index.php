@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Backend\Subscriber;
+namespace App\Livewire\Backend\Subscriber;
 
 use App\Models\Subscriber;
 use Livewire\Component;

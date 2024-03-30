@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Backend\Keyword;
+namespace App\Livewire\Backend\Keyword;
 
 use App\Models\Keyword;
 use Livewire\Component;
