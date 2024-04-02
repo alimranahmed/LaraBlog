@@ -4,8 +4,10 @@ namespace App\Livewire\Backend\Comment;
 
 use App\Models\Article;
 use App\Models\Comment;
+use Illuminate\Contracts\View\View;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,15 +15,12 @@ class Index extends Component
 {
     use WithPagination;
 
-    public $article = '';
-
-    protected $queryString = [
-        'article' => ['except' => ''],
-    ];
+    #[Url]
+    public string $article = '';
 
     protected $listeners = ['commentDeleted' => '$refresh'];
 
-    public function render()
+    public function render(): View
     {
         $comments = $this->getComments();
 
@@ -35,7 +34,7 @@ class Index extends Component
             ->noReplies();
 
         if (auth()->user()->hasRole('author')) {
-            $authorsArticleIDs = Article::where('user_id', Auth::user()->id)->pluck('id');
+            $authorsArticleIDs = Article::query()->where('user_id', Auth::user()->id)->pluck('id');
 
             $commentQuery->whereIn('article_id', $authorsArticleIDs);
         }

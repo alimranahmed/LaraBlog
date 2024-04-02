@@ -12,7 +12,7 @@
         <form class="mt-5" wire:submit.prevent="submit">
             <div class="flex-row md:flex">
                 <div class="md:mr-3 w-full md:w-1/2">
-                    <input wire:model.defer="name"
+                    <input wire:model="name"
                            class="px-2 py-1 border border-indigo-300 rounded w-full"
                            type="text"
                            name="name"
@@ -21,7 +21,7 @@
                     @error('name') <span class="text-red-600 text-sm">{{ $message }}</span> @enderror
                 </div>
                 <div class="mt-3 w-full md:mt-0 md:w-1/2">
-                    <input wire:model.defer="email"
+                    <input wire:model="email"
                            class="px-2 py-1 border border-indigo-300 rounded w-full"
                            type="email"
                            name="email"
@@ -32,7 +32,7 @@
 
             </div>
             <div class="mt-3">
-            <textarea wire:model.defer="content"
+            <textarea wire:model="content"
                       class="px-2 py-1 border border-indigo-300 rounded w-full"
                       type="text"
                       rows="4"

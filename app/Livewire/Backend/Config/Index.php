@@ -3,34 +3,37 @@
 namespace App\Livewire\Backend\Config;
 
 use App\Models\Config;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 
 class Index extends Component
 {
-    public $editingConfig;
+    public array $editingConfig = [];
 
-    public $rules = [
+    public array $rules = [
         'editingConfig.name' => '',
         'editingConfig.value' => 'required',
     ];
 
-    public function render()
+    public function render(): View
     {
         $configs = Config::all();
 
         return view('livewire.backend.config.index', compact('configs'));
     }
 
-    public function startEditing(Config $config)
+    public function startEditing(Config $config): void
     {
-        $this->editingConfig = $config;
+        $this->editingConfig = $config->toArray();
     }
 
-    public function update()
+    public function update(): void
     {
         $data = $this->validate();
-        $this->editingConfig->update(Arr::get($data, 'editingConfig'));
-        $this->reset('editingConfig');
+        Config::query()->findOrFail($this->editingConfig['id'])
+            ->update(Arr::get($data, 'editingConfig'));
+
+        $this->reset(['editingConfig', 'editingConfigId']);
     }
 }

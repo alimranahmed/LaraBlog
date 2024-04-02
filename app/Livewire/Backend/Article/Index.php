@@ -3,27 +3,27 @@
 namespace App\Livewire\Backend\Article;
 
 use App\Models\Article;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 
 class Index extends Component
 {
-    public $category = '';
+    #[Url]
+    public string $category = '';
 
-    public $query = '';
+    #[Url]
+    public string $query = '';
 
-    public $keyword = '';
-
-    protected $queryString = [
-        'category' => ['except' => ''],
-        'keyword' => ['except' => ''],
-        'query' => ['except' => ''],
-    ];
+    #[Url]
+    public string $keyword = '';
 
     protected $listeners = ['articleDeleted' => '$refresh'];
 
-    public function render()
+    public function render(): View
     {
         $articles = $this->getArticles();
 

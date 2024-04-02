@@ -25,10 +25,12 @@ class Subscribe extends Component
     {
         $this->validate();
 
-        $subscriber = Subscriber::firstOrCreate(
-            ['email' => $this->email],
-            ['token' => $this->generateUniqueToken()]
-        );
+        /** @var Subscriber $subscriber */
+        $subscriber = Subscriber::query()
+            ->firstOrCreate(
+                ['email' => $this->email],
+                ['token' => $this->generateUniqueToken()]
+            );
 
         Mail::to($this->email)->queue(new SubscribeConfirmation($subscriber));
 

@@ -3,29 +3,31 @@
 namespace App\Livewire\Backend\Comment;
 
 use App\Models\Comment;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 
 class Edit extends Component
 {
-    public $rules = [
+    public array $rules = [
         'comment.content' => 'string|required',
         'comment.is_published' => 'boolean',
     ];
 
-    public $comment;
+    public ?Comment $comment;
 
-    public function mount(Comment $comment)
+    public function mount(Comment $comment): void
     {
         $this->comment = $comment;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.backend.comment.edit');
     }
 
-    public function update(Comment $comment)
+    public function update(Comment $comment): RedirectResponse
     {
         $data = $this->validate();
 

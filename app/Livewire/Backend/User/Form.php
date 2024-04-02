@@ -3,52 +3,55 @@
 namespace App\Livewire\Backend\User;
 
 use App\Models\User;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 
 class Form extends Component
 {
-    public $user;
+    public User $user;
 
-    public $rules = [
-        'user.name' => 'required',
-        'user.username' => '',
-        'user.email' => 'required|email',
-        'user.role' => 'required',
+    public array $rules = [
+        'userData.name' => 'required',
+        'userData.username' => '',
+        'userData.email' => 'required|email',
+        'userData.role' => 'required',
     ];
 
-    public $editingUser;
+    public array $userData = [];
 
-    public function mount(?User $user)
+    public function mount(?User $user): void
     {
-        $this->editingUser = $user;
         $this->user = $user;
-        $this->user->role = $this->user->roles()->value('id');
+        $this->userData = $user->toArray();
+        $this->userData['role'] = $user->roles()->value('id');
     }
 
-    public function render()
+    public function render(): View
     {
         $roles = Role::all();
 
         return view('livewire.backend.user.form', compact('roles'));
     }
 
-    public function submit()
+    public function submit(): void
     {
         $data = $this->validate();
 
-        $personalData = Arr::get($data, 'user');
+        $personalData = Arr::get($data, 'userData');
 
-        if ($this->editingUser->id) {
-            $this->editingUser->update($personalData);
-            $this->editingUser->roles()->detach();
-            $this->editingUser->assignRole($personalData['role']);
+        if ($this->user->id) {
+            $this->user->update($personalData);
+            $this->user->roles()->detach();
+            $this->user->assignRole($personalData['role']);
         } else {
-            $user = User::create($personalData);
+            /** @var User $user */
+            $user = User::query()->create($personalData);
             $user->assignRole($personalData['role']);
         }
 
-        return redirect()->to(route('backend.user.index'));
+        $this->redirectRoute('backend.user.index');
     }
 }

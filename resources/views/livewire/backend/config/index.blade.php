@@ -8,13 +8,13 @@
         <x-slot name="body">
             @foreach($configs as $config)
                 <tr>
-                    @if($editingConfig && $editingConfig->id == $config->id)
+                    @if($editingConfig && $editingConfig['id'] == $config->id)
                         <form>
                             <x-backend.table.td>
-                                <x-backend.form.input wire:model.defer="editingConfig.name" name="config.name" disabled></x-backend.form.input>
+                                <x-backend.form.input wire:model="editingConfig.name" name="config.name" disabled></x-backend.form.input>
                             </x-backend.table.td>
                             <x-backend.table.td>
-                                <x-backend.form.input wire:model.defer="editingConfig.value" name="config.name"></x-backend.form.input>
+                                <x-backend.form.input wire:model="editingConfig.value" name="config.name"></x-backend.form.input>
                             </x-backend.table.td>
                             <x-backend.table.td>
                                 <x-backend.form.button wire:click="update({{$config}})">Update</x-backend.form.button>

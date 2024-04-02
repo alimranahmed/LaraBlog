@@ -18,27 +18,28 @@ class Form extends Component
 {
     public Article $originalArticle;
 
-    public $article;
+    public array $articleData = [];
 
     public string $method;
 
     public array $rules = [
-        'article.heading' => 'required',
-        'article.slug' => 'required',
-        'article.category_id' => 'required',
-        'article.content' => 'required',
-        'article.language' => 'required',
-        'article.is_comment_enabled' => 'boolean',
-        'article.meta.description' => 'nullable|string',
-        'article.meta.image_url' => 'nullable|url',
+        'articleData.heading' => 'required',
+        'articleData.slug' => 'required',
+        'articleData.category_id' => 'required',
+        'articleData.content' => 'required',
+        'articleData.language' => 'required',
+        'articleData.is_comment_enabled' => 'boolean',
+        'articleData.meta.description' => 'nullable|string',
+        'articleData.meta.image_url' => 'nullable|url',
     ];
 
     public function mount(?Article $article = null): void
     {
         if ($article->id) {
             $this->originalArticle = $article;
-            $this->article = $article->toArray();
-            $this->article['keywords'] = $this->originalArticle->keywords->pluck('name')->implode(' ');
+            $this->articleData = $article->toArray();
+            $this->articleData['keywords'] = $article->keywords->pluck('name')->implode(' ');
+            $this->articleData['meta'] = $article->meta ?: [];
         }
 
         $this->method = $article->id ? 'put' : 'post';
@@ -46,8 +47,8 @@ class Form extends Component
 
     public function render(): View
     {
-        if (Arr::get($this->article, 'heading')) {
-            $this->article['slug'] = Str::slug(Arr::get($this->article, 'heading'), '-', Arr::get($this->article, 'language'));
+        if (Arr::get($this->articleData, 'heading')) {
+            $this->articleData['slug'] = Str::slug(Arr::get($this->articleData, 'heading'), '-', Arr::get($this->articleData, 'language'));
         }
         $categories = Category::query()->active()->get();
 
@@ -56,7 +57,7 @@ class Form extends Component
 
     public function submit(): void
     {
-        $data = Arr::get($this->validate(), 'article');
+        $data = Arr::get($this->validate(), 'articleData');
 
         if ($this->method == 'post') {
             $this->store($data);
@@ -100,7 +101,7 @@ class Form extends Component
 
         $this->originalArticle->keywords()->detach();
 
-        $keywordsToAttach = array_unique(explode(' ', Arr::get($this->article, 'keywords')));
+        $keywordsToAttach = array_unique(explode(' ', Arr::get($this->articleData, 'keywords')));
 
         foreach ($keywordsToAttach as $keywordToAttach) {
             /** @var Keyword $newKeyword */

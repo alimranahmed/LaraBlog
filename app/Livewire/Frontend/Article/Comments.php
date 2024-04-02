@@ -44,7 +44,7 @@ class Comments extends Component
         return view('livewire.frontend.article.comments');
     }
 
-    public function add()
+    public function add(): void
     {
         $this->validate();
 

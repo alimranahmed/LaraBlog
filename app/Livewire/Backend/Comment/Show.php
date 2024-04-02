@@ -3,33 +3,34 @@
 namespace App\Livewire\Backend\Comment;
 
 use App\Models\Comment;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 
 class Show extends Component
 {
-    public $comment;
+    public ?Comment $comment = null;
 
-    public $reply;
+    public array $reply = [];
 
-    public $rules = [
+    public array $rules = [
         'reply.content' => ['required'],
     ];
 
-    public function mount(Comment $comment)
+    public function mount(Comment $comment): void
     {
         $this->comment = $comment;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.backend.comment.show');
     }
 
-    public function submitReply()
+    public function submitReply(): void
     {
         $data = $this->validate();
-        Comment::create([
+        Comment::query()->create([
             'content' => Arr::get($data, 'reply.content'),
             'article_id' => $this->comment->article_id,
             'user_id' => auth()->id(),
@@ -44,7 +45,7 @@ class Show extends Component
         $this->comment->refresh();
     }
 
-    public function delete(Comment $comment)
+    public function delete(Comment $comment): void
     {
         $comment->delete();
         $this->comment->refresh();
