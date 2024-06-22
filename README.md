@@ -27,7 +27,7 @@ A full-featured blogging system for personal use. No frontend theme and anything
   * Can navigate articles based on categories.
 
 ### Installation Process
-1. Execute `git clone https://github.com/alimranahmed/LaraBlog.git` on your terminal to download this project.
+1. Execute `composer create-project alimranahmed/larablog` on your terminal to download this project.
 2. Go to the project root directory and execute `composer install` to install all PHP dependencies of the project
 3. Create a file named as .env and copy the content of .env.example to newly created .env file 
 4. Then execute `php artisan key:generate` on your terminal/cmd to generate environment key
