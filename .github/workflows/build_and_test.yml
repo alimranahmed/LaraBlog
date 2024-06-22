@@ -79,11 +79,20 @@ jobs:
           vendor/bin/phpunit --coverage-clover tests/coverage/clover.xml
           vendor/bin/pint
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+      - name: Generate coverage badge
+        uses: tj-actions/coverage-badge-go@v1
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: coverage/clover.xml
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: true
+          file: tests/coverage/clover.xml
+          output: tests/coverage/badge.svg
+
+      - name: Upload coverage badge
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-badge
+          path: tests/coverage/badge.svg
+
+      - name: Commit coverage badge
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update coverage badge
+          file_pattern: coverage-badge.svg
