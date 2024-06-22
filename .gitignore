@@ -19,3 +19,4 @@ _ide_helper.php
 *.swo
 /clover.xml
 .phpunit.result.cache
+.composer.lock
