@@ -1,4 +1,4 @@
-[![Test Coverage](https://raw.githubusercontent.com/alimranahmed/LaraBlog/main/tests/coverage/badge-coverage.svg)](https://packagist.org/packages/hi-folks/array)
+[![Test Coverage](https://raw.githubusercontent.com/alimranahmed/LaraBlog/main/badge-coverage.svg)](https://packagist.org/packages/alimranahmed/LaraBlog)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 
 
