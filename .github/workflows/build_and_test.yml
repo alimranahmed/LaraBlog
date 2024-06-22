@@ -76,23 +76,12 @@ jobs:
           DB_USERNAME: root
           DB_PASSWORD: password
         run: |
-          vendor/bin/phpunit --coverage-clover tests/coverage/clover.xml
+          vendor/bin/phpunit --coverage-clover clover.xml
           vendor/bin/pint
 
-      - name: Generate coverage badge
-        uses: tj-actions/coverage-badge-go@v1
+      - name: Generate test coverage badge
+        uses: timkrase/phpunit-coverage-badge@v1.2.0
         with:
-          file: tests/coverage/clover.xml
-          output: tests/coverage/badge.svg
-
-      - name: Upload coverage badge
-        uses: actions/upload-artifact@v2
-        with:
-          name: coverage-badge
-          path: tests/coverage/badge.svg
-
-      - name: Commit coverage badge
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: Update coverage badge
-          file_pattern: coverage-badge.svg
+          coverage_badge_path: 'tests/coverage/badge-coverage.svg'
+          push_badge: true
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
