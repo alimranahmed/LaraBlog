@@ -36,6 +36,10 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
+          extensions: pcov
+          ini-values: |
+            pcov.enabled=1
+          coverage: pcov
 
       - name: Cache dependencies
         uses: actions/cache@v1
@@ -72,5 +76,14 @@ jobs:
           DB_USERNAME: root
           DB_PASSWORD: password
         run: |
-          vendor/bin/phpunit
+          vendor/bin/phpunit --coverage-clover tests/coverage/clover.xml
           vendor/bin/pint
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/clover.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
