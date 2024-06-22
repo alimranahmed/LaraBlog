@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire;
 
-use App\Http\Livewire\Frontend\ContactForm;
+use App\Livewire\Frontend\ContactForm;
 use App\Mail\NotifyAdmin;
 use App\Models\Config;
 use Illuminate\Support\Facades\Mail;

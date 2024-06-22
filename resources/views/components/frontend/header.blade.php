@@ -19,8 +19,6 @@
 
     <x-frontend.google-analytics/>
 
-    @livewireStyles
-
 </head>
 <body class="bg-gray-50">
 <div class="border-b border-blue-200 mb-3">

@@ -12,7 +12,6 @@
 
     <title>{{$globalConfigs->site_title}}</title>
 
-    @livewireStyles
 </head>
 <body>
 
@@ -22,6 +21,5 @@
     {{$slot}}
 </div>
 
-@livewireScripts
 </body>
 </html>

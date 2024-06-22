@@ -16,11 +16,11 @@
                 <form>
                     <tr>
                         <td class="px-6 py-4">
-                            <x-backend.form.input type="text" wire:model.defer="category.name" name="category.name"
+                            <x-backend.form.input type="text" wire:model="category.name" name="category.name"
                                                   class="w-full" placeholder="Name"/>
                         </td>
                         <td class="px-6 py-4" colspan="2">
-                            <x-backend.form.input type="text" wire:model.defer="category.alias" name="category.alias"
+                            <x-backend.form.input type="text" wire:model="category.alias" name="category.alias"
                                                   class="w-full" placeholder="Alias"/>
                         </td>
                         <td class="px-6 py-4" wire:click="store">
@@ -31,7 +31,7 @@
             @endif
 
             @foreach($categories as $category)
-                <livewire:backend.category.index-row :category="$category->id" wire:key="{{$category->id}}"/>
+                <livewire:backend.category.index-row :category="$category" wire:key="{{$category->id}}"/>
             @endforeach
         </x-slot>
     </x-backend.table>

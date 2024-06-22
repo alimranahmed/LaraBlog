@@ -28,7 +28,7 @@
 
             <x-slot name="body">
                 @forelse($articles as $article)
-                    <livewire:backend.article.index-row :article="$article->id" wire:key="{{$article->id}}"/>
+                    <livewire:backend.article.index-row :article="$article" wire:key="{{$article->id}}"/>
                 @empty
                     <tr>
                         <x-backend.table.td colspan="100" class="text-gray-500 text-center">No article found</x-backend.table.td>

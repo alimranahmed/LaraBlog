@@ -4,7 +4,7 @@
             <x-backend.form.label :required="true">Language</x-backend.form.label>
             <x-backend.form.select required
                                    name="language"
-                                   wire:model="article.language" aria-label="Language">
+                                   wire:model.live="articleData.language" aria-label="Language">
                 <option value="">Select Language</option>
                 @foreach(config('fields.lang') as $key => $language)
                     <option value="{{$key}}">{{$language}}</option>
@@ -17,8 +17,8 @@
             <x-backend.form.input type="text" name="heading"
                                   required
                                   class="w-full"
-                                  name="article.heading"
-                                  wire:model.debounce.500ms="article.heading"
+                                  name="articleData.heading"
+                                  wire:model.live.debounce.500ms="articleData.heading"
                                   aria-label="Heading"
                                   placeholder="Heading..."/>
         </div>
@@ -28,8 +28,8 @@
             <x-backend.form.input type="text" name="slug"
                                   required
                                   class="w-full"
-                                  name="article.slug"
-                                  wire:model.defer="article.slug"
+                                  name="articleData.slug"
+                                  wire:model="articleData.slug"
                                   aria-label="slug"
                                   placeholder="Slug..."/>
         </div>
@@ -37,7 +37,7 @@
         <div class="mb-3">
             <x-backend.form.label :required="true">Category</x-backend.form.label>
             <x-backend.form.select name="category" required
-                                   wire:model.defer="article.category_id"
+                                   wire:model="articleData.category_id"
                                    aria-label="Category">
                 <option value="">Select Category</option>
                 @foreach($categories as $category)
@@ -49,8 +49,8 @@
         <div class="mb-3">
             <x-backend.form.label :required="true">Content</x-backend.form.label>
             <x-backend.form.textarea class="w-full" required
-                                     name="article.content"
-                                     wire:model.defer="article.content"
+                                     name="articleData.content"
+                                     wire:model="articleData.content"
                                      aria-label="Content" rows="35"
                                      placeholder="Content"></x-backend.form.textarea>
         </div>
@@ -61,16 +61,16 @@
                 <x-backend.form.label>Description</x-backend.form.label>
                 <x-backend.form.textarea
                     class="w-full"
-                    wire:model.defer="article.meta.description"
-                    name="article.meta.description"
+                    wire:model="articleData.meta.description"
+                    name="articleData.meta.description"
                     placeholder="Description for Social Media/SEO"/>
             </div>
             <div class="mb-2">
                 <x-backend.form.label>Image URL</x-backend.form.label>
                 <x-backend.form.input
                     class="w-full"
-                    wire:model.defer="article.meta.image_url"
-                    name="article.meta.image_url"
+                    wire:model="articleData.meta.image_url"
+                    name="articleData.meta.image_url"
                     placeholder="URL for image of social media thumbnail"/>
             </div>
         </div>
@@ -79,17 +79,17 @@
             <x-backend.form.label>Keywords</x-backend.form.label>
             <x-backend.form.input class="w-full"
                                   type="text"
-                                  name="article.keywords"
-                                  wire:model.defer="article.keywords"
+                                  name="articleData.keywords"
+                                  wire:model="articleData.keywords"
                                   placeholder="Keywords" aria-label="Keywords"/>
             <span class="text-sm italic text-gray-500">*Separate the keywords using space</span>
         </div>
 
         <div class="mb-3">
             <input type="checkbox"
-                   name="article.is_comment_enabled"
+                   name="articleData.is_comment_enabled"
                    id="is-comment-enabled"
-                   wire:model.defer="article.is_comment_enabled"
+                   wire:model="articleData.is_comment_enabled"
                    aria-label="Comment Enable">
             <x-backend.form.label for="is-comment-enabled">Comment enable</x-backend.form.label>
         </div>

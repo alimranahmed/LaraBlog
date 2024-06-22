@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire;
 
-use App\Http\Livewire\Frontend\Subscribe;
+use App\Livewire\Frontend\Subscribe;
 use App\Mail\SubscribeConfirmation;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Livewire;

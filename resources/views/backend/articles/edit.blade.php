@@ -1,3 +1,3 @@
 <x-backend>
-    <livewire:backend.article.form :article="$article->id"/>
+    <livewire:backend.article.form :article="$article"/>
 </x-backend>

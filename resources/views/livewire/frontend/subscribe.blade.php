@@ -6,7 +6,7 @@
     @else
         <form wire:submit.prevent="subscribe">
             <input type="email"
-                   wire:model.defer="email"
+                   wire:model="email"
                    required
                    name="email"
                    class="px-2 py-1 rounded border border-green-400 focus:border-green-600 focus:outline-none"
