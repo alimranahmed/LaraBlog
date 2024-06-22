@@ -76,7 +76,7 @@ jobs:
           DB_USERNAME: root
           DB_PASSWORD: password
         run: |
-          vendor/bin/phpunit --coverage-clover tests/coverage/clover.xml
+          php artisan test --coverage --coverage-clover tests/coverage/clover.xml
           vendor/bin/pint
 
       - name: Generate test coverage badge
