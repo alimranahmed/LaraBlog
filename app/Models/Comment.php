@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    use HasFactory;
     use CanFormatDates;
+    use HasFactory;
 
     protected $guarded = ['id'];
 

@@ -17,10 +17,10 @@ use Spatie\Permission\Traits\HasRoles;
  */
 class User extends Authenticatable
 {
+    use CanFormatDates;
     use HasFactory;
     use HasRoles;
     use Notifiable;
-    use CanFormatDates;
 
     protected $casts = [
         'email_verified_at' => 'datetime',

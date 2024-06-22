@@ -23,8 +23,8 @@ use Spatie\LaravelMarkdown\MarkdownRenderer;
  */
 class Article extends Model
 {
-    use HasFactory;
     use CanFormatDates;
+    use HasFactory;
 
     protected $guarded = ['id'];
 

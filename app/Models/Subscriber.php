@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subscriber extends Model
 {
-    use HasFactory;
     use CanFormatDates;
+    use HasFactory;
 
     protected $guarded = ['id'];
 }

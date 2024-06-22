@@ -4,7 +4,6 @@ namespace App\Livewire\Backend\User;
 
 use App\Models\User;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
