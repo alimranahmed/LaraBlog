@@ -84,3 +84,4 @@ jobs:
         with:
           coverage_badge_path: 'badge-coverage.svg'
           push_badge: true
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
