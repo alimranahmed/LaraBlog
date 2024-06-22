@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\DB;
  */
 class Keyword extends Model
 {
-    use HasFactory;
     use CanFormatDates;
+    use HasFactory;
 
     protected $guarded = ['id'];
 

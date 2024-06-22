@@ -10,8 +10,8 @@ use Illuminate\Support\Collection;
 
 class Category extends Model
 {
-    use HasFactory;
     use CanFormatDates;
+    use HasFactory;
 
     protected $guarded = ['id'];
 
