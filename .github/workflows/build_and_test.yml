@@ -76,12 +76,12 @@ jobs:
           DB_USERNAME: root
           DB_PASSWORD: password
         run: |
-          vendor/bin/phpunit --coverage-clover clover.xml
+          vendor/bin/phpunit --coverage-clover tests/coverage/clover.xml
           vendor/bin/pint
 
       - name: Generate test coverage badge
         uses: timkrase/phpunit-coverage-badge@v1.2.0
         with:
-          coverage_badge_path: 'badge-coverage.svg'
+          coverage_badge_path: 'tests/coverage/badge-coverage.svg'
           push_badge: true
           repo_token: ${{ secrets.GITHUB_TOKEN }}
