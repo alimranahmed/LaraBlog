@@ -9,7 +9,6 @@ class CreatePermissionTables extends Migration
     /**
      * Run the migrations.
      *
-     * @return void
      *
      * @throws Exception
      */
@@ -103,7 +102,6 @@ class CreatePermissionTables extends Migration
     /**
      * Reverse the migrations.
      *
-     * @return void
      *
      * @throws Exception
      */
