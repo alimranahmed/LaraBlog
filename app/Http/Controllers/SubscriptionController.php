@@ -9,7 +9,7 @@ class SubscriptionController extends Controller
 {
     public function confirm(Request $request)
     {
-        $this->validate($request, ['token' => 'required']);
+        $request->validate(['token' => 'required']);
 
         $subscriber = Subscriber::where('token', $request->token)->first();
 
@@ -24,7 +24,7 @@ class SubscriptionController extends Controller
 
     public function unsubscribe(Request $request)
     {
-        $this->validate($request, ['token' => 'required']);
+        $request->validate(['token' => 'required']);
 
         $subscriber = Subscriber::where('token', $request->token)->first();
 

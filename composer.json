@@ -1,6 +1,6 @@
 {
     "name": "alimranahmed/larablog",
-    "description": "A full-featured blog using Laravel 8, TailwindCSS & VueJS",
+    "description": "A full-featured blog using Laravel, TailwindCSS & Livewire",
     "keywords": [
         "blog",
         "laravel"
@@ -20,7 +20,7 @@
         "codeat3/blade-teeny-icons": "^1.10",
         "codeat3/blade-unicons": "^1.8",
         "guzzlehttp/guzzle": "^7.8",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.4",
         "masbug/flysystem-google-drive-ext": "^2.3",
@@ -31,19 +31,14 @@
         "spatie/laravel-sitemap": "^7.2"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.23.0",
+        "fakerphp/faker": "^1.23",
         "laravel/breeze": "^2.0",
         "laravel/pint": "^1.15",
         "laravel/telescope": "^5.0",
-        "mockery/mockery": "^1.6.11",
+        "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.1",
         "phpunit/phpunit": "^11.0",
         "spatie/laravel-ignition": "^2.5"
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
     },
     "autoload": {
         "psr-4": {
@@ -51,10 +46,6 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ],
         "files": [
             "app/Helpers/helpers.php"
         ]
@@ -65,12 +56,6 @@
         }
     },
     "scripts": {
-        "test": [
-            "vendor/bin/phpunit"
-        ],
-        "format": [
-            "vendor/bin/php-cs-fixer fix"
-        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
@@ -84,6 +69,11 @@
             "@php artisan migrate --graceful --ansi"
         ]
     },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
@@ -93,6 +83,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }

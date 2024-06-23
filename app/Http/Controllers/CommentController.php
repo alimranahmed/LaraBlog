@@ -29,7 +29,7 @@ class CommentController extends Controller
     public function confirmComment(Request $request, $commentId)
     {
         try {
-            $this->validate($request, ['token' => 'required']);
+            $request->validate(['token' => 'required']);
 
             $comment = Comment::where('id', $commentId)
                 ->where('token', $request->get('token'))
