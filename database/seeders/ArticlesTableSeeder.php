@@ -1,6 +1,11 @@
 <?php
 
+namespace Database\Seeders;
+
 use App\Models\Article;
+use App\Models\Category;
+use App\Models\User;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 class ArticlesTableSeeder extends Seeder
@@ -13,11 +18,11 @@ class ArticlesTableSeeder extends Seeder
     public function run()
     {
         if (app()->environment() != 'production') {
-            $faker = \Faker\Factory::create();
+            $faker = Factory::create();
             foreach (range(0, 10) as $i) {
                 Article::factory()->create([
-                    'category_id' => $faker->randomElement(\App\Models\Category::all()->pluck('id')->toArray()),
-                    'user_id' => $faker->randomElement(\App\Models\User::all()->pluck('id')->toArray()),
+                    'category_id' => $faker->randomElement(Category::all()->pluck('id')->toArray()),
+                    'user_id' => $faker->randomElement(User::all()->pluck('id')->toArray()),
                 ]);
             }
             $articles = Article::all();

@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -7,7 +9,7 @@ use Spatie\Permission\PermissionRegistrar;
 
 class RolesAndPermissionsTableSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $this->saveRole();
         $this->savePermissions();
@@ -15,9 +17,9 @@ class RolesAndPermissionsTableSeeder extends Seeder
         app(PermissionRegistrar::class)->forgetCachedPermissions();
     }
 
-    public function saveRole()
+    public function saveRole(): bool
     {
-        Role::whereNotIn('name', config('acl.roles'))->delete();
+        Role::query()->whereNotIn('name', config('acl.roles'))->delete();
 
         $roles = [];
         $sl = 0;
@@ -34,10 +36,10 @@ class RolesAndPermissionsTableSeeder extends Seeder
             $sl++;
         }
 
-        return \Spatie\Permission\Models\Role::insert($roles);
+        return Role::query()->insert($roles);
     }
 
-    public function savePermissions()
+    public function savePermissions(): bool
     {
         Permission::whereNotIn('name', array_keys(config('acl.permissions')))->delete();
 
@@ -56,13 +58,13 @@ class RolesAndPermissionsTableSeeder extends Seeder
             $sl++;
         }
 
-        return \Spatie\Permission\Models\Permission::insert($permissions);
+        return Permission::query()->insert($permissions);
     }
 
-    public function generateRoleBasedPermissions()
+    public function generateRoleBasedPermissions(): void
     {
         foreach (config('acl.roles') as $role) {
-            $getRole = \Spatie\Permission\Models\Role::where('name', $role)->first();
+            $getRole = Role::where('name', $role)->first();
             $sl = 0;
             $formatRoles = [];
             foreach (config('acl.permissions') as $permission => $roles) {

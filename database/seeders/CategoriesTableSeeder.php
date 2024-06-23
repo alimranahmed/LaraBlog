@@ -1,15 +1,17 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\Category;
+use DateTime;
 use Illuminate\Database\Seeder;
 
 class CategoriesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         $categories[] = [
             'name' => 'Object Oriented Programming',
@@ -60,6 +62,6 @@ class CategoriesTableSeeder extends Seeder
             'updated_at' => new DateTime(),
         ];
 
-        \App\Models\Category::insert($categories);
+        Category::query()->insert($categories);
     }
 }

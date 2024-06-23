@@ -71,7 +71,7 @@ class ArticleController extends Controller
      */
     public function search(Request $request): View
     {
-        $this->validate($request, ['query_string' => 'required']);
+        $request->validate(['query_string' => 'required']);
 
         $queryString = $request->get('query_string');
 

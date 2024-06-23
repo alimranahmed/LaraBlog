@@ -1,18 +1,19 @@
 <?php
 
+namespace Database\Seeders;
+
+use App\Models\Keyword;
 use Illuminate\Database\Seeder;
 
 class KeywordsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (env('APP_ENV') != 'production') {
-            \App\Models\Keyword::factory()->count(5)->create();
+            Keyword::factory()->count(5)->create();
         }
     }
 }

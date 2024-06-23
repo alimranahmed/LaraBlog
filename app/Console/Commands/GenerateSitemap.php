@@ -14,7 +14,7 @@ class GenerateSitemap extends Command
 
     protected $description = 'Generate sitemap';
 
-    public function handle()
+    public function handle(): void
     {
         $paginatedArticles = Article::getPaginated();
         $latestArticleAt = $paginatedArticles->first()->created_at ?? Carbon::now()->toDateString();
