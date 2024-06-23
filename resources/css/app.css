@@ -4,7 +4,7 @@
 
 body {
     font-family: Whitney SSm A, Whitney SSm B, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-    @apply text-slate-800
+    @apply text-slate-800;
 }
 
 h1 {
@@ -57,7 +57,7 @@ pre code {
 }
 
 .article-content p {
-    @apply mb-3
+    @apply mb-3;
 }
 
 .article-content blockquote {
