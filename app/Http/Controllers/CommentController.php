@@ -13,21 +13,6 @@ use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
-    public function index(): View
-    {
-        return view('backend.comments.index');
-    }
-
-    public function edit(Comment $comment): View
-    {
-        return view('backend.comments.edit', compact('comment'));
-    }
-
-    public function show(Comment $comment): View
-    {
-        return view('backend.comments.show', compact('comment'));
-    }
-
     public function confirmComment(Request $request, $commentId): View|RedirectResponse
     {
         try {

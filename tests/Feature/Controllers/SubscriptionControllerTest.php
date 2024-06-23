@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Controllers;
 
 use App\Models\Subscriber;
 use Tests\TestCase;
 
-class SubscriptionTest extends TestCase
+class SubscriptionControllerTest extends TestCase
 {
     public function testUnsubscribe()
     {

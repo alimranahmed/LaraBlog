@@ -16,11 +16,22 @@ use Tests\TestCase;
 
 class CommentTest extends TestCase
 {
+    public function testAddValidation()
+    {
+        $article = Article::factory()->create();
+
+        Livewire::test(Comments::class, ['article' => $article])
+            ->call('add')
+            ->assertHasErrors('comment.name')
+            ->assertHasErrors('comment.email')
+            ->assertHasErrors('comment.content');
+    }
+
     public function testAdd()
     {
         Mail::fake();
 
-        Config::create(['name' => 'admin_email', 'value' => 'imran@example.com']);
+        Config::query()->create(['name' => 'admin_email', 'value' => 'imran@example.com']);
         Role::findOrCreate('reader');
 
         $article = Article::factory()->create();
@@ -35,12 +46,12 @@ class CommentTest extends TestCase
         Mail::assertQueued(CommentConfirmation::class);
         Mail::assertQueued(NotifyAdmin::class);
 
-        $comment = Comment::where('article_id', $article->id)->where('content', $content)->first();
+        $comment = Comment::query()->where('article_id', $article->id)->where('content', $content)->first();
         $this->assertNotNull($comment);
         $this->assertEquals(0, $comment->is_published);
         $this->assertEquals(0, $comment->is_confirmed);
 
-        $user = User::where('email', $email)->first();
+        $user = User::query()->where('email', $email)->first();
         $this->assertNotNull($user);
         $this->assertEquals($name, $user->name);
 

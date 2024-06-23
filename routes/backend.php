@@ -1,13 +1,13 @@
 <?php
 
 use App\Http\Controllers\Backend\ArticleController;
+use App\Http\Controllers\Backend\ConfigController;
+use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\FeedbackController;
+use App\Http\Controllers\Backend\KeywordController;
 use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\ConfigController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FeedbackController;
-use App\Http\Controllers\KeywordController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 

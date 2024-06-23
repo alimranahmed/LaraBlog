@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Controllers;
 
 use App\Models\Article;
 use App\Models\Category;
@@ -8,7 +8,7 @@ use App\Models\Keyword;
 use App\Models\User;
 use Tests\TestCase;
 
-class KeywordTest extends TestCase
+class KeywordControllerTest extends TestCase
 {
     public function test_get_articles()
     {

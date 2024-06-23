@@ -28,11 +28,7 @@ Route::get('keyword/article/{keywordName}', [KeywordController::class, 'getArtic
 Route::get('search', [ArticleController::class, 'search'])->name('search-article');
 
 //Comment
-Route::post('comment/{articleId}', [CommentController::class, 'store'])->name('add-comment');
 Route::get('comment/{commentId}/confirm', [CommentController::class, 'confirmComment'])->name('confirm-comment');
-
-//Category
-Route::get('category/{categoryId}', [CategoryController::class, 'show'])->name('get-category');
 
 Route::view('pages/about', 'frontend.pages.about')->name('page.about');
 

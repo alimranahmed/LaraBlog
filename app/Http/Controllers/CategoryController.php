@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index(): View
-    {
-        return view('backend.categories.index');
-    }
-
     public function getArticles(Request $request, $categoryAlias): View
     {
         $articles = Article::getPaginated($request);
