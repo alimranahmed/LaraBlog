@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subscriber;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
 {
-    public function confirm(Request $request)
+    public function confirm(Request $request): RedirectResponse
     {
         $request->validate(['token' => 'required']);
 
-        $subscriber = Subscriber::where('token', $request->token)->first();
+        $subscriber = Subscriber::query()->where('token', $request->token)->first();
 
         if (is_null($subscriber)) {
             return redirect()->route('home')->with('error', 'Invalid request');
@@ -22,7 +23,7 @@ class SubscriptionController extends Controller
         return redirect()->route('home')->with('success', 'Congratulation, we are connected now!');
     }
 
-    public function unsubscribe(Request $request)
+    public function unsubscribe(Request $request): RedirectResponse
     {
         $request->validate(['token' => 'required']);
 

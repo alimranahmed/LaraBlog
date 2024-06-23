@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function showLoginForm()
+    public function showLoginForm(): View|RedirectResponse
     {
         if (Auth::check()) {
             return redirect()->route('admin-dashboard');
@@ -16,7 +18,7 @@ class AuthController extends Controller
         return view('backend.auth');
     }
 
-    public function login(Request $request)
+    public function login(Request $request): RedirectResponse
     {
         $request->validate([
             'email' => 'required|email',
@@ -34,7 +36,7 @@ class AuthController extends Controller
         return back()->with('auth_error', 'Invalid credentials')->withInput();
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
         Auth::logout();
 

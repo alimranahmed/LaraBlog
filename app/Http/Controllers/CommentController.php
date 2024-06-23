@@ -5,33 +5,37 @@ namespace App\Http\Controllers;
 use App\Mail\NotifyCommentThread;
 use App\Models\Comment;
 use App\Models\User;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         return view('backend.comments.index');
     }
 
-    public function edit(Comment $comment)
+    public function edit(Comment $comment): View
     {
         return view('backend.comments.edit', compact('comment'));
     }
 
-    public function show(Comment $comment)
+    public function show(Comment $comment): View
     {
         return view('backend.comments.show', compact('comment'));
     }
 
-    public function confirmComment(Request $request, $commentId)
+    public function confirmComment(Request $request, $commentId): View|RedirectResponse
     {
         try {
             $request->validate(['token' => 'required']);
 
-            $comment = Comment::where('id', $commentId)
+            /** @var Comment $comment */
+            $comment = Comment::query()
+                ->where('id', $commentId)
                 ->where('token', $request->get('token'))
                 ->with('article')
                 ->first();
@@ -52,11 +56,11 @@ class CommentController extends Controller
 
             //notify all user of the comment thread about the new comment except him person who replied
             if ($comment->parent_comment_id) {
-                $threadUserIDs = Comment::where('parent_comment_id', $comment->parent_comment_id)
+                $threadUserIDs = Comment::query()->where('parent_comment_id', $comment->parent_comment_id)
                     ->orWhere('id', $comment->parent_comment_id)
                     ->pluck('user_id');
 
-                $threadUserEmails = User::whereIn('id', $threadUserIDs)
+                $threadUserEmails = User::query()->whereIn('id', $threadUserIDs)
                     ->where('email', '!=', $comment->user->email)
                     ->pluck('email')
                     ->unique()

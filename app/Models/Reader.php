@@ -9,12 +9,12 @@ class Reader extends Model
 {
     protected $guarded = ['id'];
 
-    public function scopeVerified(Builder $builder)
+    public function scopeVerified(Builder $builder): Builder
     {
         return $builder->where('is_verified', 1);
     }
 
-    public function scopeSubscribed(Builder $builder)
+    public function scopeSubscribed(Builder $builder): Builder
     {
         return $builder->where('notify', 1);
     }

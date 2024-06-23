@@ -5,17 +5,19 @@ namespace App\Http\Controllers;
 use App\Mail\NotifyAdmin;
 use App\Models\Config;
 use App\Models\Feedback;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class FeedbackController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         return view('backend.feedback.index');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
             'email' => 'required|email',
@@ -25,7 +27,7 @@ class FeedbackController extends Controller
 
         $data['ip'] = $_SERVER['REMOTE_ADDR'];
 
-        $feedback = Feedback::create($data);
+        $feedback = Feedback::query()->create($data);
 
         Mail::to(Config::get('admin_email'))->queue(new NotifyAdmin($feedback, route('login-form')));
 
