@@ -1,7 +1,9 @@
 <?php
+namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class UsersTableSeeder extends Seeder
@@ -11,14 +13,14 @@ class UsersTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         if (env('APP_ENV') == 'local') {
             $owner = User::create(
                 [
                     'name' => 'Al- Imran Ahmed',
                     'username' => 'owner',
-                    'password' => \Hash::make('owner'),
+                    'password' => Hash::make('owner'),
                     'email' => 'owner@gmail.com',
                     'last_ip' => '127.0.0.1',
                 ]
@@ -28,7 +30,7 @@ class UsersTableSeeder extends Seeder
                 [
                     'name' => 'Admin',
                     'username' => 'admin',
-                    'password' => \Hash::make('admin'),
+                    'password' => Hash::make('admin'),
                     'email' => 'admin@gmail.com',
                     'last_ip' => '127.0.0.1',
                 ]
@@ -38,7 +40,7 @@ class UsersTableSeeder extends Seeder
                 [
                     'name' => 'Author',
                     'username' => 'author',
-                    'password' => \Hash::make('author'),
+                    'password' => Hash::make('author'),
                     'email' => 'author@gmail.com',
                     'last_ip' => '127.0.0.1',
                 ]
@@ -47,7 +49,7 @@ class UsersTableSeeder extends Seeder
                 [
                     'name' => 'Reader',
                     'username' => 'reader',
-                    'password' => \Hash::make('reader'),
+                    'password' => Hash::make('reader'),
                     'email' => 'reader@gmail.com',
                     'last_ip' => '127.0.0.1',
                 ]

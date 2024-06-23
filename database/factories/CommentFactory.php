@@ -19,7 +19,7 @@ class CommentFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'content' => $this->faker->paragraph,
@@ -32,7 +32,7 @@ class CommentFactory extends Factory
         ];
     }
 
-    public function published()
+    public function published(): CommentFactory
     {
         return $this->state([
             'is_published' => 1,
@@ -40,7 +40,7 @@ class CommentFactory extends Factory
         ]);
     }
 
-    public function unpublished()
+    public function unpublished(): CommentFactory
     {
         return $this->state([
             'is_published' => 0,

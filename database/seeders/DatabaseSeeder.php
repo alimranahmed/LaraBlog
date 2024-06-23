@@ -1,4 +1,5 @@
 <?php
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
@@ -19,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ArticlesTableSeeder::class);
         $this->call(CommentsTableSeeder::class);
         $this->call(ConfigsTableSeeder::class);
-        if (env('APP_ENV') == 'local') {
+        if (app()->environment('local')) {
             $this->command->info('All table seeded successfully!');
             $this->command->info('username: owner@gmail.com | password: owner');
         }

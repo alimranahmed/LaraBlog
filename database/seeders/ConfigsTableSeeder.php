@@ -1,5 +1,7 @@
 <?php
+namespace Database\Seeders;
 
+use App\Models\Config;
 use Illuminate\Database\Seeder;
 
 class ConfigsTableSeeder extends Seeder
@@ -9,9 +11,9 @@ class ConfigsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        \App\Models\Config::insert([
+        Config::query()->insert([
             ['name' => 'site_name', 'value' => 'Al- Imran Ahmed (-'],
             ['name' => 'site_title', 'value' => 'Al- Imran Ahmed (-'],
             ['name' => 'copyright_owner', 'value' => 'Al- Imran Ahmed (-'],
