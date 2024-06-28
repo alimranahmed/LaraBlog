@@ -25,7 +25,7 @@ class ArticleController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-        if (!$article->hasAuthorization($user)) {
+        if (! $article->hasAuthorization($user)) {
             return redirect()->route('home')->with('errorMsg', 'Unauthorized request');
         }
 

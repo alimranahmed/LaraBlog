@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Keyword;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 
 class KeywordController extends Controller
 {

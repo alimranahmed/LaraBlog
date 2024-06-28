@@ -93,7 +93,7 @@ class ArticleControllerTest extends TestCase
 
         $this->get("article/{$article->id}/{$article->heading}")->assertOk();
 
-        $this->get("article/".Str::random()."/{$article->heading}")
+        $this->get('article/'.Str::random()."/{$article->heading}")
             ->assertRedirectToRoute('home');
     }
 
@@ -107,7 +107,7 @@ class ArticleControllerTest extends TestCase
             'is_deleted' => 0,
         ]);
 
-        $this->get("search?query_string=searched")
+        $this->get('search?query_string=searched')
             ->assertOk()
             ->assertSee($article->heading)
             ->assertSee($article->published_at->format('M d, Y'))

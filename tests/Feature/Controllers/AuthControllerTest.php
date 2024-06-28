@@ -33,7 +33,7 @@ class AuthControllerTest extends TestCase
     {
         $user = User::factory()->create([
             'email' => 'test@example.com',
-            'password' => Hash::make($password = 'password')
+            'password' => Hash::make($password = 'password'),
         ]);
 
         $this->post('admin/login', [
@@ -60,7 +60,7 @@ class AuthControllerTest extends TestCase
             'password' => '',
             'remember_me' => '',
         ])->assertStatus(302)
-        ->assertSessionHasErrors(['email', 'password']);
+            ->assertSessionHasErrors(['email', 'password']);
     }
 
     public function testLogout()

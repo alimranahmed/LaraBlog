@@ -1,19 +1,20 @@
 <?php
 
 use App\Http\Controllers\Backend\ArticleController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CommentController;
 use App\Http\Controllers\Backend\ConfigController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\FeedbackController;
 use App\Http\Controllers\Backend\KeywordController;
 use App\Http\Controllers\Backend\SubscriberController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () {
     //profile
     Route::get('profile', [UserController::class, 'profile'])->name('user-profile');
+
     //dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin-dashboard');
 

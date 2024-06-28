@@ -2,10 +2,13 @@
 
 namespace Tests\Feature\Controllers;
 
+use App\Http\Controllers\HomeController;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Config;
 use App\Models\User;
+use Exception;
+use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class HomeControllerTest extends TestCase
@@ -41,5 +44,17 @@ class HomeControllerTest extends TestCase
             ->assertSee("{$category->name}")
             ->assertDontSee('Unpublished Heading')
             ->assertSee(Config::get('site_title'));
+    }
+
+    public function testGetMessage()
+    {
+        $controller = new HomeController();
+        $e = new Exception('Test exception');
+        $message = $controller->getMessage($e);
+        $this->assertEquals($e->getLine().': '.$e->getFile().' Test exception', $message);
+
+        $e = ValidationException::withMessages(['key' => 'error message']);
+        $message = $controller->getMessage($e);
+        $this->assertEquals($e->getMessage(), $message);
     }
 }

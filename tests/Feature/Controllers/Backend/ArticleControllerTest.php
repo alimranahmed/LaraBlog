@@ -16,7 +16,7 @@ class ArticleControllerTest extends TestCase
     {
         parent::setUp();
         $this->user = User::factory()->create();
-        $role = Role::query()->createOrFirst(['name' => 'owner']);
+        $role = Role::findOrCreate('owner');
         $this->user->assignRole($role);
     }
 
