@@ -85,7 +85,8 @@ class Article extends Model
 
     public function hasAuthorization(User $user): bool
     {
-        return $user->hasRole(['author']) && $this->user_id != $user->id;
+        return $user->hasAnyRole(['owner', 'admin'])
+        || ($user->hasRole(['author']) && $this->user_id == $user->id);
     }
 
     public function scopeSearch(Builder $builder, $query = ''): Builder

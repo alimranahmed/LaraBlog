@@ -81,7 +81,7 @@ class ArticleControllerTest extends TestCase
             ->assertDontSee('Unpublished content');
     }
 
-    public function testShoById()
+    public function testShowById()
     {
         $article = Article::factory()->published()->create([
             'heading' => 'Test Heading',
