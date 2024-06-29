@@ -34,6 +34,6 @@ class Index extends Component
         Config::query()->findOrFail($this->editingConfig['id'])
             ->update(Arr::get($data, 'editingConfig'));
 
-        $this->reset(['editingConfig', 'editingConfigId']);
+        $this->reset(['editingConfig']);
     }
 }
