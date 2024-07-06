@@ -9,6 +9,7 @@ use App\Models\Config;
 use App\Models\User;
 use Exception;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class HomeControllerTest extends TestCase
@@ -44,6 +45,21 @@ class HomeControllerTest extends TestCase
             ->assertSee("{$category->name}")
             ->assertDontSee('Unpublished Heading')
             ->assertSee(Config::get('site_title'));
+    }
+
+    public function testAdminDashboard()
+    {
+        Category::factory()->create();
+        $admin = Role::findOrCreate('admin');
+        $user = User::factory()->create();
+        $user->assignRole($admin);
+
+        $this->actingAs($user)
+            ->get('/')
+            ->assertViewIs('backend.dashboard')
+            ->assertViewHas('categories')
+            ->assertViewHas('latestComments')
+            ->assertViewHas('latestFeedbacks');
     }
 
     public function testGetMessage()
