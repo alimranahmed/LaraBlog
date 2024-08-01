@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Livewire\Article;
+namespace Tests\Feature\Livewire\Frontend\Article;
 
 use App\Livewire\Frontend\Article\Comments;
 use App\Mail\CommentConfirmation;

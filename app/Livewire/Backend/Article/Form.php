@@ -33,16 +33,16 @@ class Form extends Component
         'articleData.meta.image_url' => 'nullable|url',
     ];
 
-    public function mount(?Article $article = null): void
+    public function mount($article = null): void
     {
-        if ($article->id) {
+        if ($article?->id) {
             $this->originalArticle = $article;
             $this->articleData = $article->toArray();
             $this->articleData['keywords'] = $article->keywords->pluck('name')->implode(' ');
             $this->articleData['meta'] = $article->meta ?: [];
         }
 
-        $this->method = $article->id ? 'put' : 'post';
+        $this->method = $article?->id ? 'put' : 'post';
     }
 
     public function render(): View
@@ -75,7 +75,7 @@ class Form extends Component
         $newArticle = Article::query()->create($articleData);
 
         //add keywords
-        $keywordsToAttach = array_unique(explode(' ', Arr::get($this->article, 'keywords')));
+        $keywordsToAttach = array_unique(explode(' ', Arr::get($this->articleData, 'keywords')));
 
         foreach ($keywordsToAttach as $keywordToAttach) {
             if (empty($keywordToAttach)) {

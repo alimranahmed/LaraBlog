@@ -1,0 +1,135 @@
+<?php
+
+namespace Tests\Feature\Livewire\Backend\Article;
+
+use App\Livewire\Backend\Article\Form;
+use App\Livewire\Backend\Config\Index;
+use App\Mail\NotifySubscriberForNewArticle;
+use App\Models\Article;
+use App\Models\Category;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+use Livewire\Livewire;
+use Symfony\Component\HttpFoundation\Response;
+use Tests\TestCase;
+
+class FormTest extends TestCase
+{
+
+    public function testRender(): void
+    {
+        Livewire::test(Form::class)
+            ->assertStatus(Response::HTTP_OK)
+            ->assertViewIs('livewire.backend.article.form')
+            ->assertViewHas('categories');
+    }
+
+    public function test_initializes_correctly_without_article()
+    {
+        Livewire::test(Form::class)
+            ->assertSet('method', 'post')
+            ->assertSet('articleData', []);
+    }
+
+    public function test_initializes_correctly_with_article()
+    {
+        $article = Article::factory()->create();
+        Livewire::test(Form::class, ['article' => $article])
+            ->assertSet('method', 'put')
+            ->assertSet('articleData.heading', $article->heading)
+            ->assertSet('articleData.slug', $article->slug)
+            ->assertSet('articleData.category_id', $article->category_id);
+    }
+
+    public function test_generates_slug_when_heading_changes()
+    {
+        Livewire::test(Form::class)
+            ->set('articleData.heading', 'New Article')
+            ->set('articleData.language', 'en')
+            ->assertSet('articleData.slug', Str::slug('New Article'));
+    }
+
+    public function test_validates_article_data_correctly()
+    {
+        Livewire::test(Form::class)
+            ->set('articleData.heading', '')
+            ->set('articleData.slug', '')
+            ->set('articleData.category_id', null)
+            ->set('articleData.content', '')
+            ->set('articleData.language', '')
+            ->call('submit')
+            ->assertHasErrors([
+                'articleData.heading' => 'required',
+                'articleData.slug' => 'required',
+                'articleData.category_id' => 'required',
+                'articleData.content' => 'required',
+                'articleData.language' => 'required',
+            ]);
+    }
+
+    public function test_stores_a_new_article_correctly()
+    {
+        Mail::fake();
+        Auth::loginUsingId(User::factory()->create()->id);
+
+        $category = Category::factory()->create();
+        $data = [
+            'heading' => 'Test Article',
+            'slug' => 'test-article',
+            'category_id' => $category->id,
+            'content' => 'This is a test article.',
+            'language' => 'en',
+            'is_comment_enabled' => true,
+            'meta' => [
+                'description' => 'Test description',
+                'image_url' => 'http://example.com/image.jpg',
+            ],
+            'keywords' => 'test article',
+        ];
+
+        Livewire::test(Form::class, ['article' => null])
+            ->set('articleData', $data)
+            ->call('submit')
+            ->assertSessionHas('success', 'Article published successfully!');
+
+        $this->assertDatabaseHas('articles', ['heading' => 'Test Article']);
+        $this->assertDatabaseHas('keywords', ['name' => 'test']);
+        $this->assertDatabaseHas('keywords', ['name' => 'article']);
+        Mail::assertQueued(NotifySubscriberForNewArticle::class);
+    }
+
+    public function test_updates_an_existing_article_correctly()
+    {
+        Mail::fake();
+        Auth::loginUsingId(User::factory()->create()->id);
+
+        $article = Article::factory()->create();
+        $data = [
+            'heading' => 'Updated Article',
+            'slug' => 'updated-article',
+            'category_id' => $article->category_id,
+            'content' => 'This is an updated article.',
+            'language' => 'en',
+            'is_comment_enabled' => true,
+            'meta' => [
+                'description' => 'Updated description',
+                'image_url' => 'http://example.com/updated-image.jpg',
+            ],
+            'keywords' => 'updated article',
+        ];
+
+        Livewire::test(Form::class, ['article' => $article])
+            ->set('articleData', $data)
+            ->call('submit')
+            ->assertSessionHas('successMsg', 'Article updated successfully!');
+
+        $this->assertDatabaseHas('articles', [
+            'id' => $article->id,
+            'heading' => 'Updated Article'
+        ]);
+        $this->assertDatabaseHas('keywords', ['name' => 'updated']);
+        $this->assertDatabaseHas('keywords', ['name' => 'article']);
+    }
+}

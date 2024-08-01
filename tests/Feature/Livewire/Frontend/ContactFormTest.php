@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Livewire;
+namespace Tests\Feature\Livewire\Frontend;
 
 use App\Livewire\Frontend\ContactForm;
 use App\Mail\NotifyAdmin;

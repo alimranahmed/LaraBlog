@@ -93,7 +93,7 @@ class ArticleControllerTest extends TestCase
 
         $this->get("article/{$article->id}/{$article->heading}")->assertOk();
 
-        $this->get('article/'.Str::random()."/{$article->heading}")
+        $this->get('article/'.Str::random().time()."/{$article->heading}")
             ->assertRedirectToRoute('home');
     }
 
