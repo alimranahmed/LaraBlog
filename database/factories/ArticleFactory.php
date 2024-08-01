@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -26,7 +27,7 @@ class ArticleFactory extends Factory
             'user_id' => null,
             'language' => $language = $this->faker->randomElement(['ben', 'eng']),
             'slug' => Str::slug($heading, '-', $language),
-            'category_id' => null,
+            'category_id' => Category::factory()->create()->id,
         ];
     }
 
