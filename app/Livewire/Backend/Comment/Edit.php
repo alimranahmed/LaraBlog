@@ -5,6 +5,7 @@ namespace App\Livewire\Backend\Comment;
 use App\Models\Comment;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 
@@ -27,7 +28,7 @@ class Edit extends Component
         return view('livewire.backend.comment.edit');
     }
 
-    public function update(Comment $comment): RedirectResponse
+    public function update(Comment $comment): RedirectResponse|Redirector
     {
         $data = $this->validate();
 

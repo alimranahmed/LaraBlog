@@ -22,10 +22,9 @@ class IndexTest extends TestCase
         $user->assignRole($author);
         Auth::loginUsingId($user->id);
     }
+
     public function testItRendersCorrectly()
     {
-        Auth::loginUsingId(User::factory()->create()->id);
-
         Livewire::test(Index::class)
             ->assertStatus(200)
             ->assertViewIs('livewire.backend.article.index');
@@ -41,7 +40,7 @@ class IndexTest extends TestCase
             ->set('category', $category->id)
             ->assertSeeInOrder([$category->name], 'category')
             ->assertViewHas('articles', function ($articles) use ($category) {
-                return $articles->every(fn($article) => $article->category_id === $category->id);
+                return $articles->every(fn ($article) => $article->category_id === $category->id);
             });
     }
 
@@ -57,7 +56,7 @@ class IndexTest extends TestCase
             ->set('keyword', $keyword->name)
             ->assertSeeInOrder([$keyword->name], 'keywords')
             ->assertViewHas('articles', function ($articles) use ($keyword) {
-                return $articles->every(fn($article) => $article->keywords->contains($keyword));
+                return $articles->every(fn ($article) => $article->keywords->contains($keyword));
             });
     }
 
@@ -70,7 +69,7 @@ class IndexTest extends TestCase
         Livewire::test(Index::class)
             ->set('query', $query)
             ->assertViewHas('articles', function ($articles) use ($query) {
-                return $articles->every(fn($article) => stripos($article->heading, $query) !== false);
+                return $articles->every(fn ($article) => stripos($article->heading, $query) !== false);
             });
     }
 }

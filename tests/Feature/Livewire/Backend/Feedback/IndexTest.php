@@ -20,7 +20,7 @@ class IndexTest extends TestCase
 
     public function testToggleResolvedTrue()
     {
-        $feedback = Feedback::factory()->create(['is_resolved' => false,]);
+        $feedback = Feedback::factory()->create(['is_resolved' => false]);
         Livewire::test(Index::class)
             ->call('toggleResolved', ['feedback' => $feedback->id]);
 
@@ -29,7 +29,7 @@ class IndexTest extends TestCase
 
     public function testToggleResolvedFalse()
     {
-        $feedback = Feedback::factory()->create(['is_resolved' => true,]);
+        $feedback = Feedback::factory()->create(['is_resolved' => true]);
 
         Livewire::test(Index::class)
             ->call('toggleResolved', ['feedback' => $feedback->id]);
@@ -39,7 +39,7 @@ class IndexTest extends TestCase
 
     public function testClose()
     {
-        $feedback = Feedback::factory()->create(['is_closed' => false,]);
+        $feedback = Feedback::factory()->create(['is_closed' => false]);
 
         Livewire::test(Index::class)
             ->call('close', ['feedback' => $feedback->id]);

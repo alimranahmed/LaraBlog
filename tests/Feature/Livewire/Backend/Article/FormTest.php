@@ -3,10 +3,10 @@
 namespace Tests\Feature\Livewire\Backend\Article;
 
 use App\Livewire\Backend\Article\Form;
-use App\Livewire\Backend\Config\Index;
 use App\Mail\NotifySubscriberForNewArticle;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Reader;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -17,7 +17,6 @@ use Tests\TestCase;
 
 class FormTest extends TestCase
 {
-
     public function testRender(): void
     {
         Livewire::test(Form::class)
@@ -26,14 +25,14 @@ class FormTest extends TestCase
             ->assertViewHas('categories');
     }
 
-    public function test_initializes_correctly_without_article()
+    public function testInitializesCorrectlyWithoutArticle()
     {
         Livewire::test(Form::class)
             ->assertSet('method', 'post')
             ->assertSet('articleData', []);
     }
 
-    public function test_initializes_correctly_with_article()
+    public function testInitializesCorrectlyWithArticle()
     {
         $article = Article::factory()->create();
         Livewire::test(Form::class, ['article' => $article])
@@ -43,7 +42,7 @@ class FormTest extends TestCase
             ->assertSet('articleData.category_id', $article->category_id);
     }
 
-    public function test_generates_slug_when_heading_changes()
+    public function testGeneratesSlugWhenHeadingChanges()
     {
         Livewire::test(Form::class)
             ->set('articleData.heading', 'New Article')
@@ -51,7 +50,7 @@ class FormTest extends TestCase
             ->assertSet('articleData.slug', Str::slug('New Article'));
     }
 
-    public function test_validates_article_data_correctly()
+    public function testValidatesArticleDataCorrectly()
     {
         Livewire::test(Form::class)
             ->set('articleData.heading', '')
@@ -69,10 +68,17 @@ class FormTest extends TestCase
             ]);
     }
 
-    public function test_stores_a_new_article_correctly()
+    public function testStoresANewArticleCorrectly()
     {
         Mail::fake();
         Auth::loginUsingId(User::factory()->create()->id);
+
+        $user = User::factory()->create();
+        Reader::query()->create([
+            'user_id' => $user->id,
+            'notify' => true,
+            'is_verified' => true,
+        ]);
 
         $category = Category::factory()->create();
         $data = [
@@ -100,7 +106,7 @@ class FormTest extends TestCase
         Mail::assertQueued(NotifySubscriberForNewArticle::class);
     }
 
-    public function test_updates_an_existing_article_correctly()
+    public function testUpdatesAnExistingArticleCorrectly()
     {
         Mail::fake();
         Auth::loginUsingId(User::factory()->create()->id);
@@ -127,7 +133,7 @@ class FormTest extends TestCase
 
         $this->assertDatabaseHas('articles', [
             'id' => $article->id,
-            'heading' => 'Updated Article'
+            'heading' => 'Updated Article',
         ]);
         $this->assertDatabaseHas('keywords', ['name' => 'updated']);
         $this->assertDatabaseHas('keywords', ['name' => 'article']);
