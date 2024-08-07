@@ -48,6 +48,5 @@ class Show extends Component
     public function delete(Comment $comment): void
     {
         $comment->delete();
-        $this->comment->refresh();
     }
 }
