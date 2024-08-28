@@ -1,6 +1,9 @@
+@import "../../vendor/tempest/highlight/src/Themes/Css/github-dark-dimmed.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 body {
     font-family: Whitney SSm A, Whitney SSm B, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
@@ -73,20 +76,14 @@ pre code {
  overflow-x-auto is recommended.
 */
 pre {
-    @apply my-4 rounded overflow-x-auto;
+    @apply my-8 rounded-lg overflow-x-auto;
 }
 
 /*
  Add some vertical padding and expand the width
  to fill its container.
 */
-pre.shiki code {
-    @apply block pt-5 min-w-max;
+pre[data-lang] {
+    @apply p-5 block
 }
 
-/*
- Horizontal line padding.
-*/
-pre.shiki code .line {
-    @apply px-4;
-}
