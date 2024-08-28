@@ -22,13 +22,14 @@
         "guzzlehttp/guzzle": "^7.8",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
+        "league/commonmark": "^2.5",
         "livewire/livewire": "^3.4",
         "masbug/flysystem-google-drive-ext": "^2.3",
         "sentry/sentry-laravel": "^4.4",
         "spatie/laravel-backup": "^8.6",
-        "spatie/laravel-markdown": "^2.5",
         "spatie/laravel-permission": "^6.4",
-        "spatie/laravel-sitemap": "^7.2"
+        "spatie/laravel-sitemap": "^7.2",
+        "tempest/highlight": "^2.10"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

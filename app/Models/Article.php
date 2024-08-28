@@ -11,7 +11,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Spatie\LaravelMarkdown\MarkdownRenderer;
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\MarkdownConverter;
+use Tempest\Highlight\CommonMark\HighlightExtension;
+use Tempest\Highlight\Highlighter;
 
 /**
  * @property string $category
@@ -76,10 +80,18 @@ class Article extends Model
 
     public function htmlContent(): Attribute
     {
+        $environment = new Environment();
+
+        $highlighter = new Highlighter();
+
+        $environment
+            ->addExtension(new CommonMarkCoreExtension())
+            ->addExtension(new HighlightExtension($highlighter));
+
+        $markdown = new MarkdownConverter($environment);
+
         return Attribute::make(
-            get: fn () => app(MarkdownRenderer::class)
-                ->disableHighlighting()
-                ->toHtml($this->content)
+            get: fn () => $markdown->convert($this->content)
         );
     }
 

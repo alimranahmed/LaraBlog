@@ -42,6 +42,4 @@
 
     <livewire:frontend.subscribe/>
 
-    <x-code-highlighter-script/>
-
 </x-frontend>
