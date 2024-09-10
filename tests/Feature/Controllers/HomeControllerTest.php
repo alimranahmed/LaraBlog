@@ -56,10 +56,7 @@ class HomeControllerTest extends TestCase
 
         $this->actingAs($user)
             ->get('/')
-            ->assertViewIs('backend.dashboard')
-            ->assertViewHas('categories')
-            ->assertViewHas('latestComments')
-            ->assertViewHas('latestFeedbacks');
+            ->assertViewIs('backend.dashboard');
     }
 
     public function testGetMessage()

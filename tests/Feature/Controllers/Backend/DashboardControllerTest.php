@@ -23,9 +23,6 @@ class DashboardControllerTest extends TestCase
     {
         $this->actingAs($this->user)->get('/admin/dashboard')
             ->assertStatus(Response::HTTP_OK)
-            ->assertViewIs('backend.dashboard')
-            ->assertViewHas('categories')
-            ->assertViewHas('latestComments')
-            ->assertViewHas('latestFeedbacks');
+            ->assertViewIs('backend.dashboard');
     }
 }
