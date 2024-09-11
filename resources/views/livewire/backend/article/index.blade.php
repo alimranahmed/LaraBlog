@@ -4,8 +4,8 @@
             <div class="sm:flex-auto">
                 <h1 class="text-base font-semibold leading-6 text-gray-900">Articles</h1>
                 <form class="mt-3">
-                    <x-backend.form.input name="query" wire:model.debounce="query" placeholder="Search article" autofocus/>
-                    <select name="category" wire:model.lazy="category" aria-label="Category"
+                    <x-backend.form.input name="query" wire:model.live="query" placeholder="Search article" autofocus/>
+                    <select name="category" wire:model.live.change="category" aria-label="Category"
                             class="p-1 border border-indigo-300 rounded focus:outline-none focus:border-indigo-500">
                         <option value="">All categories</option>
                         @foreach($navCategories as $category)
@@ -24,12 +24,12 @@
         </div>
     </section>
 
-    <x-backend.table>
+    <x-backend.table wire:loading.class="opacity-50 cursor-wait">
         <x-slot name="head">
             <tr>
                 <x-backend.table.th>Title</x-backend.table.th>
                 <x-backend.table.th>Publication</x-backend.table.th>
-                <x-backend.table.th>Operations</x-backend.table.th>
+                <x-backend.table.th></x-backend.table.th>
             </tr>
         </x-slot>
 

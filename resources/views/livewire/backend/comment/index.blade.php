@@ -1,4 +1,10 @@
-<div wire:loading.class="opacity-50">
+<div>
+    <div class="sm:flex sm:items-center">
+        <div class="sm:flex-auto">
+            <h1 class="text-base font-semibold leading-6 text-gray-900">Comments</h1>
+            <p class="mt-2 text-sm text-gray-700">A list of all the comments.</p>
+        </div>
+    </div>
     <x-backend.table>
         <x-slot name="head">
             <tr>

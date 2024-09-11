@@ -22,13 +22,6 @@ class Index extends Component
 
     protected $listeners = ['articleDeleted' => '$refresh'];
 
-    public function render(): View
-    {
-        $articles = $this->getArticles();
-
-        return view('livewire.backend.article.index', compact('articles'));
-    }
-
     private function getArticles()
     {
         $articles = Article::notDeleted()
@@ -54,5 +47,17 @@ class Index extends Component
         }
 
         return $articles->paginate(config('blog.item_per_page'));
+    }
+
+    public function placeholder(): View
+    {
+        return view('livewire.placeholders.list');
+    }
+
+    public function render(): View
+    {
+        $articles = $this->getArticles();
+
+        return view('livewire.backend.article.index', compact('articles'));
     }
 }

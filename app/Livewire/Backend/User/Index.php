@@ -12,13 +12,6 @@ class Index extends Component
 {
     use WithPagination;
 
-    public function render(): View
-    {
-        $users = User::with('roles')->latest()->paginate(config('blog.item_per_page'));
-
-        return view('livewire.backend.user.index', compact('users'));
-    }
-
     public function toggleActive(User $user): void
     {
         $user->update(['is_active' => ! $user->is_active]);
@@ -30,5 +23,17 @@ class Index extends Component
             abort(Response::HTTP_UNAUTHORIZED);
         }
         $user->delete();
+    }
+
+    public function placeholder(): View
+    {
+        return view('livewire.placeholders.list');
+    }
+
+    public function render(): View
+    {
+        $users = User::with('roles')->latest()->paginate(config('blog.item_per_page'));
+
+        return view('livewire.backend.user.index', compact('users'));
     }
 }

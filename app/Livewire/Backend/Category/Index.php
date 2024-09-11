@@ -17,13 +17,6 @@ class Index extends Component
 
     protected $listeners = ['categoryDeleted' => '$refresh'];
 
-    public function render(): View
-    {
-        $categories = $this->getCategories();
-
-        return view('livewire.backend.category.index', compact('categories'));
-    }
-
     public function startAdding(): void
     {
         $this->adding = true;
@@ -44,5 +37,17 @@ class Index extends Component
             ->with(['articles' => fn (HasMany $articles) => $articles->notDeleted()])
             ->orderBy('name')
             ->paginate();
+    }
+
+    public function placeholder(): View
+    {
+        return view('livewire.placeholders.list');
+    }
+
+    public function render(): View
+    {
+        $categories = $this->getCategories();
+
+        return view('livewire.backend.category.index', compact('categories'));
     }
 }

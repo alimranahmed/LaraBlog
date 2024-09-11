@@ -20,13 +20,6 @@ class Index extends Component
 
     protected $listeners = ['commentDeleted' => '$refresh'];
 
-    public function render(): View
-    {
-        $comments = $this->getComments();
-
-        return view('livewire.backend.comment.index', compact('comments'));
-    }
-
     private function getComments(): LengthAwarePaginator
     {
         $commentQuery = Comment::with('article', 'user', 'replies')
@@ -44,5 +37,17 @@ class Index extends Component
         }
 
         return $commentQuery->paginate(config('blog.item_per_page'));
+    }
+
+    public function placeholder(): View
+    {
+        return view('livewire.placeholders.list');
+    }
+
+    public function render(): View
+    {
+        $comments = $this->getComments();
+
+        return view('livewire.backend.comment.index', compact('comments'));
     }
 }

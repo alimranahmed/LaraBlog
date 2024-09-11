@@ -1,3 +1,3 @@
 <x-backend>
-    <livewire:backend.category.index/>
+    <livewire:backend.category.index lazy/>
 </x-backend>
