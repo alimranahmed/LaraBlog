@@ -4,8 +4,7 @@
             <div class="rounded border border-indigo-300 pl-2">
                 <div class="flex justify-between">
                     <div>{{$keyword->name}}</div>
-                    <x-tni-x-circle-o
-                        onclick="confirm('Are you sure to delete') || event.stopImmediatePropagation()"
+                    <x-tni-x-circle-o wire:confirm="Are you sure to delete"
                         wire:click="delete({{$keyword->id}})"
                         class="w-3 h-3 bg-white text-gray-600 hover:text-red-700 -mt-1 -mr-1 cursor-pointer"/>
                 </div>

@@ -16,7 +16,7 @@
     <div>
         <a href="{{route('backend.comment.edit', $reply->id)}}" class="text-indigo-700 hover:underline">Edit</a>
         <span wire:click="delete({{$reply->id}})"
-              onclick="confirm('You are deleting this comment!') || event.stopImmediatePropagation()"
+              wire:confirm="You are deleting this comment!"
               class="cursor-pointer text-red-700 hover:underline">Delete</span>
     </div>
 </div>

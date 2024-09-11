@@ -4,8 +4,7 @@
             <div class="border border-indigo-300 rounded px-3 py-1">
                 <div class="flex justify-between">
                     <div>{{$feedback->name}}</div>
-                    <x-tni-x-circle-o
-                        onclick="confirm('You are closing this feedback') || event.stopImmediatePropagation()"
+                    <x-tni-x-circle-o wire:confirm="You are closing this feedback"
                         wire:click="close({{$feedback->id}})"
                         class="w-4 h-4 text-gray-600 hover:text-red-700 -mr-5 -mt-2 bg-white cursor-pointer"/>
                 </div>

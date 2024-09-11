@@ -5,6 +5,7 @@ namespace App\Livewire\Backend\Comment;
 use App\Models\Article;
 use App\Models\Comment;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Sleep;
 use Livewire\Component;
 
 class IndexRow extends Component

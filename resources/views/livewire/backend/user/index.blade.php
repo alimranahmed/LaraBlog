@@ -28,46 +28,25 @@
                         <div class="text-blue-600">{{$user->email}}</div>
                     </x-backend.table.td>
                     <x-backend.table.td>
-                        @if($user->is_active)
-                            <div wire:click="toggleActive({{$user->id}})"
-                                 class="cursor-pointer px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                Active
-                            </div>
-                        @else
-                            <div wire:click="toggleActive({{$user->id}})"
-                                 class="cursor-pointer px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                Inactive
-                            </div>
-                        @endif
-                        @if(optional($user->reader)->is_verified)
-                            <div
-                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                Verified
-                            </div>
-                        @else
-                            <div
-                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                Not Verified
-                            </div>
-                        @endif
-                        @if(optional($user->reader)->notify)
-                            <div
-                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                Notify
-                            </div>
-                        @else
-                            <div
-                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                Don't Notify
-                            </div>
-                        @endif
+                        <div class="flex">
+                            <x-toggle :isEnabled="$user->is_active" wire:click="toggleActive({{$user->id}})"/>
+
+                            <x-status class="ml-3"
+                                :text="optional($user->reader)->is_verified ? 'Verified' : 'Not Verified'"
+                                :state="optional($user->reader)->is_verified ? 'positive' : 'negative'"/>
+
+                            <x-status class="ml-3"
+                                :text='optional($user->reader)->notify ? "Notify" : "No Notify"'
+                                :state="optional($user->reader)->notify ? 'positive' : 'negative'"/>
+                        </div>
                     </x-backend.table.td>
                     <x-backend.table.td>
                         <a href="{{route('backend.user.edit', $user->id)}}"
                            class="text-indigo-700 hover:underline">Edit</a>
+
                         <span wire:click="delete({{$user->id}})"
-                              onclick="confirm('You are deleting this user') || event.stopImmediatePropagation()"
-                              class="cursor-pointer text-red-700 hover:underline">Delete</span>
+                              wire:confirm="You are deleting this user"
+                              class="ml-1 cursor-pointer text-red-700 hover:underline">Delete</span>
                     </x-backend.table.td>
                 </tr>
             @endforeach
