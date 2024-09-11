@@ -75,7 +75,7 @@ class Form extends Component
         $newArticle = Article::query()->create($articleData);
 
         //add keywords
-        $keywordsToAttach = array_unique(explode(' ', Arr::get($this->articleData, 'keywords')));
+        $keywordsToAttach = $this->getKeywords();
 
         foreach ($keywordsToAttach as $keywordToAttach) {
             if (empty($keywordToAttach)) {
@@ -93,6 +93,10 @@ class Form extends Component
 
         session()->flash('success', 'Article published successfully!');
         redirect()->to(route('backend.article.index'));
+    }
+
+    public function getKeywords(): array {
+        return array_filter(array_unique(explode(' ', Arr::get($this->articleData, 'keywords'))));
     }
 
     protected function update(array $updateData): void

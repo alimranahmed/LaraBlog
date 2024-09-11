@@ -4,10 +4,24 @@
             <x-backend.form.label :required="true">Language</x-backend.form.label>
             <x-backend.form.select required
                                    name="language"
+                                   class="w-1/3"
                                    wire:model.live="articleData.language" aria-label="Language">
                 <option value="">Select Language</option>
                 @foreach(config('fields.lang') as $key => $language)
                     <option value="{{$key}}">{{$language}}</option>
+                @endforeach
+            </x-backend.form.select>
+        </div>
+
+        <div class="mb-3">
+            <x-backend.form.label :required="true">Category</x-backend.form.label>
+            <x-backend.form.select name="category" required
+                                   wire:model="articleData.category_id"
+                                   class="w-1/3"
+                                   aria-label="Category">
+                <option value="">Select Category</option>
+                @foreach($categories as $category)
+                    <option value="{{$category->id}}">{{$category->name}}</option>
                 @endforeach
             </x-backend.form.select>
         </div>
@@ -32,18 +46,6 @@
                                   wire:model="articleData.slug"
                                   aria-label="slug"
                                   placeholder="Slug..."/>
-        </div>
-
-        <div class="mb-3">
-            <x-backend.form.label :required="true">Category</x-backend.form.label>
-            <x-backend.form.select name="category" required
-                                   wire:model="articleData.category_id"
-                                   aria-label="Category">
-                <option value="">Select Category</option>
-                @foreach($categories as $category)
-                    <option value="{{$category->id}}">{{$category->name}}</option>
-                @endforeach
-            </x-backend.form.select>
         </div>
 
         <div class="mb-3">
@@ -77,10 +79,15 @@
 
         <div class="mb-3">
             <x-backend.form.label>Keywords</x-backend.form.label>
-            <x-backend.form.input class="w-full"
+            @forelse($this->getKeywords() as $keyword)
+                <x-status state="neutral" :text="$keyword" class="ml-1 py-1"></x-status>
+            @empty
+
+            @endforelse
+            <x-backend.form.input class="w-full mt-2"
                                   type="text"
                                   name="articleData.keywords"
-                                  wire:model="articleData.keywords"
+                                  wire:model.live.debounce.500ms="articleData.keywords"
                                   placeholder="Keywords" aria-label="Keywords"/>
             <span class="text-sm italic text-gray-500">*Separate the keywords using space</span>
         </div>

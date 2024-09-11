@@ -1,4 +1,4 @@
 @props(['wrap' => false])
-<td {{$attributes->merge(['class' => "px-6 py-4 ".($wrap ? '' : 'whitespace-no-wrap')])}}>
+<td {{$attributes->merge(['class' => "py-4 pl-4 text-sm".($wrap ? '' : 'whitespace-no-wrap')])}}>
     {{$slot}}
 </td>

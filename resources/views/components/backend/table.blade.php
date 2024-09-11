@@ -1,14 +1,13 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
-<div class="flex flex-col">
-    <div class="-my-2 overflow-x-auto">
-        <div class="py-2 align-middle inline-block min-w-full sm:px-1 lg:px-1">
-            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                <table class="min-w-full divide-y divide-gray-200">
+<div class="mt-8 flow-root">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-300">
                     <thead class="bg-gray-50">
-                    {{$head}}
+                        {{$head}}
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                    {{$body}}
+                    <tbody class="divide-y divide-gray-200 bg-white">
+                        {{$body}}
                     </tbody>
                 </table>
             </div>
