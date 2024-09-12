@@ -25,7 +25,7 @@
             @auth
                 <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
 
-                    <a class="flex-shrink-0 flex items-center" href="{{route('home')}}">
+                    <a class="flex-shrink-0 flex items-center" href="{{route('home')}}" wire:navigate>
                         <span class="hidden lg:block w-auto text-gray-300 hover:text-white">Dashboard</span>
                     </a>
 

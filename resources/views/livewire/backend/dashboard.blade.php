@@ -1,4 +1,4 @@
-<div class="flex flex-row">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
     <div class="basis-1/3">
         <x-backend.table>
             <x-slot name="head">

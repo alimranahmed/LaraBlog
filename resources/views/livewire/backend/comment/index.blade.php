@@ -10,7 +10,7 @@
             <tr>
                 <x-backend.table.th>Comment</x-backend.table.th>
                 <x-backend.table.th>By</x-backend.table.th>
-                <x-backend.table.th>Article</x-backend.table.th>
+{{--                <x-backend.table.th>Article</x-backend.table.th>--}}
                 <x-backend.table.th>Status</x-backend.table.th>
                 <x-backend.table.th></x-backend.table.th>
             </tr>

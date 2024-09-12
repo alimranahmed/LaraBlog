@@ -24,7 +24,7 @@
         'text-base block' => $isMobile,
         'bg-gray-900 text-white' => $isActive,
         'text-gray-300 hover:bg-gray-700 hover:text-white' => !$isActive,
-    ])>
+    ]) wire:navigate>
 
         {{$menu}}
 
