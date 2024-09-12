@@ -23,6 +23,6 @@ class ViewServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer(['livewire/backend/*'], CategoriesComposer::class);
-        View::composer(['components/backend', 'components/frontend', 'emails/*'], GlobalConfigComposer::class);
+        View::composer(['components/layouts/*', 'emails/*'], GlobalConfigComposer::class);
     }
 }

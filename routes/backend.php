@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\FeedbackController;
 use App\Http\Controllers\Backend\KeywordController;
 use App\Http\Controllers\Backend\SubscriberController;
 use App\Http\Controllers\UserController;
+use App\Livewire\Backend\Article\Index as ArticleIndex;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () {
@@ -19,7 +20,7 @@ Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin-dashboard');
 
     //admin articles
-    Route::get('article', [ArticleController::class, 'index'])->name('backend.article.index');
+    Route::get('article', ArticleIndex::class)->name('backend.article.index');
     Route::get('article/create', [ArticleController::class, 'create'])->name('backend.article.create');
     Route::get('article/{article}/edit', [ArticleController::class, 'edit'])->name('backend.article.edit');
 

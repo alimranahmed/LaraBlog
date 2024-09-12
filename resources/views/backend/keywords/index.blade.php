@@ -1,3 +1,3 @@
-<x-backend>
+<x-layouts.backend>
     <livewire:backend.keyword.index lazy/>
-</x-backend>
+</x-layouts.backend>

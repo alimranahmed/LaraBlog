@@ -1,3 +1,3 @@
-<x-backend>
+<x-layouts.backend>
     <livewire:backend.config.index/>
-</x-backend>
+</x-layouts.backend>

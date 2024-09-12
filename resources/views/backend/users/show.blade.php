@@ -1,4 +1,4 @@
-<x-backend>
+<x-layouts.backend>
     <div class="flex justify-center">
         <div>
             <div>
@@ -46,4 +46,4 @@
             @endif
         </div>
     </div>
-</x-backend>
+</x-layouts.backend>

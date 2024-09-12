@@ -1,3 +1,3 @@
-<x-backend>
+<x-layouts.backend>
     <livewire:backend.comment.show :comment="$comment"/>
-</x-backend>
+</x-layouts.backend>

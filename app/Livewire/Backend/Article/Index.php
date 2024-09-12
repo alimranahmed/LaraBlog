@@ -6,10 +6,12 @@ use App\Models\Article;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Lazy;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+#[Lazy]
 class Index extends Component
 {
     use WithPagination;

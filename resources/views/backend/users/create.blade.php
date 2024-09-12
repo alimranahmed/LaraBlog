@@ -1,3 +1,3 @@
-<x-backend>
+<x-layouts.backend>
     <livewire:backend.user.form/>
-</x-backend>
+</x-layouts.backend>
