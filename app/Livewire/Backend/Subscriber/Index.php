@@ -8,6 +8,11 @@ use Livewire\Component;
 
 class Index extends Component
 {
+    public function placeholder(): View
+    {
+        return view('livewire.placeholders.cards');
+    }
+
     public function render(): View
     {
         $subscribers = Subscriber::query()->latest()->paginate();

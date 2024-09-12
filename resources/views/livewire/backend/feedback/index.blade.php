@@ -25,7 +25,14 @@
             </div>
         @endforeach
     </section>
+
     <div class="mt-3">
         {{$feedbacks->links()}}
     </div>
+
+    @if($feedbacks->isEmpty())
+        <div class="w-full h-96 flex justify-center items-center">
+            <span class="text-5xl text-gray-300">Nothing here!</span>
+        </div>
+    @endif
 </div>

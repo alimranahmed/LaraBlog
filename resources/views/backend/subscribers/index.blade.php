@@ -1,3 +1,3 @@
 <x-backend>
-    <livewire:backend.subscriber.index/>
+    <livewire:backend.subscriber.index lazy/>
 </x-backend>

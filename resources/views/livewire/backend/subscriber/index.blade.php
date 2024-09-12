@@ -24,4 +24,10 @@
             </div>
         @endforeach
     </div>
+
+    @if($subscribers->isEmpty())
+        <div class="w-full h-96 flex justify-center items-center">
+            <span class="text-5xl text-gray-300">Nothing here!</span>
+        </div>
+    @endif
 </div>
