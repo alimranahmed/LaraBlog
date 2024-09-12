@@ -4,10 +4,12 @@ namespace App\Livewire\Backend\User;
 
 use App\Models\User;
 use Illuminate\Contracts\View\View;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Symfony\Component\HttpFoundation\Response;
 
+#[Lazy]
 class Index extends Component
 {
     use WithPagination;

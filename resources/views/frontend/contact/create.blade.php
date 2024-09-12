@@ -1,3 +1,3 @@
-<x-frontend>
+<x-layouts.frontend>
     <livewire:frontend.contact-form/>
-</x-frontend>
+</x-layouts.frontend>

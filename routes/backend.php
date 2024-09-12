@@ -1,52 +1,43 @@
 <?php
 
-use App\Http\Controllers\Backend\ArticleController;
-use App\Http\Controllers\Backend\CategoryController;
-use App\Http\Controllers\Backend\CommentController;
-use App\Http\Controllers\Backend\ConfigController;
-use App\Http\Controllers\Backend\DashboardController;
-use App\Http\Controllers\Backend\FeedbackController;
-use App\Http\Controllers\Backend\KeywordController;
-use App\Http\Controllers\Backend\SubscriberController;
-use App\Http\Controllers\UserController;
-use App\Livewire\Backend\Article\Index as ArticleIndex;
+use App\Livewire\Backend\Dashboard;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth', 'role:owner|admin|author']], function () {
     //profile
-    Route::get('profile', [UserController::class, 'profile'])->name('user-profile');
+    Route::get('profile', \App\Livewire\Backend\User\Profile::class)->name('user-profile');
 
     //dashboard
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin-dashboard');
+    Route::get('dashboard', Dashboard::class)->name('admin-dashboard');
 
     //admin articles
-    Route::get('article', ArticleIndex::class)->name('backend.article.index');
-    Route::get('article/create', [ArticleController::class, 'create'])->name('backend.article.create');
-    Route::get('article/{article}/edit', [ArticleController::class, 'edit'])->name('backend.article.edit');
+    Route::get('article', \App\Livewire\Backend\Article\Index::class)->name('backend.article.index');
+    Route::get('article/create', \App\Livewire\Backend\Article\Form::class)->name('backend.article.create');
+    Route::get('article/{article}/edit', \App\Livewire\Backend\Article\Form::class)->name('backend.article.edit');
 
     //Admin comments
-    Route::get('comment', [CommentController::class, 'index'])->name('backend.comment.index');
-    Route::get('comment/{comment}/edit', [CommentController::class, 'edit'])->name('backend.comment.edit');
-    Route::get('comment/{comment}', [CommentController::class, 'show'])->name('backend.comment.show');
+    Route::get('comment', \App\Livewire\Backend\Comment\Index::class)->name('backend.comment.index');
+    Route::get('comment/{comment}/edit', \App\Livewire\Backend\Comment\Edit::class)->name('backend.comment.edit');
+    Route::get('comment/{comment}', \App\Livewire\Backend\Comment\Show::class)->name('backend.comment.show');
 
-    Route::get('feedback', [FeedbackController::class, 'index'])->name('backend.feedback.index');
+    Route::get('feedback', \App\Livewire\Backend\Feedback\Index::class)->name('backend.feedback.index');
 
-    Route::get('subscriber', [SubscriberController::class, 'index'])->name('backend.subscriber.index');
+    Route::get('subscriber', \App\Livewire\Backend\Subscriber\Index::class)->name('backend.subscriber.index');
 });
 
 Route::group(['middleware' => ['auth', 'role:owner|admin']], function () {
-    Route::get('category', [CategoryController::class, 'index'])->name('backend.category.index');
+    Route::get('category', \App\Livewire\Backend\Category\Index::class)->name('backend.category.index');
 
     //Admin users
-    Route::get('user', [UserController::class, 'index'])->name('backend.user.index');
-    Route::get('user/password/edit', [UserController::class, 'editPassword'])->name('backend.user.password.edit');
-    Route::get('user/create', [UserController::class, 'create'])->name('backend.user.create');
-    Route::get('user/{user}/edit', [UserController::class, 'edit'])->name('backend.user.edit');
+    Route::get('user', \App\Livewire\Backend\User\Index::class)->name('backend.user.index');
+    Route::get('user/password/edit', \App\Livewire\Backend\User\PasswordForm::class)->name('backend.user.password.edit');
+    Route::get('user/create', \App\Livewire\Backend\User\Form::class)->name('backend.user.create');
+    Route::get('user/{user}/edit', \App\Livewire\Backend\User\Form::class)->name('backend.user.edit');
 
-    Route::get('keyword', [KeywordController::class, 'index'])->name('backend.keyword.index');
+    Route::get('keyword', \App\Livewire\Backend\Keyword\Index::class)->name('backend.keyword.index');
 });
 
 Route::group(['middleware' => ['auth', 'role:owner']], function () {
     //admin config
-    Route::get('config', [ConfigController::class, 'index'])->name('backend.config.index');
+    Route::get('config', \App\Livewire\Backend\Config\Index::class)->name('backend.config.index');
 });

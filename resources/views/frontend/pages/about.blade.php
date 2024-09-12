@@ -1,4 +1,4 @@
-<x-frontend>
+<x-layouts.frontend>
     <div class="md:flex mt-10 pb-3 border-b">
         <div class="w-1/2 md:w-1/3 text-center m-auto">
             <img src="{{asset('img/user.png')}}"
@@ -39,4 +39,4 @@
             </ul>
         </section>
     </div>
-</x-frontend>
+</x-layouts.frontend>

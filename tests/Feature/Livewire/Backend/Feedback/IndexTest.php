@@ -13,6 +13,13 @@ class IndexTest extends TestCase
     public function testRender(): void
     {
         Livewire::test(Index::class)
+            ->assertStatus(Response::HTTP_OK);
+    }
+
+    public function testPlaceholder()
+    {
+        Livewire::test(Index::class)
+            ->call('placeholder')
             ->assertStatus(Response::HTTP_OK)
             ->assertViewIs('livewire.backend.feedback.index')
             ->assertViewHas('feedbacks');

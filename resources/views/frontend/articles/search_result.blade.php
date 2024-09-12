@@ -1,4 +1,4 @@
-<x-frontend>
+<x-layouts.frontend>
     <div class="text-xl text-center border-b">
         Searched <strong>"{{$searched->query}}"</strong>
     </div>
@@ -12,4 +12,4 @@
 
     <livewire:frontend.subscribe/>
 
-</x-frontend>
+</x-layouts.frontend>

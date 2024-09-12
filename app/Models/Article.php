@@ -18,7 +18,7 @@ use Tempest\Highlight\CommonMark\HighlightExtension;
 use Tempest\Highlight\Highlighter;
 
 /**
- * @property string $category
+ * @property Category $category
  * @property int $user_id
  * @property string $content
  * @property array $meta

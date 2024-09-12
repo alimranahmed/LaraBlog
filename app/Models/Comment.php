@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/** @property string $content
+ * @property ?string $original_content
+ * @property int $count_edit
+ */
 class Comment extends Model
 {
     use CanFormatDates;

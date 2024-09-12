@@ -10,9 +10,14 @@ class IndexTest extends TestCase
 {
     public function testRender()
     {
+        Livewire::test(Index::class)->assertOk();
+    }
+
+    public function testPlaceholder()
+    {
         Livewire::test(Index::class)
+            ->call('placeholder')
             ->assertOk()
-            ->assertViewIs('livewire.backend.subscriber.index')
-            ->assertViewHas('subscribers');
+            ->assertViewIs('livewire.backend.subscriber.index');
     }
 }

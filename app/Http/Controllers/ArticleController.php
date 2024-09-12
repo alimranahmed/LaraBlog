@@ -11,6 +11,13 @@ use Illuminate\Support\Collection;
 
 class ArticleController extends Controller
 {
+    public function index(Request $request): View
+    {
+        $articles = Article::getPaginated($request);
+
+        return view('frontend.articles.index', compact('articles'));
+    }
+
     public function show(string $slug): mixed
     {
         $article = Article::query()

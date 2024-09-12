@@ -4,8 +4,10 @@ namespace App\Livewire\Backend\Subscriber;
 
 use App\Models\Subscriber;
 use Illuminate\Contracts\View\View;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 
+#[Lazy]
 class Index extends Component
 {
     public function placeholder(): View

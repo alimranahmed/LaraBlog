@@ -81,7 +81,7 @@ class ArticleControllerTest extends TestCase
             ->assertDontSee('Unpublished content');
     }
 
-    public function testShowById()
+    public function testShowByIdCorrectly()
     {
         $article = Article::factory()->published()->create([
             'heading' => 'Test Heading',
@@ -92,8 +92,11 @@ class ArticleControllerTest extends TestCase
         ]);
 
         $this->get("article/{$article->id}/{$article->heading}")->assertOk();
+    }
 
-        $this->get('article/'.Str::random().time()."/{$article->heading}")
+    public function testShowByIdNotFound()
+    {
+        $this->get('article/'.Str::random().time()."/".Str::random().time())
             ->assertRedirectToRoute('home');
     }
 

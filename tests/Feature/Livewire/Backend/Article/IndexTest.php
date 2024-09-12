@@ -25,9 +25,7 @@ class IndexTest extends TestCase
 
     public function testItRendersCorrectly()
     {
-        Livewire::test(Index::class)
-            ->assertStatus(200)
-            ->assertViewIs('livewire.backend.article.index');
+        Livewire::test(Index::class)->assertStatus(200);
     }
 
     public function testItFiltersArticlesBasedOnCategory()

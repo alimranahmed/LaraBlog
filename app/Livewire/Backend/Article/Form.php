@@ -36,6 +36,13 @@ class Form extends Component
     public function mount($article = null): void
     {
         if ($article?->id) {
+            /** @var User $user */
+            $user = Auth::user();
+            if (! $article->hasAuthorization($user)) {
+                $this->redirectRoute('home');
+                return;
+            }
+
             $this->originalArticle = $article;
             $this->articleData = $article->toArray();
             $this->articleData['keywords'] = $article->keywords->pluck('name')->implode(' ');

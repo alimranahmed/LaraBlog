@@ -1,4 +1,4 @@
-<x-frontend>
+<x-layouts.frontend>
 
     @forelse($articles as $article)
         <x-frontend.article :article="$article"/>
@@ -12,4 +12,4 @@
 
     <livewire:frontend.subscribe/>
 
-</x-frontend>
+</x-layouts.frontend>

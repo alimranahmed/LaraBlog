@@ -4,9 +4,11 @@ namespace App\Livewire\Backend\Feedback;
 
 use App\Models\Feedback;
 use Illuminate\Contracts\View\View;
+use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+#[Lazy]
 class Index extends Component
 {
     use WithPagination;

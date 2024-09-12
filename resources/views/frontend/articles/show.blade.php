@@ -1,4 +1,4 @@
-<x-frontend :title="$article->heading" :article="$article">
+<x-layouts.frontend :title="$article->heading" :article="$article">
     <div>
         <h1 class="sm:text-xl md:text-2xl mb-1 leading-tight">
             {{$article->heading}}
@@ -42,4 +42,4 @@
 
     <livewire:frontend.subscribe/>
 
-</x-frontend>
+</x-layouts.frontend>

@@ -12,11 +12,21 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Livewire\Livewire;
+use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class FormTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->user = User::factory()->create();
+        $role = Role::findOrCreate('owner');
+        $this->user->assignRole($role);
+        Auth::login($this->user);
+    }
+
     public function testRender(): void
     {
         Livewire::test(Form::class)
@@ -109,7 +119,6 @@ class FormTest extends TestCase
     public function testUpdatesAnExistingArticleCorrectly()
     {
         Mail::fake();
-        Auth::loginUsingId(User::factory()->create()->id);
 
         $article = Article::factory()->create();
         $data = [

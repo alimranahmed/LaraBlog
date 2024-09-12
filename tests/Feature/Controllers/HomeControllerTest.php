@@ -56,7 +56,7 @@ class HomeControllerTest extends TestCase
 
         $this->actingAs($user)
             ->get('/')
-            ->assertViewIs('backend.dashboard');
+            ->assertRedirectToRoute('admin-dashboard');
     }
 
     public function testGetMessage()

@@ -26,15 +26,14 @@ class EditTest extends TestCase
         $article = Article::factory()->create();
         $comment = Comment::factory(['article_id' => $article->id])->create();
         $updatedComment = clone $comment;
-        $updatedComment->content = $this->faker->paragraph;
 
         Livewire::test(Edit::class, ['comment' => $comment])
-            ->set('comment', $updatedComment)
+            ->set('content', $content = $this->faker->paragraph)
             ->call('update', $updatedComment);
 
         $this->assertDatabaseHas('comments', [
             'id' => $comment->id,
-            'content' => $updatedComment->content,
+            'content' => $content,
         ]);
     }
 }
