@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Livewire\Backend\Article;
 
@@ -16,7 +17,7 @@ use Livewire\Component;
 
 class Form extends Component
 {
-    public Article $originalArticle;
+    public ?Article $article = null;
 
     public array $articleData = [];
 
@@ -33,33 +34,22 @@ class Form extends Component
         'articleData.meta.image_url' => 'nullable|url',
     ];
 
-    public function mount($article = null): void
+    public function mount(): void
     {
-        if ($article?->id) {
+        if ($this->article) {
             /** @var User $user */
             $user = Auth::user();
-            if (! $article->hasAuthorization($user)) {
+            if (! $this->article->hasAuthorization($user)) {
                 $this->redirectRoute('home');
                 return;
             }
 
-            $this->originalArticle = $article;
-            $this->articleData = $article->toArray();
-            $this->articleData['keywords'] = $article->keywords->pluck('name')->implode(' ');
-            $this->articleData['meta'] = $article->meta ?: [];
+            $this->articleData = $this->article->toArray();
+            $this->articleData['keywords'] = $this->article->keywords->pluck('name')->implode(' ');
+            $this->articleData['meta'] = $this->article->meta ?: [];
         }
 
-        $this->method = $article?->id ? 'put' : 'post';
-    }
-
-    public function render(): View
-    {
-        if (Arr::get($this->articleData, 'heading')) {
-            $this->articleData['slug'] = Str::slug(Arr::get($this->articleData, 'heading'), '-', Arr::get($this->articleData, 'language'));
-        }
-        $categories = Category::query()->active()->get();
-
-        return view('livewire.backend.article.form', compact('categories'));
+        $this->method = $this->article === null ? 'post' : 'put';
     }
 
     public function submit(): void
@@ -85,9 +75,6 @@ class Form extends Component
         $keywordsToAttach = $this->getKeywords();
 
         foreach ($keywordsToAttach as $keywordToAttach) {
-            if (empty($keywordToAttach)) {
-                continue;
-            }
             /** @var Keyword $newKeyword */
             $newKeyword = Keyword::query()->firstOrCreate(['name' => $keywordToAttach]);
             $newArticle->keywords()->attach($newKeyword->id);
@@ -99,28 +86,43 @@ class Form extends Component
         }
 
         session()->flash('success', 'Article published successfully!');
-        redirect()->to(route('backend.article.index'));
-    }
-
-    public function getKeywords(): array {
-        return array_filter(array_unique(explode(' ', Arr::get($this->articleData, 'keywords'))));
+        $this->redirectRoute('backend.article.index', navigate: true);
     }
 
     protected function update(array $updateData): void
     {
-        $this->originalArticle->update($updateData);
+        $this->article->update($updateData);
 
-        $this->originalArticle->keywords()->detach();
+        $this->article->keywords()->detach();
 
-        $keywordsToAttach = array_unique(explode(' ', Arr::get($this->articleData, 'keywords')));
+        $keywordsToAttach = $this->getKeywords();
 
         foreach ($keywordsToAttach as $keywordToAttach) {
             /** @var Keyword $newKeyword */
             $newKeyword = Keyword::query()->firstOrCreate(['name' => $keywordToAttach]);
-            $this->originalArticle->keywords()->attach($newKeyword->id);
+            $this->article->keywords()->attach($newKeyword->id);
         }
 
         session()->flash('successMsg', 'Article updated successfully!');
-        redirect()->to(route('backend.article.index'));
+        $this->redirectRoute('backend.article.index', navigate: true);
+    }
+
+    public function getKeywords(): array {
+        return array_filter(
+            array_unique(
+                explode(' ', Arr::get($this->articleData, 'keywords', ''))
+            )
+        );
+    }
+
+    public function render(): View
+    {
+        if (Arr::get($this->articleData, 'heading')) {
+            $this->articleData['slug'] = Str::slug(Arr::get($this->articleData, 'heading'), '-', Arr::get($this->articleData, 'language'));
+        }
+
+        $categories = Category::query()->active()->get();
+
+        return view('livewire.backend.article.form', compact('categories'));
     }
 }

@@ -12,6 +12,7 @@
 
     <title>{{$globalConfigs->site_title}}</title>
 
+    @stack('styles')
 </head>
 <body>
 
@@ -21,5 +22,6 @@
     {{$slot}}
 </div>
 
+@stack('scripts')
 </body>
 </html>

@@ -48,6 +48,8 @@
                                   placeholder="Slug..."/>
         </div>
 
+        <livewire:backend.article.image-form/>
+
         <div class="mb-3">
             <x-backend.form.label :required="true">Content</x-backend.form.label>
             <x-backend.form.textarea class="w-full" required
