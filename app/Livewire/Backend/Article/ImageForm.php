@@ -5,7 +5,9 @@ namespace App\Livewire\Backend\Article;
 
 use App\Models\Image;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -15,8 +17,8 @@ class ImageForm extends Component
 {
     use WithFileUploads;
 
-    #[Validate(['image' => 'image|max:2048'])] // 2MB
-    public null|TemporaryUploadedFile $image = null;
+    #[Validate('image|max:2048')] // 2MB
+    public null|TemporaryUploadedFile $image_file = null;
 
     public array $files = [];
 
@@ -25,15 +27,26 @@ class ImageForm extends Component
         return view('livewire.backend.article.image-form');
     }
 
-    public function updatedImage(): void
+    /**
+     * @throws ValidationException
+     */
+    public function updatedImageFile(): void
     {
-        $this->validate();
+        try {
+            $this->validate();
+        } catch (ValidationException $e) {
+            $this->image_file = null;
+            throw $e;
+        }
         $this->save();
     }
 
     public function save(): void
     {
-        $path = $this->image->store(path: 'images');
+        $path = $this->image_file->storeAs(
+            path: 'images',
+            name: now()->format('Y-m-d-H-i-s').time().'.'.$this->image_file->getClientOriginalExtension()
+        );
 
         /** @var Image $image */
         $image = Image::query()->create([
@@ -43,10 +56,25 @@ class ImageForm extends Component
         ]);
 
         $this->files[] = [
-            'name' => $this->image->getClientOriginalName(),
+            'uuid' => (string)$image->uuid,
+            'name' => $this->image_file->getClientOriginalName(),
             'url' => route('file', [$image->uuid]),
-            'size' => $this->formatFileSize($this->image->getSize()),
+            'size' => $this->formatFileSize($this->image_file->getSize()),
         ];
+    }
+
+    public function delete(string $uuid): void
+    {
+        /** @var Image $image */
+        $image = Image::query()->where('uuid', $uuid)->firstOrFail();
+
+        Storage::delete($image->src);
+
+        $image->delete();
+
+        $this->files = collect($this->files)
+            ->where('uuid', '!=', $uuid)
+            ->toArray();
     }
 
     private function formatFileSize(int $bytes, int $precision = 2): string

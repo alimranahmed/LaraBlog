@@ -8,9 +8,9 @@
                 </svg>
 
                 <div class="mt-4 flex text-sm leading-6 text-gray-600">
-                    <label for="image" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                    <label for="image_file" class="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
                         <span>Upload a file</span>
-                        <input id="image" name="image" wire:model.live="image" type="file" class="sr-only">
+                        <input id="image_file" name="image_file" wire:model.live="image_file" type="file" class="sr-only">
                     </label>
                     <p class="pl-1">or drag and drop</p>
                 </div>
@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        @error('image')
+        @error('image_file')
             <div class="text-red-500 text-xs italic">{{ $message }}</div>
         @enderror
 
@@ -35,9 +35,18 @@
                     <div class="text-indigo-400 italic mb-1">{{$file['url']}}</div>
                     <span class="text-xs py-1 px-1 rounded cursor-pointer bg-slate-400 text-white hover:bg-slate-600"
                           @click="copyText('{{$file['url']}}')">Use</span>
+
+                    <span class="text-xs py-1 px-1 rounded cursor-pointer bg-red-400 text-white hover:bg-red-600"
+                          wire:click="delete('{{$file['uuid']}}')">Delete</span>
                 </div>
             </div>
         @endforeach
+
+        @if(!$errors->has('image_file'))
+            <div class="text-green-600" wire:loading.delay.longer wire:loading.target="image_file">
+                File is being uploaded...
+            </div>
+        @endif
 
     </form>
 </div>

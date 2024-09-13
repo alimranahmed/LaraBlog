@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * @property int|string $id
  * @property string $uuid
  * @property string $src
  */
