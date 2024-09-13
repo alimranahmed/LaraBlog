@@ -42,11 +42,9 @@
             </div>
         @endforeach
 
-        @if(!$errors->has('image_file'))
-            <div class="text-green-600" wire:loading.delay.longer wire:target="image_file">
-                File is being uploaded...
-            </div>
-        @endif
+        <div class="text-green-600" wire:loading.delay wire:target="image_file">
+            File is being uploaded...
+        </div>
 
     </form>
 </div>
