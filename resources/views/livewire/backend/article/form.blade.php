@@ -1,4 +1,4 @@
-<div>
+<div x-data="{ editor_functions: { photo: false, preview: false } }">
     <form wire:submit.prevent="submit">
         <div class="mb-3">
             <x-backend.form.label :required="true">Language</x-backend.form.label>
@@ -14,19 +14,6 @@
         </div>
 
         <div class="mb-3">
-            <x-backend.form.label :required="true">Category</x-backend.form.label>
-            <x-backend.form.select name="category" required
-                                   wire:model="articleData.category_id"
-                                   class="w-1/3"
-                                   aria-label="Category">
-                <option value="">Select Category</option>
-                @foreach($categories as $category)
-                    <option value="{{$category->id}}">{{$category->name}}</option>
-                @endforeach
-            </x-backend.form.select>
-        </div>
-
-        <div class="mb-3">
             <x-backend.form.label :required="true">Title</x-backend.form.label>
             <x-backend.form.input type="text" name="heading"
                                   required
@@ -37,7 +24,7 @@
                                   placeholder="Heading..."/>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-5">
             <x-backend.form.label :required="true">Slug</x-backend.form.label>
             <x-backend.form.input type="text" name="slug"
                                   required
@@ -48,13 +35,59 @@
                                   placeholder="Slug..."/>
         </div>
 
+        <div class="mb-3"
+             style="display: none"
+             x-show="editor_functions.photo"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 transform scale-90"
+             x-transition:enter-end="opacity-100 transform scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 transform scale-100"
+             x-transition:leave-end="opacity-0 transform scale-90"
+        >
+            <livewire:backend.article.image-form/>
+        </div>
+
         <div class="mb-3">
             <x-backend.form.label :required="true">Content</x-backend.form.label>
-            <x-backend.form.textarea class="w-full" required
+
+            <!-- Editor Control: Preview and Photo -->
+            <div>
+                <div @click="editor_functions.photo = !editor_functions.photo"
+                     class="inline text-xs py-1 px-1 rounded-tl cursor-pointer bg-indigo-300 text-slate-600 hover:text-slate-800 hover:bg-indigo-400"
+                >Photo</div>
+
+                <div @click="editor_functions.preview = !editor_functions.preview"
+                     class="inline text-xs py-1 px-1 rounded-tr cursor-pointer bg-indigo-300 text-slate-600 hover:text-slate-800 hover:bg-indigo-400"
+                >
+                    <span x-text="editor_functions.preview ? 'Edit' : 'Preview'">Preview</span>
+                </div>
+            </div>
+
+            <x-backend.form.textarea class="w-full rounded-br"
+                                     :rounded="false"
+                                     required
                                      name="articleData.content"
-                                     wire:model="articleData.content"
-                                     aria-label="Content" rows="35"
-                                     placeholder="Content"></x-backend.form.textarea>
+                                     wire:model.live.debounce.1500ms="articleData.content"
+                                     x-show="!editor_functions.preview"
+                                     aria-label="Content"
+                                     rows="35"
+                                     placeholder="Write your article here..."></x-backend.form.textarea>
+
+            <!-- Content Preview -->
+            <div class="border border-indigo-300 w-full rounded-br"
+                 x-show="editor_functions.preview"
+                 style="display: none">
+                <div class="max-w-2xl mx-auto px-5 py-5">
+                    <h1 class="sm:text-xl md:text-2xl mb-3 leading-tight">
+                        {{$articleData['heading'] ?? ''}}
+                    </h1>
+                    <div class="text-sm leading-relaxed md:text-lg article-content">
+                        {!! $contentPreview !!}
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="mb-3 p-3 border rounded-md">
@@ -75,6 +108,19 @@
                     name="articleData.meta.image_url"
                     placeholder="URL for image of social media thumbnail"/>
             </div>
+        </div>
+
+        <div class="mb-3">
+            <x-backend.form.label :required="true">Category</x-backend.form.label>
+            <x-backend.form.select name="category" required
+                                   wire:model="articleData.category_id"
+                                   class="w-1/3"
+                                   aria-label="Category">
+                <option value="">Select Category</option>
+                @foreach($categories as $category)
+                    <option value="{{$category->id}}">{{$category->name}}</option>
+                @endforeach
+            </x-backend.form.select>
         </div>
 
         <div class="mb-3">
