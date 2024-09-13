@@ -16,6 +16,7 @@ use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\MarkdownConverter;
 use Tempest\Highlight\CommonMark\HighlightExtension;
 use Tempest\Highlight\Highlighter;
+use League\CommonMark\Exception\CommonMarkException;
 
 /**
  * @property Category $category
@@ -80,6 +81,16 @@ class Article extends Model
 
     public function htmlContent(): Attribute
     {
+        return Attribute::make(
+            get: fn () => self::markdownToHtml($this->content)
+        );
+    }
+
+    /**
+     * @throws CommonMarkException
+     */
+    public static function markdownToHtml(string $markdownContent): string
+    {
         $environment = new Environment();
 
         $highlighter = new Highlighter();
@@ -88,11 +99,9 @@ class Article extends Model
             ->addExtension(new CommonMarkCoreExtension())
             ->addExtension(new HighlightExtension($highlighter));
 
-        $markdown = new MarkdownConverter($environment);
+        $markdownConverter = new MarkdownConverter($environment);
 
-        return Attribute::make(
-            get: fn () => $markdown->convert($this->content)
-        );
+        return $markdownConverter->convert($markdownContent);
     }
 
     public function hasAuthorization(User $user): bool

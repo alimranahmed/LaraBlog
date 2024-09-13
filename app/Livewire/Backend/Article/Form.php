@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Livewire\Backend\Article;
 
+use League\CommonMark\Exception\CommonMarkException;
 use App\Mail\NotifySubscriberForNewArticle;
 use App\Models\Article;
 use App\Models\Category;
@@ -21,6 +22,8 @@ class Form extends Component
 
     public array $articleData = [];
 
+    public string $contentPreview = '';
+
     public string $method;
 
     public array $rules = [
@@ -34,6 +37,9 @@ class Form extends Component
         'articleData.meta.image_url' => 'nullable|url',
     ];
 
+    /**
+     * @throws CommonMarkException
+     */
     public function mount(): void
     {
         if ($this->article) {
@@ -47,6 +53,7 @@ class Form extends Component
             $this->articleData = $this->article->toArray();
             $this->articleData['keywords'] = $this->article->keywords->pluck('name')->implode(' ');
             $this->articleData['meta'] = $this->article->meta ?: [];
+            $this->contentPreview = Article::markdownToHtml($this->article->content);
         }
 
         $this->method = $this->article === null ? 'post' : 'put';
@@ -113,6 +120,15 @@ class Form extends Component
                 explode(' ', Arr::get($this->articleData, 'keywords', ''))
             )
         );
+    }
+
+    /**
+     * @throws CommonMarkException
+     */
+    public function updated(string $property): void {
+        if ($property === 'articleData.content') {
+            $this->contentPreview = Article::markdownToHtml($this->articleData['content']);
+        }
     }
 
     public function render(): View

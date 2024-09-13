@@ -1,6 +1,6 @@
 <div>
     <form>
-        <div class="flex w-full justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-5">
+        <div class="flex w-full justify-center rounded-lg border-4 border-dashed border-gray-200 px-6 py-5">
             <div class="text-center">
 
                 <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -34,7 +34,7 @@
                     </div>
                     <div class="text-indigo-400 italic mb-1">{{$file['url']}}</div>
                     <span class="text-xs py-1 px-1 rounded cursor-pointer bg-slate-400 text-white hover:bg-slate-600"
-                          @click="copyText('{{$file['url']}}')">Copy</span>
+                          @click="copyText('{{$file['url']}}')">Use</span>
                 </div>
             </div>
         @endforeach
@@ -44,6 +44,7 @@
 @push('scripts')
     <script>
         function copyText(text) {
+            text = "<img src='"+text+"' loading='lazy' role='presentation' alt='Image'>"
             if (navigator.clipboard) {
                 // If the Clipboard API is available, use it
                 navigator.clipboard.writeText(text)
@@ -51,7 +52,7 @@
                         //alert('Copied to clipboard!');
                     })
                     .catch(err => {
-                        console.error('Failed to copy: ', err);
+                        console.error('Failed to copy using navigator.clipboard: ', err);
                     });
             } else {
                 // Fallback for older browsers
@@ -63,7 +64,7 @@
                     document.execCommand('copy');
                     //alert('Copied to clipboard!');
                 } catch (err) {
-                    console.error('Fallback: Unable to copy', err);
+                    console.error('Fallback: Unable to copy using legacy', err);
                 }
                 document.body.removeChild(textarea);
             }
