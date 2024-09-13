@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Livewire\Backend\Article;
@@ -18,7 +19,7 @@ class ImageForm extends Component
     use WithFileUploads;
 
     #[Validate('image|max:2048')] // 2MB
-    public null|TemporaryUploadedFile $image_file = null;
+    public ?TemporaryUploadedFile $image_file = null;
 
     public array $files = [];
 
@@ -56,7 +57,7 @@ class ImageForm extends Component
         ]);
 
         $this->files[] = [
-            'uuid' => (string)$image->uuid,
+            'uuid' => (string) $image->uuid,
             'name' => $this->image_file->getClientOriginalName(),
             'url' => route('file', [$image->uuid]),
             'size' => $this->formatFileSize($this->image_file->getSize()),
@@ -88,6 +89,6 @@ class ImageForm extends Component
         $index = floor(log($bytes, 1024)); // Find the appropriate unit
         $fileSize = $bytes / pow(1024, $index); // Convert size to the appropriate unit
 
-        return round($fileSize, $precision) . ' ' . $units[$index];
+        return round($fileSize, $precision).' '.$units[$index];
     }
 }

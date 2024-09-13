@@ -96,7 +96,7 @@ class ArticleControllerTest extends TestCase
 
     public function testShowByIdNotFound()
     {
-        $this->get('article/'.Str::random().time()."/".Str::random().time())
+        $this->get('article/'.Str::random().time().'/'.Str::random().time())
             ->assertRedirectToRoute('home');
     }
 

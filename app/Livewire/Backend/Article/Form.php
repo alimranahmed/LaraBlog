@@ -1,9 +1,9 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Livewire\Backend\Article;
 
-use League\CommonMark\Exception\CommonMarkException;
 use App\Mail\NotifySubscriberForNewArticle;
 use App\Models\Article;
 use App\Models\Category;
@@ -14,6 +14,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use League\CommonMark\Exception\CommonMarkException;
 use Livewire\Component;
 
 class Form extends Component
@@ -47,6 +48,7 @@ class Form extends Component
             $user = Auth::user();
             if (! $this->article->hasAuthorization($user)) {
                 $this->redirectRoute('home');
+
                 return;
             }
 
@@ -114,7 +116,8 @@ class Form extends Component
         $this->redirectRoute('backend.article.index', navigate: true);
     }
 
-    public function getKeywords(): array {
+    public function getKeywords(): array
+    {
         return array_filter(
             array_unique(
                 explode(' ', Arr::get($this->articleData, 'keywords', ''))
@@ -125,7 +128,8 @@ class Form extends Component
     /**
      * @throws CommonMarkException
      */
-    public function updated(string $property): void {
+    public function updated(string $property): void
+    {
         if ($property === 'articleData.content') {
             $this->contentPreview = Article::markdownToHtml($this->articleData['content']);
         }

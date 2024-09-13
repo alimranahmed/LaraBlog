@@ -36,13 +36,17 @@
                     <span class="text-xs py-1 px-1 rounded cursor-pointer bg-slate-400 text-white hover:bg-slate-600"
                           @click="copyText('{{$file['url']}}')">Use</span>
 
-                    <span class="text-xs py-1 px-1 rounded cursor-pointer bg-red-400 text-white hover:bg-red-600"
-                          wire:click="delete('{{$file['uuid']}}')">Delete</span>
+                    <button type="button"
+                        class="text-xs py-1 px-1 rounded cursor-pointer bg-red-400 text-white hover:bg-red-600"
+                        wire:click="delete('{{$file['uuid']}}')"
+                        wire:loading.class="cursor-wait"
+                        wire:loading.attr="disabled"
+                        wire:target="delete">Delete</button>
                 </div>
             </div>
         @endforeach
 
-        <div class="text-green-600" wire:loading.delay wire:target="image_file">
+        <div class="text-green-600" wire:loading wire:target="image_file">
             File is being uploaded...
         </div>
 

@@ -18,13 +18,14 @@ class Edit extends Component
     public Comment $comment;
 
     public ?string $content;
+
     public ?bool $is_published = false;
 
     public function mount(Comment $comment): void
     {
         $this->comment = $comment;
         $this->content = $comment->content;
-        $this->is_published = (bool)$this->is_published;
+        $this->is_published = (bool) $this->is_published;
     }
 
     public function update(): RedirectResponse|Redirector
