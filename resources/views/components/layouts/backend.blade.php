@@ -8,7 +8,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <link rel="shortcut icon" type="image/png" href="{{asset('img/favicon.png')}}"/>
+    <link rel="shortcut icon" type="image/png" href="{{\App\Models\Config::getPath(\App\Models\Config::FAVICON)}}"/>
 
     <title>{{$globalConfigs->site_title}}</title>
 

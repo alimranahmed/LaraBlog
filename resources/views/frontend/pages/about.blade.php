@@ -1,7 +1,7 @@
 <x-layouts.frontend>
     <div class="md:flex mt-10 pb-3 border-b">
         <div class="w-1/2 md:w-1/3 text-center m-auto">
-            <img src="{{asset('img/user.png')}}"
+            <img src="{{\App\Models\Config::getPath(\App\Models\Config::USER_PHOTO)}}"
                  class="rounded-full"
                  alt="Al Imran Ahmed"/>
         </div>

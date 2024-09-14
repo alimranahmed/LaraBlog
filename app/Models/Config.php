@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use http\Exception\InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
 use stdClass;
 
@@ -11,6 +12,10 @@ use stdClass;
  */
 class Config extends Model
 {
+    public const FAVICON = 'favicon';
+
+    public const USER_PHOTO = 'user_photo';
+
     protected $guarded = ['id'];
 
     public static function get($name): ?string
@@ -27,5 +32,21 @@ class Config extends Model
         $dbConfigs->each(fn (self $config) => $configs->{$config->name} = $config->value);
 
         return $configs;
+    }
+
+    public static function getPath(string $name): string
+    {
+        $defaultPath = match ($name) {
+            self::FAVICON => asset('img/favicon.png'),
+            self::USER_PHOTO => asset('img/user.png'),
+        };
+
+        if ($defaultPath == null) {
+            throw new InvalidArgumentException('Invalid config name: '.$name);
+        }
+
+        $path = Config::query()->where('name', $name)->value('value');
+
+        return $path ? route('file', [$name]) : asset($defaultPath);
     }
 }

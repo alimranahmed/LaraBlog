@@ -46,7 +46,7 @@
             </div>
         @endforeach
 
-        <div class="text-green-600" wire:loading wire:target="image_file">
+        <div class="text-green-600 animate-pulse" wire:loading wire:target="image_file">
             File is being uploaded...
         </div>
 

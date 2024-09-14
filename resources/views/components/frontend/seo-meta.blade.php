@@ -5,7 +5,7 @@
             'author' => $article->user->name,
             'title' => $article->heading,
             'description' => \Illuminate\Support\Arr::get($article->meta, 'description', mb_substr($article->content, 0, 152).'...'),
-            'image' => \Illuminate\Support\Arr::get($article->meta, 'image_url', asset('img/user.png')),
+            'image' => \Illuminate\Support\Arr::get($article->meta, 'image_url', \App\Models\Config::getPath(\App\Models\Config::USER_PHOTO)),
             'url' => route('get-article', $article->slug),
             'site' => url('/'),
             'site_name' => config('app.name'),
