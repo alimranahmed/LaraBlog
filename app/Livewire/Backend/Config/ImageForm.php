@@ -60,8 +60,8 @@ class ImageForm extends Component
 
     public function resetConfigFile(string $configName): void
     {
-        Config::query()->where('name', $configName)->delete();
         $this->deleteConfigMedia($configName);
+        Config::query()->where('name', $configName)->delete();
         $this->redirect(route('backend.config.index'));
     }
 
