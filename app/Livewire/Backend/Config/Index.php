@@ -18,7 +18,9 @@ class Index extends Component
 
     public function render(): View
     {
-        $configs = Config::all();
+        $configs = Config::query()
+            ->whereNotIn('name', [Config::FAVICON, Config::USER_PHOTO])
+            ->get();
 
         return view('livewire.backend.config.index', compact('configs'));
     }

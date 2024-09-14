@@ -1,4 +1,5 @@
 <div>
+    <livewire:backend.config.image-form/>
     <x-backend.table>
         <x-slot name="head">
             <x-backend.table.th>Name</x-backend.table.th>
@@ -9,15 +10,15 @@
             @foreach($configs as $config)
                 <tr>
                     @if($editingConfig && $editingConfig['id'] == $config->id)
-                        <form>
+                        <form wire:key="{{$config->id}}">
                             <x-backend.table.td>
-                                <x-backend.form.input wire:model="editingConfig.name" name="config.name" disabled></x-backend.form.input>
+                                <x-backend.form.input wire:model="editingConfig.name" name="config.name" disabled/>
                             </x-backend.table.td>
                             <x-backend.table.td>
-                                <x-backend.form.input wire:model="editingConfig.value" name="config.name"></x-backend.form.input>
+                                <x-backend.form.input wire:model="editingConfig.value" name="config.name"/>
                             </x-backend.table.td>
                             <x-backend.table.td>
-                                <x-backend.form.button wire:click="update({{$config}})">Update</x-backend.form.button>
+                                <x-backend.form.button wire:click="update()">Update</x-backend.form.button>
                             </x-backend.table.td>
                         </form>
                     @else
