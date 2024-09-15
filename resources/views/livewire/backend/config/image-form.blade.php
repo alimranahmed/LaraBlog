@@ -10,6 +10,7 @@
                     <input id="{{$file_name}}" type="file" wire:model="{{$file_name}}" class="sr-only"/>
                     <span class="text-slate-900 rounded px-2 leading-6 text-sm bg-indigo-300 hover:bg-indigo-400 py-1"
                           wire:target="{{$file_name}}"
+                          wire:loading.attr="disabled"
                           wire:loading.class="cursor-wait animate-pulse"
                     >Change</span>
                 </label>

@@ -1,5 +1,5 @@
 <div>
-    <section class="grid grid-cols-3 gap-3">
+    <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
         @foreach($feedbacks as $feedback)
             <div class="border border-indigo-300 rounded px-3 py-1">
                 <div class="flex justify-between">

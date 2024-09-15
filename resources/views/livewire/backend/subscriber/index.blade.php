@@ -1,5 +1,5 @@
 <div>
-    <div class="grid grid-cols-4 gap-3">
+    <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-3">
         @foreach($subscribers as $subscriber)
             <div class="rounded border border-indigo-300 pl-2">
 

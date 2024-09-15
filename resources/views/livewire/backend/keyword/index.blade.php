@@ -1,5 +1,5 @@
 <div>
-    <section class="grid grid-cols-5 gap-3">
+    <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
         @foreach($keywords as $keyword)
             <div class="rounded border border-indigo-300 pl-2">
                 <div class="flex justify-between">

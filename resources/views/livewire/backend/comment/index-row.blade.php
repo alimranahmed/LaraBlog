@@ -1,7 +1,7 @@
 <tr>
     <x-backend.table.td :wrap="true">
         <section>
-            <a href="{{route('get-article', $comment->article->id)}}" target="_blank" class="hover:underline font-semibold text-slate-700">
+            <a href="{{route('get-article', $comment->article->slug)}}" target="_blank" class="hover:underline font-semibold text-slate-700">
                 {{mb_substr($comment->article->heading, 0, 70)}}
                 {{mb_strlen($comment->article->heading)  > 70 ? '...' : '' }}<br>
             </a>

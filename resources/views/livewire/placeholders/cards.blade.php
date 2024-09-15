@@ -1,5 +1,5 @@
 <div class="animate-pulse">
-    <section class="grid grid-cols-5 gap-3">
+    <section class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
         @for($i = 1; $i <= 15; $i++)
             <div class="rounded border border-slate-300 pl-2">
                 <div class="flex justify-between">

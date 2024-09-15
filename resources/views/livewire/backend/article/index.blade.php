@@ -6,7 +6,7 @@
                 <form class="mt-3">
                     <x-backend.form.input name="query" wire:model.live="query" placeholder="Search article" autofocus/>
                     <select name="category" wire:model.live.change="category" aria-label="Category"
-                            class="p-1 border border-indigo-300 rounded focus:outline-none focus:border-indigo-500">
+                            class="p-1 border border-indigo-300 rounded focus:outline-none focus:border-indigo-500 mt-3 sm:mt-0">
                         <option value="">All categories</option>
                         @foreach($navCategories as $category)
                             <option value="{{$category->id}}" {{request('category') == $category->id ? 'selected' : ''}}>
