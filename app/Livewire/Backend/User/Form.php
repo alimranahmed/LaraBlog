@@ -51,6 +51,6 @@ class Form extends Component
             $user->assignRole($personalData['role']);
         }
 
-        $this->redirectRoute('backend.user.index');
+        $this->redirect(route('backend.user.index'), true);
     }
 }

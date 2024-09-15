@@ -1,13 +1,16 @@
 <div class="flex justify-center">
     <div>
-        <div>
-            {{$user->name}}
-            @if(!$user->roles->isEmpty())
-                <span class="text-gray-600">({{$user->roles->pluck('name')->implode(', ')}})</span>
-            @endif
-            <a href="{{route('backend.user.edit', $user->id)}}" class="text-indigo-700 hover:underline">Edit</a>
+        <div class="flex items-center gap-x-6">
+            <img class="h-16 w-16 rounded-full border" src="{{\App\Models\Config::getPath(\App\Models\Config::USER_PHOTO)}}" alt="">
+            <div>
+                <h3 class="text-base font-semibold leading-7 tracking-tight text-gray-900">{{$user->name}}</h3>
+                @if(!$user->roles->isEmpty())
+                    <p class="text-sm font-semibold leading-3 text-gray-600">{{$user->roles->pluck('name')->implode(', ')}}</p>
+                @endif
+                <a href="{{route('backend.user.edit', $user->id)}}" wire:navigate class="text-indigo-700 hover:underline">Edit</a>
+            </div>
         </div>
-        <div class="text-gray-500 border-b mb-5">Since {{$user->created_date_time_formatted}}</div>
+        <div class="text-gray-500 border-b pb-2 mb-2">Since {{$user->created_date_time_formatted}}</div>
         <div class="text-gray-600">{{$user->username}}</div>
         <div class="text-blue-600">{{$user->email}}</div>
         @if($user->is_active)

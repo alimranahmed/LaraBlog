@@ -33,11 +33,11 @@
         @endforeach
     </div>
 
-    @error('favicon')
+    @error(Config::FAVICON)
         <div class="text-red-500 text-sm italic">{{ $message }}</div>
     @enderror
 
-    @error('user_photo')
+    @error(Config::USER_PHOTO)
         <div class="text-red-500 text-sm italic">{{ $message }}</div>
     @enderror
 </div>
