@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <x-backend.form.textarea class="w-full rounded-br"
+            <x-backend.form.textarea class="w-full border-x-0 border-y outline-none"
                                      :rounded="false"
                                      required
                                      name="articleData.content"
@@ -75,7 +75,7 @@
                                      placeholder="Write your article here..."></x-backend.form.textarea>
 
             <!-- Content Preview -->
-            <div class="border border-indigo-300 w-full rounded-br"
+            <div class="border border-indigo-300 w-full border-x-0 border-y"
                  x-show="editor_functions.preview"
                  style="display: none">
                 <div class="max-w-2xl mx-auto px-5 py-5">
