@@ -8,7 +8,7 @@
     <a href="https://www.linkedin.com/in/alimrancse" target="_blank" class="mr-3">
         <x-uni-linkedin-alt-thin class="text-blue-900"/>
     </a>
-    <a href="https://www.youtube.com/@ImranicShow" target="_blank" class="mr-3">
+    <a href="https://www.youtube.com/@ImranicTechbits" target="_blank" class="mr-3">
         <x-uni-youtube-thin class="text-red-700"/>
     </a>
     <a href="https://github.com/alimranahmed" target="_blank">
