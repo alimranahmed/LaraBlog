@@ -259,11 +259,17 @@ docker compose exec app npm run build
 
 Default ports (can be changed in .env):
 
-- **1013**: Web application (APP_PORT)
-- **3313**: MySQL (DB_PORT)
+- **1013**: Web application (APP_PORT) - external access
+- **3313**: MySQL (DB_PORT for external access) - for connecting from host machine
 - **6379**: Redis (REDIS_PORT)
 - **1025**: Mailpit SMTP (MAILPIT_SMTP_PORT)
 - **1028**: Mailpit UI (MAILPIT_UI_PORT)
+
+**Important:** Inside Docker containers, services communicate using internal ports:
+- MySQL: Use `DB_HOST=mysql` and `DB_PORT=3306` in `.env`
+- Redis: Use `REDIS_HOST=redis` and `REDIS_PORT=6379` in `.env`
+
+The external port 3313 is only for connecting from your host machine (e.g., MySQL Workbench, TablePlus).
 
 ## Data Persistence
 

@@ -11,17 +11,10 @@ services:
       - ./:/var/www/html
       - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
     environment:
-      - APP_ENV=${APP_ENV:-production}
-      - APP_KEY=${APP_KEY}
-      - DB_HOST=mysql
-      - DB_PORT=3306
+      - DB_ROOT_PASSWORD=${DB_PASSWORD}
       - DB_DATABASE=${DB_DATABASE:-larablog}
       - DB_USERNAME=${DB_USERNAME:-larablog}
       - DB_PASSWORD=${DB_PASSWORD}
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - MAIL_HOST=mailpit
-      - MAIL_PORT=1025
     depends_on:
       mysql:
         condition: service_healthy
