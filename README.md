@@ -27,6 +27,37 @@ A full-featured blogging system for personal use. No frontend theme and anything
   * Can navigate articles based on categories.
 
 ### Installation Process
+
+#### Option 1: Docker Installation (Recommended) 🐳
+1. **Prerequisites**: Install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
+2. Clone the repository:
+   ```bash
+   git clone https://github.com/alimranahmed/LaraBlog.git
+   cd LaraBlog
+   ```
+3. Copy and configure environment file:
+   ```bash
+   cp .env.docker .env
+   # Edit .env if needed (set APP_ENV=local for development)
+   ```
+4. Start all services:
+   ```bash
+   docker compose up -d
+   ```
+5. Generate application key:
+   ```bash
+   docker compose exec app php artisan key:generate
+   ```
+6. Run migrations and seeders:
+   ```bash
+   docker compose exec app php artisan migrate --seed
+   ```
+7. Visit http://localhost - It's running! 🎉
+8. Access Mailpit (email testing): http://localhost:8025
+
+📖 **For detailed Docker documentation, see [DOCKER.md](DOCKER.md)**
+
+#### Option 2: Traditional Installation
 1. Execute `git clone https://github.com/alimranahmed/LaraBlog.git` on your terminal to download this project.
 2. Go to the project root directory and execute `composer install` to install all PHP dependencies of the project
 3. Create a file named as .env and copy the content of .env.example to newly created .env file 
