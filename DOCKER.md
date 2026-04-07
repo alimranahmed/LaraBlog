@@ -260,7 +260,7 @@ docker compose exec app npm run build
 Default ports (can be changed in .env):
 
 - **1013**: Web application (APP_PORT)
-- **3306**: MySQL (DB_PORT)
+- **3313**: MySQL (DB_PORT)
 - **6379**: Redis (REDIS_PORT)
 - **1025**: Mailpit SMTP (MAILPIT_SMTP_PORT)
 - **1028**: Mailpit UI (MAILPIT_UI_PORT)
