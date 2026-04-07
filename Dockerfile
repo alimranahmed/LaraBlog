@@ -1,5 +1,5 @@
 # Use official PHP image with FPM
-FROM php:8.2-fpm-alpine AS base
+FROM php:8.3-fpm-alpine AS base
 
 # Set working directory
 WORKDIR /var/www/html
