@@ -33,17 +33,36 @@ RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && docker-php-ext-enable redis \
     && apk del .build-deps
 
-# Copy custom PHP configuration
-COPY docker/php/php.ini /usr/local/etc/php/conf.d/custom.ini
-COPY docker/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
-
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# Copy custom PHP configuration
+COPY docker/php/php.ini /usr/local/etc/php/conf.d/custom.ini
+
+# Development/Local stage
+FROM base AS development
+
+# Disable OPcache for development
+RUN echo "opcache.enable=0" > /usr/local/etc/php/conf.d/opcache.ini
+
+# Expose port 9000 for PHP-FPM
+EXPOSE 9000
+
+CMD ["php-fpm"]
+
+# Local stage (alias for development)
+FROM development AS local
+
+# Production stage
+FROM base AS production
+
+# Copy OPcache configuration for production
+COPY docker/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
 # Copy application files
 COPY . .
 
-# Install PHP dependencies
+# Install PHP dependencies (production only)
 RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
 # Install Node dependencies and build assets
@@ -53,20 +72,6 @@ RUN npm ci && npm run build && rm -rf node_modules
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache
-
-# Development stage
-FROM base AS development
-
-# Install dev dependencies
-RUN composer install --optimize-autoloader --no-interaction --prefer-dist
-
-# Expose port 9000 for PHP-FPM
-EXPOSE 9000
-
-CMD ["php-fpm"]
-
-# Production stage
-FROM base AS production
 
 # Copy supervisor configuration
 COPY docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf

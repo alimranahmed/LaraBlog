@@ -40,6 +40,15 @@ docker compose up -d --build
 echo -e "${YELLOW}Waiting for MySQL to be ready...${NC}"
 sleep 10
 
+# Install composer dependencies (for local development)
+if grep -q "APP_ENV=local" .env; then
+    echo -e "${YELLOW}Installing composer dependencies...${NC}"
+    docker compose exec -T app composer install
+    
+    echo -e "${YELLOW}Installing npm dependencies...${NC}"
+    docker compose exec -T app npm install
+fi
+
 # Generate application key if not set
 if ! grep -q "APP_KEY=base64:" .env; then
     echo -e "${YELLOW}Generating application key...${NC}"
@@ -50,6 +59,11 @@ fi
 # Run migrations and seeders
 echo -e "${YELLOW}Running database migrations and seeders...${NC}"
 docker compose exec -T app php artisan migrate --seed --force
+
+# Set proper permissions
+echo -e "${YELLOW}Setting storage permissions...${NC}"
+docker compose exec -T app chown -R www-data:www-data /var/www/html/storage
+docker compose exec -T app chmod -R 775 /var/www/html/storage
 
 echo ""
 echo -e "${GREEN}===================================${NC}"
@@ -64,7 +78,8 @@ echo -e "  Email: ${GREEN}owner@gmail.com${NC}"
 echo -e "  Password: ${GREEN}owner${NC}"
 echo ""
 echo -e "Useful commands:"
-echo -e "  ${YELLOW}docker compose logs -f${NC}        - View logs"
-echo -e "  ${YELLOW}docker compose down${NC}           - Stop containers"
-echo -e "  ${YELLOW}docker compose exec app sh${NC}    - Access app container"
+echo -e "  ${YELLOW}./run php artisan [command]${NC}  - Run artisan commands"
+echo -e "  ${YELLOW}make logs${NC}                    - View logs"
+echo -e "  ${YELLOW}make down${NC}                    - Stop containers"
+echo -e "  ${YELLOW}make shell${NC}                   - Access app container"
 echo ""

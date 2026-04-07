@@ -152,6 +152,15 @@ The Docker setup includes the following services:
 - **redis**: Redis 8 (cache & sessions)
 - **mailpit**: Email testing tool
 
+## Build Stages
+
+The Dockerfile supports three build targets:
+
+- **local/development**: For local development with hot-reload, dev dependencies, and OPcache disabled
+- **production**: Optimized for production with built assets, OPcache enabled, and queue workers
+
+The build target is automatically selected based on `APP_ENV` in your `.env` file.
+
 ## Common Commands
 
 ### Running Commands in Container
