@@ -45,7 +45,7 @@ services:
       - larablog
 
   mysql:
-    image: mysql:8.4-oracle
+    image: mysql:8
     container_name: larablog-mysql
     restart: unless-stopped
     environment:
@@ -67,7 +67,7 @@ services:
       - larablog
 
   redis:
-    image: redis:7-alpine
+    image: redis:8-alpine
     container_name: larablog-redis
     restart: unless-stopped
     command: redis-server --appendonly yes

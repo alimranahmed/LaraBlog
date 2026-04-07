@@ -46,29 +46,41 @@ This will:
 
 4. **Start the containers**
    ```bash
+   make up
+   # OR
    docker compose up -d
    ```
 
 5. **Generate application key**
    ```bash
-   docker compose exec app php artisan key:generate
+   ./run php artisan key:generate
    ```
 
 6. **Run migrations and seeders**
    ```bash
-   docker compose exec app php artisan migrate --seed
+   ./run php artisan migrate --seed
    ```
 
 7. **Access the application**
    - Web: http://localhost
    - Mailpit UI: http://localhost:8025
 
+### Using the `run` Script
+
+The `./run` script makes it easy to execute commands inside the app container:
+
+```bash
+./run php artisan migrate       # Run migrations
+./run composer install          # Install dependencies
+./run npm run dev              # Build assets
+./run sh                       # Access shell
+```
+
 ### Using Makefile
 
 For convenience, common commands are available via Makefile:
 
 ```bash
-make setup      # Run automated setup
 make up         # Start containers
 make down       # Stop containers
 make logs       # View logs
@@ -77,6 +89,14 @@ make fresh      # Fresh install with database reset
 ```
 
 Run `make help` to see all available commands.
+
+For running application commands, use the `./run` script:
+
+```bash
+./run php artisan migrate
+./run composer install
+./run npm run build
+```
 
 ### Production Deployment
 
@@ -128,48 +148,72 @@ The Docker setup includes the following services:
 
 - **app**: PHP 8.2 FPM (Laravel application)
 - **nginx**: Nginx web server (Alpine Linux)
-- **mysql**: MySQL 8.4 database
-- **redis**: Redis 7 (cache & sessions)
+- **mysql**: MySQL 8 database
+- **redis**: Redis 8 (cache & sessions)
 - **mailpit**: Email testing tool
 
 ## Common Commands
 
-### Application Management
+### Running Commands in Container
+
+Use the `./run` script for all commands inside the app container:
 
 ```bash
-# View logs
-docker compose logs -f app
+# Artisan commands
+./run php artisan migrate
+./run php artisan make:controller UserController
+./run php artisan queue:work
 
-# Access container shell
-docker compose exec app sh
+# Composer
+./run composer install
+./run composer require package/name
+./run composer update
 
-# Run artisan commands
-docker compose exec app php artisan <command>
+# NPM
+./run npm install
+./run npm run dev
+./run npm run build
 
-# Install new composer packages
-docker compose exec app composer require <package>
+# Shell access
+./run sh
 
-# Clear caches
-docker compose exec app php artisan cache:clear
-docker compose exec app php artisan config:clear
-docker compose exec app php artisan route:clear
-docker compose exec app php artisan view:clear
+# Any command
+./run [your-command-here]
 ```
 
-### Database Management
+### Container Management
 
 ```bash
+make up           # Start all containers
+make down         # Stop all containers
+make restart      # Restart all containers
+make logs         # View all logs
+make logs nginx   # View specific service logs
+make shell        # Access app container shell
+make clean        # Stop and remove all data
+make fresh        # Fresh install with database reset
+```
+
+### Database Operations
+
+```bash
+# Run migrations
+./run php artisan migrate
+
+# Seed database
+./run php artisan db:seed
+
+# Fresh migration
+./run php artisan migrate:fresh --seed
+
 # Access MySQL CLI
 docker compose exec mysql mysql -u larablog -p
 
-# Backup database
+# Backup
 docker compose exec mysql mysqldump -u larablog -p larablog > backup.sql
 
-# Restore database
+# Restore
 docker compose exec -T mysql mysql -u larablog -p larablog < backup.sql
-
-# Fresh migration with seed
-docker compose exec app php artisan migrate:fresh --seed
 ```
 
 ### Queue & Scheduler

@@ -35,25 +35,21 @@ A full-featured blogging system for personal use. No frontend theme and anything
    git clone https://github.com/alimranahmed/LaraBlog.git
    cd LaraBlog
    ```
-3. Copy and configure environment file:
+3. Quick setup with script:
+   ```bash
+   ./docker-setup.sh
+   ```
+   **Or manually:**
    ```bash
    cp .env.docker .env
-   # Edit .env if needed (set APP_ENV=local for development)
+   make up
+   ./run php artisan key:generate
+   ./run php artisan migrate --seed
    ```
-4. Start all services:
-   ```bash
-   docker compose up -d
-   ```
-5. Generate application key:
-   ```bash
-   docker compose exec app php artisan key:generate
-   ```
-6. Run migrations and seeders:
-   ```bash
-   docker compose exec app php artisan migrate --seed
-   ```
-7. Visit http://localhost - It's running! 🎉
-8. Access Mailpit (email testing): http://localhost:8025
+4. Visit http://localhost - It's running! 🎉
+5. Access Mailpit (email testing): http://localhost:8025
+
+**Tip**: Use `./run php artisan [command]` to run any artisan command
 
 📖 **For detailed Docker documentation, see [DOCKER.md](DOCKER.md)**
 
