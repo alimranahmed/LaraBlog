@@ -46,8 +46,8 @@ A full-featured blogging system for personal use. No frontend theme and anything
    ./run php artisan key:generate
    ./run php artisan migrate --seed
    ```
-4. Visit http://localhost - It's running! 🎉
-5. Access Mailpit (email testing): http://localhost:8025
+4. Visit http://localhost:1013 - It's running! 🎉
+5. Access Mailpit (email testing): http://localhost:1028
 
 **Tip**: Use `./run php artisan [command]` to run any artisan command
 

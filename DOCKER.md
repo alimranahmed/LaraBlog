@@ -62,8 +62,8 @@ This will:
    ```
 
 7. **Access the application**
-   - Web: http://localhost
-   - Mailpit UI: http://localhost:8025
+   - Web: http://localhost:1013
+   - Mailpit UI: http://localhost:1028
 
 ### Using the `run` Script
 
@@ -250,11 +250,11 @@ docker compose exec app npm run build
 
 Default ports (can be changed in .env):
 
-- **80**: Web application (APP_PORT)
+- **1013**: Web application (APP_PORT)
 - **3306**: MySQL (DB_PORT)
 - **6379**: Redis (REDIS_PORT)
 - **1025**: Mailpit SMTP (MAILPIT_SMTP_PORT)
-- **8025**: Mailpit UI (MAILPIT_UI_PORT)
+- **1028**: Mailpit UI (MAILPIT_UI_PORT)
 
 ## Data Persistence
 
