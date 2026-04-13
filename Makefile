@@ -12,9 +12,3 @@ logs: ## Show container logs (use: make logs [service])
 
 in: ## Access app container shell
 	docker compose exec app sh
-
-install_local:
-	sh ./docker/install_local.sh
-
-install_prod:
-	sh ./docker/install_prod.sh
