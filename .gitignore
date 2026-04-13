@@ -9,6 +9,11 @@ Homestead.yaml
 npm-debug.log
 public/storage
 /public/hot
+/public/build
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
 public/mix-manifest.json
 storage/*.key
 vendor
@@ -20,3 +25,12 @@ _ide_helper.php
 /clover.xml
 .phpunit.result.cache
 .composer.lock
+.env.backup
+.env.production
+.phpactor.json
+/auth.json
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed

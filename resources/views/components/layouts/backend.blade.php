@@ -14,7 +14,7 @@
 
     @stack('styles')
 </head>
-<body>
+<body class="text-slate-800">
 
 <x-backend.navbar/>
 

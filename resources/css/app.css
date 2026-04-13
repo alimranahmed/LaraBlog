@@ -1,13 +1,9 @@
 @import "../../vendor/tempest/highlight/src/Themes/Css/github-dark-dimmed.css";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+@import 'tailwindcss';
 
 body {
     font-family: Whitney SSm A, Whitney SSm B, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-    @apply text-slate-800;
 }
 
 h1 {

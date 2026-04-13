@@ -1,8 +1,9 @@
-# Use official PHP image with FPM
-FROM php:8.3-fpm-alpine AS base
+FROM php:8.4-fpm-alpine AS base
 
 # Set working directory
 WORKDIR /var/www/html
+
+COPY . .
 
 # Install system dependencies and PHP extensions
 RUN apk add --no-cache \
@@ -45,10 +46,23 @@ FROM base AS development
 # Disable OPcache for development
 RUN echo "opcache.enable=0" > /usr/local/etc/php/conf.d/opcache.ini
 
-# Expose port 9000 for PHP-FPM
+RUN composer install --optimize-autoloader --no-interaction --prefer-dist
+
+RUN npm install
+
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html/storage \
+    && chmod -R 755 /var/www/html/bootstrap/cache
+
+COPY docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 EXPOSE 9000
 
-CMD ["php-fpm"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 # Local stage (alias for development)
 FROM development AS local
@@ -56,27 +70,18 @@ FROM development AS local
 # Production stage
 FROM base AS production
 
-# Copy OPcache configuration for production
 COPY docker/php/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 
-# Copy application files
-COPY . .
-
-# Install PHP dependencies (production only)
 RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
-# Install Node dependencies and build assets
 RUN npm ci && npm run build && rm -rf node_modules
 
-# Set permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
     && chmod -R 755 /var/www/html/bootstrap/cache
 
-# Copy supervisor configuration
 COPY docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Create entrypoint script
 COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
