@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Run commands in the app container
+# Usage: ./run [command]
+# Examples:
+#   ./run php artisan migrate
+#   ./run composer install
+#   ./run npm run dev
+
+if [ $# -eq 0 ]; then
+    echo "Usage: ./run [command]"
+    echo ""
+    echo "Examples:"
+    echo "  ./run php artisan migrate"
+    echo "  ./run composer require package/name"
+    echo "  ./run npm install"
+    echo "  ./run sh  (access container shell)"
+    exit 1
+fi
+
+docker compose exec app "$@"

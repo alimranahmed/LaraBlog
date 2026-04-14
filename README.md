@@ -27,10 +27,34 @@ A full-featured blogging system for personal use. No frontend theme and anything
   * Can navigate articles based on categories.
 
 ### Installation Process
+
+#### Option 1: Docker Installation (Recommended) 🐳
+1. **Prerequisites**: Install [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
+2. Clone the repository:
+   ```bash
+   git clone https://github.com/alimranahmed/LaraBlog.git
+   cd LaraBlog
+   ```
+3. Quick setup with a script:
+   ```bash
+   ./run composer install
+   ./run npm install
+   ./run npm run build
+   ./run php artisan key:generate
+   ./run php artisan migrate --seed
+   ```
+4. Visit http://localhost:1013 - It's running! 🎉
+5. Access Mailpit (email testing): http://localhost:1028
+
+**Tip**: Use `./run php artisan [command]` to run any artisan command
+
+📖 **For detailed Docker documentation, see [DOCKER.md](DOCKER.md)**
+
+#### Option 2: Traditional Installation
 1. Execute `git clone https://github.com/alimranahmed/LaraBlog.git` on your terminal to download this project.
 2. Go to the project root directory and execute `composer install` to install all PHP dependencies of the project
-3. Create a file named as .env and copy the content of .env.example to newly created .env file 
-4. Then execute `php artisan key:generate` on your terminal/cmd to generate environment key
+3. Create a file named as .env and copy the content of .env.example to a newly created .env file 
+4. Then execute `php artisan key:generate` on your terminal/cmd to generate an environment key
 5. Then create a Database for this project and edit the .env file to authorized this project on your database. 
 6. Execute `php artisan migrate:refresh --seed` terminal on your terminal.
 7. Now you are ready to go, If you don't want to create any virtual host for this project then execute
