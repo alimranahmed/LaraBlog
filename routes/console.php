@@ -5,4 +5,7 @@ use Illuminate\Support\Facades\Schedule;
 
 Schedule::command('backup:run --only-db')->monthly();
 Schedule::command(GenerateSitemap::class)->weekly();
-Schedule::command('telescope:prune')->daily();
+
+if (class_exists(\Laravel\Telescope\TelescopeServiceProvider::class)) {
+    Schedule::command('telescope:prune')->daily();
+}
